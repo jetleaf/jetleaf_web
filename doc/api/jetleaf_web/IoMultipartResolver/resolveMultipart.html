@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the resolveMultipart method from the IoMultipartResolver class, for the Dart programming language.">
+  <title>resolveMultipart method - IoMultipartResolver class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoMultipartResolver-class.html">IoMultipartResolver</a></li>
+    <li class="self-crumb">resolveMultipart method</li>
+  </ol>
+  <div class="self-name">resolveMultipart</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;IoMultipartResolver-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">resolveMultipart</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a></span>&gt;</span></span>
+<span class="name ">resolveMultipart</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="resolveMultipart-param-request"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Parses the given <code>request</code> into a <a href="../../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a>,
+allowing access to uploaded files and form fields.</p>
+<p>This method handles reading the request body, decoding multipart
+boundaries, and creating file representations.</p>
+<p>Throws <a href="../../jetleaf_web/MultipartException-class.html">MultipartException</a> or <a href="../../jetleaf_web/MultipartParseException-class.html">MultipartParseException</a> if parsing fails.</p>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">final multipartRequest = await resolver.resolveMultipart(request);
+final avatar = multipartRequest.getFile('avatar');
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;MultipartServerHttpRequest&gt; resolveMultipart(ServerHttpRequest request) async {
+  final logger = getLog();
+  if (logger.getIsTraceEnabled()) {
+    logger.trace(&quot;Checking if request is multipart...&quot;);
+  }
+
+  if (isMultipart(request)) {
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;Request is multipart&#47;form-data ✅&quot;);
+    }
+
+    if (request is! IoRequest) {
+      if (logger.getIsWarnEnabled()) {
+        logger.warn(&quot;❌ Error: Request is not an IoRequest (${request.runtimeType})&quot;);
+      }
+
+      throw MultipartException(&quot;Cannot resolve request as multipart since it is not a type of $IoRequest. Are you using IoServer?&quot;);
+    }
+
+    final contentType = request.getHeaders().getContentType()!;
+    final boundary = extractBoundary(contentType.toString());
+
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;Content-Type: $contentType - Boundary: $boundary&quot;);
+    }
+
+    if (boundary == null) {
+      if (logger.getIsTraceEnabled()) {
+        logger.trace(&quot;❌ No boundary found in Content-Type header!&quot;);
+      }
+
+      throw MultipartException(&#39;No boundary found in Content-Type header&#39;);
+    }
+
+    final contentLength = request.getContentLength();
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;Content-Length: $contentLength bytes&quot;);
+    }
+
+    if (_maxUploadSize &gt; 0 &amp;&amp; contentLength &gt; _maxUploadSize) {
+      if (logger.getIsTraceEnabled()) {
+        logger.trace(&quot;❌ Max upload size exceeded ($_maxUploadSize &lt; $contentLength)&quot;);
+      }
+
+      throw MaxUploadSizeExceededException(_maxUploadSize, contentLength);
+    }
+
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;Starting multipart body parsing...&quot;);
+    }
+
+    _parts = await parse(request.getBody(), boundary, contentType.getCharset() ?? _defaultCharset, contentLength);
+
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;✅ Parsed ${_parts.length} parts from request body&quot;);
+    }
+
+    &#47;&#47; Check each part
+    for (final part in _parts) {
+      final name = part.getName();
+      final filename = part.getSubmittedFileName();
+      final size = part.getSize();
+
+      if (logger.getIsTraceEnabled()) {
+        logger.trace(&quot;-&gt; Found part: name=&#39;$name&#39;, filename=&#39;${filename ?? &quot;N&#47;A&quot;}&#39;, size=$size&quot;);
+      }
+
+      if (isFilePart(part)) {
+        if (_maxUploadSizePerFile &gt; 0 &amp;&amp; size &gt; _maxUploadSizePerFile) {
+          if (logger.getIsTraceEnabled()) {
+            logger.trace(&quot;❌ File &#39;$filename&#39; exceeds per-file upload limit ($_maxUploadSizePerFile &lt; $size)&quot;);
+          }
+
+          throw MaxUploadSizePerFileExceededException(_maxUploadSizePerFile, size, filename ?? &#39;unknown&#39;);
+        }
+      }
+    }
+
+    final req = request.getRequest();
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;✅ Processing ${_parts.length} parts...&quot;);
+    }
+
+    &#47;&#47; Process each part into files or fields
+    for (final part in _parts) {
+      final name = part.getName();
+      final submitted = part.getSubmittedFileName();
+      final isFile = isFilePart(part);
+
+      if (logger.getIsTraceEnabled()) {
+        logger.trace(&quot;Processing part &#39;$name&#39; (${isFile ? &quot;File&quot; : &quot;Field&quot;})&quot;);
+      }
+
+      if (isFile) {
+        final size = part.getSize();
+        final file = IoMultipartFile(part.getInputStream(), part.getName(), submitted ?? &quot;&quot;, size);
+        _files.putIfAbsent(name, () =&gt; []).add(file);
+
+        if (logger.getIsTraceEnabled()) {
+          logger.trace(&quot;📁 Added file part &#39;$name&#39; (filename=&#39;${submitted ?? &quot;unknown&quot;}&#39;, size=$size)&quot;);
+        }
+      } else {
+        final value = await part.getInputStream().readAsString();
+        _params.putIfAbsent(name, () =&gt; []).add(value);
+
+        if (logger.getIsTraceEnabled()) {
+          logger.trace(&quot;🧩 Added form field &#39;$name&#39; = &#39;$value&#39;&quot;);
+        }
+      }
+    }
+
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&quot;✅ Constructing IoMultipartRequest...&quot;);
+    }
+
+    final mu = IoMultipartRequest(req, _fileSizeThreshold, _maxUploadSize, _maxUploadSizePerFile, _files, _parts, _params);
+    mu.setCreatedAt(request.getCreatedAt());
+
+    if (logger.getIsTraceEnabled()) {
+      logger.trace(&#39;&#39;&#39;
+✅ Multipart request successfully resolved!
+Summary:
+- Files: ${_files.length}
+- Params: ${_params.length}
+- Total parts: ${_parts.length}
+- CreatedAt: ${request.getCreatedAt()}
+&#39;&#39;&#39;);
+    }
+
+    return mu;
+  } else {
+    if (logger.getIsErrorEnabled()) {
+      logger.error(&quot;❌ Request is NOT multipart&#47;form-data&quot;);
+    }
+
+    throw MultipartException(&#39;Request is not multipart&#47;form-data&#39;);
+  }
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoMultipartResolver-class.html">IoMultipartResolver</a></li>
+    <li class="self-crumb">resolveMultipart method</li>
+</ol>
+
+    <h5>IoMultipartResolver class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

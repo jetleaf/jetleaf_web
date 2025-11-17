@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the DefaultCsrfTokenRepositoryManager.new constructor from Class DefaultCsrfTokenRepositoryManager from the jetleaf_web library, for the Dart programming language.">
+  <title>DefaultCsrfTokenRepositoryManager.new constructor - DefaultCsrfTokenRepositoryManager - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/DefaultCsrfTokenRepositoryManager-class.html">DefaultCsrfTokenRepositoryManager</a></li>
+    <li class="self-crumb">DefaultCsrfTokenRepositoryManager.new constructor</li>
+  </ol>
+  <div class="self-name">DefaultCsrfTokenRepositoryManager.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;DefaultCsrfTokenRepositoryManager-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">DefaultCsrfTokenRepositoryManager</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">DefaultCsrfTokenRepositoryManager</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Default implementation of <a href="../../jetleaf_web/CsrfTokenRepositoryManager-class.html">CsrfTokenRepositoryManager</a> responsible for
+discovering, configuring, and providing access to <a href="../../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a>
+instances.</p>
+<p>This manager integrates with the Jetleaf <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> to:</p>
+<ol>
+<li>Discover custom <a href="../../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a> implementations registered as pods</li>
+<li>Build a default repository from environment configuration</li>
+<li>Provide a fallback repository if none is configured</li>
+</ol>
+<h3 id="discovery-process">Discovery Process</h3>
+<p>On initialization (<a href="../../jetleaf_web/DefaultCsrfTokenRepositoryManager/onReady.html">onReady</a>), the manager:</p>
+<ol>
+<li>Searches the application context for <a href="../../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a> pods</li>
+<li>If found, uses the discovered repository</li>
+<li>If not found, uses <a href="../../jetleaf_web/RequestAttributeCsrfTokenRepository-class.html">RequestAttributeCsrfTokenRepository</a> as fallback</li>
+</ol>
+<h3 id="environment-integration">Environment Integration</h3>
+<p>The manager reads configuration from environment properties:</p>
+<ul>
+<li><code>jetleaf.web.csrf.enabled</code> - Global enable/disable flag</li>
+<li><code>jetleaf.web.csrf.header-name</code> - Custom header name</li>
+<li><code>jetleaf.web.csrf.parameter-name</code> - Custom parameter name</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final manager = DefaultCsrfTokenRepositoryManager();
+await manager.onReady(); // Discovers repositories
+
+final repository = manager.getRepository();
+final token = repository.generateToken(request);
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">DefaultCsrfTokenRepositoryManager();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/DefaultCsrfTokenRepositoryManager-class.html">DefaultCsrfTokenRepositoryManager</a></li>
+    <li class="self-crumb">DefaultCsrfTokenRepositoryManager.new constructor</li>
+</ol>
+
+    <h5>DefaultCsrfTokenRepositoryManager class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

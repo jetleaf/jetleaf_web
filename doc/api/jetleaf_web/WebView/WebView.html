@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the WebView.new constructor from Class WebView from the jetleaf_web library, for the Dart programming language.">
+  <title>WebView.new constructor - WebView - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/WebView-class.html">WebView</a></li>
+    <li class="self-crumb">WebView.new const constructor</li>
+  </ol>
+  <div class="self-name">WebView.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;WebView-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">WebView</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">WebView</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-route"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">route</span>, [</span></li>
+<li><span class="parameter" id="-param-ignoreContextPath"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">ignoreContextPath</span> = <span class="default-value">false</span>, </span></li>
+<li><span class="parameter" id="-param-method"><span class="type-annotation"><a href="../../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span> <span class="parameter-name">method</span> = <span class="default-value">HttpMethod.GET</span></span></li>
+</ol>])
+    </section>
+    
+<section class="desc markdown">
+  <p>Marks a class as a <strong>web view component</strong> specialized for rendering HTML, CSS, or JavaScript content.</p>
+<p><a href="../../jetleaf_web/WebView-class.html">WebView</a> is a specialized form of <a href="../../jetleaf_web/Controller-class.html">Controller</a> annotation designed exclusively
+for server-side view rendering. While regular <a href="../../jetleaf_web/Controller-class.html">Controller</a> classes can handle
+both REST API endpoints and view rendering, classes annotated with <a href="../../jetleaf_web/WebView-class.html">WebView</a>
+are specifically optimized for generating dynamic web content and must extend
+either <a href="../../jetleaf_web/RenderableView-class.html">RenderableView</a> or <a href="../../jetleaf_web/RenderableWebView-class.html">RenderableWebView</a>.</p>
+<h3 id="key-characteristics">Key Characteristics</h3>
+<ul>
+<li><strong>View-Focused</strong>: Dedicated to rendering HTML, CSS, and JavaScript content</li>
+<li><strong>Dynamic Context</strong>: Accesses request data through <a href="../../jetleaf_web/ViewContext-class.html">ViewContext</a> including
+session attributes, path variables, query parameters, and headers</li>
+<li><strong>Template Support</strong>: Can work with template engines or return raw HTML</li>
+<li><strong>Content Type</strong>: Defaults to <code>"text/html"</code> content type</li>
+</ul>
+<h3 id="implementation-requirements">Implementation Requirements</h3>
+<p>Classes annotated with <code>@WebView</code> must extend one of:</p>
+<ul>
+<li><a href="../../jetleaf_web/RenderableView-class.html">RenderableView</a> - For direct string-based HTML rendering</li>
+<li><a href="../../jetleaf_web/RenderableWebView-class.html">RenderableWebView</a> - For template-based rendering with <a href="../../jetleaf_web/PageView-class.html">PageView</a></li>
+</ul>
+<h3 id="dynamic-context-access">Dynamic Context Access</h3>
+<p>The <a href="../../jetleaf_web/ViewContext-class.html">ViewContext</a> provides access to various request data sources:</p>
+<ul>
+<li><strong>Session Data</strong>: <code>context.getSessionAttribute("key")</code></li>
+<li><strong>Path Variables</strong>: <code>context.getPathVariable("name")</code></li>
+<li><strong>Query Parameters</strong>: <code>context.getQueryParam("id")</code></li>
+<li><strong>Request Headers</strong>: <code>context.getHeader("content-type")</code></li>
+<li><strong>Request Attributes</strong>: <code>context.getAttribute("data")</code></li>
+</ul>
+<h3 id="example-direct-html-rendering">Example: Direct HTML Rendering</h3>
+<pre class="language-dart"><code class="language-dart">@WebView("/home") // Becomes /api/home if context path is configured
+class HomePage extends RenderableView {
+  @override
+  String render(ViewContext context) {
+    final session = context.getSessionAttribute("userSession");
+    final userName = context.getPathVariable("name");
+    final theme = context.getQueryParam("theme") ?? "light";
+    
+    return """
+    &lt;html&gt;
+      &lt;head&gt;
+        &lt;title&gt;Welcome&lt;/title&gt;
+        &lt;link rel="stylesheet" href="/styles/$theme.css"&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;h1&gt;Hello, $userName!&lt;/h1&gt;
+        &lt;p&gt;Welcome to Jetleaf Web Framework!&lt;/p&gt;
+        &lt;p&gt;Session ID: ${session?.id}&lt;/p&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+    """;
+  }
+}
+</code></pre>
+<h3 id="example-template-based-rendering">Example: Template-Based Rendering</h3>
+<pre class="language-dart"><code class="language-dart">@WebView("/users/{id}/profile")
+class UserProfileView extends RenderableWebView {
+  @override
+  PageView render(ViewContext context) {
+    final userId = context.getPathVariable("id");
+    final userSession = context.getSessionAttribute("currentUser");
+    final preview = context.getQueryParam("preview") == "true";
+    
+    return PageView("user-profile.html")
+      ..addAttribute("userId", userId)
+      ..addAttribute("userSession", userSession)
+      ..addAttribute("isPreview", preview);
+  }
+}
+</code></pre>
+<h3 id="common-use-cases">Common Use Cases</h3>
+<ul>
+<li><strong>Dynamic Web Pages</strong>: Generating HTML content with server-side data</li>
+<li><strong>Email Templates</strong>: Rendering dynamic email content for notifications</li>
+<li><strong>Report Generation</strong>: Creating HTML reports with live data</li>
+<li><strong>Dashboard Views</strong>: Building admin interfaces with real-time data</li>
+<li><strong>Form Processing</strong>: Handling form submissions and rendering results</li>
+</ul>
+<h3 id="url-path-handling">URL Path Handling</h3>
+<p>The <code>route</code> parameter supports:</p>
+<ul>
+<li><strong>Static Paths</strong>: <code>/home</code>, <code>/about</code>, <code>/contact</code></li>
+<li><strong>Path Variables</strong>: <code>/users/{id}</code>, <code>/products/{category}/{id}</code></li>
+<li><strong>Context Path Integration</strong>: Automatically prefixed with application context path</li>
+<li><strong>Context Path Override</strong>: Use <code>ignoreContextPath</code> to disable context path prefixing</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<ul>
+<li><strong>Automatic Registration</strong>: Discovered and registered by controller scanners</li>
+<li><strong>Request Mapping</strong>: Routes HTTP requests to appropriate view renderers</li>
+<li><strong>Content Negotiation</strong>: Supports different content types through configuration</li>
+<li><strong>Error Handling</strong>: Integrates with framework error page system</li>
+</ul>
+<h3 id="comparison-with-rest-controllers">Comparison with REST Controllers</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>WebView</th>
+<th>REST Controller</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Primary Purpose</strong></td>
+<td>HTML View Rendering</td>
+<td>JSON/XML API Responses</td>
+</tr>
+<tr>
+<td><strong>Return Type</strong></td>
+<td>String or PageView</td>
+<td>Response or Domain Object</td>
+</tr>
+<tr>
+<td><strong>Content Type</strong></td>
+<td>text/html (default)</td>
+<td>application/json (typical)</td>
+</tr>
+<tr>
+<td><strong>Data Access</strong></td>
+<td>ViewContext for request data</td>
+<td>Method parameters with annotations</td>
+</tr>
+<tr>
+<td><strong>Base Class</strong></td>
+<td>Must extend RenderableView/RenderableWebView</td>
+<td>No specific base class required</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>route</code>: The URL path pattern that maps to this view component</li>
+<li><code>ignoreContextPath</code>: When <code>true</code>, excludes the application context path from the route</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Use descriptive route patterns that reflect the view's purpose</li>
+<li>Leverage template engines for complex HTML generation</li>
+<li>Implement proper error handling for missing data</li>
+<li>Consider security implications when rendering user data</li>
+<li>Use CSS and JavaScript appropriately for dynamic behavior</li>
+</ul>
+<h3 id="parameters-2">Parameters</h3>
+<ul>
+<li><code>route</code>: The URL path pattern for this view component</li>
+<li><code>ignoreContextPath</code>: Whether to exclude the application context path (default: false)</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">@WebView("/dashboard")              // Includes context path
+@WebView("/api/docs", true)         // Excludes context path
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const WebView(this.route, [this.ignoreContextPath = false, this.method = HttpMethod.GET]);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/WebView-class.html">WebView</a></li>
+    <li class="self-crumb">WebView.new const constructor</li>
+</ol>
+
+    <h5>WebView class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

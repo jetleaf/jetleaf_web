@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoRequest class from the jetleaf_web library, for the Dart programming language.">
+  <title>IoRequest class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">IoRequest class</li>
+  </ol>
+  <div class="self-name">IoRequest</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;IoRequest-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">IoRequest</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Represents a concrete implementation of <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> that wraps
+a Dart <code>dart:io</code> <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">io.HttpRequest</a>.</p>
+<p><a href="../jetleaf_web/IoRequest-class.html">IoRequest</a> provides a unified interface for accessing all aspects
+of an HTTP request within JetLeaf's framework, including:</p>
+<ul>
+<li>Request metadata (creation time, completion time, duration)</li>
+<li>Headers, cookies, query parameters, and path variables</li>
+<li>Session management</li>
+<li>Request attributes for per-request storage</li>
+<li>Connection information and client certificates</li>
+</ul>
+<p>This class is intended for use within filters, controllers, or
+dispatchers, and can be extended to customize behavior for
+particular request-handling needs.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li>Thread-safe attribute storage using <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/LocalThread-class.html">LocalThread</a>.</li>
+<li>Ability to extract path variables from annotated routes or request URLs.</li>
+<li>Provides access to the underlying <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">io.HttpRequest</a> for low-level operations.</li>
+<li>Supports request lifecycle tracking for monitoring and debugging.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final ioRequest = IoRequest(httpRequest, '/api/v1');
+final session = ioRequest.getSession();
+final contentType = ioRequest.getHeaders().getContentType();
+ioRequest.setAttribute('userId', 123);
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></li>
+    </ul>
+  </dd>
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="IoRequest.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/IoRequest/IoRequest.html">IoRequest.new</a></span><span class="signature">(<span class="parameter" id="-param-_request"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a></span> <span class="parameter-name">_request</span>, [</span><span class="parameter" id="-param-contextPath"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">contextPath</span></span>])</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/IoRequest-class.html">IoRequest</a> wrapping a <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a> and its context path.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="getAttribute" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getAttribute.html">getAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="getAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the value of the specified request attribute, or <code>null</code> if not set.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getAttributeNames" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getAttributeNames.html">getAttributeNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a set of all attribute names currently stored in this request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getAttributes" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getAttributes.html">getAttributes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a map of all attributes attached to this request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getBody" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getBody.html">getBody</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the message body as an <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getCertificate" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getCertificate.html">getCertificate</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-io/X509Certificate-class.html">X509Certificate</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the client certificate associated with this request, if present.
+  
+
+</dd>
+
+        <dt id="getCompletedAt" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getCompletedAt.html">getCompletedAt</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the timestamp when the request processing was completed, if available.
+  
+
+</dd>
+
+        <dt id="getConnection" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getConnection.html">getConnection</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpConnectionInfo-class.html">HttpConnectionInfo</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns connection information for this HTTP request.
+  
+
+</dd>
+
+        <dt id="getContentLength" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getContentLength.html">getContentLength</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the size of the HTTP request body in bytes, if known.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getContextPath" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getContextPath.html">getContextPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>context path</strong> of the current web application.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getCookies" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getCookies.html">getCookies</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpCookies-class.html">HttpCookies</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <a href="../jetleaf_web/HttpCookies-class.html">HttpCookies</a> collection associated with this request or response.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getCreatedAt" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getCreatedAt.html">getCreatedAt</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the timestamp when this request was created.
+  
+
+</dd>
+
+        <dt id="getHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getHeaders.html">getHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the HTTP headers associated with this message.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getMethod" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getMethod.html">getMethod</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a> used for this request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getParameter" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getParameter.html">getParameter</a></span><span class="signature">(<wbr><span class="parameter" id="getParameter-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the first value of the specified request parameter, or <code>null</code> if not present.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getParameterMap" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getParameterMap.html">getParameterMap</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a map of all request parameters and their corresponding values.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getParameterValues" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getParameterValues.html">getParameterValues</a></span><span class="signature">(<wbr><span class="parameter" id="getParameterValues-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns all values for the specified request parameter name.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getPathVariable" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getPathVariable.html">getPathVariable</a></span><span class="signature">(<wbr><span class="parameter" id="getPathVariable-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the value of a single path variable by its <code>name</code>, or <code>null</code> if not present.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getPathVariables" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getPathVariables.html">getPathVariables</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns all path variables extracted from the matched URI template.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getQueryString" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getQueryString.html">getQueryString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the raw query string component of the request URI, if any.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getRequest" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getRequest.html">getRequest</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the underlying <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">io.HttpRequest</a> instance associated with this request.
+  
+
+</dd>
+
+        <dt id="getRequestURI" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getRequestURI.html">getRequestURI</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the request URI as provided by the client.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getRequestUrl" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getRequestUrl.html">getRequestUrl</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>logical request URL</strong> associated with this HTTP request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getSession" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getSession.html">getSession</a></span><span class="signature">(<wbr>[<span class="parameter" id="getSession-param-create"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">create</span> = <span class="default-value">true</span></span>])
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpSession-class.html">HttpSession</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the current <a href="../jetleaf_web/HttpSession-class.html">HttpSession</a> associated with this request, or optionally creates one.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getUri" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/getUri.html">getUri</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the full URI of this request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeAttribute" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/removeAttribute.html">removeAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="removeAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes the request attribute with the specified <code>name</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="setAttribute" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setAttribute.html">setAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="setAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="setAttribute-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets or replaces a request attribute with the given <code>name</code> and <code>value</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="setCompletedAt" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setCompletedAt.html">setCompletedAt</a></span><span class="signature">(<wbr><span class="parameter" id="setCompletedAt-param-dateTime"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">dateTime</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the timestamp representing when this request was completed.
+  
+
+</dd>
+
+        <dt id="setContextPath" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setContextPath.html">setContextPath</a></span><span class="signature">(<wbr><span class="parameter" id="setContextPath-param-contextPath"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">contextPath</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <strong>context path</strong> for the http request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="setCreatedAt" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setCreatedAt.html">setCreatedAt</a></span><span class="signature">(<wbr><span class="parameter" id="setCreatedAt-param-dateTime"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a></span> <span class="parameter-name">dateTime</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the timestamp representing when this request was created.
+  
+
+</dd>
+
+        <dt id="setHandlerContext" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setHandlerContext.html">setHandlerContext</a></span><span class="signature">(<wbr><span class="parameter" id="setHandlerContext-param-handler"><span class="type-annotation"><a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> <span class="parameter-name">handler</span>, </span><span class="parameter" id="setHandlerContext-param-pattern"><span class="type-annotation"><a href="../jetleaf_web/PathPattern-class.html">PathPattern</a></span> <span class="parameter-name">pattern</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Associates the resolved handler method and path pattern with this request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="setHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setHeaders.html">setHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Replaces the entire set of HTTP headers for this message.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="setRequestUrl" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/setRequestUrl.html">setRequestUrl</a></span><span class="signature">(<wbr><span class="parameter" id="setRequestUrl-param-requestUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">requestUrl</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <strong>request URL</strong> associated with this HTTP request.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="shouldUpgrade" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRequest/shouldUpgrade.html">shouldUpgrade</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Indicates whether this request should be <strong>upgraded</strong> to a higher-level
+protocol (e.g., WebSocket, HTTP/2 push, or other upgrade-capable protocols).
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">IoRequest class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

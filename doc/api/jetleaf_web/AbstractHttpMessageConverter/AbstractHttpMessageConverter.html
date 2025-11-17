@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AbstractHttpMessageConverter.new constructor from Class AbstractHttpMessageConverter from the jetleaf_web library, for the Dart programming language.">
+  <title>AbstractHttpMessageConverter.new constructor - AbstractHttpMessageConverter - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">AbstractHttpMessageConverter.new constructor</li>
+  </ol>
+  <div class="self-name">AbstractHttpMessageConverter.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;AbstractHttpMessageConverter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">AbstractHttpMessageConverter&lt;<wbr><span class="type-parameter">T</span>&gt;</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">AbstractHttpMessageConverter&lt;<wbr><span class="type-parameter">T</span>&gt;</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Abstract base class implementing common <a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> functionality.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> provides a robust foundation for creating
+concrete HTTP message converter implementations. It handles common concerns
+like media type support management, default encoding, header processing,
+and exception handling, allowing subclasses to focus on type-specific conversion logic.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>Media Type Management</strong>: Configurable list of supported media types</li>
+<li><strong>Encoding Support</strong>: Default character encoding configuration (UTF-8 by default)</li>
+<li><strong>Header Handling</strong>: Automatic Content-Type header management</li>
+<li><strong>Exception Wrapping</strong>: Consistent exception handling and transformation</li>
+<li><strong>Template Methods</strong>: Clean separation between common and type-specific logic</li>
+</ul>
+<h3 id="implementation-pattern">Implementation Pattern</h3>
+<p>Subclasses typically:</p>
+<ol>
+<li>Call super constructor and set supported media types</li>
+<li>Implement <a href="../../jetleaf_web/AbstractHttpMessageConverter/readInternal.html">readInternal</a> for deserialization logic</li>
+<li>Implement <a href="../../jetleaf_web/AbstractHttpMessageConverter/writeInternal.html">writeInternal</a> for serialization logic</li>
+<li>Optionally override <a href="../../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a>/<a href="../../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a> for custom media type logic</li>
+</ol>
+<h3 id="example-json-converter-implementation">Example: JSON Converter Implementation</h3>
+<pre class="language-dart"><code class="language-dart">class JsonHttpMessageConverter extends AbstractHttpMessageConverter&lt;Object&gt; {
+  final JsonCodec _codec;
+
+  JsonHttpMessageConverter(this._codec) {
+    setSupportedMediaTypes([MediaType.APPLICATION_JSON]);
+    setDefaultEncoding(Closeable.DEFAULT_ENCODING);
+  }
+
+  @override
+  Future&lt;Object&gt; readInternal(Class&lt;Object&gt; type, HttpInputMessage inputMessage) async {
+    final body = await inputMessage.getBody().readAsString(encoding: getDefaultEncoding());
+    return _codec.decode(body);
+  }
+
+  @override
+  Future&lt;void&gt; writeInternal(Object object, HttpOutputMessage outputMessage) async {
+    final jsonString = _codec.encode(object);
+    await outputMessage.getBody().writeString(jsonString, encoding: getDefaultEncoding());
+  }
+}
+</code></pre>
+<h3 id="media-type-compatibility">Media Type Compatibility</h3>
+<p>The default <a href="../../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a> and <a href="../../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a> implementations use media type compatibility
+checking, supporting scenarios like:</p>
+<ul>
+<li><code>application/json</code> ↔ <code>application/json; charset=utf-8</code></li>
+<li><code>text/plain</code> ↔ <code>text/plain; charset=iso-8859-1</code></li>
+<li>Exact media type matches and compatible parameter variations</li>
+</ul>
+<h3 id="exception-handling-strategy">Exception Handling Strategy</h3>
+<p>The converter automatically wraps implementation exceptions:</p>
+<ul>
+<li><strong>Read Errors</strong>: Wrapped in <a href="../../jetleaf_web/HttpMessageNotReadableException-class.html">HttpMessageNotReadableException</a> with status 400</li>
+<li><strong>Write Errors</strong>: Wrapped in <a href="../../jetleaf_web/HttpMessageNotWritableException-class.html">HttpMessageNotWritableException</a> with status 500</li>
+<li><strong>Original Context</strong>: Preserves original exception and stack trace for debugging</li>
+</ul>
+<h3 id="header-management">Header Management</h3>
+<p>The <a href="../../jetleaf_web/AbstractHttpMessageConverter/addDefaultHeaders.html">addDefaultHeaders</a> method ensures proper Content-Type headers are set:</p>
+<ul>
+<li>Only sets headers if not already present</li>
+<li>Uses provided contentType or falls back to first supported media type</li>
+<li>Maintains consistency between declared and actual content types</li>
+</ul>
+<h3 id="best-practices-for-subclasses">Best Practices for Subclasses</h3>
+<ul>
+<li><strong>Set Supported Media Types</strong>: Call <a href="../../jetleaf_web/AbstractHttpMessageConverter/setSupportedMediaTypes.html">setSupportedMediaTypes</a> in constructor</li>
+<li><strong>Handle Encoding</strong>: Respect <a href="../../jetleaf_web/AbstractHttpMessageConverter/getDefaultEncoding.html">getDefaultEncoding()</a> in read/write operations</li>
+<li><strong>Validate Input</strong>: Perform type-specific validation in template methods</li>
+<li><strong>Resource Cleanup</strong>: Ensure streams are properly closed in error scenarios</li>
+<li><strong>Performance</strong>: Consider buffering strategies for large payloads</li>
+</ul>
+<h3 id="extension-points">Extension Points</h3>
+<p>Subclasses can override:</p>
+<ul>
+<li><a href="../../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a>/<a href="../../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a>: Custom media type matching logic</li>
+<li><a href="../../jetleaf_web/AbstractHttpMessageConverter/addDefaultHeaders.html">addDefaultHeaders</a>: Custom header management</li>
+<li><a href="../../jetleaf_web/AbstractHttpMessageConverter/getSupportedMediaTypes.html">getSupportedMediaTypes</a>: Dynamic media type support</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<p>Used as the base for all built-in Jetleaf converters:</p>
+<ul>
+<li><code>StringHttpMessageConverter</code>: Handles text/plain content</li>
+<li><code>ByteArrayHttpMessageConverter</code>: Handles application/octet-stream</li>
+<li><code>FormHttpMessageConverter</code>: Handles application/x-www-form-urlencoded</li>
+<li><code>JsonHttpMessageConverter</code>: Handles application/json</li>
+<li><code>XmlHttpMessageConverter</code>: Handles application/xml</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> dramatically reduces boilerplate code
+for converter implementations while ensuring consistent behavior, proper
+error handling, and framework integration across all HTTP message converters.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">AbstractHttpMessageConverter();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">AbstractHttpMessageConverter.new constructor</li>
+</ol>
+
+    <h5>AbstractHttpMessageConverter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the doGetHandler method from the AbstractServerDispatcher class, for the Dart programming language.">
+  <title>doGetHandler method - AbstractServerDispatcher class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a></li>
+    <li class="self-crumb">doGetHandler method</li>
+  </ol>
+  <div class="self-name">doGetHandler</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;AbstractServerDispatcher-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">doGetHandler</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://pub.dev/documentation/meta/1.17.0/meta/protected-constant.html">protected</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>?</span>
+<span class="name ">doGetHandler</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="doGetHandler-param-request"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Resolves the appropriate <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> for the given HTTP <code>request</code>.</p>
+<p>This method determines which controller method (handler) should process
+the incoming request, based on the request’s URI path and the registered
+handler mappings.</p>
+<h3 id="resolution-process">Resolution Process</h3>
+<ol>
+<li>Checks the internal cache (<code>_handlerCache</code>) to see if a handler has
+already been resolved for the request’s path.</li>
+<li>If not cached, iterates through all available handler mappings
+(from <code>_getHandlerMappings</code>) and asks each mapping to resolve
+a matching handler for the current request.</li>
+<li>Once a handler is found, it is stored in the cache for future requests.</li>
+<li>If no handler matches, <code>null</code> is cached for that path and returned.</li>
+</ol>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final handler = doGetHandler(request);
+if (handler != null) {
+  print('Resolved handler: ${handler.methodName}');
+} else {
+  print('No matching handler found.');
+}
+</code></pre>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Subsequent requests to the same path benefit from cached lookup.</li>
+<li>The cache avoids redundant traversal of handler mappings.</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p>The resolved <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> if a match is found, or <code>null</code> otherwise.</p>
+<p>@protected
+@see <a href="../../jetleaf_web/HandlerMapping/getHandler.html">HandlerMapping.getHandler</a></p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@protected
+HandlerMethod? doGetHandler(ServerHttpRequest request) {
+  final log = getLog();
+  final path = request.getRequestURI().path;
+  final method = request.getMethod().toString();
+  final requestKey = &#39;$method:$path&#39;;
+
+  &#47;&#47; STEP 1: Check if we&#39;ve seen this EXACT (method, concrete path) before
+  final cachedPatternKey = _requestFingerprintCache[requestKey];
+  if (cachedPatternKey != null) {
+    final cachedHandler = _handlerCache[cachedPatternKey];
+    if (cachedHandler != null) {
+      if (log.getIsTraceEnabled()) {
+        log.trace(&#39;✅ Cache HIT for $requestKey → pattern $cachedPatternKey&#39;);
+      }
+      return cachedHandler;
+    }
+  }
+
+  &#47;&#47; STEP 2: Cache miss or expired entry—resolve handler from mappings
+  HandlerMethod? handlerMethod = _handlerMapping.getHandler(request) ?? _defaultHandlerMapping?.getHandler(request);
+
+  if (handlerMethod != null) {
+    if (log.getIsTraceEnabled()) {
+      log.trace(&#39;🧩 Matched request $path → handler [${handlerMethod.getInvokingClass().getSimpleName()}.${handlerMethod.getMethod()?.getName()}]&#39;);
+    }
+
+    &#47;&#47; STEP 3: Store handler in pattern-based cache
+    &#47;&#47; Key: HTTP_METHOD:HANDLER_PATTERN (e.g., GET:&#47;users&#47;{id})
+    &#47;&#47; This prevents collisions and memory bloat from concrete paths.
+    final patternKey = &#39;${handlerMethod.getHttpMethod().toString()}:${handlerMethod.getPath()}&#39;;
+    if (!_handlerCache.containsKey(patternKey)) {
+      _handlerCache[patternKey] = handlerMethod;
+      if (log.getIsTraceEnabled()) {
+        log.trace(&#39;💾 Cached pattern: $patternKey&#39;);
+      }
+    }
+
+    &#47;&#47; STEP 4: Map this concrete request to its pattern for future lookups
+    &#47;&#47; Key: HTTP_METHOD:CONCRETE_PATH (e.g., GET:&#47;users&#47;123)
+    &#47;&#47; Value: The pattern key (e.g., GET:&#47;users&#47;{id})
+    &#47;&#47; This allows repeating requests (same method + path) to skip mapping lookup.
+    if (!_requestFingerprintCache.containsKey(requestKey)) {
+      _requestFingerprintCache[requestKey] = patternKey;
+      if (log.getIsTraceEnabled()) {
+        log.trace(&#39;💾 Fingerprinted: $requestKey → $patternKey&#39;);
+      }
+    }
+
+    return handlerMethod;
+  }
+
+  if (log.getIsTraceEnabled()) {
+    log.trace(&#39;❌ No handler mapping found for $path&#39;);
+  }
+
+  return null;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a></li>
+    <li class="self-crumb">doGetHandler method</li>
+</ol>
+
+    <h5>AbstractServerDispatcher class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

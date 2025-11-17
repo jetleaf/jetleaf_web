@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoEncodingDecoder class from the jetleaf_web library, for the Dart programming language.">
+  <title>IoEncodingDecoder class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">IoEncodingDecoder class</li>
+  </ol>
+  <div class="self-name">IoEncodingDecoder</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;IoEncodingDecoder-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">IoEncodingDecoder</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A <strong>pluggable, multi-encoding decoder</strong> that supports dynamic registration
+of custom <a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> implementations while providing a fallback
+<a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> for unsupported encodings.</p>
+<p>The <a href="../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a> acts as a central registry and coordinator
+for encoding/decoding operations across multiple character encodings.
+It delegates requests to user-defined <a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> instances, if
+available, or defers to the configured fallback decoder for all other
+cases.</p>
+<h3 id="overview">Overview</h3>
+<ul>
+<li>Enables <strong>runtime extensibility</strong> — new encodings can be added or replaced
+dynamically using <a href="../jetleaf_web/IoEncodingDecoder/registerHandler.html">registerHandler</a>.</li>
+<li>Ensures <strong>compatibility and robustness</strong> by always delegating to a fallback
+decoder (defaults to <a href="../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a>) when no handler is available.</li>
+<li>Provides unified APIs for text encoding, decoding, and supported encoding
+enumeration.</li>
+<li>Internally normalizes encoding names to lowercase for consistent lookup.</li>
+</ul>
+<h3 id="typical-use-cases">Typical Use Cases</h3>
+<ul>
+<li>Supporting <strong>custom or legacy encodings</strong> (e.g., Shift-JIS, GB2312).</li>
+<li>Extending base decoding behavior for <strong>application-specific formats</strong>.</li>
+<li>Centralizing all encoding logic in I/O, HTTP, and serialization layers.</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Thread-safe for concurrent encoding operations, assuming all handlers are.</li>
+<li>Encodings are matched case-insensitively (<code>utf-8</code>, <code>UTF-8</code>, <code>Utf8</code> → same).</li>
+<li>Unregistered encodings automatically fall back to the default decoder.</li>
+<li>Handlers can be dynamically added, removed, or replaced at runtime.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final decoder = IoEncodingDecoder();
+decoder.registerHandler('shift-jis', ShiftJisEncodingHandler());
+
+final bytes = Uint8List.fromList([0x82, 0xA0]);
+print(decoder.decode(bytes, 'shift-jis')); // "あ"
+</code></pre>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> — Low-level encoding/decoding abstraction.</li>
+<li><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> — Base interface for all multi-encoding decoders.</li>
+<li><a href="../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a> — Default implementation using Dart’s <code>dart:convert</code>.</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/ApplicationContextAware-class.html">ApplicationContextAware</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/InitializingPod-class.html">InitializingPod</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="IoEncodingDecoder.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/IoEncodingDecoder.html">IoEncodingDecoder.new</a></span><span class="signature">([<span class="parameter" id="-param-fallbackDecoder"><span class="type-annotation"><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a>?</span> <span class="parameter-name">fallbackDecoder</span></span>])</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a> instance with an optional
+<code>fallbackDecoder</code>.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="decode" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/decode.html">decode</a></span><span class="signature">(<wbr><span class="parameter" id="decode-param-bytes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-typed_data/Uint8List-class.html">Uint8List</a></span> <span class="parameter-name">bytes</span>, {</span><span class="parameter" id="decode-param-encodingString"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">encodingString</span> = <span class="default-value">&#39;utf-8&#39;</span>, </span><span class="parameter" id="decode-param-encoding"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a>?</span> <span class="parameter-name">encoding</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Decodes a byte array to a <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a> using the specified <code>encoding</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="encode" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/encode.html">encode</a></span><span class="signature">(<wbr><span class="parameter" id="encode-param-text"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">text</span>, {</span><span class="parameter" id="encode-param-encodingString"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">encodingString</span> = <span class="default-value">&#39;utf-8&#39;</span>, </span><span class="parameter" id="encode-param-encoding"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a>?</span> <span class="parameter-name">encoding</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-typed_data/Uint8List-class.html">Uint8List</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Encodes a <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a> into a <a href="https://api.dart.dev/stable/3.9.2/dart-typed_data/Uint8List-class.html">Uint8List</a> using the specified <code>encoding</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getPackageName" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/getPackageName.html">getPackageName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Represents an abstraction for identifying the package that an object,
+resource, or service belongs to.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getSupportedEncodings" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/getSupportedEncodings.html">getSupportedEncodings</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the list of all supported encodings.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="onReady" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/onReady.html">onReady</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Interface to be implemented by pods that require initialization logic
+after their properties have been set by the container.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="registerHandler" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/registerHandler.html">registerHandler</a></span><span class="signature">(<wbr><span class="parameter" id="registerHandler-param-decoder"><span class="type-annotation"><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a></span> <span class="parameter-name">decoder</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Registers a custom encoding for the specified <code>decoder</code>.
+  
+
+</dd>
+
+        <dt id="removeHandler" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/removeHandler.html">removeHandler</a></span><span class="signature">(<wbr><span class="parameter" id="removeHandler-param-decoder"><span class="type-annotation"><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a></span> <span class="parameter-name">decoder</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes a previously registered handler for the specified <code>decoder</code>.
+  
+
+</dd>
+
+        <dt id="setApplicationContext" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/setApplicationContext.html">setApplicationContext</a></span><span class="signature">(<wbr><span class="parameter" id="setApplicationContext-param-applicationContext"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a></span> <span class="parameter-name">applicationContext</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> that this component runs in.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="supportsEncoding" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoEncodingDecoder/supportsEncoding.html">supportsEncoding</a></span><span class="signature">(<wbr><span class="parameter" id="supportsEncoding-param-encoding"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">encoding</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if the specified <code>encoding</code> is supported.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">IoEncodingDecoder class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

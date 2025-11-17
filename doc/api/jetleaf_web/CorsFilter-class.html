@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the CorsFilter class from the jetleaf_web library, for the Dart programming language.">
+  <title>CorsFilter class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">CorsFilter class</li>
+  </ol>
+  <div class="self-name">CorsFilter</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;CorsFilter-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">CorsFilter</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>JetLeaf’s standard <strong>CORS enforcement filter</strong>, responsible for applying
+<a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> policies to incoming HTTP requests and responses.</p>
+<p>This filter acts as the runtime enforcement layer that executes
+<strong>before</strong> CORS rules have been defined by the
+<a href="../jetleaf_web/CorsConfigurationManager-class.html">CorsConfigurationManager</a>. Its main job is to:</p>
+<ol>
+<li>Determine whether CORS is globally enabled via environment configuration.</li>
+<li>Retrieve the applicable <a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> for the current request.</li>
+<li>Inject standard CORS headers into the request (or response) before
+delegating downstream in the <a href="../jetleaf_web/FilterChain-class.html">FilterChain</a>.</li>
+</ol>
+<h3 id="responsibilities">Responsibilities</h3>
+<ol>
+<li>Detect whether CORS is globally enabled.</li>
+<li>Resolve the applicable <a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> for the request path.</li>
+<li>Inject the corresponding CORS headers into the response.</li>
+<li>Handle <strong>pre-flight</strong> (<code>OPTIONS</code>) requests directly without
+invoking downstream filters or the dispatcher.</li>
+</ol>
+<h3 id="pre-flight-request-handling">Pre-flight Request Handling</h3>
+<p>A <strong>pre-flight</strong> request is detected when:</p>
+<pre class="language-text"><code class="language-text">- HTTP method == OPTIONS
+- Contains Origin header
+- Contains Access-Control-Request-Method header
+</code></pre>
+<p>When such a request is detected, the filter:</p>
+<ul>
+<li>Writes the appropriate CORS response headers,</li>
+<li>Sets the response status to <code>204 No Content</code>,</li>
+<li>And <strong>terminates</strong> the chain (i.e., does not call <code>chain.next()</code>).</li>
+</ul>
+<h3 id="configuration-property">Configuration Property</h3>
+<p>The filter checks the environment property:</p>
+<pre class="language-text"><code class="language-text">jetleaf.web.cors.enabled=true
+</code></pre>
+<p>via <a href="../jetleaf_web/CorsConfigurationManager/ENABLED_PROPERTY_NAME-constant.html">CorsConfigurationManager.ENABLED_PROPERTY_NAME</a>.</p>
+<ul>
+<li>If set to <code>"false"</code>, the filter is <strong>disabled</strong> and passes the request through unchanged.</li>
+<li>Defaults to <code>"true"</code> if not explicitly configured.</li>
+</ul>
+<h3 id="header-injection-behavior">Header Injection Behavior</h3>
+<p>When enabled and a matching configuration is found, the filter applies:</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Source Field</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Access-Control-Allow-Origin</code></td>
+<td><code>cors.allowedOrigins</code></td>
+</tr>
+<tr>
+<td><code>Access-Control-Allow-Methods</code></td>
+<td><code>cors.allowedMethods</code></td>
+</tr>
+<tr>
+<td><code>Access-Control-Allow-Headers</code></td>
+<td><code>cors.allowedHeaders</code></td>
+</tr>
+<tr>
+<td><code>Access-Control-Allow-Credentials</code></td>
+<td><code>cors.allowCredentials</code></td>
+</tr>
+<tr>
+<td><code>Access-Control-Expose-Headers</code></td>
+<td><code>cors.exposedHeaders</code></td>
+</tr>
+<tr>
+<td><code>Access-Control-Max-Age</code></td>
+<td><code>cors.maxAgeSeconds</code></td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">final filter = CorsFilter(manager);
+await filter.doFilter(req, res, chain);
+</code></pre>
+<h3 id="execution-order">Execution Order</h3>
+<p>This filter declares <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Ordered/HIGHEST_PRECEDENCE-constant.html">Ordered.HIGHEST_PRECEDENCE</a>, meaning it runs <strong>before</strong>
+most other filters in the chain. This ensures that CORS policies are applied
+at the initial outbound stage of request handling.</p>
+<h3 id="integration-points">Integration Points</h3>
+<ul>
+<li><a href="../jetleaf_web/CorsConfigurationManager-class.html">CorsConfigurationManager</a> — provides configuration lookup.</li>
+<li><a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> — controls global enable/disable flag.</li>
+<li><a href="../jetleaf_web/FilterChain-class.html">FilterChain</a> — allows further processing after header injection.</li>
+</ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<p>The filter is stateless between requests; safe for concurrent multi-threaded use.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/Filter-class.html">Filter</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/EnvironmentAware-class.html">EnvironmentAware</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Ordered-class.html">Ordered</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="CorsFilter.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/CorsFilter/CorsFilter.html">CorsFilter.new</a></span><span class="signature">(<span class="parameter" id="-param-_manager"><span class="type-annotation"><a href="../jetleaf_web/CorsConfigurationManager-class.html">CorsConfigurationManager</a></span> <span class="parameter-name">_manager</span></span>)</span>
+        </dt>
+        <dd>
+          JetLeaf’s standard <strong>CORS enforcement filter</strong>, responsible for applying
+<a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> policies to incoming HTTP requests and responses.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="doFilter" class="callable">
+  <span class="name"><a href="../jetleaf_web/CorsFilter/doFilter.html">doFilter</a></span><span class="signature">(<wbr><span class="parameter" id="doFilter-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span><span class="parameter" id="doFilter-param-response"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span>, </span><span class="parameter" id="doFilter-param-chain"><span class="type-annotation"><a href="../jetleaf_web/FilterChain-class.html">FilterChain</a></span> <span class="parameter-name">chain</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Called for each HTTP request and response.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getOrder" class="callable">
+  <span class="name"><a href="../jetleaf_web/CorsFilter/getOrder.html">getOrder</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A contract for objects that are assigned an order or precedence value.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setEnvironment" class="callable">
+  <span class="name"><a href="../jetleaf_web/CorsFilter/setEnvironment.html">setEnvironment</a></span><span class="signature">(<wbr><span class="parameter" id="setEnvironment-param-environment"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a></span> <span class="parameter-name">environment</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> that this component runs in.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">CorsFilter class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

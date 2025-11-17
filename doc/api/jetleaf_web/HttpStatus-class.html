@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the HttpStatus class from the jetleaf_web library, for the Dart programming language.">
+  <title>HttpStatus class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">HttpStatus class</li>
+  </ol>
+  <div class="self-name">HttpStatus</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;HttpStatus-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">HttpStatus</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A comprehensive utility class representing <strong>HTTP status codes</strong>, their <strong>meanings</strong>, and <strong>categories</strong>.</p>
+<p>The <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> class provides a structured and type-safe way to work with HTTP response codes in Dart.
+It defines all standard and extended HTTP status codes (1xx–6xx) along with their official names and
+human-readable descriptions.</p>
+<p>This implementation aims to simplify HTTP response handling by providing:</p>
+<ul>
+<li>
+<p>🧭 <strong>Categorization</strong> — Each code is classified into categories:</p>
+<ul>
+<li><strong>1xx Informational</strong> — Request received and continuing process</li>
+<li><strong>2xx Success</strong> — Request successfully received, understood, and accepted</li>
+<li><strong>3xx Redirection</strong> — Further action required to complete the request</li>
+<li><strong>4xx Client Error</strong> — Client appears to have made an error</li>
+<li><strong>5xx Server Error</strong> — Server failed to fulfill a valid request</li>
+<li><strong>6xx Custom / Connection Error</strong> — Non-standard, local network or client-specific errors</li>
+</ul>
+</li>
+<li>
+<p>🔍 <strong>Lookup Functions</strong> — Retrieve statuses using:</p>
+<ul>
+<li><a href="../jetleaf_web/HttpStatus/fromCode.html">HttpStatus.fromCode</a> → look up by numeric status code</li>
+<li><a href="../jetleaf_web/HttpStatus/fromString.html">HttpStatus.fromString</a> → look up by symbolic name (e.g. <code>"OK"</code>, <code>"NOT_FOUND"</code>)</li>
+</ul>
+</li>
+<li>
+<p>🧩 <strong>Range Checking Helpers</strong> — Determine if a code belongs to a certain group:</p>
+<ul>
+<li><a href="../jetleaf_web/HttpStatus/is1xxInformational.html">is1xxInformational</a>, <a href="../jetleaf_web/HttpStatus/is2xxSuccessful.html">is2xxSuccessful</a>, <a href="../jetleaf_web/HttpStatus/is3xxRedirection.html">is3xxRedirection</a>,
+<a href="../jetleaf_web/HttpStatus/is4xxClientError.html">is4xxClientError</a>, <a href="../jetleaf_web/HttpStatus/is5xxServerError.html">is5xxServerError</a>, <a href="../jetleaf_web/HttpStatus/is6xxConnectionError.html">is6xxConnectionError</a></li>
+</ul>
+</li>
+<li>
+<p>💡 <strong>Automatic Fallbacks</strong> — For unknown codes, <a href="../jetleaf_web/HttpStatus/fromCode.html">HttpStatus.fromCode</a> dynamically generates
+a meaningful placeholder object with an inferred category description (e.g. <code>"UNKNOWN_777"</code>).</p>
+</li>
+<li>
+<p>🧱 <strong>Immutability &amp; Consistency</strong> — Each <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> is a constant value object with well-defined
+equality and hash behavior, making it safe to use in maps, sets, or for comparison.</p>
+</li>
+</ul>
+<h3 id="example-usage">Example Usage</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:jetleaf_lang/lang.dart';
+
+// Access a predefined status constant
+print(HttpStatus.OK.getCode()); // 200
+print(HttpStatus.NOT_FOUND.getDescription()); // "Requested resource could not be found but may be available in the future"
+
+// Check for status category
+if (HttpStatus.OK.is2xxSuccessful()) {
+  print('Request succeeded!');
+}
+
+// Lookup dynamically
+final custom = HttpStatus.fromCode(777);
+print(custom.name); // "UNKNOWN_777"
+
+// Check if predefined
+print(HttpStatus.isPredefined(404)); // true
+print(HttpStatus.isPredefined(777)); // false
+
+// Get all predefined statuses
+final allStatuses = HttpStatus.getAllStatusCodes();
+print(allStatuses.length); // e.g., 80+
+</code></pre>
+<h3 id="when-to-use">When to Use</h3>
+<p>Use <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> in any HTTP-related context where readability, safety, and consistency matter:</p>
+<ul>
+<li>REST clients and APIs</li>
+<li>Logging and analytics of HTTP responses</li>
+<li>Mock servers and integration testing</li>
+<li>Network layer abstractions</li>
+</ul>
+<h3 id="design-philosophy">Design Philosophy</h3>
+<p>This class provides <strong>self-documenting constants</strong> instead of numeric literals (magic numbers),
+ensuring that code remains both descriptive and maintainable:</p>
+<pre class="language-dart"><code class="language-dart">// ✅ Good
+if (response.statusCode == HttpStatus.FORBIDDEN.getCode()) { ... }
+
+// 🚫 Avoid
+if (response.statusCode == 403) { ... }
+</code></pre>
+<p>In addition to readability, this approach prevents accidental misuse of codes and encourages
+standardization across codebases.</p>
+<h3 id="interoperability">Interoperability</h3>
+<p>The <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> constants and utilities are compatible with any networking package in Dart or Flutter,
+such as:</p>
+<ul>
+<li><code>package:http</code></li>
+<li><code>dart:io</code></li>
+<li><code>dio</code></li>
+<li><code>chopper</code></li>
+</ul>
+<h3 id="summary">Summary</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Range</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Informational</td>
+<td>100–199</td>
+<td>CONTINUE</td>
+<td>Request received, awaiting next step</td>
+</tr>
+<tr>
+<td>Success</td>
+<td>200–299</td>
+<td>OK</td>
+<td>Request completed successfully</td>
+</tr>
+<tr>
+<td>Redirection</td>
+<td>300–399</td>
+<td>MOVED_PERMANENTLY</td>
+<td>Client should use a different URI</td>
+</tr>
+<tr>
+<td>Client Error</td>
+<td>400–499</td>
+<td>NOT_FOUND</td>
+<td>Request invalid or cannot be fulfilled</td>
+</tr>
+<tr>
+<td>Server Error</td>
+<td>500–599</td>
+<td>INTERNAL_SERVER_ERROR</td>
+<td>Server failed to fulfill a valid request</td>
+</tr>
+<tr>
+<td>Connection Error</td>
+<td>600–699</td>
+<td>CONNECTION_NOT_REACHABLE</td>
+<td>Non-standard, client-side network failure</td>
+</tr>
+</tbody>
+</table>
+<h3 id="related-links">Related Links</h3>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics (IETF)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">MDN HTTP Status Codes Documentation</a></li>
+<li><a href="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">IANA HTTP Status Code Registry</a></li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+  <dt>Mixed-in types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode-mixin.html">EqualsAndHashCode</a></li>
+    </ul>
+  </dd>
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="equalizedProperties" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="fromJson" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/fromJson.html">fromJson</a></span><span class="signature">(<wbr><span class="parameter" id="fromJson-param-json"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span> <span class="parameter-name">json</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates an <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> instance from a JSON-compatible <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a>.
+  
+
+</dd>
+
+        <dt id="getCode" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/getCode.html">getCode</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the numeric HTTP status code.
+  
+
+</dd>
+
+        <dt id="getDescription" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/getDescription.html">getDescription</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the descriptive text associated with this HTTP status.
+  
+
+</dd>
+
+        <dt id="getName" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/getName.html">getName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the canonical name of this HTTP status.
+  
+
+</dd>
+
+        <dt id="is1xxInformational" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is1xxInformational.html">is1xxInformational</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>1xx (Informational)</strong> status.
+  
+
+</dd>
+
+        <dt id="is2xxSuccessful" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is2xxSuccessful.html">is2xxSuccessful</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>2xx (Successful)</strong> status.
+  
+
+</dd>
+
+        <dt id="is3xxRedirection" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is3xxRedirection.html">is3xxRedirection</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>3xx (Redirection)</strong> status.
+  
+
+</dd>
+
+        <dt id="is4xxClientError" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is4xxClientError.html">is4xxClientError</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>4xx (Client Error)</strong> status.
+  
+
+</dd>
+
+        <dt id="is5xxServerError" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is5xxServerError.html">is5xxServerError</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>5xx (Server Error)</strong> status.
+  
+
+</dd>
+
+        <dt id="is6xxConnectionError" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/is6xxConnectionError.html">is6xxConnectionError</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> is a <strong>6xx (Connection Error)</strong> status.
+  
+
+</dd>
+
+        <dt id="isBetween" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/isBetween.html">isBetween</a></span><span class="signature">(<wbr><span class="parameter" id="isBetween-param-begin"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">begin</span>, </span><span class="parameter" id="isBetween-param-end"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">end</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if <code>_code</code> falls inclusively between <code>begin</code> and <code>end</code>.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toJson" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/toJson.html">toJson</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Converts this <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> to a JSON-compatible <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a>.
+  
+
+</dd>
+
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A string representation of this object.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+  <section class="summary offset-anchor" id="static-methods">
+    <h2>Static Methods</h2>
+    <dl class="callables">
+        <dt id="fromCode" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/fromCode.html">fromCode</a></span><span class="signature">(<wbr><span class="parameter" id="fromCode-param-statusCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">statusCode</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns an <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> instance for the given <code>statusCode</code>.
+  
+
+</dd>
+
+        <dt id="fromString" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/fromString.html">fromString</a></span><span class="signature">(<wbr><span class="parameter" id="fromString-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns an <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> instance that matches the given <code>name</code>.
+  
+
+</dd>
+
+        <dt id="getAllStatusCodes" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/getAllStatusCodes.html">getAllStatusCodes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns an unmodifiable list of all predefined <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> instances.
+  
+
+</dd>
+
+        <dt id="getStatusCodesInRange" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/getStatusCodesInRange.html">getStatusCodesInRange</a></span><span class="signature">(<wbr><span class="parameter" id="getStatusCodesInRange-param-start"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">start</span>, </span><span class="parameter" id="getStatusCodesInRange-param-end"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">end</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a list of all predefined <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> codes within the given range.
+  
+
+</dd>
+
+        <dt id="isPredefined" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpStatus/isPredefined.html">isPredefined</a></span><span class="signature">(<wbr><span class="parameter" id="isPredefined-param-statusCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">statusCode</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns <code>true</code> if the given <code>statusCode</code> is predefined.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="A_TIMEOUT_OCCURRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/A_TIMEOUT_OCCURRED-constant.html">A_TIMEOUT_OCCURRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  524 A Timeout Occurred – Cloudflare extension indicating that Cloudflare was able to complete a TCP connection to the origin server,
+but did not receive a timely HTTP response.
+  
+
+</dd>
+
+        <dt id="ACCEPTED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/ACCEPTED-constant.html">ACCEPTED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  202 Accepted – The request has been accepted for processing, but the processing has not been completed.
+The request might or might not be eventually acted upon, and may be disallowed when processing occurs.
+  
+
+</dd>
+
+        <dt id="ALREADY_REPORTED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/ALREADY_REPORTED-constant.html">ALREADY_REPORTED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  208 Already Reported – WebDAV extension used to avoid repeatedly enumerating the internal members of multiple bindings
+to the same collection.
+  
+
+</dd>
+
+        <dt id="BAD_GATEWAY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/BAD_GATEWAY-constant.html">BAD_GATEWAY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  502 Bad Gateway – The server was acting as a gateway or proxy and received an invalid response from the upstream server.
+Common when a reverse proxy cannot reach the backend server.
+  
+
+</dd>
+
+        <dt id="BAD_REQUEST" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/BAD_REQUEST-constant.html">BAD_REQUEST</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  400 Bad Request – The server cannot or will not process the request due to an apparent client error.
+This includes malformed request syntax, invalid request message framing, or deceptive request routing.
+  
+
+</dd>
+
+        <dt id="BANDWIDTH_LIMIT_EXCEEDED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/BANDWIDTH_LIMIT_EXCEEDED-constant.html">BANDWIDTH_LIMIT_EXCEEDED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  509 Bandwidth Limit Exceeded – Apache extension indicating that the bandwidth limit has been exceeded.
+Used by some servers to indicate that the site has exceeded its allocated bandwidth.
+  
+
+</dd>
+
+        <dt id="BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS-constant.html">BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  450 Blocked by Windows Parental Controls – A Microsoft extension indicating that Windows Parental Controls are turned on and are blocking access.
+Used by Microsoft's family safety features.
+  
+
+</dd>
+
+        <dt id="CLIENT_CLOSED_REQUEST" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CLIENT_CLOSED_REQUEST-constant.html">CLIENT_CLOSED_REQUEST</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  499 Client Closed Request – Nginx extension indicating that the client closed the connection before the server could send a response.
+Used when clients cancel requests before completion.
+  
+
+</dd>
+
+        <dt id="CONFLICT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CONFLICT-constant.html">CONFLICT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  409 Conflict – Indicates that the request could not be processed because of conflict in the current state of the resource.
+Often occurs in PUT requests when multiple clients try to update the same resource.
+  
+
+</dd>
+
+        <dt id="CONNECTION_CLOSED_WITHOUT_RESPONSE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CONNECTION_CLOSED_WITHOUT_RESPONSE-constant.html">CONNECTION_CLOSED_WITHOUT_RESPONSE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  444 Connection Closed Without Response – A non-standard status code used to instruct nginx to close the connection without sending a response.
+Used to close connections from clients sending malicious requests.
+  
+
+</dd>
+
+        <dt id="CONNECTION_NOT_REACHABLE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CONNECTION_NOT_REACHABLE-constant.html">CONNECTION_NOT_REACHABLE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  600 Connection Not Reachable – H-Standard status code used by some proxies to indicate a connection not reachable.
+Used when a proxy cannot reach the upstream server.
+  
+
+</dd>
+
+        <dt id="CONNECTION_TIMED_OUT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CONNECTION_TIMED_OUT-constant.html">CONNECTION_TIMED_OUT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  522 Connection Timed Out – Cloudflare extension indicating that Cloudflare could not negotiate a TCP handshake with the origin server.
+The origin server is not responding to requests.
+  
+
+</dd>
+
+        <dt id="CONTINUE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CONTINUE-constant.html">CONTINUE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  100 Continue – The server has received the request headers and the client should proceed to send the request body.
+Used in HTTP/1.1 when the client needs to send a large request body and wants to check if the server will accept it.
+  
+
+</dd>
+
+        <dt id="CREATED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/CREATED-constant.html">CREATED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  201 Created – The request has been fulfilled, resulting in the creation of a new resource.
+The newly created resource can be referenced by the URI(s) returned in the entity of the response.
+  
+
+</dd>
+
+        <dt id="EARLY_HINTS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/EARLY_HINTS-constant.html">EARLY_HINTS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  103 Early Hints – Used to return some response headers before the final HTTP message.
+Allows the server to send preliminary response headers while it prepares the full response.
+  
+
+</dd>
+
+        <dt id="EXPECTATION_FAILED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/EXPECTATION_FAILED-constant.html">EXPECTATION_FAILED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  417 Expectation Failed – The server cannot meet the requirements of the Expect request-header field.
+Occurs when the Expect header contains expectations that cannot be met.
+  
+
+</dd>
+
+        <dt id="FAILED_DEPENDENCY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/FAILED_DEPENDENCY-constant.html">FAILED_DEPENDENCY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  424 Failed Dependency – The request failed because it depended on another request and that request failed.
+WebDAV extension used when a method could not be performed because it depended on another action that failed.
+  
+
+</dd>
+
+        <dt id="FORBIDDEN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/FORBIDDEN-constant.html">FORBIDDEN</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  403 Forbidden – The request contained valid data and was understood by the server, but the server is refusing action.
+Unlike 401, authenticating will make no difference.
+  
+
+</dd>
+
+        <dt id="FOUND" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/FOUND-constant.html">FOUND</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  302 Found – Tells the client to look at (browse to) another URL temporarily.
+The original URL should be used for future requests.
+  
+
+</dd>
+
+        <dt id="GATEWAY_TIMEOUT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/GATEWAY_TIMEOUT-constant.html">GATEWAY_TIMEOUT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  504 Gateway Timeout – The server was acting as a gateway or proxy and did not receive a timely response from the upstream server.
+Occurs when a proxy server times out waiting for a response from an upstream server.
+  
+
+</dd>
+
+        <dt id="GONE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/GONE-constant.html">GONE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  410 Gone – Indicates that the resource requested is no longer available and will not be available again.
+Unlike 404, this condition is expected to be permanent.
+  
+
+</dd>
+
+        <dt id="HTTP_REQUEST_SENT_TO_HTTPS_PORT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/HTTP_REQUEST_SENT_TO_HTTPS_PORT-constant.html">HTTP_REQUEST_SENT_TO_HTTPS_PORT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  497 HTTP Request Sent to HTTPS Port – Nginx extension indicating that a plain HTTP request was sent to an HTTPS port.
+Occurs when clients mistakenly use HTTP instead of HTTPS.
+  
+
+</dd>
+
+        <dt id="HTTP_VERSION_NOT_SUPPORTED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/HTTP_VERSION_NOT_SUPPORTED-constant.html">HTTP_VERSION_NOT_SUPPORTED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  505 HTTP Version Not Supported – The server does not support the HTTP protocol version used in the request.
+The server should indicate which protocols it supports in the response.
+  
+
+</dd>
+
+        <dt id="IM_A_TEAPOT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/IM_A_TEAPOT-constant.html">IM_A_TEAPOT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  418 I'm a teapot – This code was defined in 1998 as one of the traditional IETF April Fools' jokes.
+It is not expected to be implemented by actual HTTP servers, but some do for fun.
+  
+
+</dd>
+
+        <dt id="IM_USED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/IM_USED-constant.html">IM_USED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  226 IM Used – The server has fulfilled a request for the resource, and the response is a representation of the result
+of one or more instance-manipulations applied to the current instance.
+  
+
+</dd>
+
+        <dt id="INSUFFICIENT_STORAGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/INSUFFICIENT_STORAGE-constant.html">INSUFFICIENT_STORAGE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  507 Insufficient Storage – The server is unable to store the representation needed to complete the request.
+WebDAV extension indicating that the server cannot complete the request due to insufficient storage space.
+  
+
+</dd>
+
+        <dt id="INTERNAL_SERVER_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/INTERNAL_SERVER_ERROR-constant.html">INTERNAL_SERVER_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  500 Internal Server Error – A generic error message when an unexpected condition was encountered and no more specific message is suitable.
+The most common server error, indicating something went wrong on the server side.
+  
+
+</dd>
+
+        <dt id="INVALID_SSL_CERTIFICATE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/INVALID_SSL_CERTIFICATE-constant.html">INVALID_SSL_CERTIFICATE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  526 Invalid SSL Certificate – Cloudflare extension indicating that Cloudflare could not validate the SSL certificate on the origin web server.
+The SSL certificate is invalid, expired, or not trusted.
+  
+
+</dd>
+
+        <dt id="INVALID_TOKEN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/INVALID_TOKEN-constant.html">INVALID_TOKEN</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  498 Invalid Token – Esri extension indicating that the provided token is invalid or expired.
+Used by ArcGIS services for authentication errors.
+  
+
+</dd>
+
+        <dt id="LENGTH_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/LENGTH_REQUIRED-constant.html">LENGTH_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  411 Length Required – The request did not specify the length of its content, which is required by the requested resource.
+The client should add a Content-Length header and resubmit the request.
+  
+
+</dd>
+
+        <dt id="LOCKED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/LOCKED-constant.html">LOCKED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  423 Locked – The resource that is being accessed is locked.
+WebDAV extension indicating that the source or destination resource is locked.
+  
+
+</dd>
+
+        <dt id="LOOP_DETECTED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/LOOP_DETECTED-constant.html">LOOP_DETECTED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  508 Loop Detected – The server detected an infinite loop while processing the request.
+WebDAV extension used when the server terminates an operation because it encounters an infinite loop.
+  
+
+</dd>
+
+        <dt id="METHOD_NOT_ALLOWED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/METHOD_NOT_ALLOWED-constant.html">METHOD_NOT_ALLOWED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  405 Method Not Allowed – A request method is not supported for the requested resource.
+The response must include an Allow header containing a list of valid methods.
+  
+
+</dd>
+
+        <dt id="MISDIRECTED_REQUEST" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/MISDIRECTED_REQUEST-constant.html">MISDIRECTED_REQUEST</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  421 Misdirected Request – The request was directed at a server that is not able to produce a response.
+Can be sent when a server is not configured to produce responses for the combination of scheme and authority.
+  
+
+</dd>
+
+        <dt id="MOVED_PERMANENTLY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/MOVED_PERMANENTLY-constant.html">MOVED_PERMANENTLY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  301 Moved Permanently – This and all future requests should be directed to the given URI.
+Search engines will update their indexes to the new URI.
+  
+
+</dd>
+
+        <dt id="MOVED_TEMPORARILY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/MOVED_TEMPORARILY-constant.html">MOVED_TEMPORARILY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  302 Moved Temporarily – Legacy alias for 302 Found.
+This naming was used in HTTP/1.0 but is now deprecated in favor of "Found".
+  
+
+</dd>
+
+        <dt id="MULTI_STATUS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/MULTI_STATUS-constant.html">MULTI_STATUS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  207 Multi-Status – WebDAV extension providing status for multiple independent operations.
+The message body contains XML with status information about multiple resources.
+  
+
+</dd>
+
+        <dt id="MULTIPLE_CHOICES" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/MULTIPLE_CHOICES-constant.html">MULTIPLE_CHOICES</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  300 Multiple Choices – Indicates multiple options for the resource from which the client may choose.
+The client should select one of the provided alternatives.
+  
+
+</dd>
+
+        <dt id="NETWORK_AUTHENTICATION_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NETWORK_AUTHENTICATION_REQUIRED-constant.html">NETWORK_AUTHENTICATION_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  511 Network Authentication Required – The client needs to authenticate to gain network access.
+Intended for use by intercepting proxies to control access to the network.
+  
+
+</dd>
+
+        <dt id="NETWORK_CONNECT_TIMEOUT_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NETWORK_CONNECT_TIMEOUT_ERROR-constant.html">NETWORK_CONNECT_TIMEOUT_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  599 Network Connect Timeout Error – Non-standard status code used by some proxies to indicate a network connect timeout.
+Used when a proxy times out connecting to the upstream server.
+  
+
+</dd>
+
+        <dt id="NETWORK_READ_TIMEOUT_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NETWORK_READ_TIMEOUT_ERROR-constant.html">NETWORK_READ_TIMEOUT_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  598 Network Read Timeout Error – Non-standard status code used by some proxies to indicate a network read timeout.
+Used when a proxy times out reading from the client or upstream server.
+  
+
+</dd>
+
+        <dt id="NO_CONTENT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NO_CONTENT-constant.html">NO_CONTENT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  204 No Content – The server successfully processed the request and is not returning any content.
+This is commonly used for DELETE requests or PUT requests where no response body is needed.
+  
+
+</dd>
+
+        <dt id="NON_AUTHORITATIVE_INFORMATION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NON_AUTHORITATIVE_INFORMATION-constant.html">NON_AUTHORITATIVE_INFORMATION</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  203 Non-Authoritative Information – The server is a transforming proxy that received a 200 OK from its origin,
+but is returning a modified version of the origin's response.
+  
+
+</dd>
+
+        <dt id="NOT_ACCEPTABLE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NOT_ACCEPTABLE-constant.html">NOT_ACCEPTABLE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  406 Not Acceptable – The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.
+The server should generate a list of available representations.
+  
+
+</dd>
+
+        <dt id="NOT_EXTENDED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NOT_EXTENDED-constant.html">NOT_EXTENDED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  510 Not Extended – Further extensions to the request are required for the server to fulfil it.
+The client should send additional information or use a different approach.
+  
+
+</dd>
+
+        <dt id="NOT_FOUND" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NOT_FOUND-constant.html">NOT_FOUND</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  404 Not Found – The requested resource could not be found but may be available in the future.
+Subsequent requests by the client are permissible.
+  
+
+</dd>
+
+        <dt id="NOT_IMPLEMENTED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NOT_IMPLEMENTED-constant.html">NOT_IMPLEMENTED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  501 Not Implemented – The server either does not recognize the request method, or it lacks the ability to fulfil the request.
+Usually implies future availability (e.g., a new feature of a web-service API).
+  
+
+</dd>
+
+        <dt id="NOT_MODIFIED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/NOT_MODIFIED-constant.html">NOT_MODIFIED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  304 Not Modified – Indicates that the resource has not been modified since the version specified by the request headers.
+The client can use its cached version of the resource.
+  
+
+</dd>
+
+        <dt id="OK" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/OK-constant.html">OK</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  200 OK – Standard response for successful HTTP requests. The actual response will depend on the request method used.
+GET: The resource has been fetched and transmitted in the message body.
+HEAD: The representation headers are included without any message body.
+PUT or POST: The resource describing the result of the action is transmitted.
+  
+
+</dd>
+
+        <dt id="ORIGIN_IS_UNREACHABLE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/ORIGIN_IS_UNREACHABLE-constant.html">ORIGIN_IS_UNREACHABLE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  523 Origin Is Unreachable – Cloudflare extension indicating that Cloudflare could not reach the origin server.
+Usually occurs when DNS resolution fails or the server is unreachable.
+  
+
+</dd>
+
+        <dt id="PARTIAL_CONTENT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PARTIAL_CONTENT-constant.html">PARTIAL_CONTENT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  206 Partial Content – The server is delivering only part of the resource due to a range header sent by the client.
+Used for resumable downloads and streaming media.
+  
+
+</dd>
+
+        <dt id="PAYLOAD_TOO_LARGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PAYLOAD_TOO_LARGE-constant.html">PAYLOAD_TOO_LARGE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  413 Payload Too Large – The request is larger than the server is willing or able to process.
+Previously called "Request Entity Too Large".
+  
+
+</dd>
+
+        <dt id="PAYMENT_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PAYMENT_REQUIRED-constant.html">PAYMENT_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  402 Payment Required – Reserved for future use. The original intention was that this code might be used as part of some form of digital cash or micropayment scheme.
+Some services use this for rate limiting or subscription requirements.
+  
+
+</dd>
+
+        <dt id="PERMANENT_REDIRECT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PERMANENT_REDIRECT-constant.html">PERMANENT_REDIRECT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  308 Permanent Redirect – The request and all future requests should be repeated using another URI.
+Unlike 301, the request method should not be changed when reissuing the request.
+  
+
+</dd>
+
+        <dt id="PRECONDITION_FAILED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PRECONDITION_FAILED-constant.html">PRECONDITION_FAILED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  412 Precondition Failed – The server does not meet one of the preconditions that the requester put on the request header fields.
+Used with conditional requests using If-Match, If-None-Match, If-Modified-Since, etc.
+  
+
+</dd>
+
+        <dt id="PRECONDITION_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PRECONDITION_REQUIRED-constant.html">PRECONDITION_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  428 Precondition Required – The origin server requires the request to be conditional.
+Intended to prevent the 'lost update' problem where multiple clients update a resource simultaneously.
+  
+
+</dd>
+
+        <dt id="PROCESSING" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PROCESSING-constant.html">PROCESSING</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  102 Processing – WebDAV extension indicating that the server has received and is processing the request, but no response is available yet.
+This prevents the client from timing out and assuming the request was lost.
+  
+
+</dd>
+
+        <dt id="PROXY_AUTHENTICATION_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/PROXY_AUTHENTICATION_REQUIRED-constant.html">PROXY_AUTHENTICATION_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  407 Proxy Authentication Required – The client must first authenticate itself with the proxy.
+Similar to 401, but authentication is needed with a proxy server.
+  
+
+</dd>
+
+        <dt id="RAILGUN_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/RAILGUN_ERROR-constant.html">RAILGUN_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  527 Railgun Error – Cloudflare extension indicating an error with Cloudflare's Railgun service.
+Railgun is a Cloudflare technology that speeds up non-cached pages.
+  
+
+</dd>
+
+        <dt id="RANGE_NOT_SATISFIABLE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/RANGE_NOT_SATISFIABLE-constant.html">RANGE_NOT_SATISFIABLE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  416 Range Not Satisfiable – The client has asked for a portion of the file (byte serving), but the server cannot supply that portion.
+Used when the Range header specifies invalid byte ranges.
+  
+
+</dd>
+
+        <dt id="REQUEST_CANCELLED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/REQUEST_CANCELLED-constant.html">REQUEST_CANCELLED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  601 Request Cancelled – H-Standard status code used by some proxies to indicate a request cancellation.
+Used when a request is cancelled by the user or due to a timeout.
+  
+
+</dd>
+
+        <dt id="REQUEST_HEADER_FIELDS_TOO_LARGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/REQUEST_HEADER_FIELDS_TOO_LARGE-constant.html">REQUEST_HEADER_FIELDS_TOO_LARGE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  431 Request Header Fields Too Large – The server is unwilling to process the request because either an individual header field,
+or all the header fields collectively, are too large.
+  
+
+</dd>
+
+        <dt id="REQUEST_HEADER_TOO_LARGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/REQUEST_HEADER_TOO_LARGE-constant.html">REQUEST_HEADER_TOO_LARGE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  494 Request Header Too Large – Nginx extension indicating that the client sent too large of a request or too long of a header line.
+Similar to 431 but specific to Nginx servers.
+  
+
+</dd>
+
+        <dt id="REQUEST_TIMEOUT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/REQUEST_TIMEOUT-constant.html">REQUEST_TIMEOUT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  408 Request Timeout – The server timed out waiting for the request.
+The client did not produce a request within the time that the server was prepared to wait.
+  
+
+</dd>
+
+        <dt id="RESET_CONTENT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/RESET_CONTENT-constant.html">RESET_CONTENT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  205 Reset Content – The server successfully processed the request, asks that the requester reset its document view,
+and is not returning any content.
+  
+
+</dd>
+
+        <dt id="RETRY_WITH" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/RETRY_WITH-constant.html">RETRY_WITH</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  449 Retry With – A Microsoft extension indicating that the request should be retried after performing the appropriate action.
+Used by Microsoft's Internet Information Services (IIS).
+  
+
+</dd>
+
+        <dt id="SEE_OTHER" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SEE_OTHER-constant.html">SEE_OTHER</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  303 See Other – The response to the request can be found under another URI using the GET method.
+Used to redirect after a POST request to prevent duplicate submissions.
+  
+
+</dd>
+
+        <dt id="SERVICE_UNAVAILABLE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SERVICE_UNAVAILABLE-constant.html">SERVICE_UNAVAILABLE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  503 Service Unavailable – The server cannot handle the request (because it is overloaded or down for maintenance).
+Generally, this is a temporary state and should include a Retry-After header.
+  
+
+</dd>
+
+        <dt id="SITE_FROZEN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SITE_FROZEN-constant.html">SITE_FROZEN</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  530 Site Frozen – Pantheon extension indicating that the site is frozen due to inactivity.
+Used by Pantheon hosting platform when a site is temporarily suspended.
+  
+
+</dd>
+
+        <dt id="SSL_CERTIFICATE_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SSL_CERTIFICATE_ERROR-constant.html">SSL_CERTIFICATE_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  495 SSL Certificate Error – Nginx extension indicating an error with the client's SSL certificate.
+Used when client certificate verification fails.
+  
+
+</dd>
+
+        <dt id="SSL_CERTIFICATE_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SSL_CERTIFICATE_REQUIRED-constant.html">SSL_CERTIFICATE_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  496 SSL Certificate Required – Nginx extension indicating that a client certificate is required but not provided.
+Used when client certificate authentication is mandatory.
+  
+
+</dd>
+
+        <dt id="SSL_HANDSHAKE_FAILED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SSL_HANDSHAKE_FAILED-constant.html">SSL_HANDSHAKE_FAILED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  525 SSL Handshake Failed – Cloudflare extension indicating that Cloudflare could not negotiate a SSL/TLS handshake with the origin server.
+SSL certificate or configuration issues on the origin server.
+  
+
+</dd>
+
+        <dt id="SWITCH_PROXY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SWITCH_PROXY-constant.html">SWITCH_PROXY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  306 Switch Proxy – No longer used. Originally meant "Subsequent requests should use the specified proxy."
+This status code is no longer used and is reserved.
+  
+
+</dd>
+
+        <dt id="SWITCHING_PROTOCOLS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/SWITCHING_PROTOCOLS-constant.html">SWITCHING_PROTOCOLS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  101 Switching Protocols – The requester has asked the server to switch protocols and the server has agreed to do so.
+Commonly used when upgrading from HTTP to WebSocket connections.
+  
+
+</dd>
+
+        <dt id="TEMPORARY_REDIRECT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/TEMPORARY_REDIRECT-constant.html">TEMPORARY_REDIRECT</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  307 Temporary Redirect – The request should be repeated with another URI; however, future requests should still use the original URI.
+Unlike 302, the request method should not be changed when reissuing the request.
+  
+
+</dd>
+
+        <dt id="TOO_EARLY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/TOO_EARLY-constant.html">TOO_EARLY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  425 Too Early – Indicates that the server is unwilling to risk processing a request that might be replayed.
+Used to prevent replay attacks in early data scenarios.
+  
+
+</dd>
+
+        <dt id="TOO_MANY_REQUESTS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/TOO_MANY_REQUESTS-constant.html">TOO_MANY_REQUESTS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  429 Too Many Requests – The user has sent too many requests in a given amount of time ("rate limiting").
+The response should include details explaining the condition and may include a Retry-After header.
+  
+
+</dd>
+
+        <dt id="UNAUTHORIZED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/UNAUTHORIZED-constant.html">UNAUTHORIZED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  401 Unauthorized – Similar to 403 Forbidden, but specifically for use when authentication is required and has failed or has not yet been provided.
+The response must include a WWW-Authenticate header field.
+  
+
+</dd>
+
+        <dt id="UNAVAILABLE_FOR_LEGAL_REASONS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/UNAVAILABLE_FOR_LEGAL_REASONS-constant.html">UNAVAILABLE_FOR_LEGAL_REASONS</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  451 Unavailable For Legal Reasons – A server operator has received a legal demand to deny access to a resource or to a set of resources.
+Named after the novel Fahrenheit 451 by Ray Bradbury.
+  
+
+</dd>
+
+        <dt id="UNPROCESSABLE_ENTITY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/UNPROCESSABLE_ENTITY-constant.html">UNPROCESSABLE_ENTITY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  422 Unprocessable Entity – The request was well-formed but was unable to be followed due to semantic errors.
+WebDAV extension indicating that the server understands the content type but cannot process the instructions.
+  
+
+</dd>
+
+        <dt id="UNSUPPORTED_MEDIA_TYPE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/UNSUPPORTED_MEDIA_TYPE-constant.html">UNSUPPORTED_MEDIA_TYPE</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  415 Unsupported Media Type – The request entity has a media type which the server or resource does not support.
+The client should check the Content-Type header.
+  
+
+</dd>
+
+        <dt id="UPGRADE_REQUIRED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/UPGRADE_REQUIRED-constant.html">UPGRADE_REQUIRED</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  426 Upgrade Required – The client should switch to a different protocol such as TLS/1.3.
+The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades.
+  
+
+</dd>
+
+        <dt id="URI_TOO_LONG" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/URI_TOO_LONG-constant.html">URI_TOO_LONG</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  414 URI Too Long – The URI provided was too long for the server to process.
+Often the result of too much data being encoded as a query-string of a GET request.
+  
+
+</dd>
+
+        <dt id="USE_PROXY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/USE_PROXY-constant.html">USE_PROXY</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  305 Use Proxy – The requested resource is available only through a proxy, the address for which is provided in the response.
+This status code is deprecated due to security concerns.
+  
+
+</dd>
+
+        <dt id="VARIANT_ALSO_NEGOTIATES" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/VARIANT_ALSO_NEGOTIATES-constant.html">VARIANT_ALSO_NEGOTIATES</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  506 Variant Also Negotiates – Transparent content negotiation for the request results in a circular reference.
+Indicates a configuration error in the server's content negotiation setup.
+  
+
+</dd>
+
+        <dt id="WEB_SERVER_IS_DOWN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/WEB_SERVER_IS_DOWN-constant.html">WEB_SERVER_IS_DOWN</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  521 Web Server Is Down – Cloudflare extension indicating that the origin server has refused the connection from Cloudflare.
+The origin web server is not reachable.
+  
+
+</dd>
+
+        <dt id="WEB_SERVER_RETURNED_UNKNOWN_ERROR" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpStatus/WEB_SERVER_RETURNED_UNKNOWN_ERROR-constant.html">WEB_SERVER_RETURNED_UNKNOWN_ERROR</a></span>
+  <span class="signature">&#8594; const <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  
+
+</dt>
+<dd>
+  520 Web Server Returned an Unknown Error – Cloudflare extension indicating that the origin server returned an empty, unknown, or unexpected response.
+Used when Cloudflare cannot determine what went wrong with the origin server.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">HttpStatus class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

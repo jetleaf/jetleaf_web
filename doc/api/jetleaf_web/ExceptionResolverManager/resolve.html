@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the resolve method from the ExceptionResolverManager class, for the Dart programming language.">
+  <title>resolve method - ExceptionResolverManager class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></li>
+    <li class="self-crumb">resolve method</li>
+  </ol>
+  <div class="self-name">resolve</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ExceptionResolverManager-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">resolve</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+<span class="name ">resolve</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="resolve-param-request"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span></li>
+<li><span class="parameter" id="resolve-param-response"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span>, </span></li>
+<li><span class="parameter" id="resolve-param-method"><span class="type-annotation"><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>?</span> <span class="parameter-name">method</span>, </span></li>
+<li><span class="parameter" id="resolve-param-ex"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">ex</span>, </span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Attempts to resolve an exception using the configured exception resolvers.</p>
+<p>The <code>resolve</code> method iterates over all <code>_exceptionResolvers</code> in order,
+attempting to handle the given exception <code>ex</code> for the provided HTTP
+<code>request</code> and <code>response</code>. Before invoking each resolver, it ensures that
+content negotiation is performed via <code>negotiationResolver</code> based on the
+media types supported by the resolver.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>request</code>: The incoming <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> being processed.</li>
+<li><code>response</code>: The outgoing <a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> to write results to.</li>
+<li><code>method</code>: The reflective <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> that was handling the request
+when the exception occurred. May be null if the context is not method-specific.</li>
+<li><code>ex</code>: The exception object that needs to be resolved.</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p>A <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a> that completes with <code>true</code> if any resolver successfully handled
+the exception, or <code>false</code> if none of the resolvers could handle it.</p>
+<h3 id="behavior">Behavior</h3>
+<ol>
+<li>Iterates through <code>_exceptionResolvers</code>.</li>
+<li>Performs content negotiation for the resolver using <code>negotiationResolver</code>.</li>
+<li>Calls <code>resolver.resolve(...)</code> with the current request, response, method, and exception.</li>
+<li>If a resolver returns <code>true</code>, indicating the exception has been handled,
+the iteration stops and the method returns <code>true</code>.</li>
+<li>If no resolver handles the exception, the method returns <code>false</code>.</li>
+</ol>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final handled = await exceptionHandler.resolve(request, response, method, ex);
+if (!handled) {
+  // Fallback logic if exception could not be resolved
+  response.statusCode = 500;
+  response.write('Internal server error');
+}
+</code></pre>
+<p>This method is typically used in a server framework to centralize exception
+handling and integrate with content negotiation mechanisms.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;bool&gt; resolve(ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? method, Object ex) async {
+  for (final resolver in _exceptionResolvers) {
+    if (await resolver.resolve(request, response, method, ex)) {
+      return true;
+    }
+  }
+
+  return false;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></li>
+    <li class="self-crumb">resolve method</li>
+</ol>
+
+    <h5>ExceptionResolverManager class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the advises method from the ControllerAdviser class, for the Dart programming language.">
+  <title>advises method - ControllerAdviser class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a></li>
+    <li class="self-crumb">advises method</li>
+  </ol>
+  <div class="self-name">advises</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ControllerAdviser-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">advises</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+<span class="name ">advises</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="advises-param-controllerClass"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">controllerClass</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Determines whether this advice applies to the given <code>controllerClass</code>.</p>
+<p>The applicability check follows these rules:</p>
+<ol>
+<li>
+<p><strong>Advice–Controller annotation match:</strong></p>
+<ul>
+<li>A <code>@RestControllerAdvice</code> applies only to <code>@RestController</code> controllers.</li>
+<li>A <code>@ControllerAdvice</code> applies only to <code>@Controller</code> controllers.</li>
+</ul>
+</li>
+<li>
+<p><strong>Assignable types:</strong><br>
+If defined, advice applies only when the given controller type is assignable
+from one of the types listed in <code>assignableTypes</code>.</p>
+</li>
+<li>
+<p><strong>Base packages:</strong><br>
+If defined, advice applies only when the controller’s package name starts
+with one of the listed packages.</p>
+</li>
+<li>
+<p><strong>Annotations:</strong><br>
+If defined, advice applies only when the controller class has one of the listed annotations.</p>
+</li>
+<li>
+<p><strong>Default behavior:</strong><br>
+If no scoping restrictions are set, the advice applies globally.</p>
+</li>
+</ol>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">bool advises(Class controllerClass) {
+  &#47;&#47; Step 1: Ensure advice–controller type compatibility
+  final controllerAnnotation = controllerClass.getDirectAnnotation&lt;RestController&gt;()
+    ?? controllerClass.getDirectAnnotation&lt;WebView&gt;()
+    ?? controllerClass.getDirectAnnotation&lt;Controller&gt;();
+
+  &#47;&#47; REST advice applies only to REST controllers
+  if (controllerAnnotation is RestController &amp;&amp; controllerAdvice is! RestControllerAdvice) {
+    return false;
+  }
+
+  &#47;&#47; MVC or WebView advice applies only to MVC&#47;WebView controllers
+  if ((controllerAnnotation is Controller || controllerAnnotation is WebView) &amp;&amp; controllerAdvice is RestControllerAdvice) {
+    return false;
+  }
+
+  &#47;&#47; Step 2: explicit assignable types
+  final assignable = controllerAdvice.assignableTypes;
+  final supportedTypes = assignable.map(ClassUtils.loadClass).whereType&lt;Class&gt;();
+
+  if (supportedTypes.isNotEmpty) {
+    return supportedTypes.any((type) =&gt; type.isAssignableFrom(controllerClass));
+  }
+
+  &#47;&#47; Step 3: base packages
+  final basePkgs = controllerAdvice.basePackages;
+  if (basePkgs.isNotEmpty) {
+    final controllerPkg = controllerClass.getPackage()?.getName();
+    if (controllerPkg != null &amp;&amp; basePkgs.any((pkg) =&gt; pkg.equals(controllerPkg))) {
+      return true;
+    }
+    return false;
+  }
+
+  &#47;&#47; Step 4: annotations
+  final annotations = controllerAdvice.annotations;
+  if (annotations.isNotEmpty) {
+    for (final ann in annotations) {
+      final annClass = ClassUtils.loadClass(ann);
+      if (annClass != null &amp;&amp; controllerClass.getAllDirectAnnotations().any((ann) =&gt; ann.getClass() == annClass)) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  &#47;&#47; Step 5: no scope restrictions =&gt; applies globally
+  return true;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a></li>
+    <li class="self-crumb">advises method</li>
+</ol>
+
+    <h5>ControllerAdviser class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

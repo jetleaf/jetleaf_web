@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ResponseCookie class from the jetleaf_web library, for the Dart programming language.">
+  <title>ResponseCookie class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">ResponseCookie class</li>
+  </ol>
+  <div class="self-name">ResponseCookie</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;ResponseCookie-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">ResponseCookie</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Represents an <strong>HTTP response cookie</strong> as defined in <a href="https://tools.ietf.org/html/rfc6265">RFC 6265</a>
+with all attributes that can be set by the server in a <code>Set-Cookie</code> header.</p>
+<p>Extends <a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> with additional attributes:</p>
+<ul>
+<li><code>Max-Age</code> (<a href="../jetleaf_web/ResponseCookie/maxAge.html">maxAge</a>)</li>
+<li><code>Domain</code> (<a href="../jetleaf_web/ResponseCookie/domain.html">domain</a>)</li>
+<li><code>Path</code> (<a href="../jetleaf_web/ResponseCookie/path.html">path</a>)</li>
+<li><code>Secure</code> (<a href="../jetleaf_web/ResponseCookie/secure.html">secure</a>)</li>
+<li><code>HttpOnly</code> (<a href="../jetleaf_web/ResponseCookie/httpOnly.html">httpOnly</a>)</li>
+<li><code>Partitioned</code> (<a href="../jetleaf_web/ResponseCookie/partitioned.html">partitioned</a>)</li>
+<li><code>SameSite</code> (<a href="../jetleaf_web/ResponseCookie/sameSite.html">sameSite</a>)</li>
+</ul>
+<h3 id="validation-rules">Validation Rules</h3>
+<ul>
+<li><strong>Cookie name</strong> must be valid per RFC 2616 token rules.</li>
+<li><strong>Cookie value</strong> must be valid per RFC 2616 rules; quoted values are allowed.</li>
+<li><strong>Domain</strong> must only contain letters, digits, hyphens, and dots. Cannot start or end with <code>-</code> or <code>.</code>.</li>
+<li><strong>Path</strong> must contain US-ASCII printable characters excluding <code>;</code>.</li>
+<li>Other attributes are type-checked; e.g., <a href="../jetleaf_web/ResponseCookie/maxAge.html">maxAge</a> is a Duration, <a href="../jetleaf_web/ResponseCookie/secure.html">secure</a> is bool.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final cookie = ResponseCookie(
+  name: 'sessionId',
+  value: 'abc123',
+  maxAge: Duration(hours: 1),
+  path: '/',
+  secure: true,
+  httpOnly: true,
+  sameSite: 'Strict',
+);
+
+print(cookie); 
+// sessionId=abc123; Path=/; Max-Age=3600; Expires=Mon, 02 Nov 2025 18:30:00 GMT; Secure; HttpOnly; SameSite=Strict
+</code></pre>
+<h3 id="factory-constructors">Factory Constructors</h3>
+<ul>
+<li><code>fromHttpCookie</code> — create a ResponseCookie from an existing <a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> object.</li>
+<li><code>fromDartCookie</code> — create a ResponseCookie from a Dart <code>Cookie</code>.</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>All attributes are optional except <code>name</code> (required).</li>
+<li>Validation is performed on <code>name</code>, <code>value</code>, <code>domain</code>, and <code>path</code> using <code>_Rfc6265Utils</code>.</li>
+<li>Use <a href="../jetleaf_web/ResponseCookie/copyWith.html">copyWith</a> to create modified copies of an existing cookie.</li>
+<li>Use <a href="../jetleaf_web/ResponseCookie/create.html">create</a> for quick instantiation with just name and optional value.</li>
+</ul>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> — base class for cookies without attributes</li>
+<li><code>_Rfc6265Utils</code> — internal RFC 6265 validation utility</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a></li>
+      <li>ResponseCookie</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="ResponseCookie.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/ResponseCookie/ResponseCookie.html">ResponseCookie.new</a></span><span class="signature">({<span class="parameter" id="-param-name"><span>required</span> <span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">maxAge</span> = <span class="default-value">const Duration(seconds: -1)</span>, </span><span class="parameter" id="-param-domain"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">domain</span>, </span><span class="parameter" id="-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">path</span>, </span><span class="parameter" id="-param-secure"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">secure</span> = <span class="default-value">false</span>, </span><span class="parameter" id="-param-httpOnly"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">httpOnly</span> = <span class="default-value">false</span>, </span><span class="parameter" id="-param-partitioned"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">partitioned</span> = <span class="default-value">false</span>, </span><span class="parameter" id="-param-sameSite"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sameSite</span></span>})</span>
+        </dt>
+        <dd>
+          Creates a <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a> with all attributes.
+        </dd>
+        <dt id="ResponseCookie.fromCookie" class="callable">
+          <span class="name"><a href="../jetleaf_web/ResponseCookie/ResponseCookie.fromCookie.html">ResponseCookie.fromCookie</a></span><span class="signature">(<span class="parameter" id="fromCookie-param-cookie"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/Cookie-class.html">Cookie</a></span> <span class="parameter-name">cookie</span>, {</span><span class="parameter" id="fromCookie-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="fromCookie-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="fromCookie-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a>?</span> <span class="parameter-name">maxAge</span>, </span><span class="parameter" id="fromCookie-param-domain"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">domain</span>, </span><span class="parameter" id="fromCookie-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">path</span>, </span><span class="parameter" id="fromCookie-param-secure"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">secure</span>, </span><span class="parameter" id="fromCookie-param-httpOnly"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">httpOnly</span>, </span><span class="parameter" id="fromCookie-param-partitioned"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">partitioned</span>, </span><span class="parameter" id="fromCookie-param-sameSite"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sameSite</span></span>})</span>
+        </dt>
+        <dd>
+          Creates a ResponseCookie from a standard Dart cookie <a href="https://api.dart.dev/stable/3.9.2/dart-io/Cookie-class.html">Cookie</a>.
+        </dd>
+        <dt id="ResponseCookie.fromHttpCookie" class="callable">
+          <span class="name"><a href="../jetleaf_web/ResponseCookie/ResponseCookie.fromHttpCookie.html">ResponseCookie.fromHttpCookie</a></span><span class="signature">(<span class="parameter" id="fromHttpCookie-param-cookie"><span class="type-annotation"><a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a></span> <span class="parameter-name">cookie</span>, {</span><span class="parameter" id="fromHttpCookie-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">maxAge</span> = <span class="default-value">const Duration(seconds: -1)</span>, </span><span class="parameter" id="fromHttpCookie-param-domain"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">domain</span>, </span><span class="parameter" id="fromHttpCookie-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">path</span>, </span><span class="parameter" id="fromHttpCookie-param-secure"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">secure</span> = <span class="default-value">false</span>, </span><span class="parameter" id="fromHttpCookie-param-httpOnly"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">httpOnly</span> = <span class="default-value">false</span>, </span><span class="parameter" id="fromHttpCookie-param-partitioned"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">partitioned</span> = <span class="default-value">false</span>, </span><span class="parameter" id="fromHttpCookie-param-sameSite"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sameSite</span></span>})</span>
+        </dt>
+        <dd>
+          Creates a ResponseCookie from an existing <a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> with additional attributes.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="domain" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/domain.html">domain</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  
+
+</dt>
+<dd>
+  The cookie "Domain" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="httpOnly" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/httpOnly.html">httpOnly</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Indicates if the cookie has the "HttpOnly" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="maxAge" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/maxAge.html">maxAge</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span>
+  
+
+</dt>
+<dd>
+  The cookie "Max-Age" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="partitioned" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/partitioned.html">partitioned</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Indicates if the cookie has the "Partitioned" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="path" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/path.html">path</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  
+
+</dt>
+<dd>
+  The cookie "Path" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="sameSite" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/sameSite.html">sameSite</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  
+
+</dt>
+<dd>
+  The cookie "SameSite" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="secure" class="property">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/secure.html">secure</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Indicates if the cookie has the "Secure" attribute.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="copyWith" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/copyWith.html">copyWith</a></span><span class="signature">(<wbr>{<span class="parameter" id="copyWith-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span>, </span><span class="parameter" id="copyWith-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span>, </span><span class="parameter" id="copyWith-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a>?</span> <span class="parameter-name">maxAge</span>, </span><span class="parameter" id="copyWith-param-domain"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">domain</span>, </span><span class="parameter" id="copyWith-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">path</span>, </span><span class="parameter" id="copyWith-param-secure"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">secure</span>, </span><span class="parameter" id="copyWith-param-httpOnly"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">httpOnly</span>, </span><span class="parameter" id="copyWith-param-partitioned"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a>?</span> <span class="parameter-name">partitioned</span>, </span><span class="parameter" id="copyWith-param-sameSite"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">sameSite</span></span>})
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a <strong>copy</strong> of this <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a> with the given attributes replaced.
+  
+
+</dd>
+
+        <dt id="equalizedProperties" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getDomain" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/getDomain.html">getDomain</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return the cookie "Domain" attribute, or <code>null</code> if not set.
+  
+
+</dd>
+
+        <dt id="getMaxAge" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/getMaxAge.html">getMaxAge</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return the cookie "Max-Age" attribute.
+  
+
+</dd>
+
+        <dt id="getName" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpCookie/getName.html">getName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <strong>cookie name</strong>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPath" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/getPath.html">getPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return the cookie "Path" attribute, or <code>null</code> if not set.
+  
+
+</dd>
+
+        <dt id="getSameSite" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/getSameSite.html">getSameSite</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return the cookie "SameSite" attribute, or <code>null</code> if not set.
+  
+
+</dd>
+
+        <dt id="getValue" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpCookie/getValue.html">getValue</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <strong>cookie value</strong>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isHttpOnly" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/isHttpOnly.html">isHttpOnly</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return <code>true</code> if the cookie has the "HttpOnly" attribute.
+  
+
+</dd>
+
+        <dt id="isPartitioned" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/isPartitioned.html">isPartitioned</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return <code>true</code> if the cookie has the "Partitioned" attribute.
+  
+
+</dd>
+
+        <dt id="isSecure" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/isSecure.html">isSecure</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Return <code>true</code> if the cookie has the "Secure" attribute.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toDartCookie" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpCookie/toDartCookie.html">toDartCookie</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-io/Cookie-class.html">Cookie</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Converts this <a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> to a standard Dart <a href="https://api.dart.dev/stable/3.9.2/dart-io/Cookie-class.html">Cookie</a> object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A string representation of this object.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+  <section class="summary offset-anchor" id="static-methods">
+    <h2>Static Methods</h2>
+    <dl class="callables">
+        <dt id="create" class="callable">
+  <span class="name"><a href="../jetleaf_web/ResponseCookie/create.html">create</a></span><span class="signature">(<wbr><span class="parameter" id="create-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, [</span><span class="parameter" id="create-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">value</span></span>])
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a> with the given <code>name</code> and optional <code>value</code>.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">ResponseCookie class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

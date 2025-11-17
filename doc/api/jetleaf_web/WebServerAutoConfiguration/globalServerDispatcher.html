@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the globalServerDispatcher method from the WebServerAutoConfiguration class, for the Dart programming language.">
+  <title>globalServerDispatcher method - WebServerAutoConfiguration class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/WebServerAutoConfiguration-class.html">WebServerAutoConfiguration</a></li>
+    <li class="self-crumb">globalServerDispatcher method</li>
+  </ol>
+  <div class="self-name">globalServerDispatcher</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;WebServerAutoConfiguration-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">globalServerDispatcher</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Role-class.html">Role</a>(DesignRole.INFRASTRUCTURE)</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Pod-class.html">Pod</a>(value: GLOBAL_SERVER_DISPATCHER_POD_NAME)</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/ConditionalOnMissingPod-class.html">ConditionalOnMissingPod</a>(values: [ServerDispatcher])</li>
+    </ol>
+  </div>
+<span class="returntype"><a href="../../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a></span>
+<span class="name ">globalServerDispatcher</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="globalServerDispatcher-param-resolver"><span class="type-annotation"><a href="../../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a></span> <span class="parameter-name">resolver</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-context"><span class="type-annotation"><a href="../../jetleaf_web/ServerContext-class.html">ServerContext</a></span> <span class="parameter-name">context</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-parser"><span class="type-annotation">PathPatternParserManager</span> <span class="parameter-name">parser</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-interceptor"><span class="type-annotation"><a href="../../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a></span> <span class="parameter-name">interceptor</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-adapter"><span class="type-annotation"><a href="../../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></span> <span class="parameter-name">adapter</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-exception"><span class="type-annotation"><a href="../../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></span> <span class="parameter-name">exception</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-filter"><span class="type-annotation"><a href="../../jetleaf_web/FilterManager-class.html">FilterManager</a></span> <span class="parameter-name">filter</span>, </span></li>
+<li><span class="parameter" id="globalServerDispatcher-param-mapping"><span class="type-annotation"><a href="../../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a></span> <span class="parameter-name">mapping</span>, </span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Provides the global server dispatcher for routing requests.</p>
+<p>This dispatcher delegates incoming requests to handler mappings and
+adapters. It requires a <code>MultipartResolver</code> to handle multipart
+request content. Only registered if no other <code>ServerDispatcher</code> pod exists.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@Role(DesignRole.INFRASTRUCTURE)
+@Pod(value: GLOBAL_SERVER_DISPATCHER_POD_NAME)
+@ConditionalOnMissingPod(values: [ServerDispatcher])
+ServerDispatcher globalServerDispatcher(
+  MultipartResolver resolver,
+  ServerContext context,
+  PathPatternParserManager parser,
+  HandlerInterceptorManager interceptor,
+  HandlerAdapterManager adapter,
+  ExceptionResolverManager exception,
+  FilterManager filter,
+  RouteRegistryHandlerMapping mapping
+) =&gt; GlobalServerDispatcher(resolver, context, parser, filter, adapter, mapping, interceptor, exception);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/WebServerAutoConfiguration-class.html">WebServerAutoConfiguration</a></li>
+    <li class="self-crumb">globalServerDispatcher method</li>
+</ol>
+
+    <h5>WebServerAutoConfiguration class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

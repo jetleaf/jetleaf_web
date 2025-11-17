@@ -1,0 +1,2857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="jetleaf_web library API docs, for the Dart programming language.">
+  <title>jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li class="self-crumb">jetleaf_web.dart</li>
+  </ol>
+  <div class="self-name">jetleaf_web</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar=""
+    data-below-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html">
+  
+    <div>
+      
+
+      <h1>
+        <span class="kind-library">jetleaf_web</span>
+        library 
+ 
+
+      </h1>
+    </div>
+
+    
+<section class="desc markdown">
+  <p>Jetleaf Web Framework Library</p>
+<p>This library exports all core modules, annotations, context utilities,
+HTTP message converters, server infrastructure, routing, handlers,
+exception resolvers, multipart support, path matching, REST clients,
+template rendering, and utility classes required to build web applications
+using Jetleaf.</p>
+<p>It serves as the main entry point for importing the Jetleaf web framework
+into your application, providing access to all features and default
+implementations, while allowing overrides via custom pods.</p>
+</section>
+
+
+    <section class="summary offset-anchor" id="classes">
+      <h2>Classes</h2>
+      <dl>
+          <dt id="AbstractAnnotatedHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/AbstractAnnotatedHandlerMapping-class.html">AbstractAnnotatedHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HandlerMapping-class.html">HandlerMapping</a> implementation that discovers and registers
+annotated controller methods from the JetLeaf <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>.
+</dd>
+
+          <dt id="AbstractFrameworkHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/AbstractFrameworkHandlerMapping-class.html">AbstractFrameworkHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/AbstractAnnotatedHandlerMapping-class.html">AbstractAnnotatedHandlerMapping</a> that registers
+JetLeaf framework-specific routes and endpoints.
+</dd>
+
+          <dt id="AbstractHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/AbstractHandlerMapping-class.html">AbstractHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  Base class for JetLeaf handler mappings that associate request paths
+with handler methods.
+</dd>
+
+          <dt id="AbstractHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Abstract base class implementing common <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> functionality.
+</dd>
+
+          <dt id="AbstractMultipartParser">
+  <span class="name "><a href="../jetleaf_web/AbstractMultipartParser-class.html">AbstractMultipartParser</a></span> 
+
+</dt>
+<dd>
+  Abstract base class for parsing multipart HTTP requests with support for
+disk-backed file storage.
+</dd>
+
+          <dt id="AbstractRouteDslHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/AbstractRouteDslHandlerMapping-class.html">AbstractRouteDslHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/AbstractFrameworkHandlerMapping-class.html">AbstractFrameworkHandlerMapping</a> that supports
+JetLeaf Route DSL (Domain-Specific Language) for defining routes programmatically.
+</dd>
+
+          <dt id="AbstractServerDispatcher">
+  <span class="name "><a href="../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a></span> 
+
+</dt>
+<dd>
+  A <strong>base implementation</strong> of <a href="../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a> providing the full orchestration
+pipeline for handling HTTP requests in the JetLeaf framework.
+</dd>
+
+          <dt id="AbstractUrlHandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/AbstractUrlHandlerAdapter-class.html">AbstractUrlHandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Abstract base implementation of <a href="../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a> for URL-based handler methods.
+</dd>
+
+          <dt id="AbstractWebViewAnnotatedHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping-class.html">AbstractWebViewAnnotatedHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  Base class for annotation-based handler mappings that discover and
+register <code>@WebView</code>-annotated controller components in the JetLeaf
+web framework.
+</dd>
+
+          <dt id="AcceptHeaderNegotiationStrategy">
+  <span class="name "><a href="../jetleaf_web/AcceptHeaderNegotiationStrategy-class.html">AcceptHeaderNegotiationStrategy</a></span> 
+
+</dt>
+<dd>
+  Default <a href="../jetleaf_web/ContentNegotiationStrategy-class.html">ContentNegotiationStrategy</a> implementation that negotiates
+content type based on the client's <code>Accept</code> header.
+</dd>
+
+          <dt id="AnnotatedHandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/AnnotatedHandlerAdapter-class.html">AnnotatedHandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Adapter that supports annotation-based controller handlers.
+</dd>
+
+          <dt id="AnnotatedHandlerMethod">
+  <span class="name "><a href="../jetleaf_web/AnnotatedHandlerMethod-class.html">AnnotatedHandlerMethod</a></span> 
+
+</dt>
+<dd>
+  Represents a <strong>handler method</strong> discovered through annotations
+such as <code>@RequestMapping</code>, <code>@GetMapping</code>, or <code>@PostMapping</code>.
+</dd>
+
+          <dt id="AnnotatedMethodArgumentResolver">
+  <span class="name "><a href="../jetleaf_web/AnnotatedMethodArgumentResolver-class.html">AnnotatedMethodArgumentResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves parameters of handler methods annotated with request parameter
+annotations in JetLeaf's web request handling system.
+</dd>
+
+          <dt id="AnnotatedTypeFilter">
+  <span class="name "><a href="../jetleaf_web/AnnotatedTypeFilter-class.html">AnnotatedTypeFilter</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  A <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/TypeFilter-class.html">TypeFilter</a> implementation that matches classes annotated with a
+specific annotation type <code>T</code>.
+</dd>
+
+          <dt id="Base64EncodingDecoder">
+  <span class="name "><a href="../jetleaf_web/Base64EncodingDecoder-class.html">Base64EncodingDecoder</a></span> 
+
+</dt>
+<dd>
+  A <strong>Base64-specific implementation</strong> of <a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> that provides
+encoding and decoding functionality for binary and textual data using
+the Base64 scheme.
+</dd>
+
+          <dt id="BasicEncodingDecoder">
+  <span class="name "><a href="../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a></span> 
+
+</dt>
+<dd>
+  A <strong>lightweight, default implementation</strong> of <a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> that provides
+native text encoding and decoding for a predefined set of common character
+encodings.
+</dd>
+
+          <dt id="ByteArrayHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/ByteArrayHttpMessageConverter-class.html">ByteArrayHttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s built-in <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> for handling
+raw binary data with media type <code>application/octet-stream</code>.
+</dd>
+
+          <dt id="CacheControl">
+  <span class="name "><a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span> 
+
+</dt>
+<dd>
+  Represents the HTTP <code>Cache-Control</code> header and allows fluent
+construction of cache directives.
+</dd>
+
+          <dt id="Catch">
+  <span class="name "><a href="../jetleaf_web/Catch-class.html">Catch</a></span> 
+
+</dt>
+<dd>
+  Annotation that marks a <strong>method or class</strong> as an exception handler.
+</dd>
+
+          <dt id="ConfigurableServerDispatcher">
+  <span class="name "><a href="../jetleaf_web/ConfigurableServerDispatcher-class.html">ConfigurableServerDispatcher</a></span> 
+
+</dt>
+<dd>
+  Defines a configurable contract for server dispatchers that support
+dynamic handler registration and fallback routing behavior.
+</dd>
+
+          <dt id="ConfigurableWebApplicationContext">
+  <span class="name "><a href="../jetleaf_web/ConfigurableWebApplicationContext-class.html">ConfigurableWebApplicationContext</a></span> 
+
+</dt>
+<dd>
+  /// A web-specific <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> that allows configuration and lifecycle
+management of the web application context.
+</dd>
+
+          <dt id="ConfigurableWebEnvironment">
+  <span class="name "><a href="../jetleaf_web/ConfigurableWebEnvironment-class.html">ConfigurableWebEnvironment</a></span> 
+
+</dt>
+<dd>
+  A web-specific environment that allows dynamic configuration and
+management of environment properties.
+</dd>
+
+          <dt id="ConfigurableWebServer">
+  <span class="name "><a href="../jetleaf_web/ConfigurableWebServer-class.html">ConfigurableWebServer</a></span> 
+
+</dt>
+<dd>
+  Extension of <a href="../jetleaf_web/WebServer-class.html">WebServer</a> providing mutator methods for host and port
+configuration prior to startup.
+</dd>
+
+          <dt id="ContentDisposition">
+  <span class="name "><a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a></span> 
+
+</dt>
+<dd>
+  Representation of the <code>Content-Disposition</code> HTTP header as defined in
+<a href="https://tools.ietf.org/html/rfc6266">RFC 6266</a> and <a href="https://tools.ietf.org/html/rfc2183">RFC 2183</a>.
+</dd>
+
+          <dt id="ContentDispositionBuilder">
+  <span class="name "><a href="../jetleaf_web/ContentDispositionBuilder-class.html">ContentDispositionBuilder</a></span> 
+
+</dt>
+<dd>
+  A <strong>mutable builder</strong> for constructing <a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a> instances.
+</dd>
+
+          <dt id="ContentNegotiationAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/ContentNegotiationAutoConfiguration-class.html">ContentNegotiationAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for content negotiation in Jetleaf.
+</dd>
+
+          <dt id="ContentNegotiationResolver">
+  <span class="name "><a href="../jetleaf_web/ContentNegotiationResolver-class.html">ContentNegotiationResolver</a></span> 
+
+</dt>
+<dd>
+  Abstract interface for resolving content negotiation and setting
+response headers automatically for all return value handlers.
+</dd>
+
+          <dt id="ContentNegotiationStrategy">
+  <span class="name "><a href="../jetleaf_web/ContentNegotiationStrategy-class.html">ContentNegotiationStrategy</a></span> 
+
+</dt>
+<dd>
+  Abstract strategy for determining the appropriate <a href="../jetleaf_web/MediaType-class.html">MediaType</a> to use
+when writing HTTP response bodies.
+</dd>
+
+          <dt id="ContextPathAware">
+  <span class="name "><a href="../jetleaf_web/ContextPathAware-class.html">ContextPathAware</a></span> 
+
+</dt>
+<dd>
+  A contract for components that need knowledge of the server's context path.
+</dd>
+
+          <dt id="Controller">
+  <span class="name "><a href="../jetleaf_web/Controller-class.html">Controller</a></span> 
+
+</dt>
+<dd>
+  Controller annotation for Jet View controllers
+</dd>
+
+          <dt id="ControllerAdvice">
+  <span class="name "><a href="../jetleaf_web/ControllerAdvice-class.html">ControllerAdvice</a></span> 
+
+</dt>
+<dd>
+  Marks a class as a <strong>controller advice</strong> within the JetLeaf framework,
+enabling centralized handling of cross-cutting web concerns such as:
+</dd>
+
+          <dt id="ControllerAdviser">
+  <span class="name "><a href="../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a></span> 
+
+</dt>
+<dd>
+  Internal representation of a <code>@ControllerAdvice</code> or <code>@RestControllerAdvice</code> declaration in JetLeaf.
+</dd>
+
+          <dt id="ControllerExceptionHandler">
+  <span class="name "><a href="../jetleaf_web/ControllerExceptionHandler-class.html">ControllerExceptionHandler</a></span> 
+
+</dt>
+<dd>
+  A centralized exception handler for JetLeaf web controllers, responsible for
+transforming framework-level and domain-specific exceptions into
+structured, framework-consistent <a href="../jetleaf_web/View-class.html">View</a> responses.
+</dd>
+
+          <dt id="CookieValue">
+  <span class="name "><a href="../jetleaf_web/CookieValue-class.html">CookieValue</a></span> 
+
+</dt>
+<dd>
+  Binds the value of a <strong>cookie</strong> from the HTTP request to a method parameter.
+</dd>
+
+          <dt id="CookieValueResolver">
+  <span class="name "><a href="../jetleaf_web/CookieValueResolver-class.html">CookieValueResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/CookieValue-class.html">CookieValue</a> by extracting
+values from HTTP cookies in the request.
+</dd>
+
+          <dt id="CorsConfiguration">
+  <span class="name "><a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a></span> 
+
+</dt>
+<dd>
+  Defines the Cross-Origin Resource Sharing (CORS) policy for an HTTP server.
+</dd>
+
+          <dt id="CorsConfigurationManager">
+  <span class="name "><a href="../jetleaf_web/CorsConfigurationManager-class.html">CorsConfigurationManager</a></span> 
+
+</dt>
+<dd>
+  Unifies the responsibilities of both <a href="../jetleaf_web/CorsConfigurationSource-class.html">CorsConfigurationSource</a>
+and <a href="../jetleaf_web/CorsConfigurationRegistry-class.html">CorsConfigurationRegistry</a> into a single composite manager.
+</dd>
+
+          <dt id="CorsConfigurationRegistrar">
+  <span class="name "><a href="../jetleaf_web/CorsConfigurationRegistrar-class.html">CorsConfigurationRegistrar</a></span> 
+
+</dt>
+<dd>
+  Strategy interface used for declarative registration of
+<a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> policies.
+</dd>
+
+          <dt id="CorsConfigurationRegistry">
+  <span class="name "><a href="../jetleaf_web/CorsConfigurationRegistry-class.html">CorsConfigurationRegistry</a></span> 
+
+</dt>
+<dd>
+  Central registry interface for managing and associating
+<a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> objects with specific URL path patterns.
+</dd>
+
+          <dt id="CorsConfigurationSource">
+  <span class="name "><a href="../jetleaf_web/CorsConfigurationSource-class.html">CorsConfigurationSource</a></span> 
+
+</dt>
+<dd>
+  Provides a source of CORS configurations for HTTP requests.
+</dd>
+
+          <dt id="CorsFilter">
+  <span class="name "><a href="../jetleaf_web/CorsFilter-class.html">CorsFilter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s standard <strong>CORS enforcement filter</strong>, responsible for applying
+<a href="../jetleaf_web/CorsConfiguration-class.html">CorsConfiguration</a> policies to incoming HTTP requests and responses.
+</dd>
+
+          <dt id="CrossOrigin">
+  <span class="name "><a href="../jetleaf_web/CrossOrigin-class.html">CrossOrigin</a></span> 
+
+</dt>
+<dd>
+  Configures <strong>Cross-Origin Resource Sharing (CORS)</strong> for a specific controller
+method, allowing controlled access from other origins.
+</dd>
+
+          <dt id="CsrfAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/CsrfAutoConfiguration-class.html">CsrfAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class that registers CSRF protection components
+in the Jetleaf application context.
+</dd>
+
+          <dt id="CsrfFilter">
+  <span class="name "><a href="../jetleaf_web/CsrfFilter-class.html">CsrfFilter</a></span> 
+
+</dt>
+<dd>
+  Jetleaf's standard <strong>CSRF (Cross-Site Request Forgery) protection filter</strong>.
+</dd>
+
+          <dt id="CsrfToken">
+  <span class="name "><a href="../jetleaf_web/CsrfToken-class.html">CsrfToken</a></span> 
+
+</dt>
+<dd>
+  Represents a CSRF (Cross-Site Request Forgery) protection token.
+</dd>
+
+          <dt id="CsrfTokenRepository">
+  <span class="name "><a href="../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for persisting and retrieving <a href="../jetleaf_web/CsrfToken-class.html">CsrfToken</a> instances
+across requests.
+</dd>
+
+          <dt id="CsrfTokenRepositoryManager">
+  <span class="name "><a href="../jetleaf_web/CsrfTokenRepositoryManager-class.html">CsrfTokenRepositoryManager</a></span> 
+
+</dt>
+<dd>
+  Central manager responsible for discovering and providing access to
+<a href="../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a> instances within the Jetleaf application.
+</dd>
+
+          <dt id="DefaultContentNegotiationResolver">
+  <span class="name "><a href="../jetleaf_web/DefaultContentNegotiationResolver-class.html">DefaultContentNegotiationResolver</a></span> 
+
+</dt>
+<dd>
+  Default implementation of <a href="../jetleaf_web/ContentNegotiationResolver-class.html">ContentNegotiationResolver</a> that automatically
+resolves and sets response content type using discoverable strategies.
+</dd>
+
+          <dt id="DefaultCorsConfigurationManager">
+  <span class="name "><a href="../jetleaf_web/DefaultCorsConfigurationManager-class.html">DefaultCorsConfigurationManager</a></span> 
+
+</dt>
+<dd>
+  Default implementation of <a href="../jetleaf_web/CorsConfigurationManager-class.html">CorsConfigurationManager</a> responsible for
+registering, resolving, and supplying CORS (Cross-Origin Resource Sharing)
+configurations across the JetLeaf web application.
+</dd>
+
+          <dt id="DefaultCsrfTokenRepositoryManager">
+  <span class="name "><a href="../jetleaf_web/DefaultCsrfTokenRepositoryManager-class.html">DefaultCsrfTokenRepositoryManager</a></span> 
+
+</dt>
+<dd>
+  Default implementation of <a href="../jetleaf_web/CsrfTokenRepositoryManager-class.html">CsrfTokenRepositoryManager</a> responsible for
+discovering, configuring, and providing access to <a href="../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a>
+instances.
+</dd>
+
+          <dt id="DefaultHandlerArgumentContext">
+  <span class="name "><a href="../jetleaf_web/DefaultHandlerArgumentContext-class.html">DefaultHandlerArgumentContext</a></span> 
+
+</dt>
+<dd>
+  Default in-memory implementation of <a href="../jetleaf_web/HandlerArgumentContext-class.html">HandlerArgumentContext</a>.
+</dd>
+
+          <dt id="DefaultHttpHeaderBuilder">
+  <span class="name "><a href="../jetleaf_web/DefaultHttpHeaderBuilder-class.html">DefaultHttpHeaderBuilder</a></span> 
+
+</dt>
+<dd>
+  A concrete implementation of <a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a> that provides default
+functionality for building HTTP headers with a fluent interface.
+</dd>
+
+          <dt id="DefaultMethodArgumentResolverManager">
+  <span class="name "><a href="../jetleaf_web/DefaultMethodArgumentResolverManager-class.html">DefaultMethodArgumentResolverManager</a></span> 
+
+</dt>
+<dd>
+  Composite implementation of <a href="../jetleaf_web/MethodArgumentResolver-class.html">MethodArgumentResolver</a> that delegates
+to a chain of registered resolvers.
+</dd>
+
+          <dt id="DefaultResolverContext">
+  <span class="name "><a href="../jetleaf_web/DefaultResolverContext-class.html">DefaultResolverContext</a></span> 
+
+</dt>
+<dd>
+  Default implementation of <a href="../jetleaf_web/ResolverContext-class.html">ResolverContext</a> backed by <a href="../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a>.
+</dd>
+
+          <dt id="DefaultRestClient">
+  <span class="name "><a href="../jetleaf_web/DefaultRestClient-class.html">DefaultRestClient</a></span> 
+
+</dt>
+<dd>
+  The central entry point for building and executing HTTP-based REST operations.
+</dd>
+
+          <dt id="DefaultRestExecutor">
+  <span class="name "><a href="../jetleaf_web/DefaultRestExecutor-class.html">DefaultRestExecutor</a></span> 
+
+</dt>
+<dd>
+  A low-level HTTP client implementation for the JetLeaf REST framework
+that provides a configurable and extensible bridge to Dart’s
+<a href="https://api.dart.dev/stable/dart-io/HttpClient-class.html"><code>HttpClient</code></a>.
+</dd>
+
+          <dt id="DefaultReturnValueHandlerManager">
+  <span class="name "><a href="../jetleaf_web/DefaultReturnValueHandlerManager-class.html">DefaultReturnValueHandlerManager</a></span> 
+
+</dt>
+<dd>
+  Central orchestrator that coordinates multiple
+<a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementations within JetLeaf’s MVC layer.
+</dd>
+
+          <dt id="DELETE">
+  <span class="name "><a href="../jetleaf_web/DELETE-class.html">DELETE</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>DELETE</strong> route.
+</dd>
+
+          <dt id="DeleteMapping">
+  <span class="name "><a href="../jetleaf_web/DeleteMapping-class.html">DeleteMapping</a></span> 
+
+</dt>
+<dd>
+  Shorthand annotation for a <code>DELETE</code> HTTP method mapping on a controller method.
+</dd>
+
+          <dt id="EncodingDecoder">
+  <span class="name "><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a></span> 
+
+</dt>
+<dd>
+  A <strong>unified abstraction for text encoding and decoding</strong> operations,
+providing a consistent interface for converting between raw bytes and
+human-readable strings across multiple character encodings.
+</dd>
+
+          <dt id="ErrorPage">
+  <span class="name "><a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span> 
+
+</dt>
+<dd>
+  Represents an error page configuration for handling HTTP error responses.
+</dd>
+
+          <dt id="ErrorPageRegistrar">
+  <span class="name "><a href="../jetleaf_web/ErrorPageRegistrar-class.html">ErrorPageRegistrar</a></span> 
+
+</dt>
+<dd>
+  A configurator interface for programmatically registering error pages.
+</dd>
+
+          <dt id="ErrorPageRegistry">
+  <span class="name "><a href="../jetleaf_web/ErrorPageRegistry-class.html">ErrorPageRegistry</a></span> 
+
+</dt>
+<dd>
+  A mutable registry for error pages that supports building a collection
+through programmatic configuration.
+</dd>
+
+          <dt id="ErrorPages">
+  <span class="name "><a href="../jetleaf_web/ErrorPages-class.html">ErrorPages</a></span> 
+
+</dt>
+<dd>
+  Central registry and manager for error page pods in the Jetleaf framework.
+</dd>
+
+          <dt id="ETag">
+  <span class="name "><a href="../jetleaf_web/ETag-class.html">ETag</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <a href="https://datatracker.ietf.org/doc/html/rfc7232">ETag</a>
+entity tag for conditional requests.
+</dd>
+
+          <dt id="ExceptionHandler">
+  <span class="name "><a href="../jetleaf_web/ExceptionHandler-class.html">ExceptionHandler</a></span> 
+
+</dt>
+<dd>
+  Annotation used to mark a <strong>method as an exception handler</strong> within a controller.
+</dd>
+
+          <dt id="ExceptionResolver">
+  <span class="name "><a href="../jetleaf_web/ExceptionResolver-class.html">ExceptionResolver</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for resolving exceptions that occur during HTTP request processing.
+</dd>
+
+          <dt id="ExceptionResolverAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/ExceptionResolverAutoConfiguration-class.html">ExceptionResolverAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for exception resolvers in Jetleaf.
+</dd>
+
+          <dt id="ExceptionResolverManager">
+  <span class="name "><a href="../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></span> 
+
+</dt>
+<dd>
+  Central registry and lifecycle coordinator for all <a href="../jetleaf_web/ExceptionResolver-class.html">ExceptionResolver</a> instances
+in the JetLeaf web framework.
+</dd>
+
+          <dt id="FilePart">
+  <span class="name "><a href="../jetleaf_web/FilePart-class.html">FilePart</a></span> 
+
+</dt>
+<dd>
+  Implementation of the <a href="../jetleaf_web/Part-class.html">Part</a> interface representing a file uploaded
+in a multipart/form-data request.
+</dd>
+
+          <dt id="Filter">
+  <span class="name "><a href="../jetleaf_web/Filter-class.html">Filter</a></span> 
+
+</dt>
+<dd>
+  Represents a component that can intercept and manipulate HTTP requests and responses
+as they flow through the application.
+</dd>
+
+          <dt id="FilterChain">
+  <span class="name "><a href="../jetleaf_web/FilterChain-class.html">FilterChain</a></span> 
+
+</dt>
+<dd>
+  Represents a chain of filters through which an HTTP request and response
+pass before reaching the final handler.
+</dd>
+
+          <dt id="FilterManager">
+  <span class="name "><a href="../jetleaf_web/FilterManager-class.html">FilterManager</a></span> 
+
+</dt>
+<dd>
+  Central registry and lifecycle manager for all <a href="../jetleaf_web/Filter-class.html">Filter</a> components
+within the JetLeaf web framework.
+</dd>
+
+          <dt id="FormHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/FormHttpMessageConverter-class.html">FormHttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> implementation for handling HTML form data
+serialization and deserialization.
+</dd>
+
+          <dt id="FrameworkHandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/FrameworkHandlerAdapter-class.html">FrameworkHandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Adapter responsible for handling Jetleaf's internal framework routes.
+</dd>
+
+          <dt id="FrameworkHandlerMethod">
+  <span class="name "><a href="../jetleaf_web/FrameworkHandlerMethod-class.html">FrameworkHandlerMethod</a></span> 
+
+</dt>
+<dd>
+  A lightweight <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> representing a framework-provided route.
+</dd>
+
+          <dt id="FrameworkMethodArgumentResolver">
+  <span class="name "><a href="../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a></span> 
+
+</dt>
+<dd>
+  Core JetLeaf argument resolver that provides built-in support for
+resolving <strong>framework-level types</strong> such as <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>,
+<a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>, <code>RequestHttpBody</code>, and <a href="../jetleaf_web/ViewContext-class.html">ViewContext</a>.
+</dd>
+
+          <dt id="GET">
+  <span class="name "><a href="../jetleaf_web/GET-class.html">GET</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>GET</strong> route.
+</dd>
+
+          <dt id="GetMapping">
+  <span class="name "><a href="../jetleaf_web/GetMapping-class.html">GetMapping</a></span> 
+
+</dt>
+<dd>
+  Shorthand annotation for a <code>GET</code> HTTP method mapping on a controller method.
+</dd>
+
+          <dt id="GlobalServerDispatcher">
+  <span class="name "><a href="../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a></span> 
+
+</dt>
+<dd>
+  A central dispatcher for handling HTTP requests within a web application.
+</dd>
+
+          <dt id="HandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Defines the contract for all handler adapters within the Jetleaf Web framework.
+</dd>
+
+          <dt id="HandlerAdapterAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/HandlerAdapterAutoConfiguration-class.html">HandlerAdapterAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for handler adapters in Jetleaf.
+</dd>
+
+          <dt id="HandlerAdapterManager">
+  <span class="name "><a href="../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></span> 
+
+</dt>
+<dd>
+  Central registry and lifecycle coordinator for all <a href="../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a> instances
+in the JetLeaf web framework.
+</dd>
+
+          <dt id="HandlerArgumentContext">
+  <span class="name "><a href="../jetleaf_web/HandlerArgumentContext-class.html">HandlerArgumentContext</a></span> 
+
+</dt>
+<dd>
+  Defines the contract for a <strong>handler execution context</strong>, which stores
+and provides access to method invocation data within the JetLeaf
+request-handling pipeline.
+</dd>
+
+          <dt id="HandlerInterceptor">
+  <span class="name "><a href="../jetleaf_web/HandlerInterceptor-class.html">HandlerInterceptor</a></span> 
+
+</dt>
+<dd>
+  Defines a contract for intercepting requests before and after
+they are handled by a <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>.
+</dd>
+
+          <dt id="HandlerInterceptorManager">
+  <span class="name "><a href="../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a></span> 
+
+</dt>
+<dd>
+  Central registry and lifecycle manager for all <a href="../jetleaf_web/HandlerInterceptor-class.html">HandlerInterceptor</a> instances
+within the JetLeaf web runtime.
+</dd>
+
+          <dt id="HandlerMapping">
+  <span class="name "><a href="../jetleaf_web/HandlerMapping-class.html">HandlerMapping</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for mapping incoming HTTP requests to <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>s.
+</dd>
+
+          <dt id="HandlerMethod">
+  <span class="name "><a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> 
+
+</dt>
+<dd>
+  Contract for all invocable handler methods in the Jetleaf web framework.
+</dd>
+
+          <dt id="HEAD">
+  <span class="name "><a href="../jetleaf_web/HEAD-class.html">HEAD</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>HEAD</strong> route.
+</dd>
+
+          <dt id="HtmlExceptionResolver">
+  <span class="name "><a href="../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves exceptions using <code>@ControllerAdvice</code>, annotated pods.
+</dd>
+
+          <dt id="HttpBody">
+  <span class="name "><a href="../jetleaf_web/HttpBody-class.html">HttpBody</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Represents an <strong>HTTP entity</strong>, consisting of optional headers and an optional body.
+</dd>
+
+          <dt id="HttpCookie">
+  <span class="name "><a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a></span> 
+
+</dt>
+<dd>
+  Represents an <strong>HTTP cookie</strong> as a name-value pair, consistent with the content
+of the <code>"Cookie"</code> request header.<br>
+For cookies sent in responses, see <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a>, which includes additional
+attributes such as <code>expires</code>, <code>maxAge</code>, <code>domain</code>, <code>path</code>, and <code>secure</code>
+expected in the <code>"Set-Cookie"</code> response header.
+</dd>
+
+          <dt id="HttpCookies">
+  <span class="name "><a href="../jetleaf_web/HttpCookies-class.html">HttpCookies</a></span> 
+
+</dt>
+<dd>
+  A mutable collection of <a href="../jetleaf_web/HttpCookie-class.html">HttpCookie</a> and <a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a> objects,
+representing all cookies associated with an HTTP request or response.
+</dd>
+
+          <dt id="HttpEvent">
+  <span class="name "><a href="../jetleaf_web/HttpEvent-class.html">HttpEvent</a></span> 
+
+</dt>
+<dd>
+  Base class for all <strong>HTTP-related application events</strong> within the JetLeaf
+Web subsystem.
+</dd>
+
+          <dt id="HttpHeaderBuilder">
+  <span class="name "><a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a><span class="signature">&lt;<wbr><span class="type-parameter">B extends <a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a><span class="signature">&lt;<wbr><span class="type-parameter">B</span>&gt;</span></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  An abstract builder interface for constructing <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> with a fluent API.
+</dd>
+
+          <dt id="HttpHeaders">
+  <span class="name "><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> 
+
+</dt>
+<dd>
+  A comprehensive data structure representing HTTP request or response headers,
+mapping String header names to a list of String values with case-insensitive lookups.
+</dd>
+
+          <dt id="HttpInputMessage">
+  <span class="name "><a href="../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>input message</strong>, typically corresponding to
+an incoming HTTP <strong>request</strong> or a deserialized response body.
+</dd>
+
+          <dt id="HttpMessage">
+  <span class="name "><a href="../jetleaf_web/HttpMessage-class.html">HttpMessage</a></span> 
+
+</dt>
+<dd>
+  Represents the base abstraction for HTTP messages, containing
+both <strong>headers</strong> and a potential <strong>body</strong>.
+</dd>
+
+          <dt id="HttpMessageAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/HttpMessageAutoConfiguration-class.html">HttpMessageAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for HTTP message converters in Jetleaf.
+</dd>
+
+          <dt id="HttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Strategy interface for converting between HTTP messages and Dart objects.
+</dd>
+
+          <dt id="HttpMessageConverterRegistrar">
+  <span class="name "><a href="../jetleaf_web/HttpMessageConverterRegistrar-class.html">HttpMessageConverterRegistrar</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for programmatically registering <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> instances.
+</dd>
+
+          <dt id="HttpMessageConverterRegistry">
+  <span class="name "><a href="../jetleaf_web/HttpMessageConverterRegistry-class.html">HttpMessageConverterRegistry</a></span> 
+
+</dt>
+<dd>
+  A registry for managing and organizing <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> instances.
+</dd>
+
+          <dt id="HttpMessageConverters">
+  <span class="name "><a href="../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a></span> 
+
+</dt>
+<dd>
+  A composite registry and container for managing <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> pods.
+</dd>
+
+          <dt id="HttpMethod">
+  <span class="name "><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span> 
+
+</dt>
+<dd>
+  A type-safe representation of all <strong>standard HTTP request methods (verbs)</strong>,
+such as <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>, and others defined in the
+<a href="https://datatracker.ietf.org/doc/html/rfc9110">RFC 9110: HTTP Semantics</a>.
+</dd>
+
+          <dt id="HttpOutputMessage">
+  <span class="name "><a href="../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>output message</strong>, typically corresponding to
+a server <strong>response</strong> or a serialized outgoing request body.
+</dd>
+
+          <dt id="HttpRange">
+  <span class="name "><a href="../jetleaf_web/HttpRange-class.html">HttpRange</a></span> 
+
+</dt>
+<dd>
+  Represents an <strong>HTTP Range</strong> as defined in <a href="https://datatracker.ietf.org/doc/html/rfc7233">RFC 7233</a>.<br>
+This class handles parsing, validation, and formatting of HTTP Range headers,
+supporting <strong>byte ranges</strong> for partial content (HTTP 206 Partial Content responses).
+</dd>
+
+          <dt id="HttpSession">
+  <span class="name "><a href="../jetleaf_web/HttpSession-class.html">HttpSession</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP session that allows server-side storage of
+user-specific data across multiple requests.
+</dd>
+
+          <dt id="HttpStatus">
+  <span class="name "><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span> 
+
+</dt>
+<dd>
+  A comprehensive utility class representing <strong>HTTP status codes</strong>, their <strong>meanings</strong>, and <strong>categories</strong>.
+</dd>
+
+          <dt id="HttpUpgradedEvent">
+  <span class="name "><a href="../jetleaf_web/HttpUpgradedEvent-class.html">HttpUpgradedEvent</a></span> 
+
+</dt>
+<dd>
+  Event published when an HTTP connection is <strong>upgraded</strong> to another protocol.
+</dd>
+
+          <dt id="IoEncodingDecoder">
+  <span class="name "><a href="../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a></span> 
+
+</dt>
+<dd>
+  A <strong>pluggable, multi-encoding decoder</strong> that supports dynamic registration
+of custom <a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> implementations while providing a fallback
+<a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> for unsupported encodings.
+</dd>
+
+          <dt id="IoMultipartFile">
+  <span class="name "><a href="../jetleaf_web/IoMultipartFile-class.html">IoMultipartFile</a></span> 
+
+</dt>
+<dd>
+  Represents a single uploaded file in a multipart HTTP request.
+</dd>
+
+          <dt id="IoMultipartRequest">
+  <span class="name "><a href="../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a></span> 
+
+</dt>
+<dd>
+  Represents a multipart HTTP request, providing access to uploaded files
+and form-data parts in a type-safe and memory-aware manner.
+</dd>
+
+          <dt id="IoMultipartResolver">
+  <span class="name "><a href="../jetleaf_web/IoMultipartResolver-class.html">IoMultipartResolver</a></span> 
+
+</dt>
+<dd>
+  A concrete implementation of <a href="../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a> for handling
+<code>multipart/form-data</code> HTTP requests in an I/O-based server environment.
+</dd>
+
+          <dt id="IoPart">
+  <span class="name "><a href="../jetleaf_web/IoPart-class.html">IoPart</a></span> 
+
+</dt>
+<dd>
+  Default implementation of the <a href="../jetleaf_web/Part-class.html">Part</a> interface, representing a single
+part of a multipart/form-data request.
+</dd>
+
+          <dt id="IoRequest">
+  <span class="name "><a href="../jetleaf_web/IoRequest-class.html">IoRequest</a></span> 
+
+</dt>
+<dd>
+  Represents a concrete implementation of <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> that wraps
+a Dart <code>dart:io</code> <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">io.HttpRequest</a>.
+</dd>
+
+          <dt id="IoResponse">
+  <span class="name "><a href="../jetleaf_web/IoResponse-class.html">IoResponse</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP response within the JetLeaf I/O framework, providing
+a bridge between the high-level <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> abstraction and the
+underlying <code>dart:io</code> <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpResponse-class.html">io.HttpResponse</a>.
+</dd>
+
+          <dt id="IoRestHttpRequest">
+  <span class="name "><a href="../jetleaf_web/IoRestHttpRequest-class.html">IoRestHttpRequest</a></span> 
+
+</dt>
+<dd>
+  A low-level HTTP request implementation used internally by <code>IoClient</code>
+to perform outbound REST calls using Dart’s <code>`HttpClientRequest`</code>.
+</dd>
+
+          <dt id="IoRestHttpResponse">
+  <span class="name "><a href="../jetleaf_web/IoRestHttpResponse-class.html">IoRestHttpResponse</a></span> 
+
+</dt>
+<dd>
+  A low-level HTTP response wrapper used by <a href="../jetleaf_web/IoRestHttpRequest-class.html">IoRestHttpRequest</a>
+to expose JetLeaf's standardized <a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a> interface
+over Dart's native <a href="https://api.dart.dev/stable/dart-io/HttpClientResponse-class.html"><code>HttpClientResponse</code></a>.
+</dd>
+
+          <dt id="IoServerContext">
+  <span class="name "><a href="../jetleaf_web/IoServerContext-class.html">IoServerContext</a></span> 
+
+</dt>
+<dd>
+  IoServerContext
+</dd>
+
+          <dt id="IoWebServer">
+  <span class="name "><a href="../jetleaf_web/IoWebServer-class.html">IoWebServer</a></span> 
+
+</dt>
+<dd>
+  A platform-level implementation of <a href="../jetleaf_web/ConfigurableWebServer-class.html">ConfigurableWebServer</a> backed by
+Dart’s native <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpServer-class.html">HttpServer</a>.
+</dd>
+
+          <dt id="IoWebServerFactory">
+  <span class="name "><a href="../jetleaf_web/IoWebServerFactory-class.html">IoWebServerFactory</a></span> 
+
+</dt>
+<dd>
+  A concrete factory that produces <a href="../jetleaf_web/IoWebServer-class.html">IoWebServer</a> instances for JetLeaf applications.
+</dd>
+
+          <dt id="Jetson2HttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/Jetson2HttpMessageConverter-class.html">Jetson2HttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s default JSON-based <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> backed by
+the <a href="https://pub.dev/documentation/jetson/1.0.0/jetson/ObjectMapper-class.html">ObjectMapper</a> from the Jetson serialization framework.
+</dd>
+
+          <dt id="Jetson2XmlHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/Jetson2XmlHttpMessageConverter-class.html">Jetson2XmlHttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf's XML-based <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> backed by
+the <a href="https://pub.dev/documentation/jetson/1.0.0/jetson/ObjectMapper-class.html">ObjectMapper</a> from the Jetson serialization framework.
+</dd>
+
+          <dt id="Jetson2YamlHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/Jetson2YamlHttpMessageConverter-class.html">Jetson2YamlHttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf's YAML-based <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> backed by
+the <a href="https://pub.dev/documentation/jetson/1.0.0/jetson/ObjectMapper-class.html">ObjectMapper</a> from the Jetson serialization framework.
+</dd>
+
+          <dt id="JetsonAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/JetsonAutoConfiguration-class.html">JetsonAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  
+</dd>
+
+          <dt id="JsonReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/JsonReturnValueHandler-class.html">JsonReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementation that handles
+<strong>JSON-serializable controller return values</strong>.
+</dd>
+
+          <dt id="JtlAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration-class.html">JtlAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for JTL template infrastructure in Jetleaf.
+</dd>
+
+          <dt id="LiteralSegment">
+  <span class="name "><a href="../jetleaf_web/LiteralSegment-class.html">LiteralSegment</a></span> 
+
+</dt>
+<dd>
+  A literal path segment representing a fixed portion of a route pattern,
+such as <code>"home"</code>, <code>"api"</code>, or <code>"v1"</code>.
+</dd>
+
+          <dt id="MatrixVariable">
+  <span class="name "><a href="../jetleaf_web/MatrixVariable-class.html">MatrixVariable</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>matrix variable</strong> from a specific path segment of the URI
+to a method parameter.
+</dd>
+
+          <dt id="MatrixVariableResolver">
+  <span class="name "><a href="../jetleaf_web/MatrixVariableResolver-class.html">MatrixVariableResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves and parses URI matrix variables embedded in path segments.
+</dd>
+
+          <dt id="MatrixVariables">
+  <span class="name "><a href="../jetleaf_web/MatrixVariables-class.html">MatrixVariables</a></span> 
+
+</dt>
+<dd>
+  Represents a resolved set of matrix variables for a specific path segment.
+</dd>
+
+          <dt id="MatrixVariableUtils">
+  <span class="name "><a href="../jetleaf_web/MatrixVariableUtils-class.html">MatrixVariableUtils</a></span> 
+
+</dt>
+<dd>
+  Resolves and parses URI matrix variables embedded in path segments.
+</dd>
+
+          <dt id="MediaType">
+  <span class="name "><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span> 
+
+</dt>
+<dd>
+  A robust representation of an HTTP <strong>media type</strong> (also known as a <em>MIME type</em>),
+used to describe the format of data transmitted over HTTP.
+</dd>
+
+          <dt id="MethodArgumentAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/MethodArgumentAutoConfiguration-class.html">MethodArgumentAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for method argument resolvers in Jetleaf.
+</dd>
+
+          <dt id="MethodArgumentResolver">
+  <span class="name "><a href="../jetleaf_web/MethodArgumentResolver-class.html">MethodArgumentResolver</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for resolving method parameters of a <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>.
+</dd>
+
+          <dt id="MethodArgumentResolverManager">
+  <span class="name "><a href="../jetleaf_web/MethodArgumentResolverManager-class.html">MethodArgumentResolverManager</a></span> 
+
+</dt>
+<dd>
+  Central coordination interface for resolving <strong>method arguments</strong>
+in annotated controller or handler methods.
+</dd>
+
+          <dt id="MethodExceptionAdviser">
+  <span class="name "><a href="../jetleaf_web/MethodExceptionAdviser-class.html">MethodExceptionAdviser</a></span> 
+
+</dt>
+<dd>
+  Internal resolver that maps exception types to their corresponding handler methods
+within a <code>@ControllerAdvice</code>, <code>@RestControllerAdvice</code>, or annotated controller.
+</dd>
+
+          <dt id="MultipartFile">
+  <span class="name "><a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a></span> 
+
+</dt>
+<dd>
+  Represents a file uploaded via a multipart/form-data HTTP request.
+</dd>
+
+          <dt id="MultipartParser">
+  <span class="name "><a href="../jetleaf_web/MultipartParser-class.html">MultipartParser</a></span> 
+
+</dt>
+<dd>
+  Abstract base class for parsing multipart HTTP requests and handling file uploads.
+</dd>
+
+          <dt id="MultipartResolver">
+  <span class="name "><a href="../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a></span> 
+
+</dt>
+<dd>
+  Defines a strategy for handling <strong>multipart HTTP requests</strong>, commonly used
+for form submissions that include file uploads (<code>multipart/form-data</code>).
+</dd>
+
+          <dt id="MultipartServerHttpRequest">
+  <span class="name "><a href="../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP request with multipart/form-data content, typically used for file uploads.
+</dd>
+
+          <dt id="OncePerRequestFilter">
+  <span class="name "><a href="../jetleaf_web/OncePerRequestFilter-class.html">OncePerRequestFilter</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/Filter-class.html">Filter</a> that guarantees execution <strong>only once per request</strong>.
+</dd>
+
+          <dt id="OPTIONS">
+  <span class="name "><a href="../jetleaf_web/OPTIONS-class.html">OPTIONS</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>OPTIONS</strong> route.
+</dd>
+
+          <dt id="PageView">
+  <span class="name "><a href="../jetleaf_web/PageView-class.html">PageView</a></span> 
+
+</dt>
+<dd>
+  Concrete implementation of <a href="../jetleaf_web/View-class.html">View</a> with fluent builder-style APIs for
+convenient view configuration in controller methods.
+</dd>
+
+          <dt id="PageViewReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/PageViewReturnValueHandler-class.html">PageViewReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  Handles controller method return values of type <a href="../jetleaf_web/PageView-class.html">PageView</a> for rendering
+template-based web pages with advanced features like redirect fallbacks.
+</dd>
+
+          <dt id="Part">
+  <span class="name "><a href="../jetleaf_web/Part-class.html">Part</a></span> 
+
+</dt>
+<dd>
+  A <strong>single component</strong> of a multipart/form-data request, representing
+either a simple form field or a file upload.
+</dd>
+
+          <dt id="PATCH">
+  <span class="name "><a href="../jetleaf_web/PATCH-class.html">PATCH</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>PATCH</strong> route.
+</dd>
+
+          <dt id="PatchMapping">
+  <span class="name "><a href="../jetleaf_web/PatchMapping-class.html">PatchMapping</a></span> 
+
+</dt>
+<dd>
+  Shorthand annotation for a <code>PATCH</code> HTTP method mapping on a controller method.
+</dd>
+
+          <dt id="PathMatch">
+  <span class="name "><a href="../jetleaf_web/PathMatch-class.html">PathMatch</a></span> 
+
+</dt>
+<dd>
+  Represents the result of matching a request path against a compiled
+<a href="../jetleaf_web/PathPattern-class.html">PathPattern</a> in JetLeaf.
+</dd>
+
+          <dt id="PathPattern">
+  <span class="name "><a href="../jetleaf_web/PathPattern-class.html">PathPattern</a></span> 
+
+</dt>
+<dd>
+  Represents a compiled path pattern in JetLeaf that can be efficiently
+matched against incoming request paths.
+</dd>
+
+          <dt id="PathPatternParser">
+  <span class="name "><a href="../jetleaf_web/PathPatternParser-class.html">PathPatternParser</a></span> 
+
+</dt>
+<dd>
+  Interface for parsing and matching path patterns in JetLeaf.
+</dd>
+
+          <dt id="PathPatternParserConfig">
+  <span class="name "><a href="../jetleaf_web/PathPatternParserConfig-class.html">PathPatternParserConfig</a></span> 
+
+</dt>
+<dd>
+  Configuration options for the JetLeaf path pattern parser.
+</dd>
+
+          <dt id="PathPatternParserRegistry">
+  <span class="name "><a href="../jetleaf_web/PathPatternParserRegistry-class.html">PathPatternParserRegistry</a></span> 
+
+</dt>
+<dd>
+  Registry interface for managing the <a href="../jetleaf_web/PathPatternParser-class.html">PathPatternParser</a> used by JetLeaf.
+</dd>
+
+          <dt id="PathSegment">
+  <span class="name "><a href="../jetleaf_web/PathSegment-class.html">PathSegment</a></span> 
+
+</dt>
+<dd>
+  Represents a single segment of a parsed path pattern within JetLeaf’s
+routing system.
+</dd>
+
+          <dt id="PathVariable">
+  <span class="name "><a href="../jetleaf_web/PathVariable-class.html">PathVariable</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>path variable</strong> from the URI template to a method parameter.
+</dd>
+
+          <dt id="PathVariableResolver">
+  <span class="name "><a href="../jetleaf_web/PathVariableResolver-class.html">PathVariableResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/PathVariable-class.html">PathVariable</a> by extracting
+values from URI template variables.
+</dd>
+
+          <dt id="POST">
+  <span class="name "><a href="../jetleaf_web/POST-class.html">POST</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>POST</strong> route.
+</dd>
+
+          <dt id="PostMapping">
+  <span class="name "><a href="../jetleaf_web/PostMapping-class.html">PostMapping</a></span> 
+
+</dt>
+<dd>
+  Shorthand annotation for a <code>POST</code> HTTP method mapping on a controller method.
+</dd>
+
+          <dt id="Produces">
+  <span class="name "><a href="../jetleaf_web/Produces-class.html">Produces</a></span> 
+
+</dt>
+<dd>
+  Marks a controller or handler method with the media types
+that it can produce in the response.
+</dd>
+
+          <dt id="PUT">
+  <span class="name "><a href="../jetleaf_web/PUT-class.html">PUT</a></span> 
+
+</dt>
+<dd>
+  Represents an HTTP <strong>PUT</strong> route.
+</dd>
+
+          <dt id="PutMapping">
+  <span class="name "><a href="../jetleaf_web/PutMapping-class.html">PutMapping</a></span> 
+
+</dt>
+<dd>
+  Shorthand annotation for a <code>PUT</code> HTTP method mapping on a controller method.
+</dd>
+
+          <dt id="ReadOnlyHttpHeaders">
+  <span class="name "><a href="../jetleaf_web/ReadOnlyHttpHeaders-class.html">ReadOnlyHttpHeaders</a></span> 
+
+</dt>
+<dd>
+  A read-only implementation of <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> that throws <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/UnsupportedOperationException-class.html">UnsupportedOperationException</a>
+for any mutating operations.
+</dd>
+
+          <dt id="RedirectReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/RedirectReturnValueHandler-class.html">RedirectReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s built-in <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementation
+responsible for processing <strong>redirect-based return values</strong> from
+controller methods.
+</dd>
+
+          <dt id="RedirectView">
+  <span class="name "><a href="../jetleaf_web/RedirectView-class.html">RedirectView</a></span> 
+
+</dt>
+<dd>
+  Represents a <strong>redirect-based view</strong> that instructs the framework
+to issue an HTTP redirect to the specified target path or URL.
+</dd>
+
+          <dt id="RegexSegment">
+  <span class="name "><a href="../jetleaf_web/RegexSegment-class.html">RegexSegment</a></span> 
+
+</dt>
+<dd>
+  A regex-based path segment used for advanced route matching in JetLeaf.
+</dd>
+
+          <dt id="Renderable">
+  <span class="name "><a href="../jetleaf_web/Renderable-class.html">Renderable</a></span> 
+
+</dt>
+<dd>
+  Marker interface for components capable of rendering content in response to HTTP requests.
+</dd>
+
+          <dt id="RenderableView">
+  <span class="name "><a href="../jetleaf_web/RenderableView-class.html">RenderableView</a></span> 
+
+</dt>
+<dd>
+  Abstract base class for view components that render content directly as strings.
+</dd>
+
+          <dt id="RenderableWebView">
+  <span class="name "><a href="../jetleaf_web/RenderableWebView-class.html">RenderableWebView</a></span> 
+
+</dt>
+<dd>
+  Abstract base class for view components that use template-based rendering with models.
+</dd>
+
+          <dt id="RequestAndResponseRouterHandler">
+  <span class="name "><a href="../jetleaf_web/RequestAndResponseRouterHandler-class.html">RequestAndResponseRouterHandler</a></span> 
+
+</dt>
+<dd>
+  A concrete <a href="../jetleaf_web/RouterHandler-class.html">RouterHandler</a> for routes that operate on both
+<a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> and <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>.
+</dd>
+
+          <dt id="RequestAttribute">
+  <span class="name "><a href="../jetleaf_web/RequestAttribute-class.html">RequestAttribute</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>request-scoped attribute</strong> to a method parameter.
+</dd>
+
+          <dt id="RequestAttributeCsrfTokenRepository">
+  <span class="name "><a href="../jetleaf_web/RequestAttributeCsrfTokenRepository-class.html">RequestAttributeCsrfTokenRepository</a></span> 
+
+</dt>
+<dd>
+  A <a href="../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a> implementation that stores CSRF tokens as
+request attributes.
+</dd>
+
+          <dt id="RequestAttributeResolver">
+  <span class="name "><a href="../jetleaf_web/RequestAttributeResolver-class.html">RequestAttributeResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/RequestAttribute-class.html">RequestAttribute</a> by extracting
+values from request-scoped attributes.
+</dd>
+
+          <dt id="RequestBody">
+  <span class="name "><a href="../jetleaf_web/RequestBody-class.html">RequestBody</a></span> 
+
+</dt>
+<dd>
+  Marks a method parameter to be bound to the HTTP request body.
+</dd>
+
+          <dt id="RequestBodyResolver">
+  <span class="name "><a href="../jetleaf_web/RequestBodyResolver-class.html">RequestBodyResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <code>@RequestBody</code>.
+</dd>
+
+          <dt id="RequestHeader">
+  <span class="name "><a href="../jetleaf_web/RequestHeader-class.html">RequestHeader</a></span> 
+
+</dt>
+<dd>
+  Binds the value of a specific HTTP request header to a method parameter.
+</dd>
+
+          <dt id="RequestHeaderResolver">
+  <span class="name "><a href="../jetleaf_web/RequestHeaderResolver-class.html">RequestHeaderResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/RequestHeader-class.html">RequestHeader</a> by extracting
+values from HTTP request headers.
+</dd>
+
+          <dt id="RequestMapping">
+  <span class="name "><a href="../jetleaf_web/RequestMapping-class.html">RequestMapping</a></span> 
+
+</dt>
+<dd>
+  Maps an HTTP request to a specific controller method or class within JetLeaf.
+</dd>
+
+          <dt id="RequestOnlyRouterHandler">
+  <span class="name "><a href="../jetleaf_web/RequestOnlyRouterHandler-class.html">RequestOnlyRouterHandler</a></span> 
+
+</dt>
+<dd>
+  A concrete <a href="../jetleaf_web/RouterHandler-class.html">RouterHandler</a> for routes that operate only on
+<a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>.
+</dd>
+
+          <dt id="RequestParam">
+  <span class="name "><a href="../jetleaf_web/RequestParam-class.html">RequestParam</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>query parameter</strong> from the HTTP request URI to a method parameter.
+</dd>
+
+          <dt id="RequestParameter">
+  <span class="name "><a href="../jetleaf_web/RequestParameter-class.html">RequestParameter</a></span> 
+
+</dt>
+<dd>
+  Base annotation for binding HTTP request elements to method parameters.
+</dd>
+
+          <dt id="RequestParamResolver">
+  <span class="name "><a href="../jetleaf_web/RequestParamResolver-class.html">RequestParamResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/RequestParam-class.html">RequestParam</a> by extracting
+values from HTTP request parameters (query string or form data).
+</dd>
+
+          <dt id="RequestPart">
+  <span class="name "><a href="../jetleaf_web/RequestPart-class.html">RequestPart</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>multipart/form-data request part</strong> to a method parameter.
+</dd>
+
+          <dt id="RequestPartResolver">
+  <span class="name "><a href="../jetleaf_web/RequestPartResolver-class.html">RequestPartResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <code>@RequestPart</code> in multipart requests.
+</dd>
+
+          <dt id="RequestRouteEntry">
+  <span class="name "><a href="../jetleaf_web/RequestRouteEntry-class.html">RequestRouteEntry</a></span> 
+
+</dt>
+<dd>
+  Represents a <a href="../jetleaf_web/RouteEntry-class.html">RouteEntry</a> whose handler accepts only
+a <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>.
+</dd>
+
+          <dt id="RequestSpec">
+  <span class="name "><a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span> 
+
+</dt>
+<dd>
+  Defines the contract for building and executing configurable HTTP requests
+in a fluent, chainable manner.
+</dd>
+
+          <dt id="ResolvedBy">
+  <span class="name "><a href="../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a></span> 
+
+</dt>
+<dd>
+  A metadata annotation that associates parameter resolver implementations
+with annotation classes for web request parameter resolution.
+</dd>
+
+          <dt id="Resolver">
+  <span class="name "><a href="../jetleaf_web/Resolver-class.html">Resolver</a></span> 
+
+</dt>
+<dd>
+  The core interface for resolving method parameter values from HTTP request context.
+</dd>
+
+          <dt id="ResolverContext">
+  <span class="name "><a href="../jetleaf_web/ResolverContext-class.html">ResolverContext</a></span> 
+
+</dt>
+<dd>
+  Defines a strategy interface for locating appropriate <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a>s
+capable of reading or writing specific Dart types within a given media type context.
+</dd>
+
+          <dt id="ResponseBody">
+  <span class="name "><a href="../jetleaf_web/ResponseBody-class.html">ResponseBody</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Represents an <strong>HTTP response entity</strong>, consisting of a status code, optional headers,
+and an optional body of type <code>T</code>. Extends <a href="../jetleaf_web/HttpBody-class.html">HttpBody</a> to include HTTP response-specific details.
+</dd>
+
+          <dt id="ResponseBodyReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/ResponseBodyReturnValueHandler-class.html">ResponseBodyReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> responsible for processing
+controller methods that return a <a href="../jetleaf_web/ResponseBody-class.html">ResponseBody</a> instance.
+</dd>
+
+          <dt id="ResponseCookie">
+  <span class="name "><a href="../jetleaf_web/ResponseCookie-class.html">ResponseCookie</a></span> 
+
+</dt>
+<dd>
+  Represents an <strong>HTTP response cookie</strong> as defined in <a href="https://tools.ietf.org/html/rfc6265">RFC 6265</a>
+with all attributes that can be set by the server in a <code>Set-Cookie</code> header.
+</dd>
+
+          <dt id="ResponseStatus">
+  <span class="name "><a href="../jetleaf_web/ResponseStatus-class.html">ResponseStatus</a></span> 
+
+</dt>
+<dd>
+  Annotation used to mark a controller class or method with a specific HTTP status.
+</dd>
+
+          <dt id="RestClient">
+  <span class="name "><a href="../jetleaf_web/RestClient-class.html">RestClient</a></span> 
+
+</dt>
+<dd>
+  Defines the <strong>builder interface</strong> for constructing and configuring
+<a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a> instances used in the JetLeaf REST client framework.
+</dd>
+
+          <dt id="RestConfig">
+  <span class="name "><a href="../jetleaf_web/RestConfig-class.html">RestConfig</a></span> 
+
+</dt>
+<dd>
+  Provides configuration options for low-level <strong>I/O client behavior</strong>
+used by <code>IoClient</code> within the JetLeaf networking stack.
+</dd>
+
+          <dt id="RestController">
+  <span class="name "><a href="../jetleaf_web/RestController-class.html">RestController</a></span> 
+
+</dt>
+<dd>
+  Marks a class as a <strong>REST controller</strong> within the JetLeaf framework.
+</dd>
+
+          <dt id="RestControllerAdvice">
+  <span class="name "><a href="../jetleaf_web/RestControllerAdvice-class.html">RestControllerAdvice</a></span> 
+
+</dt>
+<dd>
+  Specialized variant of <a href="../jetleaf_web/ControllerAdvice-class.html">ControllerAdvice</a> for <strong>REST controllers</strong> that
+produce structured responses (e.g., JSON or XML).
+</dd>
+
+          <dt id="RestControllerExceptionHandler">
+  <span class="name "><a href="../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a></span> 
+
+</dt>
+<dd>
+  A centralized exception handling component for RESTful controllers in
+the JetLeaf Web framework.
+</dd>
+
+          <dt id="RestExceptionResolver">
+  <span class="name "><a href="../jetleaf_web/RestExceptionResolver-class.html">RestExceptionResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves exceptions using <code>@RestControllerAdvice</code> annotated pods.
+</dd>
+
+          <dt id="RestExecutor">
+  <span class="name "><a href="../jetleaf_web/RestExecutor-class.html">RestExecutor</a></span> 
+
+</dt>
+<dd>
+  Defines the <strong>primary abstraction for executing HTTP requests</strong>
+within the JetLeaf client-side ecosystem.
+</dd>
+
+          <dt id="RestHttpRequest">
+  <span class="name "><a href="../jetleaf_web/RestHttpRequest-class.html">RestHttpRequest</a></span> 
+
+</dt>
+<dd>
+  Defines the <strong>abstraction for a client-side HTTP request</strong>, representing
+a request being prepared, configured, and executed by a <code>RestCreator</code>.
+</dd>
+
+          <dt id="RestHttpResponse">
+  <span class="name "><a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a></span> 
+
+</dt>
+<dd>
+  Represents the <strong>HTTP response</strong> returned from executing a <a href="../jetleaf_web/RestHttpRequest-class.html">RestHttpRequest</a>.
+</dd>
+
+          <dt id="RestInterceptor">
+  <span class="name "><a href="../jetleaf_web/RestInterceptor-class.html">RestInterceptor</a></span> 
+
+</dt>
+<dd>
+  Defines the <strong>interceptor interface</strong> used to customize and extend
+the behavior of REST client request execution within the JetLeaf framework.
+</dd>
+
+          <dt id="ReturnValueAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/ReturnValueAutoConfiguration-class.html">ReturnValueAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for return value handlers in Jetleaf.
+</dd>
+
+          <dt id="ReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  Strategy interface for handling the return value of a JetLeaf
+controller method invocation.
+</dd>
+
+          <dt id="ReturnValueHandlerManager">
+  <span class="name "><a href="../jetleaf_web/ReturnValueHandlerManager-class.html">ReturnValueHandlerManager</a></span> 
+
+</dt>
+<dd>
+  Central coordination interface for managing and delegating
+<strong>method return value handling</strong> within the JetLeaf web framework.
+</dd>
+
+          <dt id="Route">
+  <span class="name "><a href="../jetleaf_web/Route-class.html">Route</a></span> 
+
+</dt>
+<dd>
+  Represents a single HTTP route definition consisting of a <a href="../jetleaf_web/Route/path.html">path</a>
+and an <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a>.
+</dd>
+
+          <dt id="RouteDefinition">
+  <span class="name "><a href="../jetleaf_web/RouteDefinition-class.html">RouteDefinition</a></span> 
+
+</dt>
+<dd>
+  A <strong>concrete route declaration</strong> produced by a <a href="../jetleaf_web/Router-class.html">Router</a> or its builder.
+</dd>
+
+          <dt id="RouteDslHandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/RouteDslHandlerAdapter-class.html">RouteDslHandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Adapter that supports Jetleaf’s DSL-based routing system.
+</dd>
+
+          <dt id="RouteDslHandlerMethod">
+  <span class="name "><a href="../jetleaf_web/RouteDslHandlerMethod-class.html">RouteDslHandlerMethod</a></span> 
+
+</dt>
+<dd>
+  A <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> implementation representing a route defined via the Route DSL.
+</dd>
+
+          <dt id="RouteEntry">
+  <span class="name "><a href="../jetleaf_web/RouteEntry-class.html">RouteEntry</a></span> 
+
+</dt>
+<dd>
+  Represents a single <strong>registered route entry</strong> within a <a href="../jetleaf_web/Router-class.html">Router</a>.
+</dd>
+
+          <dt id="Router">
+  <span class="name "><a href="../jetleaf_web/Router-class.html">Router</a></span> 
+
+</dt>
+<dd>
+  Defines the <strong>core contract</strong> for JetLeaf’s routing system.
+</dd>
+
+          <dt id="RouterBuilder">
+  <span class="name "><a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span> 
+
+</dt>
+<dd>
+  Default <strong>implementation</strong> of the <a href="../jetleaf_web/Router-class.html">Router</a> interface for JetLeaf.
+</dd>
+
+          <dt id="RouteRegistryHandlerMapping">
+  <span class="name "><a href="../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a></span> 
+
+</dt>
+<dd>
+  The central <a href="../jetleaf_web/HandlerMapping-class.html">HandlerMapping</a> implementation that manages and resolves
+all route handler registrations within JetLeaf’s web framework.
+</dd>
+
+          <dt id="RouterHandler">
+  <span class="name "><a href="../jetleaf_web/RouterHandler-class.html">RouterHandler</a></span> 
+
+</dt>
+<dd>
+  A <strong>unified routing contract</strong> that abstracts over different styles of
+route handler functions in the JetLeaf web framework.
+</dd>
+
+          <dt id="RouterRegistrar">
+  <span class="name "><a href="../jetleaf_web/RouterRegistrar-class.html">RouterRegistrar</a></span> 
+
+</dt>
+<dd>
+  Defines a contract for components that contribute routers to the
+application’s routing system.
+</dd>
+
+          <dt id="RouterRegistry">
+  <span class="name "><a href="../jetleaf_web/RouterRegistry-class.html">RouterRegistry</a></span> 
+
+</dt>
+<dd>
+  A <strong>central registry</strong> for collecting and organizing <a href="../jetleaf_web/Router-class.html">Router</a> instances
+during application initialization.
+</dd>
+
+          <dt id="RouterSpec">
+  <span class="name "><a href="../jetleaf_web/RouterSpec-class.html">RouterSpec</a></span> 
+
+</dt>
+<dd>
+  A <strong>compiled router specification</strong> containing all resolved <a href="../jetleaf_web/RouteDefinition-class.html">RouteDefinition</a>s.
+</dd>
+
+          <dt id="ServerContext">
+  <span class="name "><a href="../jetleaf_web/ServerContext-class.html">ServerContext</a></span> 
+
+</dt>
+<dd>
+  Represents the <strong>runtime environment</strong> of a JetLeaf web server.
+</dd>
+
+          <dt id="ServerContextAware">
+  <span class="name "><a href="../jetleaf_web/ServerContextAware-class.html">ServerContextAware</a></span> 
+
+</dt>
+<dd>
+  A contract for components that need access to the <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a>.
+</dd>
+
+          <dt id="ServerContextInitializer">
+  <span class="name "><a href="../jetleaf_web/ServerContextInitializer-class.html">ServerContextInitializer</a><span class="signature">&lt;<wbr><span class="type-parameter">T extends <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a></span>&gt;</span></span> 
+
+</dt>
+<dd>
+  Defines a callback-style initializer that can customize a <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a>
+before the web server becomes active.
+</dd>
+
+          <dt id="ServerDispatcher">
+  <span class="name "><a href="../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a></span> 
+
+</dt>
+<dd>
+  A <strong>generic HTTP request dispatcher</strong> in the JetLeaf framework.
+</dd>
+
+          <dt id="ServerEvent">
+  <span class="name "><a href="../jetleaf_web/ServerEvent-class.html">ServerEvent</a></span> 
+
+</dt>
+<dd>
+  Base class for all web server lifecycle events.
+</dd>
+
+          <dt id="ServerHttpRequest">
+  <span class="name "><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> 
+
+</dt>
+<dd>
+  An abstract interface representing an <strong>HTTP request on the server side</strong>.
+</dd>
+
+          <dt id="ServerHttpResponse">
+  <span class="name "><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> 
+
+</dt>
+<dd>
+  A generic abstraction representing an <strong>HTTP response</strong> within the JetLeaf framework.
+</dd>
+
+          <dt id="ServerStartedEvent">
+  <span class="name "><a href="../jetleaf_web/ServerStartedEvent-class.html">ServerStartedEvent</a></span> 
+
+</dt>
+<dd>
+  ServerStartedEvent
+</dd>
+
+          <dt id="ServerStartingEvent">
+  <span class="name "><a href="../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a></span> 
+
+</dt>
+<dd>
+  ServerStartingEvent
+</dd>
+
+          <dt id="ServerStoppedEvent">
+  <span class="name "><a href="../jetleaf_web/ServerStoppedEvent-class.html">ServerStoppedEvent</a></span> 
+
+</dt>
+<dd>
+  ServerStoppedEvent
+</dd>
+
+          <dt id="ServerStoppingEvent">
+  <span class="name "><a href="../jetleaf_web/ServerStoppingEvent-class.html">ServerStoppingEvent</a></span> 
+
+</dt>
+<dd>
+  ServerStoppingEvent
+</dd>
+
+          <dt id="ServerWebApplicationContext">
+  <span class="name "><a href="../jetleaf_web/ServerWebApplicationContext-class.html">ServerWebApplicationContext</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext-class.html">AnnotationConfigApplicationContext</a> implementation that
+provides full JetLeaf web runtime capabilities.
+</dd>
+
+          <dt id="SessionAttribute">
+  <span class="name "><a href="../jetleaf_web/SessionAttribute-class.html">SessionAttribute</a></span> 
+
+</dt>
+<dd>
+  Binds a <strong>session-scoped attribute</strong> to a controller method parameter.
+</dd>
+
+          <dt id="SessionAttributeResolver">
+  <span class="name "><a href="../jetleaf_web/SessionAttributeResolver-class.html">SessionAttributeResolver</a></span> 
+
+</dt>
+<dd>
+  Resolves method parameters annotated with <a href="../jetleaf_web/SessionAttribute-class.html">SessionAttribute</a> by extracting
+values from HTTP session attributes.
+</dd>
+
+          <dt id="SimpleUriBuilder">
+  <span class="name "><a href="../jetleaf_web/SimpleUriBuilder-class.html">SimpleUriBuilder</a></span> 
+
+</dt>
+<dd>
+  A lightweight implementation of <a href="../jetleaf_web/UriBuilder-class.html">UriBuilder</a> that constructs URIs from
+string templates, variable placeholders, and optional query parameters.
+</dd>
+
+          <dt id="StandardWebEnvironment">
+  <span class="name "><a href="../jetleaf_web/StandardWebEnvironment-class.html">StandardWebEnvironment</a></span> 
+
+</dt>
+<dd>
+  A standard implementation of <a href="../jetleaf_web/ConfigurableWebEnvironment-class.html">ConfigurableWebEnvironment</a> that uses
+<a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/GlobalEnvironment-class.html">GlobalEnvironment</a> as its base.
+</dd>
+
+          <dt id="StringHttpMessageConverter">
+  <span class="name "><a href="../jetleaf_web/StringHttpMessageConverter-class.html">StringHttpMessageConverter</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s built-in <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> implementation
+for handling plain text (<code>text/plain</code>) HTTP payloads.
+</dd>
+
+          <dt id="StringReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/StringReturnValueHandler-class.html">StringReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> responsible for handling
+controller methods that return <strong>plain string content</strong>.
+</dd>
+
+          <dt id="UriBuilder">
+  <span class="name "><a href="../jetleaf_web/UriBuilder-class.html">UriBuilder</a></span> 
+
+</dt>
+<dd>
+  Defines the contract for building <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a> instances from templates,
+path variables, and query parameters.
+</dd>
+
+          <dt id="VariableSegment">
+  <span class="name "><a href="../jetleaf_web/VariableSegment-class.html">VariableSegment</a></span> 
+
+</dt>
+<dd>
+  A variable path segment representing a named placeholder in a route pattern,
+such as <code>"{id}"</code> or <code>"{userId}"</code>.
+</dd>
+
+          <dt id="View">
+  <span class="name "><a href="../jetleaf_web/View-class.html">View</a></span> 
+
+</dt>
+<dd>
+  Represents a renderable web view with template path, redirect behavior,
+HTTP status codes, and model attributes for dynamic content rendering.
+</dd>
+
+          <dt id="ViewContext">
+  <span class="name "><a href="../jetleaf_web/ViewContext-class.html">ViewContext</a></span> 
+
+</dt>
+<dd>
+  Provides access to HTTP request data and context for view rendering components.
+</dd>
+
+          <dt id="ViewNameReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/ViewNameReturnValueHandler-class.html">ViewNameReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  Resolves controller method return values that are strings representing view names
+and renders them using the JTL template engine with asset-based template resolution.
+</dd>
+
+          <dt id="VoidReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/VoidReturnValueHandler-class.html">VoidReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  JetLeaf’s <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementation for controller
+methods that return <strong>void</strong> or produce <strong>no response body</strong>.
+</dd>
+
+          <dt id="WebApplicationContext">
+  <span class="name "><a href="../jetleaf_web/WebApplicationContext-class.html">WebApplicationContext</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> tailored for web applications.
+</dd>
+
+          <dt id="WebAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/WebAutoConfiguration-class.html">WebAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for Jetleaf web framework components.
+</dd>
+
+          <dt id="WebAwareProcessor">
+  <span class="name "><a href="../jetleaf_web/WebAwareProcessor-class.html">WebAwareProcessor</a></span> 
+
+</dt>
+<dd>
+  A pod initialization processor that automatically injects web-specific
+dependencies into pods implementing web-aware interfaces within a
+<a href="../jetleaf_web/ServerWebApplicationContext-class.html">ServerWebApplicationContext</a>.
+</dd>
+
+          <dt id="WebConfigurer">
+  <span class="name "><a href="../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a></span> 
+
+</dt>
+<dd>
+  Defines the configuration contract for JetLeaf’s web layer.
+</dd>
+
+          <dt id="WebEnvironment">
+  <span class="name "><a href="../jetleaf_web/WebEnvironment-class.html">WebEnvironment</a></span> 
+
+</dt>
+<dd>
+  Represents a web-specific environment abstraction for accessing
+environment properties, system variables, and configuration values
+relevant to web applications.
+</dd>
+
+          <dt id="WebEnvironmentPropertySource">
+  <span class="name "><a href="../jetleaf_web/WebEnvironmentPropertySource-class.html">WebEnvironmentPropertySource</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/property/MapPropertySource-class.html">MapPropertySource</a> that provides default configuration
+properties for a web environment.
+</dd>
+
+          <dt id="WebRequest">
+  <span class="name "><a href="../jetleaf_web/WebRequest-class.html">WebRequest</a></span> 
+
+</dt>
+<dd>
+  Represents a unified abstraction over an HTTP request–response interaction.
+</dd>
+
+          <dt id="WebServer">
+  <span class="name "><a href="../jetleaf_web/WebServer-class.html">WebServer</a></span> 
+
+</dt>
+<dd>
+  Defines the base contract for a JetLeaf-compatible web server.
+</dd>
+
+          <dt id="WebServerAutoConfiguration">
+  <span class="name "><a href="../jetleaf_web/WebServerAutoConfiguration-class.html">WebServerAutoConfiguration</a></span> 
+
+</dt>
+<dd>
+  Auto-configuration class for core web server infrastructure in Jetleaf.
+</dd>
+
+          <dt id="WebServerAware">
+  <span class="name "><a href="../jetleaf_web/WebServerAware-class.html">WebServerAware</a></span> 
+
+</dt>
+<dd>
+  A contract for components that require access to the <a href="../jetleaf_web/WebServer-class.html">WebServer</a> instance.
+</dd>
+
+          <dt id="WebServerFactory">
+  <span class="name "><a href="../jetleaf_web/WebServerFactory-class.html">WebServerFactory</a></span> 
+
+</dt>
+<dd>
+  A factory interface responsible for creating <a href="../jetleaf_web/WebServer-class.html">WebServer</a> instances.
+</dd>
+
+          <dt id="WebUtils">
+  <span class="name "><a href="../jetleaf_web/WebUtils-class.html">WebUtils</a></span> 
+
+</dt>
+<dd>
+  Utility methods for web-related operations, such as retrieving
+HTTP response status codes from annotated methods or classes.
+</dd>
+
+          <dt id="WebView">
+  <span class="name "><a href="../jetleaf_web/WebView-class.html">WebView</a></span> 
+
+</dt>
+<dd>
+  Marks a class as a <strong>web view component</strong> specialized for rendering HTML, CSS, or JavaScript content.
+</dd>
+
+          <dt id="WebViewContext">
+  <span class="name "><a href="../jetleaf_web/WebViewContext-class.html">WebViewContext</a></span> 
+
+</dt>
+<dd>
+  Internal implementation of <a href="../jetleaf_web/ViewContext-class.html">ViewContext</a> for JetLeaf’s web-based
+rendering system.
+</dd>
+
+          <dt id="WebViewHandlerAdapter">
+  <span class="name "><a href="../jetleaf_web/WebViewHandlerAdapter-class.html">WebViewHandlerAdapter</a></span> 
+
+</dt>
+<dd>
+  Adapter responsible for invoking <a href="../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a> instances within
+the JetLeaf web request processing pipeline.
+</dd>
+
+          <dt id="WebViewHandlerMethod">
+  <span class="name "><a href="../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a></span> 
+
+</dt>
+<dd>
+  Represents a <strong>handler method</strong> discovered through annotations
+such as <code>@RequestMapping</code>, <code>@GetMapping</code>, or <code>@PostMapping</code>.
+</dd>
+
+          <dt id="WildcardSegment">
+  <span class="name "><a href="../jetleaf_web/WildcardSegment-class.html">WildcardSegment</a></span> 
+
+</dt>
+<dd>
+  A wildcard path segment used in route patterns to match one or multiple
+path components.
+</dd>
+
+          <dt id="XmlReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/XmlReturnValueHandler-class.html">XmlReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementation that handles <strong>XML-serializable</strong>
+controller return values.
+</dd>
+
+          <dt id="XRouteEntry">
+  <span class="name "><a href="../jetleaf_web/XRouteEntry-class.html">XRouteEntry</a></span> 
+
+</dt>
+<dd>
+  Represents a <a href="../jetleaf_web/RouteEntry-class.html">RouteEntry</a> whose handler accepts both
+a <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> and a <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>.
+</dd>
+
+          <dt id="YamlReturnValueHandler">
+  <span class="name "><a href="../jetleaf_web/YamlReturnValueHandler-class.html">YamlReturnValueHandler</a></span> 
+
+</dt>
+<dd>
+  <a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a> implementation that handles <strong>YAML-serializable</strong>
+controller return values.
+</dd>
+
+      </dl>
+    </section>
+
+
+
+
+
+
+
+    <section class="summary offset-anchor" id="functions">
+      <h2>Functions</h2>
+      <dl class="callables">
+          <dt id="delete" class="callable">
+  <span class="name"><a href="../jetleaf_web/delete.html">delete</a></span><span class="signature">(<wbr><span class="parameter" id="delete-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="delete-param-handler"><span class="type-annotation"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="deleteX" class="callable">
+  <span class="name"><a href="../jetleaf_web/deleteX.html">deleteX</a></span><span class="signature">(<wbr><span class="parameter" id="deleteX-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="deleteX-param-handler"><span class="type-annotation"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="get" class="callable">
+  <span class="name"><a href="../jetleaf_web/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="get-param-handler"><span class="type-annotation"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="getX" class="callable">
+  <span class="name"><a href="../jetleaf_web/getX.html">getX</a></span><span class="signature">(<wbr><span class="parameter" id="getX-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="getX-param-handler"><span class="type-annotation"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="patch" class="callable">
+  <span class="name"><a href="../jetleaf_web/patch.html">patch</a></span><span class="signature">(<wbr><span class="parameter" id="patch-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="patch-param-handler"><span class="type-annotation"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="patchX" class="callable">
+  <span class="name"><a href="../jetleaf_web/patchX.html">patchX</a></span><span class="signature">(<wbr><span class="parameter" id="patchX-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="patchX-param-handler"><span class="type-annotation"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="post" class="callable">
+  <span class="name"><a href="../jetleaf_web/post.html">post</a></span><span class="signature">(<wbr><span class="parameter" id="post-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="post-param-handler"><span class="type-annotation"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="postX" class="callable">
+  <span class="name"><a href="../jetleaf_web/postX.html">postX</a></span><span class="signature">(<wbr><span class="parameter" id="postX-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="postX-param-handler"><span class="type-annotation"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="put" class="callable">
+  <span class="name"><a href="../jetleaf_web/put.html">put</a></span><span class="signature">(<wbr><span class="parameter" id="put-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="put-param-handler"><span class="type-annotation"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+          <dt id="putX" class="callable">
+  <span class="name"><a href="../jetleaf_web/putX.html">putX</a></span><span class="signature">(<wbr><span class="parameter" id="putX-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, </span><span class="parameter" id="putX-param-handler"><span class="type-annotation"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  JetLeaf's <strong>Routing DSL</strong> provides a concise, functional way to
+create and register HTTP routes without explicitly instantiating
+<a href="../jetleaf_web/Route-class.html">Route</a> or calling <a href="../jetleaf_web/RouterBuilder/route.html">RouterBuilder.route</a> manually.
+  
+
+</dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="typedefs">
+      <h2>Typedefs</h2>
+      <dl>
+          
+  <dt id="RequestCallback" class="callable">
+    <span class="name"><a href="../jetleaf_web/RequestCallback.html">RequestCallback</a></span><span class="signature">
+      <span class="returntype parameter">= <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-request"><span class="type-annotation"><a href="../jetleaf_web/RestHttpRequest-class.html">RestHttpRequest</a></span> <span class="parameter-name">request</span></span>)</span></span>
+    </span>
+    
+
+  </dt>
+  <dd>
+    A functional interface representing a <strong>callback used to prepare an HTTP request</strong>.
+    
+
+  </dd>
+
+          
+  <dt id="RequestRouterFunction" class="callable">
+    <span class="name"><a href="../jetleaf_web/RequestRouterFunction.html">RequestRouterFunction</a></span><span class="signature">
+      <span class="returntype parameter">= <a href="https://api.dart.dev/stable/3.9.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)</span></span>
+    </span>
+    
+
+  </dt>
+  <dd>
+    A <strong>function signature</strong> for routes that accept only the
+<a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>.
+    
+
+  </dd>
+
+          
+  <dt id="ResponseExtractor" class="callable">
+    <span class="name"><a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a></span>&lt;<wbr><span class="type-parameter">T</span>&gt;<span class="signature">
+      <span class="returntype parameter">= <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-response"><span class="type-annotation"><a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a></span> <span class="parameter-name">response</span></span>)</span></span>
+    </span>
+    
+
+  </dt>
+  <dd>
+    A functional interface for <strong>asynchronously extracting and transforming</strong>
+data from a <a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a>.
+    
+
+  </dd>
+
+          
+  <dt id="XRouterFunction" class="callable">
+    <span class="name"><a href="../jetleaf_web/XRouterFunction.html">XRouterFunction</a></span><span class="signature">
+      <span class="returntype parameter">= <a href="https://api.dart.dev/stable/3.9.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span> Function<span class="signature">(<span class="parameter" id="param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span><span class="parameter" id="param-response"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span></span>)</span></span>
+    </span>
+    
+
+  </dt>
+  <dd>
+    A <strong>function signature</strong> for routes that operate on both
+the <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> and <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>.
+    
+
+  </dd>
+
+      </dl>
+    </section>
+
+    <section class="summary offset-anchor" id="exceptions">
+      <h2>Exceptions / Errors</h2>
+      <dl>
+          <dt id="BadGatewayException">
+  <span class="name "><a href="../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>invalid or failed response</strong>
+from an upstream server, corresponding to the <strong>HTTP 502 Bad Gateway</strong> status.
+</dd>
+
+          <dt id="BadRequestException">
+  <span class="name "><a href="../jetleaf_web/BadRequestException-class.html">BadRequestException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> that indicates a <strong>client-side request error</strong>
+corresponding to the HTTP <strong>400 Bad Request</strong> status.
+</dd>
+
+          <dt id="ConflictException">
+  <span class="name "><a href="../jetleaf_web/ConflictException-class.html">ConflictException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing a <strong>resource state conflict</strong>,<br>
+corresponding to the HTTP <strong>409 Conflict</strong> status.
+</dd>
+
+          <dt id="ForbiddenException">
+  <span class="name "><a href="../jetleaf_web/ForbiddenException-class.html">ForbiddenException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>authorization failure</strong>,<br>
+corresponding to the HTTP <strong>403 Forbidden</strong> status.
+</dd>
+
+          <dt id="GatewayTimeoutException">
+  <span class="name "><a href="../jetleaf_web/GatewayTimeoutException-class.html">GatewayTimeoutException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>upstream service timeout</strong>,<br>
+corresponding to the HTTP <strong>504 Gateway Timeout</strong> status.
+</dd>
+
+          <dt id="HttpException">
+  <span class="name "><a href="../jetleaf_web/HttpException-class.html">HttpException</a></span> 
+
+</dt>
+<dd>
+  Base exception class for all HTTP operations in the JetLeaf web library.
+</dd>
+
+          <dt id="HttpMediaTypeNotSupportedException">
+  <span class="name "><a href="../jetleaf_web/HttpMediaTypeNotSupportedException-class.html">HttpMediaTypeNotSupportedException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when a client sends a request with an <strong>unsupported media type</strong>.
+</dd>
+
+          <dt id="HttpMessageNotReadableException">
+  <span class="name "><a href="../jetleaf_web/HttpMessageNotReadableException-class.html">HttpMessageNotReadableException</a></span> 
+
+</dt>
+<dd>
+  Thrown when the HTTP message body could not be read or parsed.
+</dd>
+
+          <dt id="HttpMessageNotWritableException">
+  <span class="name "><a href="../jetleaf_web/HttpMessageNotWritableException-class.html">HttpMessageNotWritableException</a></span> 
+
+</dt>
+<dd>
+  Thrown when the HTTP response body could not be written.
+</dd>
+
+          <dt id="InternalServerErrorException">
+  <span class="name "><a href="../jetleaf_web/InternalServerErrorException-class.html">InternalServerErrorException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>unexpected server failure</strong>,<br>
+corresponding to the HTTP <strong>500 Internal Server Error</strong> status.
+</dd>
+
+          <dt id="InvalidPathPatternException">
+  <span class="name "><a href="../jetleaf_web/InvalidPathPatternException-class.html">InvalidPathPatternException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when a path pattern used in routing or matching
+within the JetLeaf framework is invalid or cannot be parsed.
+</dd>
+
+          <dt id="MaxUploadSizeExceededException">
+  <span class="name "><a href="../jetleaf_web/MaxUploadSizeExceededException-class.html">MaxUploadSizeExceededException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when the total upload size exceeds the allowed maximum.
+</dd>
+
+          <dt id="MaxUploadSizePerFileExceededException">
+  <span class="name "><a href="../jetleaf_web/MaxUploadSizePerFileExceededException-class.html">MaxUploadSizePerFileExceededException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when a single uploaded file exceeds the per-file size limit.
+</dd>
+
+          <dt id="MethodNotAllowedException">
+  <span class="name "><a href="../jetleaf_web/MethodNotAllowedException-class.html">MethodNotAllowedException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> corresponding to the HTTP <strong>405 Method Not Allowed</strong> status.
+</dd>
+
+          <dt id="MultipartException">
+  <span class="name "><a href="../jetleaf_web/MultipartException-class.html">MultipartException</a></span> 
+
+</dt>
+<dd>
+  Base exception class for multipart upload-related errors.
+</dd>
+
+          <dt id="MultipartParseException">
+  <span class="name "><a href="../jetleaf_web/MultipartParseException-class.html">MultipartParseException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when a multipart/form-data request cannot be parsed correctly.
+</dd>
+
+          <dt id="NotAcceptableException">
+  <span class="name "><a href="../jetleaf_web/NotAcceptableException-class.html">NotAcceptableException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>unacceptable response format</strong>
+or <strong>media type negotiation failure</strong>, corresponding to the
+<strong>HTTP 406 Not Acceptable</strong> status.
+</dd>
+
+          <dt id="NotFoundException">
+  <span class="name "><a href="../jetleaf_web/NotFoundException-class.html">NotFoundException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating that the requested resource
+could not be found (HTTP <strong>404 Not Found</strong>).
+</dd>
+
+          <dt id="PathMatchingException">
+  <span class="name "><a href="../jetleaf_web/PathMatchingException-class.html">PathMatchingException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when path matching fails unexpectedly during
+JetLeaf’s request routing or resource resolution.
+</dd>
+
+          <dt id="PathVariableException">
+  <span class="name "><a href="../jetleaf_web/PathVariableException-class.html">PathVariableException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating an <strong>error in resolving or binding</strong>
+a path variable from the request URI.
+</dd>
+
+          <dt id="PayloadTooLargeException">
+  <span class="name "><a href="../jetleaf_web/PayloadTooLargeException-class.html">PayloadTooLargeException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating that the client's request payload
+exceeds the server's allowed size, corresponding to the HTTP<br>
+<strong>413 Payload Too Large</strong> status.
+</dd>
+
+          <dt id="RequestTimeoutException">
+  <span class="name "><a href="../jetleaf_web/RequestTimeoutException-class.html">RequestTimeoutException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing a <strong>client request timeout</strong>,<br>
+corresponding to the HTTP <strong>408 Request Timeout</strong> status.
+</dd>
+
+          <dt id="ResponseAlreadyCommittedException">
+  <span class="name "><a href="../jetleaf_web/ResponseAlreadyCommittedException-class.html">ResponseAlreadyCommittedException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when attempting to modify an HTTP response that has already been committed.
+</dd>
+
+          <dt id="ServiceUnavailableException">
+  <span class="name "><a href="../jetleaf_web/ServiceUnavailableException-class.html">ServiceUnavailableException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing a <strong>temporary service outage</strong>,<br>
+corresponding to the HTTP <strong>503 Service Unavailable</strong> status.
+</dd>
+
+          <dt id="TooManyRequestsException">
+  <span class="name "><a href="../jetleaf_web/TooManyRequestsException-class.html">TooManyRequestsException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating <strong>rate limiting</strong> or <strong>quota exhaustion</strong>,<br>
+corresponding to the HTTP <strong>429 Too Many Requests</strong> status.
+</dd>
+
+          <dt id="UnauthorizedException">
+  <span class="name "><a href="../jetleaf_web/UnauthorizedException-class.html">UnauthorizedException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> signaling that the client request lacks valid
+<strong>authentication credentials</strong>, corresponding to the HTTP <strong>401 Unauthorized</strong> status.
+</dd>
+
+          <dt id="UnsupportedMediaTypeException">
+  <span class="name "><a href="../jetleaf_web/UnsupportedMediaTypeException-class.html">UnsupportedMediaTypeException</a></span> 
+
+</dt>
+<dd>
+  A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>unsupported request content type</strong>,<br>
+corresponding to the <strong>HTTP 415 Unsupported Media Type</strong> status.
+</dd>
+
+          <dt id="ViewResolutionException">
+  <span class="name "><a href="../jetleaf_web/ViewResolutionException-class.html">ViewResolutionException</a></span> 
+
+</dt>
+<dd>
+  Exception thrown when a <strong>view cannot be resolved or rendered</strong> during
+request processing.
+</dd>
+
+          <dt id="WebServerException">
+  <span class="name "><a href="../jetleaf_web/WebServerException-class.html">WebServerException</a></span> 
+
+</dt>
+<dd>
+  Represents an unrecoverable runtime error that occurs within the
+JetLeaf WebServer or its request handling pipeline.
+</dd>
+
+      </dl>
+    </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li class="self-crumb">jetleaf_web.dart</li>
+</ol>
+
+    <h5><span class="package-name">jetleaf_web</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+    <h5>jetleaf_web library</h5>
+  </div><!--/sidebar-offcanvas-right-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

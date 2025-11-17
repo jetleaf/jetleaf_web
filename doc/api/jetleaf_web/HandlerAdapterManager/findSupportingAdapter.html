@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the findSupportingAdapter method from the HandlerAdapterManager class, for the Dart programming language.">
+  <title>findSupportingAdapter method - HandlerAdapterManager class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></li>
+    <li class="self-crumb">findSupportingAdapter method</li>
+  </ol>
+  <div class="self-name">findSupportingAdapter</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;HandlerAdapterManager-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">findSupportingAdapter</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a>?</span>
+<span class="name ">findSupportingAdapter</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="findSupportingAdapter-param-method"><span class="type-annotation"><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> <span class="parameter-name">method</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Finds a <a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a> capable of handling the specified <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>.</p>
+<p>This method iterates through the list of registered handler adapters and
+returns the first one whose <a href="../../jetleaf_web/HandlerAdapter/supports.html">HandlerAdapter.supports</a> method returns <code>true</code>
+for the given <code>method</code>.</p>
+<h3 id="purpose">Purpose</h3>
+<p>A <a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a> acts as the bridge between the dispatcher and
+a specific type of handler (such as annotated controllers, functional
+handlers, or route-based DSL handlers). Since different handler types
+require different invocation strategies, this method determines the
+correct adapter to delegate execution.</p>
+<h3 id="behavior">Behavior</h3>
+<ul>
+<li>Returns the first matching <a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a> that supports the handler.</li>
+<li>Returns <code>null</code> if no adapter is capable of handling the given method.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final adapter = adapterManager.findSupportingAdapter(handlerMethod);
+
+if (adapter == null) {
+  throw StateError('No adapter found for handler: $handlerMethod');
+}
+
+await adapter.handle(request, response, handlerMethod);
+</code></pre>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Executes a linear search through registered adapters.</li>
+<li>Typically minimal overhead due to the small number of adapters.</li>
+</ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
+<li>Safe for concurrent read access as <code>_adapters</code> is an immutable list after initialization.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">HandlerAdapter? findSupportingAdapter(HandlerMethod method) =&gt; _adapters.find((a) =&gt; a.supports(method));</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></li>
+    <li class="self-crumb">findSupportingAdapter method</li>
+</ol>
+
+    <h5>HandlerAdapterManager class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

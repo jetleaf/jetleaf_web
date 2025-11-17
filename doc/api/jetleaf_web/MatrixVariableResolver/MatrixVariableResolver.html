@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the MatrixVariableResolver.new constructor from Class MatrixVariableResolver from the jetleaf_web library, for the Dart programming language.">
+  <title>MatrixVariableResolver.new constructor - MatrixVariableResolver - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/MatrixVariableResolver-class.html">MatrixVariableResolver</a></li>
+    <li class="self-crumb">MatrixVariableResolver.new const constructor</li>
+  </ol>
+  <div class="self-name">MatrixVariableResolver.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;MatrixVariableResolver-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">MatrixVariableResolver</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">MatrixVariableResolver</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Resolves and parses URI matrix variables embedded in path segments.</p>
+<p>Matrix variables are name-value pairs separated by semicolons (<code>;</code>),
+appearing <em>inside</em> the path segment, unlike query parameters which
+appear after a <code>?</code> in the query string. This format is defined in
+RFC 3986 and provides a way to attach metadata to individual path
+segments.</p>
+<h3 id="matrix-variable-syntax">Matrix Variable Syntax</h3>
+<pre class="language-text"><code class="language-text">/cars;color=red;year=2012/owners;name=alice
+</code></pre>
+<ul>
+<li>Segment 1: "cars;color=red;year=2012" → { color: "red", year: "2012" }</li>
+<li>Segment 2: "owners;name=alice" → { name: "alice" }</li>
+</ul>
+<h3 id="differences-from-query-parameters">Differences from Query Parameters</h3>
+<ul>
+<li><strong>Matrix variables</strong>: Appear within path segments, segment-specific</li>
+<li><strong>Query parameters</strong>: Appear after <code>?</code>, apply to entire request</li>
+<li><strong>Semantics</strong>: Matrix variables qualify the path segment, query parameters qualify the resource</li>
+</ul>
+<h3 id="use-cases">Use Cases</h3>
+<ul>
+<li>Filtering collections within a path segment</li>
+<li>Providing segment-specific metadata</li>
+<li>RESTful API design with hierarchical data</li>
+<li>Semantic URL structures</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final resolver = MatrixVariableUtils();
+final matrixVars = resolver.resolve("/cars;color=red;year=2012");
+
+print(matrixVars.get('color')); // "red"
+print(matrixVars['year']); // "2012"
+</code></pre>
+<h3 id="encoding">Encoding</h3>
+<p>Matrix variables are automatically URL-decoded during parsing.
+Missing or malformed key-value pairs are ignored gracefully.</p>
+<h3 id="related-standards">Related Standards</h3>
+<ul>
+<li>RFC 3986: Uniform Resource Identifier (URI) Generic Syntax</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const MatrixVariableResolver();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/MatrixVariableResolver-class.html">MatrixVariableResolver</a></li>
+    <li class="self-crumb">MatrixVariableResolver.new const constructor</li>
+</ol>
+
+    <h5>MatrixVariableResolver class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

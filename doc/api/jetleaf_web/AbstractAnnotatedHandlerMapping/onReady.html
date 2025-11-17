@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the onReady method from the AbstractAnnotatedHandlerMapping class, for the Dart programming language.">
+  <title>onReady method - AbstractAnnotatedHandlerMapping class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractAnnotatedHandlerMapping-class.html">AbstractAnnotatedHandlerMapping</a></li>
+    <li class="self-crumb">onReady method</li>
+  </ol>
+  <div class="self-name">onReady</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;AbstractAnnotatedHandlerMapping-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">onReady</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+        <li>@<a href="https://pub.dev/documentation/meta/1.17.0/meta/mustCallSuper-constant.html">mustCallSuper</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">onReady</span>(<wbr>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Interface to be implemented by pods that require initialization logic
+after their properties have been set by the container.</p>
+<p>This can be used to validate configuration, open connections, or perform
+any logic that depends on dependency injection being complete.</p>
+<h3 id="usage-example">Usage Example:</h3>
+<pre class="language-dart"><code class="language-dart">class MyRepository implements InitializingPod {
+  late DatabaseClient client;
+
+  @override
+  void onReady() {
+    if (client == null) {
+      throw Exception('Database client must be set');
+    }
+  }
+}
+</code></pre>
+<p>Called automatically after dependency injection and before the pod is used.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+@mustCallSuper
+Future&lt;void&gt; onReady() async {
+  List&lt;_ControllerDefinition&gt; definitions = [];
+  final names = applicationContext.getDefinitionNames();
+
+  for (final name in names) {
+    final definition = applicationContext.getDefinition(name);
+    final type = definition.type;
+
+    &#47;&#47; Identify classes annotated as controllers.
+    if (type.hasDirectAnnotation&lt;Controller&gt;() || type.hasDirectAnnotation&lt;RestController&gt;()) {
+      final controller = type.getDirectAnnotation&lt;RestController&gt;() ?? type.getDirectAnnotation&lt;Controller&gt;();
+
+      &#47;&#47; Exclude @ControllerAdvice and @RestControllerAdvice pods.
+      if (controller != null &amp;&amp; (controller is! ControllerAdvice || controller is! RestControllerAdvice)) {
+        final target = await applicationContext.getPod(name);
+        definitions.add(_ControllerDefinition(controller, type, target, name));
+      }
+    }
+  }
+
+  &#47;&#47; Register all handler methods for discovered controllers.
+  for (final definition in definitions) {
+    final annotation = definition.annotation;
+    final ignoreContextPath = annotation.ignoreContextPath;
+    String? basePath = annotation.value;
+    HttpMethod? baseHttpMethod;
+    List&lt;MediaType&gt; baseProduces = [];
+    List&lt;MediaType&gt; baseConsumes = [];
+
+    &#47;&#47; Check for optional class-level @RequestMapping
+    final baseMapping = definition.type.getDirectAnnotation&lt;RequestMapping&gt;();
+    if (baseMapping != null) {
+      final path = baseMapping.path;
+
+      basePath = basePath != null &amp;&amp; path != null
+          ? WebUtils.normalizePath(&quot;$basePath$path&quot;)
+          : path != null
+              ? WebUtils.normalizePath(path)
+              : basePath != null
+                  ? WebUtils.normalizePath(basePath)
+                  : null;
+
+      baseHttpMethod = baseMapping.method;
+      baseProduces = baseMapping.produces;
+      baseConsumes = baseMapping.consumes;
+    }
+
+    for (final method in definition.type.getMethods()) {
+      final mapping = method.getDirectAnnotation&lt;RequestMapping&gt;();
+      if (mapping == null) continue;
+
+      final httpMethod = mapping.method;
+
+      &#47;&#47; Enforce consistent HTTP methods between class and method mappings.
+      if (baseHttpMethod != null &amp;&amp; !httpMethod.equals(baseHttpMethod)) {
+        throw BadRequestException(
+          &quot;Invalid route definition: &quot;
+          &quot;Method &#39;${method.getName()}&#39; in &#39;${definition.type.getQualifiedName()}&#39; &quot;
+          &quot;declares HTTP method &#39;$httpMethod&#39;, &quot;
+          &quot;but its class-level @RequestMapping declares &#39;$baseHttpMethod&#39;.\n&quot;
+          &quot;➡️ Ensure that all methods under a class-level mapping use the same HTTP method, &quot;
+          &quot;or remove the method from the class-level @RequestMapping.&quot;,
+        );
+      }
+
+      &#47;&#47; Inherit default properties from the class-level mapping.
+      final path = mapping.path;
+      final produces = mapping.produces.isNotEmpty
+          ? mapping.produces
+          : baseProduces;
+      final consumes = mapping.consumes.isNotEmpty
+          ? mapping.consumes
+          : baseConsumes;
+
+      &#47;&#47; Construct the resolved path, including context prefix if applicable.
+      final resolvedPath = ignoreContextPath
+          ? WebUtils.normalizePath(&quot;${basePath ?? &quot;&quot;}${path ?? &quot;&quot;}&quot;)
+          : WebUtils.normalizePath(&quot;${getContextPath()}${basePath ?? &quot;&quot;}${path ?? &quot;&quot;}&quot;);
+
+      final pattern = parser.getParser().parsePattern(resolvedPath);
+
+      final handler = AnnotatedHandlerMethod(
+        DefaultHandlerArgumentContext(),
+        resolvedPath,
+        definition: definition,
+        method: method,
+        httpMethod: httpMethod,
+        produces: produces,
+        consumes: consumes,
+      );
+
+      &#47;&#47; Register the handler in the parent URL mapping.
+      registerHandler(pattern, handler);
+
+      if (logger.getIsTraceEnabled()) {
+        logger.trace(&quot;[Mapped] $httpMethod ${pattern.pattern} -&gt; ${definition.type.getName()}.${method.getName()}&quot;);
+      }
+    }
+  }
+
+  return super.onReady();
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractAnnotatedHandlerMapping-class.html">AbstractAnnotatedHandlerMapping</a></li>
+    <li class="self-crumb">onReady method</li>
+</ol>
+
+    <h5>AbstractAnnotatedHandlerMapping class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

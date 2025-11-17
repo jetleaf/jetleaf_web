@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the RequestSpec class from the jetleaf_web library, for the Dart programming language.">
+  <title>RequestSpec class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">RequestSpec class</li>
+  </ol>
+  <div class="self-name">RequestSpec</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;RequestSpec-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">RequestSpec</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#interface" class="feature feature-interface" title="This class can only be implemented (not extended or mixed in).">interface</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Defines the contract for building and executing configurable HTTP requests
+in a fluent, chainable manner.</p>
+<p>The <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a> interface acts as a <strong>builder pattern</strong> for describing
+outbound HTTP requests in a declarative and composable way. It allows
+configuration of all major request components—method, URI, headers, body,
+and execution behavior—before sending the request through an HTTP client.</p>
+<h3 id="core-responsibilities">Core Responsibilities</h3>
+<ul>
+<li><strong>Request Configuration</strong> — Define the HTTP method, target URL or URI
+template, request body, and headers.</li>
+<li><strong>Variable Substitution</strong> — Build URIs dynamically by interpolating
+template variables and appending query parameters.</li>
+<li><strong>Request Execution</strong> — Execute the built request and transform the
+response into the desired type using an optional <a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a>.</li>
+</ul>
+<h3 id="fluent-example">Fluent Example</h3>
+<pre class="language-dart"><code class="language-dart">final client = MyHttpClient();
+
+final response = await client.request()
+  .method(HttpMethod.POST)
+  .uri('/api/users/{id}', variables: {'id': 42}, query: {'active': 'true'})
+  .header('Content-Type', 'application/json')
+  .body({'name': 'Alice'})
+  .execute(User, MyUserExtractor());
+
+print('Created user: ${response.name}');
+</code></pre>
+<h3 id="lifecycle">Lifecycle</h3>
+<ol>
+<li><strong>Build Phase:</strong> Configure the request using fluent setter methods.</li>
+<li><strong>Execution Phase:</strong> Call <a href="../jetleaf_web/RequestSpec/execute.html">execute</a>, <a href="../jetleaf_web/RequestSpec/stream.html">stream</a>, or <a href="../jetleaf_web/RequestSpec/exchange.html">exchange</a> to send
+the request and obtain a response.</li>
+<li><strong>Extraction Phase:</strong> Optionally transform the raw HTTP response into
+a custom model using a <a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a>.</li>
+</ol>
+<h3 id="extensibility">Extensibility</h3>
+<p>Implementations may:</p>
+<ul>
+<li>Integrate with custom HTTP clients or libraries.</li>
+<li>Provide hooks for interceptors, filters, or request tracing.</li>
+<li>Handle streaming responses or multipart form data.</li>
+<li>Support content negotiation and error decoding.</li>
+</ul>
+<h3 id="implementations">Implementations</h3>
+<ul>
+<li><code>DefaultRequestSpec</code> — A standard in-memory implementation for building
+and executing HTTP requests.</li>
+<li><code>ReactiveRequestSpec</code> — A non-blocking, streaming-oriented variant.</li>
+</ul>
+</section>
+
+
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="body" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/body.html">body</a></span><span class="signature">(<wbr><span class="parameter" id="body-param-body"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">body</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the request body to the provided <code>body</code> object.
+  
+
+</dd>
+
+        <dt id="exchange" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/exchange.html">exchange</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="exchange-param-extractor"><span class="type-annotation"><a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">extractor</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/ResponseBody-class.html">ResponseBody</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Executes the request and retrieves the full <a href="../jetleaf_web/ResponseBody-class.html">ResponseBody</a> object
+containing status code, headers, and typed response data.
+  
+
+</dd>
+
+        <dt id="execute" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/execute.html">execute</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="execute-param-extractor"><span class="type-annotation"><a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">extractor</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Executes the built request and converts the response into the given <a href="https://pub.dev/documentation/analyzer/8.4.1/dart_element_type/">type</a>.
+  
+
+</dd>
+
+        <dt id="header" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/header.html">header</a></span><span class="signature">(<wbr><span class="parameter" id="header-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="header-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds an HTTP header with the specified <code>name</code> and <code>value</code>.
+  
+
+</dd>
+
+        <dt id="headerBuilder" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/headerBuilder.html">headerBuilder</a></span><span class="signature">(<wbr><span class="parameter" id="headerBuilder-param-builder"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a></span>&gt;</span></span> <span class="parameter-name">builder</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Configures the request using a <a href="../jetleaf_web/HttpHeaderBuilder-class.html">HttpHeaderBuilder</a>, allowing
+dynamic or computed header values.
+  
+
+</dd>
+
+        <dt id="headers" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/headers.html">headers</a></span><span class="signature">(<wbr><span class="parameter" id="headers-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds all headers from the given <code>headers</code> collection.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="stream" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/stream.html">stream</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="stream-param-extractor"><span class="type-annotation"><a href="../jetleaf_web/ResponseExtractor.html">ResponseExtractor</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">extractor</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Stream-class.html">Stream</a><span class="signature">&lt;<wbr><span class="type-parameter">T?</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Executes the request and returns a streaming response of type <code>T</code>.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="uri" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/uri.html">uri</a></span><span class="signature">(<wbr><span class="parameter" id="uri-param-template"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">template</span>, {</span><span class="parameter" id="uri-param-variables"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">variables</span>, </span><span class="parameter" id="uri-param-query"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">query</span></span>})
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Defines the request URI based on a template and optional <code>variables</code> and <code>query</code> parameters.
+  
+
+</dd>
+
+        <dt id="url" class="callable">
+  <span class="name"><a href="../jetleaf_web/RequestSpec/url.html">url</a></span><span class="signature">(<wbr><span class="parameter" id="url-param-url"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">url</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RequestSpec-class.html">RequestSpec</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Specifies the full <code>url</code> for this request.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">RequestSpec class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

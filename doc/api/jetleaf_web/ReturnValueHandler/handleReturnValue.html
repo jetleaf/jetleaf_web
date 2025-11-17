@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the handleReturnValue method from the ReturnValueHandler class, for the Dart programming language.">
+  <title>handleReturnValue method - ReturnValueHandler class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a></li>
+    <li class="self-crumb">handleReturnValue abstract method</li>
+  </ol>
+  <div class="self-name">handleReturnValue</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ReturnValueHandler-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">handleReturnValue</span> abstract method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">handleReturnValue</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="handleReturnValue-param-returnValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">returnValue</span>, </span></li>
+<li><span class="parameter" id="handleReturnValue-param-method"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a>?</span> <span class="parameter-name">method</span>, </span></li>
+<li><span class="parameter" id="handleReturnValue-param-request"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span></li>
+<li><span class="parameter" id="handleReturnValue-param-response"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span>, </span></li>
+<li><span class="parameter" id="handleReturnValue-param-hm"><span class="type-annotation"><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>?</span> <span class="parameter-name">hm</span>, </span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Processes the return value and writes the appropriate response.</p>
+<p>This method is responsible for transforming the controller method's
+return value into an HTTP response. This typically involves:</p>
+<ul>
+<li>Setting appropriate HTTP headers (Content-Type, Status, etc.)</li>
+<li>Writing response body content</li>
+<li>Handling redirects or forward operations</li>
+<li>Managing response committing and flushing</li>
+</ul>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>returnValue</code>: The value returned by the controller method (may be null)</li>
+<li><code>method</code>: The reflective <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a> that was invoked</li>
+<li><code>request</code>: The current <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> being processed</li>
+<li><code>response</code>: The <a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> to write the result to</li>
+<li><code>hm</code>: The <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> metadata about the invoked method</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">@override
+Future&lt;void&gt; handleReturnValue(
+  Object? returnValue,
+  Method method,
+  ServerHttpRequest request,
+  ServerHttpResponse response,
+  HandlerMethod hm,
+) async {
+  if (returnValue == null) {
+    response.status = HttpStatus.NO_CONTENT;
+    return;
+  }
+  
+  final modelAndView = returnValue as PageView;
+  
+  // Set response status if specified
+  if (modelAndView.status != null) {
+    response.status = modelAndView.status!;
+  }
+  
+  // Resolve and render the view
+  final view = await viewHandler.resolveView(modelAndView.viewName);
+  if (view != null) {
+    await view.render(modelAndView.model, request, response);
+  } else {
+    throw ViewResolutionException(
+      'Could not resolve view: ${modelAndView.viewName}'
+    );
+  }
+}
+</code></pre>
+<h3 id="error-handling">Error Handling</h3>
+<p>Implementations should handle errors gracefully:</p>
+<ul>
+<li>Throw framework-specific exceptions for unrecoverable errors</li>
+<li>Set appropriate HTTP status codes for client errors</li>
+<li>Log errors for debugging and monitoring</li>
+<li>Consider providing fallback behavior when possible</li>
+</ul>
+<h3 id="async-operations">Async Operations</h3>
+<p>Use async/await for any I/O operations (file reading, database access,
+network calls) to avoid blocking the request processing thread.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;void&gt; handleReturnValue(Object? returnValue, Method? method, ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? hm);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a></li>
+    <li class="self-crumb">handleReturnValue abstract method</li>
+</ol>
+
+    <h5>ReturnValueHandler class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

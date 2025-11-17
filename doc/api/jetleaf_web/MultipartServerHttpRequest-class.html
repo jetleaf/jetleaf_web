@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the MultipartServerHttpRequest class from the jetleaf_web library, for the Dart programming language.">
+  <title>MultipartServerHttpRequest class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">MultipartServerHttpRequest class</li>
+  </ol>
+  <div class="self-name">MultipartServerHttpRequest</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;MultipartServerHttpRequest-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">MultipartServerHttpRequest</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#interface" class="feature feature-interface" title="This class can only be implemented (not extended or mixed in).">interface</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Represents an HTTP request with multipart/form-data content, typically used for file uploads.</p>
+<p>This interface extends <a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> and provides convenient methods
+to access uploaded files and metadata in a type-safe way. JetLeaf uses
+implementations of this interface in controllers or services that handle
+multipart requests.</p>
+<p>A multipart request can contain multiple files, multiple fields with the
+same name, and textual parameters. The methods here allow retrieval of
+individual files, lists of files, and associated metadata like content
+type, boundary, and character encoding.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">Future&lt;void&gt; handleUpload(MultipartServerHttpRequest request) async {
+  final fileNames = request.getFileNames();
+  for (final name in fileNames) {
+    final files = request.getFiles(name);
+    for (final file in files) {
+      print('Received file ${file.getOriginalFilename()} of size ${file.getSize()}');
+      await file.transferTo(File('/tmp/${file.getOriginalFilename()}').openWrite());
+    }
+  }
+}
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></li>
+    </ul>
+  </dd>
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="getAttribute" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getAttribute.html">getAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="getAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the value of the specified request attribute, or <code>null</code> if not set.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAttributeNames" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getAttributeNames.html">getAttributeNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a set of all attribute names currently stored in this request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAttributes" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getAttributes.html">getAttributes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a map of all attributes attached to this request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getBody" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpInputMessage/getBody.html">getBody</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the message body as an <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getContentLength" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getContentLength.html">getContentLength</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the size of the HTTP request body in bytes, if known.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getContextPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getContextPath.html">getContextPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <strong>context path</strong> of the current web application.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getCookies" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getCookies.html">getCookies</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpCookies-class.html">HttpCookies</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <a href="../jetleaf_web/HttpCookies-class.html">HttpCookies</a> collection associated with this request or response.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getFile" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getFile.html">getFile</a></span><span class="signature">(<wbr><span class="parameter" id="getFile-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the single <a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a> associated with the given field <code>name</code>,
+or <code>null</code> if no file was uploaded under that name.
+  
+
+</dd>
+
+        <dt id="getFileMap" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getFileMap.html">getFileMap</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a map of single multipart files keyed by field name.
+  
+
+</dd>
+
+        <dt id="getFileNames" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getFileNames.html">getFileNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a set of multipart file field names contained in this request.
+  
+
+</dd>
+
+        <dt id="getFiles" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getFiles.html">getFiles</a></span><span class="signature">(<wbr><span class="parameter" id="getFiles-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a list of <a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a> instances associated with the given field <code>name</code>.
+  
+
+</dd>
+
+        <dt id="getFileSizeThreshold" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getFileSizeThreshold.html">getFileSizeThreshold</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the threshold (in bytes) below which files are kept in memory.
+  
+
+</dd>
+
+        <dt id="getHeaders" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpMessage/getHeaders.html">getHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the HTTP headers associated with this message.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMaxUploadSize" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getMaxUploadSize.html">getMaxUploadSize</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the maximum allowed size for the entire multipart request.
+  
+
+</dd>
+
+        <dt id="getMaxUploadSizePerFile" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getMaxUploadSizePerFile.html">getMaxUploadSizePerFile</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the maximum allowed size for each uploaded file in bytes.
+  
+
+</dd>
+
+        <dt id="getMethod" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getMethod.html">getMethod</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a> used for this request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMultiFileMap" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getMultiFileMap.html">getMultiFileMap</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MultipartFile-class.html">MultipartFile</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a map of multipart files keyed by field name, supporting multiple
+files per field.
+  
+
+</dd>
+
+        <dt id="getParameter" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getParameter.html">getParameter</a></span><span class="signature">(<wbr><span class="parameter" id="getParameter-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the first value of the specified request parameter, or <code>null</code> if not present.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getParameterMap" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getParameterMap.html">getParameterMap</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a map of all request parameters and their corresponding values.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getParameterValues" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getParameterValues.html">getParameterValues</a></span><span class="signature">(<wbr><span class="parameter" id="getParameterValues-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns all values for the specified request parameter name.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPart" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getPart.html">getPart</a></span><span class="signature">(<wbr><span class="parameter" id="getPart-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/Part-class.html">Part</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the Part with the given name.
+  
+
+</dd>
+
+        <dt id="getParts" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartServerHttpRequest/getParts.html">getParts</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/Part-class.html">Part</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a collection of all Part components of this request.
+  
+
+</dd>
+
+        <dt id="getPathVariable" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getPathVariable.html">getPathVariable</a></span><span class="signature">(<wbr><span class="parameter" id="getPathVariable-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the value of a single path variable by its <code>name</code>, or <code>null</code> if not present.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPathVariables" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getPathVariables.html">getPathVariables</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns all path variables extracted from the matched URI template.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getQueryString" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getQueryString.html">getQueryString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the raw query string component of the request URI, if any.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRequestURI" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getRequestURI.html">getRequestURI</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the request URI as provided by the client.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRequestUrl" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getRequestUrl.html">getRequestUrl</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <strong>logical request URL</strong> associated with this HTTP request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getSession" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getSession.html">getSession</a></span><span class="signature">(<wbr>[<span class="parameter" id="getSession-param-create"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">create</span> = <span class="default-value">true</span></span>])
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpSession-class.html">HttpSession</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the current <a href="../jetleaf_web/HttpSession-class.html">HttpSession</a> associated with this request, or optionally creates one.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getUri" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/getUri.html">getUri</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the full URI of this request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeAttribute" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/removeAttribute.html">removeAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="removeAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Removes the request attribute with the specified <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setAttribute" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/setAttribute.html">setAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="setAttribute-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="setAttribute-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets or replaces a request attribute with the given <code>name</code> and <code>value</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setContextPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/setContextPath.html">setContextPath</a></span><span class="signature">(<wbr><span class="parameter" id="setContextPath-param-contextPath"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">contextPath</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the <strong>context path</strong> for the http request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setHandlerContext" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/setHandlerContext.html">setHandlerContext</a></span><span class="signature">(<wbr><span class="parameter" id="setHandlerContext-param-handler"><span class="type-annotation"><a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> <span class="parameter-name">handler</span>, </span><span class="parameter" id="setHandlerContext-param-pattern"><span class="type-annotation"><a href="../jetleaf_web/PathPattern-class.html">PathPattern</a></span> <span class="parameter-name">pattern</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Associates the resolved handler method and path pattern with this request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setHeaders" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpMessage/setHeaders.html">setHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Replaces the entire set of HTTP headers for this message.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setRequestUrl" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/setRequestUrl.html">setRequestUrl</a></span><span class="signature">(<wbr><span class="parameter" id="setRequestUrl-param-requestUrl"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">requestUrl</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the <strong>request URL</strong> associated with this HTTP request.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="shouldUpgrade" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/ServerHttpRequest/shouldUpgrade.html">shouldUpgrade</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Indicates whether this request should be <strong>upgraded</strong> to a higher-level
+protocol (e.g., WebSocket, HTTP/2 push, or other upgrade-capable protocols).
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">MultipartServerHttpRequest class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

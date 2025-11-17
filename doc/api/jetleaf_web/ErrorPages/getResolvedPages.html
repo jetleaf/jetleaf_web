@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getResolvedPages method from the ErrorPages class, for the Dart programming language.">
+  <title>getResolvedPages method - ErrorPages class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ErrorPages-class.html">ErrorPages</a></li>
+    <li class="self-crumb">getResolvedPages method</li>
+  </ol>
+  <div class="self-name">getResolvedPages</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ErrorPages-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">getResolvedPages</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>&gt;</span></span>
+<span class="name ">getResolvedPages</span>(<wbr>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Returns the final resolved list of error pages with application precedence.</p>
+<h3 id="resolution-logic">Resolution Logic</h3>
+<ol>
+<li><strong>Application Priority</strong>: Application pages take precedence for each status</li>
+<li><strong>Framework Fallback</strong>: Framework pages fill gaps for statuses without application pages</li>
+<li><strong>Status Mapping</strong>: Pages are mapped by HTTP status code to ensure uniqueness</li>
+<li><strong>Sorted Output</strong>: Final list is sorted by HTTP status code for consistent ordering</li>
+</ol>
+<h3 id="returns">Returns</h3>
+<p>An unmodifiable list of error pages where each HTTP status has at most one page,
+with application pages overriding framework pages for the same status.</p>
+<h3 id="example-output">Example Output</h3>
+<pre class="language-dart"><code class="language-dart">final pages = errorPages.getResolvedPages();
+// Returns: [404-&gt;/app/404, 500-&gt;/framework/500] 
+// (app page for 404, framework page for 500)
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">List&lt;ErrorPage&gt; getResolvedPages() {
+  &#47;&#47; Map by status code to avoid duplicates
+  final resolvedMap = &lt;HttpStatus, ErrorPage&gt;{};
+
+  &#47;&#47; First, add application-defined pages
+  for (final page in _errorPages) {
+    resolvedMap[page.getStatus()] = page;
+  }
+
+  &#47;&#47; Then, fill in any framework pages that don&#39;t have an app-defined override
+  for (final page in _frameworkErrorPages) {
+    resolvedMap.putIfAbsent(page.getStatus(), () =&gt; page);
+  }
+
+  &#47;&#47; Return as a list, sorted by status code
+  final resolvedList = resolvedMap.values.toList()
+    ..sort((a, b) =&gt; a.getStatus().getCode().compareTo(b.getStatus().getCode()));
+
+  return UnmodifiableListView(resolvedList);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ErrorPages-class.html">ErrorPages</a></li>
+    <li class="self-crumb">getResolvedPages method</li>
+</ol>
+
+    <h5>ErrorPages class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AbstractRouteDslHandlerMapping.new constructor from Class AbstractRouteDslHandlerMapping from the jetleaf_web library, for the Dart programming language.">
+  <title>AbstractRouteDslHandlerMapping.new constructor - AbstractRouteDslHandlerMapping - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractRouteDslHandlerMapping-class.html">AbstractRouteDslHandlerMapping</a></li>
+    <li class="self-crumb">AbstractRouteDslHandlerMapping.new constructor</li>
+  </ol>
+  <div class="self-name">AbstractRouteDslHandlerMapping.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;AbstractRouteDslHandlerMapping-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">AbstractRouteDslHandlerMapping</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">AbstractRouteDslHandlerMapping</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-parser"><span class="type-annotation">PathPatternParserManager</span> <span class="parameter-name">parser</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>A specialized <a href="../../jetleaf_web/AbstractFrameworkHandlerMapping-class.html">AbstractFrameworkHandlerMapping</a> that supports
+JetLeaf Route DSL (Domain-Specific Language) for defining routes programmatically.</p>
+<p><a href="../../jetleaf_web/AbstractRouteDslHandlerMapping-class.html">AbstractRouteDslHandlerMapping</a> scans the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> for:</p>
+<ul>
+<li>Pods implementing <a href="../../jetleaf_web/RouterRegistrar-class.html">RouterRegistrar</a>, which programmatically register routes.</li>
+<li>Pods of type <a href="../../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a>, which define view or route DSL blocks.</li>
+<li>Optional <a href="../../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a> pods that contribute additional routes via <code>addViews</code>.</li>
+</ul>
+<p>This class bridges the JetLeaf routing DSL with the underlying
+handler mapping infrastructure, converting route definitions into
+<a href="../../jetleaf_web/RouteDslHandlerMethod-class.html">RouteDslHandlerMethod</a> instances and registering them with
+<a href="../../jetleaf_web/AbstractHandlerMapping/registerHandler.html">AbstractHandlerMapping.registerHandler</a>.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Discover and invoke all <a href="../../jetleaf_web/RouterRegistrar-class.html">RouterRegistrar</a> Pods to collect routes.</li>
+<li>Collect and build <a href="../../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a> route definitions.</li>
+<li>Apply context path prefixes when required (unless <code>ignoreContextPath</code> is true).</li>
+<li>Transform DSL route definitions into <a href="../../jetleaf_web/PathPattern-class.html">PathPattern</a>-bound handler methods.</li>
+<li>Integrate additional routes from <a href="../../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a>.</li>
+</ul>
+<h3 id="initialization-flow">Initialization Flow</h3>
+<ol>
+<li>During <code>onReady</code>, retrieves all <a href="../../jetleaf_web/RouterRegistrar-class.html">RouterRegistrar</a> and <a href="../../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a> Pods.</li>
+<li>Builds route specifications (<a href="../../jetleaf_web/RouteDefinition-class.html">RouteDefinition</a>) from each registrar or builder.</li>
+<li>Normalizes paths and converts each route into a <a href="../../jetleaf_web/RouteDslHandlerMethod-class.html">RouteDslHandlerMethod</a>.</li>
+<li>Registers all handlers with the framework’s handler mapping infrastructure.</li>
+<li>Delegates to <code>super.onReady()</code> to ensure standard framework routes are initialized.</li>
+</ol>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final mapping = MyRouteDslHandlerMapping(parserManager);
+await mapping.onReady();
+
+// Automatically registers all routes defined via RouteRegistrars and RouterBuilders
+</code></pre>
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="../../jetleaf_web/AbstractFrameworkHandlerMapping-class.html">AbstractFrameworkHandlerMapping</a></li>
+<li><a href="../../jetleaf_web/RouterRegistrar-class.html">RouterRegistrar</a></li>
+<li><a href="../../jetleaf_web/RouterBuilder-class.html">RouterBuilder</a></li>
+<li><a href="../../jetleaf_web/RouteDslHandlerMethod-class.html">RouteDslHandlerMethod</a></li>
+<li><a href="../../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a></li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">AbstractRouteDslHandlerMapping(super.parser);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractRouteDslHandlerMapping-class.html">AbstractRouteDslHandlerMapping</a></li>
+    <li class="self-crumb">AbstractRouteDslHandlerMapping.new constructor</li>
+</ol>
+
+    <h5>AbstractRouteDslHandlerMapping class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

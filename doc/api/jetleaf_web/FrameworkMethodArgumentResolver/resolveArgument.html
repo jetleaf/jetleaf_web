@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the resolveArgument method from the FrameworkMethodArgumentResolver class, for the Dart programming language.">
+  <title>resolveArgument method - FrameworkMethodArgumentResolver class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a></li>
+    <li class="self-crumb">resolveArgument method</li>
+  </ol>
+  <div class="self-name">resolveArgument</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;FrameworkMethodArgumentResolver-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">resolveArgument</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+<span class="name ">resolveArgument</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="resolveArgument-param-param"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Parameter-class.html">Parameter</a></span> <span class="parameter-name">param</span>, </span></li>
+<li><span class="parameter" id="resolveArgument-param-req"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">req</span>, </span></li>
+<li><span class="parameter" id="resolveArgument-param-res"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">res</span>, </span></li>
+<li><span class="parameter" id="resolveArgument-param-handler"><span class="type-annotation"><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> <span class="parameter-name">handler</span>, [</span></li>
+<li><span class="parameter" id="resolveArgument-param-ex"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">ex</span>, </span></li>
+</ol>])
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Resolves the argument value for the given <code>param</code>.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>param</code>: The method parameter being resolved.</li>
+<li><code>req</code>: The current HTTP request.</li>
+<li><code>res</code>: The current HTTP response.</li>
+<li><code>handler</code>: The handler method being invoked.</li>
+<li><code>ex</code>: (optional) The exception object, when invoked in exception contexts.</li>
+</ul>
+<p>Returns the resolved argument value or <code>null</code> if not applicable.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;Object?&gt; resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]) async {
+  final paramClass = param.getClass();
+
+  if (ex != null &amp;&amp; paramClass.isAssignableFrom(ex.getClass())) {
+    return ex;
+  }
+
+  if (WebRequest.CLASS.isAssignableFrom(paramClass)) {
+    return WebRequest(req, res);
+  }
+
+  if (ServerHttpRequest.CLASS.isAssignableFrom(paramClass)) {
+    return req;
+  }
+
+  if (ServerHttpResponse.CLASS.isAssignableFrom(paramClass)) {
+    return res;
+  }
+
+  if (HttpInputMessage.CLASS.isAssignableFrom(paramClass)) {
+    return req;
+  }
+
+  if (HttpOutputMessage.CLASS.isAssignableFrom(paramClass)) {
+    return res;
+  }
+
+  if (ViewContext.CLASS.isAssignableFrom(paramClass)) {
+    return WebViewContext(req);
+  }
+
+  if (PageView.CLASS.isAssignableFrom(paramClass)) {
+    return PageView(ErrorPage.ERROR_NOT_FOUND_PAGE.getPath());
+  }
+
+  return null;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a></li>
+    <li class="self-crumb">resolveArgument method</li>
+</ol>
+
+    <h5>FrameworkMethodArgumentResolver class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AbstractWebViewAnnotatedHandlerMapping class from the jetleaf_web library, for the Dart programming language.">
+  <title>AbstractWebViewAnnotatedHandlerMapping class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">AbstractWebViewAnnotatedHandlerMapping class</li>
+  </ol>
+  <div class="self-name">AbstractWebViewAnnotatedHandlerMapping</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;AbstractWebViewAnnotatedHandlerMapping-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">AbstractWebViewAnnotatedHandlerMapping</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Base class for annotation-based handler mappings that discover and
+register <code>@WebView</code>-annotated controller components in the JetLeaf
+web framework.</p>
+<p>This abstract mapping class provides the <strong>foundation</strong> for
+resolving request-to-handler mappings from annotated view components
+(e.g., server-rendered templates, HTML views, etc.).</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Scans the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> for Pods annotated with <code>@WebView</code>.</li>
+<li>Introspects each annotated type for a <code>Renderable</code> method.</li>
+<li>Registers the discovered view handler methods as
+<a href="../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a> instances.</li>
+<li>Normalizes and parses all controller routes via the shared
+<code>PathPatternParserManager</code>.</li>
+<li>Logs route mappings for diagnostic visibility during initialization.</li>
+</ul>
+<h3 id="workflow">Workflow</h3>
+<ol>
+<li><strong>Discovery:</strong> During <a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping/onReady.html">onReady</a>, the class scans all definitions in
+the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>.</li>
+<li><strong>Filtering:</strong> It includes only Pods annotated with <code>@WebView</code>,
+ignoring advice-related annotations (<code>@ControllerAdvice</code>,
+<code>@RestControllerAdvice</code>).</li>
+<li><strong>Introspection:</strong> For each valid target, the class inspects the
+type metadata to locate the <code>Renderable.METHOD_NAME</code> method.</li>
+<li><strong>Registration:</strong> A <a href="../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a> is created and mapped
+to the parsed route pattern using <a href="../jetleaf_web/AbstractHandlerMapping/registerHandler.html">registerHandler</a>.</li>
+<li><strong>Diagnostics:</strong> Each mapping is logged (if debug logging is enabled)
+in the format:
+<pre class="language-dart"><code>/** [Mapped] GET /home -&gt; MyController.render */
+</code></pre>
+</li>
+</ol>
+<h3 id="integration">Integration</h3>
+<p>This mapping serves as the base for specialized handler mappings that
+extend the annotated view system, such as:</p>
+<ul>
+<li><code>WebViewHandlerMapping</code>: standard view-based controller mapping.</li>
+<li><code>TemplateViewHandlerMapping</code>: template engine–specific mappings.</li>
+<li><code>StaticViewHandlerMapping</code>: static page handler mappings.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">@WebView(route: '/home', method: HttpMethod.GET)
+class HomePageController implements Renderable {
+  @override
+  String render() =&gt; "&lt;h1&gt;Welcome Home!&lt;/h1&gt;";
+}
+
+// Framework automatically registers this handler:
+// [Mapped] GET /home -&gt; HomePageController.render
+</code></pre>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
+<li>Initialization and registration occur during the framework startup phase.</li>
+<li>Route registration is synchronized in the superclass to ensure consistency.</li>
+</ul>
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="../jetleaf_web/HandlerMapping-class.html">HandlerMapping</a></li>
+<li><a href="../jetleaf_web/WebView-class.html">WebView</a></li>
+<li><a href="../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a></li>
+<li><code>PathPatternParserManager</code></li>
+<li><a href="../jetleaf_web/AbstractHandlerMapping-class.html">AbstractHandlerMapping</a></li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../jetleaf_web/AbstractHandlerMapping-class.html">AbstractHandlerMapping</a></li>
+      <li>AbstractWebViewAnnotatedHandlerMapping</li>
+    </ul>
+  </dd>
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/InitializingPod-class.html">InitializingPod</a></li>
+    </ul>
+  </dd>
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/AbstractAnnotatedHandlerMapping-class.html">AbstractAnnotatedHandlerMapping</a></li>
+          </ul></dd>
+
+        
+        
+  <dt>Annotations</dt>
+  <dd>
+    <ul class="annotation-list clazz-relationships">
+        <li>@<a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/Author-class.html">Author</a>(&quot;Evaristus Adimonyemma&quot;)</li>
+    </ul>
+  </dd>
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="AbstractWebViewAnnotatedHandlerMapping.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping/AbstractWebViewAnnotatedHandlerMapping.html">AbstractWebViewAnnotatedHandlerMapping.new</a></span><span class="signature">(<span class="parameter" id="-param-parser"><span class="type-annotation">PathPatternParserManager</span> <span class="parameter-name">parser</span></span>)</span>
+        </dt>
+        <dd>
+          Base class for annotation-based handler mappings that discover and
+register <code>@WebView</code>-annotated controller components in the JetLeaf
+web framework.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="applicationContext" class="property">
+  <span class="name"><a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping/applicationContext.html">applicationContext</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a></span>
+  
+
+</dt>
+<dd>
+  The application context used for accessing Pod definitions.
+  <div class="features"><span class="feature">getter/setter pair</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="logger" class="property">
+  <span class="name"><a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping/logger.html">logger</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/jetleaf_logging/1.0.1/logging/Log-class.html">Log</a></span>
+  
+
+</dt>
+<dd>
+  Framework logger for debug and diagnostic output.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="parser" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/AbstractHandlerMapping/parser.html">parser</a></span>
+  <span class="signature">&#8594; PathPatternParserManager</span>
+  
+
+</dt>
+<dd class="inherited">
+  The composite path matcher used to evaluate and normalize URL patterns.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="getContextPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/AbstractHandlerMapping/getContextPath.html">getContextPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the global context path from the active <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getHandler" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HandlerMapping/getHandler.html">getHandler</a></span><span class="signature">(<wbr><span class="parameter" id="getHandler-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Resolves a <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> capable of handling the given <code>request</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPackageName" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/PackageIdentifier/getPackageName.html">getPackageName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Represents an abstraction for identifying the package that an object,
+resource, or service belongs to.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="onReady" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractWebViewAnnotatedHandlerMapping/onReady.html">onReady</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Interface to be implemented by pods that require initialization logic
+after their properties have been set by the container.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="registerHandler" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/AbstractHandlerMapping/registerHandler.html">registerHandler</a></span><span class="signature">(<wbr><span class="parameter" id="registerHandler-param-pattern"><span class="type-annotation"><a href="../jetleaf_web/PathPattern-class.html">PathPattern</a></span> <span class="parameter-name">pattern</span>, </span><span class="parameter" id="registerHandler-param-handler"><span class="type-annotation"><a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a <a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> for the given <code>pattern</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">AbstractWebViewAnnotatedHandlerMapping class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

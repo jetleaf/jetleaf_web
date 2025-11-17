@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoWebServer.new constructor from Class IoWebServer from the jetleaf_web library, for the Dart programming language.">
+  <title>IoWebServer.new constructor - IoWebServer - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a></li>
+    <li class="self-crumb">IoWebServer.new constructor</li>
+  </ol>
+  <div class="self-name">IoWebServer.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;IoWebServer-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">IoWebServer</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">IoWebServer</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="-param-_context"><span class="type-annotation"><a href="../../jetleaf_web/ServerContext-class.html">ServerContext</a></span> <span class="parameter-name">_context</span>, </span></li>
+<li><span class="parameter" id="-param-_host"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">_host</span>, </span></li>
+<li><span class="parameter" id="-param-_port"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">_port</span>, </span></li>
+<li><span class="parameter" id="-param-_eventBus"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a></span> <span class="parameter-name">_eventBus</span>, </span></li>
+<li><span class="parameter" id="-param-_dispatcher"><span class="type-annotation"><a href="../../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a></span> <span class="parameter-name">_dispatcher</span>, </span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>A platform-level implementation of <a href="../../jetleaf_web/ConfigurableWebServer-class.html">ConfigurableWebServer</a> backed by
+Dart’s native <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpServer-class.html">HttpServer</a>.</p>
+<p>The <a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a> is the core JetLeaf I/O web runtime component responsible
+for binding an HTTP port, managing incoming requests, dispatching them
+through the <a href="../../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a> chain, and coordinating request lifecycle
+events via the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a>.</p>
+<h3 id="key-responsibilities">Key Responsibilities</h3>
+<ul>
+<li>Initializes and binds an <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpServer-class.html">HttpServer</a> using JetLeaf environment
+configuration (host and port).</li>
+<li>Converts low-level <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a> instances into JetLeaf <a href="../../jetleaf_web/IoRequest-class.html">IoRequest</a> and
+<a href="../../jetleaf_web/IoResponse-class.html">IoResponse</a> objects.</li>
+<li>Delegates request handling to the configured <a href="../../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a>,
+which orchestrates filters, interceptors, and handler mappings.</li>
+<li>Publishes <a href="../../jetleaf_web/ServerEvent-class.html">ServerEvent</a>s through the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> to enable
+reactive extensions and monitoring.</li>
+<li>Provides lifecycle management with <code>start()</code> and <code>stop()</code> methods.</li>
+</ul>
+<h3 id="configuration">Configuration</h3>
+<p>The server automatically resolves configuration from the
+<a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> using the following property keys:</p>
+<ul>
+<li><code>WebServer.SERVER_HOST_PROPERTY_NAME</code> – the host interface to bind.</li>
+<li><code>WebServer.SERVER_PORT_PROPERTY_NAME</code> – the port number.</li>
+</ul>
+<p>These values may also be overridden manually via <a href="../../jetleaf_web/IoWebServer/setAddress.html">setAddress</a> or <a href="../../jetleaf_web/IoWebServer/setPort.html">setPort</a>.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final context = ServerContext(log: MyLogger());
+
+final server = IoWebServer(context)
+  ..setApplicationEventBus(MyEventBus())
+  ..setEnvironment(MyEnvironment({
+    WebServer.SERVER_HOST_PROPERTY_NAME: '0.0.0.0',
+    WebServer.SERVER_PORT_PROPERTY_NAME: '8080',
+  }));
+
+await server.start();
+</code></pre>
+<h3 id="lifecycle">Lifecycle</h3>
+<ul>
+<li><code>start()</code> binds the socket, initializes listeners, and begins accepting
+connections.</li>
+<li><code>stop()</code> gracefully terminates active connections and releases resources.</li>
+<li>The <code>_isRunning</code> flag tracks active server state to prevent duplicate
+starts.</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li>Throws <a href="../../jetleaf_web/WebServerException-class.html">WebServerException</a> if the server is already running or fails
+to initialize.</li>
+<li>Wraps lower-level I/O errors in framework-level exceptions to ensure
+consistent error propagation.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">IoWebServer(this._context, this._host, this._port, this._eventBus, this._dispatcher);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a></li>
+    <li class="self-crumb">IoWebServer.new constructor</li>
+</ol>
+
+    <h5>IoWebServer class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

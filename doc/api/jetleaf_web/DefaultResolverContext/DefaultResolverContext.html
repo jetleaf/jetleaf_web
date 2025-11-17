@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the DefaultResolverContext.new constructor from Class DefaultResolverContext from the jetleaf_web library, for the Dart programming language.">
+  <title>DefaultResolverContext.new constructor - DefaultResolverContext - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/DefaultResolverContext-class.html">DefaultResolverContext</a></li>
+    <li class="self-crumb">DefaultResolverContext.new const constructor</li>
+  </ol>
+  <div class="self-name">DefaultResolverContext.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;DefaultResolverContext-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">DefaultResolverContext</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">DefaultResolverContext</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-_converter"><span class="type-annotation"><a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a></span> <span class="parameter-name">_converter</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new <a href="../../jetleaf_web/DefaultResolverContext-class.html">DefaultResolverContext</a> backed by the given <code>_converter</code>.</p>
+<p>Default implementation of <a href="../../jetleaf_web/ResolverContext-class.html">ResolverContext</a> backed by <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a>.</p>
+<p>The <a href="../../jetleaf_web/DefaultResolverContext-class.html">DefaultResolverContext</a> delegates converter lookup to a provided
+<a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a> registry. It acts as the canonical lookup bridge
+between the web layer and available HTTP message converters (JSON, text,
+binary, etc.).</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Provide a single place for locating the first compatible
+<a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> for <strong>reading</strong> request bodies (deserialization).</li>
+<li>Provide a single place for locating the first compatible
+<a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> for <strong>writing</strong> response bodies (serialization).</li>
+<li>Delegate ordering and compatibility decisions to <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a>.</li>
+</ul>
+<h3 id="typical-uses">Typical Uses</h3>
+<ul>
+<li>Passed into argument resolvers that need to deserialize request bodies.</li>
+<li>Used by return-value handlers to find a suitable serializer for responses.</li>
+<li>Supplied to components that perform content negotiation.</li>
+</ul>
+<h3 id="behavior--guarantees">Behavior &amp; Guarantees</h3>
+<ul>
+<li>This implementation performs <strong>no</strong> converter selection logic itself;
+it forwards requests to the underlying <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a>.</li>
+<li>The ordering, media-type compatibility, and capability checks are the
+responsibility of the injected registry.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final converters = HttpMessageConverters([JsonConverter(), StringConverter()]);
+final context = DefaultResolverContext(converters);
+
+final writer = context.findWritable(Product.class, MediaType.APPLICATION_JSON);
+if (writer != null) {
+  await writer.write(product, MediaType.APPLICATION_JSON, response);
+}
+</code></pre>
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="../../jetleaf_web/ResolverContext-class.html">ResolverContext</a> — the interface this class implements.</li>
+<li><a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a> — the registry that actually holds converters.</li>
+<li><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> — converter interface for reading/writing messages.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const DefaultResolverContext(this._converter);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/DefaultResolverContext-class.html">DefaultResolverContext</a></li>
+    <li class="self-crumb">DefaultResolverContext.new const constructor</li>
+</ol>
+
+    <h5>DefaultResolverContext class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

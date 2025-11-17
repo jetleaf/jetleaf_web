@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the RenderableView class from the jetleaf_web library, for the Dart programming language.">
+  <title>RenderableView class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">RenderableView class</li>
+  </ol>
+  <div class="self-name">RenderableView</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;RenderableView-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">RenderableView</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Abstract base class for view components that render content directly as strings.</p>
+<p>Extend this class when you want to generate HTML (or other content) by directly
+building strings, either through string concatenation, string buffers, or
+custom rendering logic. This approach is suitable for:</p>
+<ul>
+<li>Simple HTML generation without complex templates</li>
+<li>Dynamic content that doesn't require template engine features</li>
+<li>Prototyping and rapid development</li>
+<li>Cases where template engine overhead is undesirable</li>
+</ul>
+<h3 id="implementation-requirements">Implementation Requirements</h3>
+<p>Subclasses must implement the <a href="../jetleaf_web/RenderableView/render.html">render</a> method to provide the actual content
+generation logic. The method receives a <a href="../jetleaf_web/ViewContext-class.html">ViewContext</a> with access to all
+request data and returns the rendered content as a string.</p>
+<h3 id="example-simple-html-generation">Example: Simple HTML Generation</h3>
+<pre class="language-dart"><code class="language-dart">@WebView("/welcome/{name}")
+class WelcomeView extends RenderableView {
+  @override
+  Future&lt;String&gt; render(ViewContext context) async {
+    final userName = context.getPathVariable("name") ?? "Guest";
+    final theme = context.getQueryParam("theme") ?? "light";
+    
+    return """
+    &lt;!DOCTYPE html&gt;
+    &lt;html lang="en" data-theme="$theme"&gt;
+    &lt;head&gt;
+      &lt;meta charset="UTF-8"&gt;
+      &lt;title&gt;Welcome&lt;/title&gt;
+      &lt;style&gt;
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .light { background: white; color: black; }
+        .dark { background: #333; color: white; }
+      &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body class="$theme"&gt;
+      &lt;h1&gt;Welcome, $userName!&lt;/h1&gt;
+      &lt;p&gt;Thank you for visiting our application.&lt;/p&gt;
+      &lt;p&gt;Current time: ${DateTime.now()}&lt;/p&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    """;
+  }
+}
+</code></pre>
+<h3 id="example-dynamic-content-with-data-processing">Example: Dynamic Content with Data Processing</h3>
+<pre class="language-dart"><code class="language-dart">@WebView("/user/{id}/profile")
+class UserProfileView extends RenderableView {
+  final UserRepository userRepository;
+  
+  UserProfileView(this.userRepository);
+  
+  @override
+  Future&lt;String&gt; render(ViewContext context) async {
+    final userId = context.getPathVariable("id");
+    if (userId == null) {
+      return "&lt;h1&gt;Error: User ID is required&lt;/h1&gt;";
+    }
+    
+    final user = await userRepository.findById(userId);
+    if (user == null) {
+      return "&lt;h1&gt;User not found&lt;/h1&gt;";
+    }
+    
+    final buffer = StringBuffer()
+      ..write('&lt;div class="user-profile"&gt;')
+      ..write('&lt;h1&gt;${_escapeHtml(user.name)}&lt;/h1&gt;')
+      ..write('&lt;p&gt;Email: ${_escapeHtml(user.email)}&lt;/p&gt;')
+      ..write('&lt;p&gt;Member since: ${user.joinDate}&lt;/p&gt;')
+      ..write('&lt;/div&gt;');
+    
+    return buffer.toString();
+  }
+  
+  String _escapeHtml(String text) {
+    // Basic HTML escaping for security
+    return text
+      .replaceAll('&amp;', '&amp;amp;')
+      .replaceAll('&lt;', '&amp;lt;')
+      .replaceAll('&gt;', '&amp;gt;')
+      .replaceAll('"', '&amp;quot;')
+      .replaceAll("'", '&amp;#x27;');
+  }
+}
+</code></pre>
+<h3 id="advantages">Advantages</h3>
+<ul>
+<li><strong>Simplicity</strong>: No template engine configuration required</li>
+<li><strong>Performance</strong>: Direct string manipulation can be faster for simple cases</li>
+<li><strong>Flexibility</strong>: Complete control over the output format</li>
+<li><strong>Dependency-Free</strong>: No external template dependencies</li>
+</ul>
+<h3 id="disadvantages">Disadvantages</h3>
+<ul>
+<li><strong>Maintainability</strong>: Complex HTML can become difficult to manage</li>
+<li><strong>Reusability</strong>: Harder to reuse template fragments</li>
+<li><strong>Separation of Concerns</strong>: Business logic may mix with presentation logic</li>
+<li><strong>Tooling</strong>: Limited support for IDE features like syntax highlighting</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Use for simple, self-contained view components</li>
+<li>Implement proper HTML escaping for user-generated content</li>
+<li>Consider using <a href="https://api.dart.dev/stable/3.9.2/dart-core/StringBuffer-class.html">StringBuffer</a> for complex string building</li>
+<li>Keep business logic separate from rendering logic</li>
+<li>Use async/await appropriately for data loading</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<ul>
+<li>Automatically discovered when annotated with <code>@WebView</code></li>
+<li>Integrated with the framework's content negotiation</li>
+<li>Supports async data loading during rendering</li>
+<li>Works with the error handling system</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/Renderable-class.html">Renderable</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="RenderableView.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/RenderableView/RenderableView.html">RenderableView.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="render" class="callable">
+  <span class="name"><a href="../jetleaf_web/RenderableView/render.html">render</a></span><span class="signature">(<wbr><span class="parameter" id="render-param-context"><span class="type-annotation"><a href="../jetleaf_web/ViewContext-class.html">ViewContext</a></span> <span class="parameter-name">context</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Renders the view content as a string using the provided context.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">RenderableView class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

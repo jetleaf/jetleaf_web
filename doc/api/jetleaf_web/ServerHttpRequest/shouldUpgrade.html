@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the shouldUpgrade method from the ServerHttpRequest class, for the Dart programming language.">
+  <title>shouldUpgrade method - ServerHttpRequest class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></li>
+    <li class="self-crumb">shouldUpgrade abstract method</li>
+  </ol>
+  <div class="self-name">shouldUpgrade</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ServerHttpRequest-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">shouldUpgrade</span> abstract method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+<span class="name ">shouldUpgrade</span>(<wbr>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Indicates whether this request should be <strong>upgraded</strong> to a higher-level
+protocol (e.g., WebSocket, HTTP/2 push, or other upgrade-capable protocols).</p>
+<p>When this method returns <code>true</code>, the request is signaling that the client
+has requested an HTTP <strong>protocol upgrade</strong>, usually through the presence
+of the <code>Connection: Upgrade</code> and <code>Upgrade: &lt;protocol&gt;</code> headers.</p>
+<p>The server or framework may then initiate an upgrade handshake and
+replace the standard request/response handling pipeline with a protocol-
+specific handler (for example, a WebSocket frame handler).</p>
+<h3 id="event-publication">Event Publication</h3>
+<p>When <code>shouldUpgrade()</code> evaluates to <code>true</code>, a <a href="../../jetleaf_web/HttpUpgradedEvent-class.html">HttpUpgradedEvent</a> is
+automatically <strong>published</strong> by the framework.<br>
+This allows components such as <strong>socket listeners</strong>, <strong>WebSocket adapters</strong>,<br>
+or <strong>custom upgrade interceptors</strong> to listen for upgrade initiation and
+take ownership of the connection.</p>
+<h3 id="typical-use-case">Typical Use Case</h3>
+<pre class="language-dart"><code class="language-dart">if (request.shouldUpgrade()) {
+  // Framework publishes HttpUpgradedEvent internally
+  // Listeners (e.g., WebSocketHandler) will capture and process it.
+  print('Connection upgrade requested: ${request.getHeaders()["Upgrade"]}');
+}
+</code></pre>
+<h3 id="common-upgrade-scenarios">Common Upgrade Scenarios</h3>
+<ul>
+<li><strong>WebSocket Upgrade</strong> (<code>Upgrade: websocket</code>)</li>
+<li><strong>HTTP/2 Upgrade</strong> (rare, used in some intermediaries)</li>
+<li><strong>Custom protocol negotiation</strong></li>
+</ul>
+<h3 id="implementation-notes">Implementation Notes</h3>
+<ul>
+<li>Concrete implementations typically inspect the <code>Upgrade</code> header and
+the presence of <code>Connection: Upgrade</code>.</li>
+<li>Returning <code>true</code> does not itself perform the upgrade; it only signals
+that the framework <strong>should</strong> handle it.</li>
+<li>Upon publication of <a href="../../jetleaf_web/HttpUpgradedEvent-class.html">HttpUpgradedEvent</a>, all compatible upgrade
+listeners registered in the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> may react and
+rebind the connection stream to a new protocol.</li>
+</ul>
+<h3 id="example-headers">Example Headers</h3>
+<pre class="language-dart"><code>GET /chat HTTP/1.1
+Host: example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==
+Sec-WebSocket-Version: 13
+</code></pre>
+<h3 id="returns">Returns</h3>
+<ul>
+<li><code>true</code> if the request explicitly requests an upgrade to a higher-level
+protocol (e.g., WebSocket)</li>
+<li><code>false</code> otherwise</li>
+</ul>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="../../jetleaf_web/HttpUpgradedEvent-class.html">HttpUpgradedEvent</a></li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">bool shouldUpgrade();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></li>
+    <li class="self-crumb">shouldUpgrade abstract method</li>
+</ol>
+
+    <h5>ServerHttpRequest class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

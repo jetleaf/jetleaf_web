@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoMultipartRequest.new constructor from Class IoMultipartRequest from the jetleaf_web library, for the Dart programming language.">
+  <title>IoMultipartRequest.new constructor - IoMultipartRequest - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a></li>
+    <li class="self-crumb">IoMultipartRequest.new constructor</li>
+  </ol>
+  <div class="self-name">IoMultipartRequest.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;IoMultipartRequest-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">IoMultipartRequest</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">IoMultipartRequest</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="-param-request"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a></span> <span class="parameter-name">request</span>, </span></li>
+<li><span class="parameter" id="-param-_fileSizeThreshold"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">_fileSizeThreshold</span>, </span></li>
+<li><span class="parameter" id="-param-_maxUploadSize"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">_maxUploadSize</span>, </span></li>
+<li><span class="parameter" id="-param-_maxUploadSizePerFile"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">_maxUploadSizePerFile</span>, </span></li>
+<li><span class="parameter" id="-param-_multipartFiles"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/MultipartFile-class.html">MultipartFile</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">_multipartFiles</span>, </span></li>
+<li><span class="parameter" id="-param-_parts"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/Part-class.html">Part</a></span>&gt;</span></span> <span class="parameter-name">_parts</span>, </span></li>
+<li><span class="parameter" id="-param-_params"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">_params</span>, </span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Constructs a new <a href="../../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a> instance.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>request</code>: The underlying raw HTTP request.</li>
+<li><code>_fileSizeThreshold</code>: Memory threshold for files before disk storage.</li>
+<li><code>_maxUploadSize</code>: Maximum total request size in bytes.</li>
+<li><code>_maxUploadSizePerFile</code>: Maximum size for a single uploaded file.</li>
+<li><code>_multipartFiles</code>: Map of multipart files keyed by field name.</li>
+<li><code>_parts</code>: List of all parts, including both files and form fields.</li>
+<li><code>_params</code>: Map of multipart params keyed by field name</li>
+</ul>
+<p>This constructor initializes the multipart request, storing both
+the parts and files for easy retrieval through the
+<a href="../../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a> interface methods.</p>
+<p>Represents a multipart HTTP request, providing access to uploaded files
+and form-data parts in a type-safe and memory-aware manner.</p>
+<p><code>IoMultipartRequest</code> extends <a href="../../jetleaf_web/IoRequest-class.html">IoRequest</a> and implements
+<a href="../../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a>, adding support for handling multipart/form-data
+requests, including files and standard form fields.</p>
+<p>This class stores multipart files and parts in memory while respecting
+configurable limits for maximum upload size and per-file size thresholds.</p>
+<p>It provides convenient methods to retrieve single or multiple files,
+access parts by name, and query upload constraints.</p>
+<p><strong>Example Usage:</strong></p>
+<pre class="language-dart"><code class="language-dart">final request = IoMultipartRequest(
+  rawRequest,
+  1024 * 1024, // 1 MB memory threshold
+  50 * 1024 * 1024, // 50 MB max total upload size
+  10 * 1024 * 1024, // 10 MB max per file
+  multipartFilesMap,
+  partsList
+);
+
+final file = request.getFile('avatar');
+final allFiles = request.getFiles('attachments');
+final part = request.getPart('description');
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">IoMultipartRequest(
+  super.request,
+  this._fileSizeThreshold,
+  this._maxUploadSize,
+  this._maxUploadSizePerFile,
+  this._multipartFiles,
+  this._parts,
+  this._params
+);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoMultipartRequest-class.html">IoMultipartRequest</a></li>
+    <li class="self-crumb">IoMultipartRequest.new constructor</li>
+</ol>
+
+    <h5>IoMultipartRequest class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the readInternal method from the Jetson2YamlHttpMessageConverter class, for the Dart programming language.">
+  <title>readInternal method - Jetson2YamlHttpMessageConverter class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/Jetson2YamlHttpMessageConverter-class.html">Jetson2YamlHttpMessageConverter</a></li>
+    <li class="self-crumb">readInternal method</li>
+  </ol>
+  <div class="self-name">readInternal</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;Jetson2YamlHttpMessageConverter-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">readInternal</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+<span class="name ">readInternal</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="readInternal-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">type</span>, </span></li>
+<li><span class="parameter" id="readInternal-param-inputMessage"><span class="type-annotation"><a href="../../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a></span> <span class="parameter-name">inputMessage</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Template method for reading and deserializing HTTP input.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<p>Subclasses must implement this method to:</p>
+<ul>
+<li>Read the input message body using appropriate encoding</li>
+<li>Parse/deserialize the content into the target type <code>T</code></li>
+<li>Perform type-specific validation and transformation</li>
+<li>Handle format-specific parsing rules and edge cases</li>
+</ul>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>type</code>: The target Dart type to convert to</li>
+<li><code>inputMessage</code>: The HTTP input message containing the content to read</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p>A <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a> that completes with the deserialized Dart object of type <code>T</code></p>
+<h3 id="example-implementation">Example Implementation</h3>
+<pre class="language-dart"><code class="language-dart">@override
+Future&lt;User&gt; readInternal(Class&lt;User&gt; type, HttpInputMessage inputMessage) async {
+  // Read the input stream with proper encoding
+  final content = await inputMessage.getBody().readAsString(encoding: getDefaultEncoding());
+  
+  // Parse the content (JSON example)
+  final jsonMap = jsonDecode(content) as Map&lt;String, dynamic&gt;;
+  
+  // Convert to target type
+  return User.fromJson(jsonMap);
+}
+</code></pre>
+<h3 id="error-handling">Error Handling</h3>
+<p>Exceptions thrown by this method are automatically wrapped in
+<a href="../../jetleaf_web/HttpMessageNotReadableException-class.html">HttpMessageNotReadableException</a> by the <a href="../../jetleaf_web/AbstractHttpMessageConverter/read.html">read</a> method.</p>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+<li>Consider streaming for large payloads to avoid memory issues</li>
+<li>Use efficient parsing libraries for complex formats</li>
+<li>Cache expensive resources like parsers or validators</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;Object&gt; readInternal(Class&lt;Object&gt; type, HttpInputMessage inputMessage) async {
+  final encoding = resolveRequestEncoding(inputMessage);
+
+  final stream = inputMessage.getBody();
+  final yaml = await stream.readAsString(encoding);
+
+  final mapper = _objectMapper;
+  if (mapper is YamlObjectMapper) {
+    return mapper.readYamlValue(yaml, type);
+  } else {
+    return mapper.readValue(yaml, type);
+  }
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/Jetson2YamlHttpMessageConverter-class.html">Jetson2YamlHttpMessageConverter</a></li>
+    <li class="self-crumb">readInternal method</li>
+</ol>
+
+    <h5>Jetson2YamlHttpMessageConverter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

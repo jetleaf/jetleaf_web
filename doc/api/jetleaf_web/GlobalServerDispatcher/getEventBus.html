@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the getEventBus method from the GlobalServerDispatcher class, for the Dart programming language.">
+  <title>getEventBus method - GlobalServerDispatcher class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a></li>
+    <li class="self-crumb">getEventBus method</li>
+  </ol>
+  <div class="self-name">getEventBus</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;GlobalServerDispatcher-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">getEventBus</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a></span>
+<span class="name ">getEventBus</span>(<wbr>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Returns the active <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> associated with this dispatcher.</p>
+<p>The event bus acts as the <strong>central event-distribution mechanism</strong> within
+the JetLeaf runtime. It allows the dispatcher to publish and listen to
+application-level events such as:</p>
+<ul>
+<li><a href="../../jetleaf_web/HttpUpgradedEvent-class.html">HttpUpgradedEvent</a> – emitted when a protocol upgrade (e.g., WebSocket) is requested.</li>
+</ul>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Provides a consistent entry point for event publication within the
+dispatching pipeline.</li>
+<li>Decouples request handling from event subscribers (e.g., metrics, WebSocket adapters).</li>
+<li>Enables asynchronous event propagation across framework components.</li>
+</ul>
+<h3 id="implementation-notes">Implementation Notes</h3>
+<p>Subclasses must override this method to return the context-bound
+<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> instance, typically obtained from the
+<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>.</p>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">@override
+ApplicationEventBus getEventBus() =&gt; applicationContext.getEventBus();
+</code></pre>
+<h3 id="returns">Returns</h3>
+<p>The <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> used by this dispatcher for event publication.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+ApplicationEventBus getEventBus() =&gt; _applicationEventBus;</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a></li>
+    <li class="self-crumb">getEventBus method</li>
+</ol>
+
+    <h5>GlobalServerDispatcher class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the FilterManager.new constructor from Class FilterManager from the jetleaf_web library, for the Dart programming language.">
+  <title>FilterManager.new constructor - FilterManager - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/FilterManager-class.html">FilterManager</a></li>
+    <li class="self-crumb">FilterManager.new constructor</li>
+  </ol>
+  <div class="self-name">FilterManager.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;FilterManager-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">FilterManager</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">FilterManager</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Central registry and lifecycle manager for all <a href="../../jetleaf_web/Filter-class.html">Filter</a> components
+within the JetLeaf web framework.</p>
+<p>The <a href="../../jetleaf_web/FilterManager-class.html">FilterManager</a> is responsible for discovering, initializing, and
+ordering all <a href="../../jetleaf_web/Filter-class.html">Filter</a> instances that participate in the web request
+processing pipeline.<br>
+Filters provide a mechanism for cross-cutting request processing concerns,
+such as authentication, logging, compression, and CORS handling.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Scans the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> for registered <a href="../../jetleaf_web/Filter-class.html">Filter</a> Pods.</li>
+<li>Allows custom filters to be contributed via <a href="../../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a>.</li>
+<li>Orders filters using <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a>.</li>
+<li>Provides an immutable, ordered view of the filter chain via <a href="../../jetleaf_web/FilterManager/getFilters.html">getFilters</a>.</li>
+<li>Ensures thread-safe registration and modification of filters.</li>
+</ul>
+<h3 id="request-lifecycle">Request Lifecycle</h3>
+<p>Filters are executed sequentially during request handling:</p>
+<ol>
+<li><strong>Pre-processing phase:</strong> Filters may modify the request or block it.</li>
+<li><strong>Handler execution:</strong> The main handler processes the request.</li>
+<li><strong>Post-processing phase:</strong> Filters may transform or log the response.</li>
+</ol>
+<h3 id="initialization-flow">Initialization Flow</h3>
+<ol>
+<li>On application startup, <a href="../../jetleaf_web/FilterManager/onReady.html">onReady</a> is invoked.</li>
+<li>The manager discovers all <a href="../../jetleaf_web/Filter-class.html">Filter</a> Pods in the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>.</li>
+<li><a href="../../jetleaf_web/WebConfigurer/addFilters.html">WebConfigurer.addFilters</a> contributes additional filters.</li>
+<li>All filters are ordered and cached for efficient request processing.</li>
+</ol>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final manager = FilterManager();
+manager.setApplicationContext(context);
+await manager.onReady();
+
+final filters = manager.getFilters();
+for (final f in filters) {
+  print('Registered filter: ${f.runtimeType}');
+}
+</code></pre>
+<h3 id="common-filter-types">Common Filter Types</h3>
+<ul>
+<li><strong>AuthenticationFilter</strong> — Verifies authentication headers</li>
+<li><strong>CorsFilter</strong> — Adds CORS headers for cross-origin requests</li>
+<li><strong>LoggingFilter</strong> — Logs inbound requests and outbound responses</li>
+<li><strong>CompressionFilter</strong> — Compresses response payloads for efficiency</li>
+<li><strong>CustomFilter</strong> — Application-defined filter logic</li>
+</ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
+<li>All modifications to the filter list are synchronized.</li>
+<li>Provides safe concurrent reads via <a href="https://api.dart.dev/stable/3.9.2/collection/UnmodifiableListView-class.html">UnmodifiableListView</a>.</li>
+<li>Ensures consistent and predictable filter ordering.</li>
+</ul>
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="../../jetleaf_web/Filter-class.html">Filter</a></li>
+<li><a href="../../jetleaf_web/WebConfigurer-class.html">WebConfigurer</a></li>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a></li>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a></li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">FilterManager();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/FilterManager-class.html">FilterManager</a></li>
+    <li class="self-crumb">FilterManager.new constructor</li>
+</ol>
+
+    <h5>FilterManager class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

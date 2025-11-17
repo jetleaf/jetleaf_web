@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ErrorPage.new constructor from Class ErrorPage from the jetleaf_web library, for the Dart programming language.">
+  <title>ErrorPage.new constructor - ErrorPage - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ErrorPage-class.html">ErrorPage</a></li>
+    <li class="self-crumb">ErrorPage.new constructor</li>
+  </ol>
+  <div class="self-name">ErrorPage.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;ErrorPage-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ErrorPage</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">ErrorPage</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, [</span></li>
+<li><span class="parameter" id="-param-status"><span class="type-annotation"><a href="../../jetleaf_web/HttpStatus-class.html">HttpStatus</a>?</span> <span class="parameter-name">status</span></span></li>
+</ol>])
+    </section>
+    
+<section class="desc markdown">
+  <p>Represents an error page configuration for handling HTTP error responses.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/ErrorPage-class.html">ErrorPage</a> class extends <a href="../../jetleaf_web/PageView-class.html">PageView</a> to provide specialized functionality
+for error page management in the Jetleaf framework. It supports both
+application-defined custom error pages and framework-provided default
+error pages with comprehensive redirect and fallback capabilities.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>HTTP Status Association</strong>: Each error page is associated with a specific HTTP status code</li>
+<li><strong>Framework Identification</strong>: Special identifier for framework-provided pages</li>
+<li><strong>Redirect Support</strong>: Configurable redirects to other error pages as fallbacks</li>
+<li><strong>Predefined Pages</strong>: Built-in support for common HTTP error statuses</li>
+<li><strong>Hierarchical Fallbacks</strong>: Intelligent fallback chains for error resolution</li>
+</ul>
+<h3 id="framework-vs-application-pages">Framework vs Application Pages</h3>
+<ul>
+<li><strong>Framework Pages</strong>: Identified by the <code>FRAMEWORK_ERROR_PAGE_IDENTIFIER</code> path prefix,
+provide standardized error handling across Jetleaf applications</li>
+<li><strong>Application Pages</strong>: Custom pages defined by developers, can override framework defaults</li>
+</ul>
+<h3 id="redirect-chain-strategy">Redirect Chain Strategy</h3>
+<p>Many framework error pages are configured with redirects to create a sensible
+fallback hierarchy. For example:</p>
+<ul>
+<li>400, 401, 403, 500, 502, 503 → 404 → Ultimate fallback</li>
+<li>This ensures users always see a meaningful error page even when specific
+error pages are unavailable</li>
+</ul>
+<h3 id="usage-examples">Usage Examples</h3>
+<pre class="language-dart"><code class="language-dart">// Framework error page (using predefined constant)
+final notFoundPage = ErrorPage.ERROR_NOT_FOUND_PAGE;
+
+// Custom application error page
+final customErrorPage = ErrorPage('/errors/custom-error.html', HttpStatus.IM_A_TEAPOT);
+
+// Error page with redirect configuration
+final redirectErrorPage = ErrorPage('/errors/maintenance.html', HttpStatus.SERVICE_UNAVAILABLE)
+  ..setRedirectPath('/errors/general.html')
+  ..setRedirectStatus(HttpStatus.OK);
+</code></pre>
+<h3 id="integration-with-errorpages-registry">Integration with ErrorPages Registry</h3>
+<p>Error pages are typically managed by the <a href="../../jetleaf_web/ErrorPages-class.html">ErrorPages</a> registry which:</p>
+<ul>
+<li>Discovers all error page pods in the application context</li>
+<li>Handles conflicts between application and framework pages</li>
+<li>Provides resolved page lists for error handling components</li>
+</ul>
+<h3 id="template-resolution">Template Resolution</h3>
+<p>Error pages support various template resolution strategies:</p>
+<ul>
+<li><strong>Static HTML</strong>: Direct file paths to HTML resources</li>
+<li><strong>Dynamic Templates</strong>: Template engine integration (Thymeleaf, Mustache, etc.)</li>
+<li><strong>Redirects</strong>: HTTP redirects to other error pages or application endpoints</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Use framework-provided pages as base templates for customization</li>
+<li>Create application-specific pages for unique error scenarios</li>
+<li>Configure sensible redirect chains for comprehensive error coverage</li>
+<li>Test error page rendering for all supported HTTP status codes</li>
+<li>Consider accessibility and user experience in error page design</li>
+</ul>
+<h3 id="related-components">Related Components</h3>
+<ul>
+<li><a href="../../jetleaf_web/ErrorPages-class.html">ErrorPages</a>: Central registry for error page management</li>
+<li><a href="../../jetleaf_web/PageView-class.html">PageView</a>: Base class for page view configurations</li>
+<li><a href="../../jetleaf_web/HttpStatus-class.html">HttpStatus</a>: HTTP status code definitions and utilities</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../../jetleaf_web/ErrorPage-class.html">ErrorPage</a> class provides a robust foundation for error page management
+in Jetleaf applications, supporting both framework defaults and custom
+application error handling with flexible redirect and fallback capabilities.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>path</code>: The resource path to the error page content (template, HTML file, etc.)</li>
+<li><code>status</code>: The HTTP status code that triggers this error page (optional)</li>
+</ul>
+<h3 id="example-basic-error-page">Example: Basic Error Page</h3>
+<pre class="language-dart"><code class="language-dart">final errorPage = ErrorPage('/public/errors/not-found.html', HttpStatus.NOT_FOUND);
+</code></pre>
+<h3 id="example-framework-style-error-page">Example: Framework-style Error Page</h3>
+<pre class="language-dart"><code class="language-dart">final customFrameworkPage = ErrorPage(
+  '${ErrorPage.FRAMEWORK_ERROR_PAGE_IDENTIFIER}/418.html',
+  HttpStatus.IM_A_TEAPOT,
+);
+</code></pre>
+<h3 id="path-resolution">Path Resolution</h3>
+<p>The path can be:</p>
+<ul>
+<li>A direct file path to static HTML content</li>
+<li>A template path resolved by configured template engines</li>
+<li>A logical view name mapped to actual templates</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">ErrorPage(super.path, [super.status]);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ErrorPage-class.html">ErrorPage</a></li>
+    <li class="self-crumb">ErrorPage.new constructor</li>
+</ol>
+
+    <h5>ErrorPage class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the BadGatewayException.new constructor from Class BadGatewayException from the jetleaf_web library, for the Dart programming language.">
+  <title>BadGatewayException.new constructor - BadGatewayException - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a></li>
+    <li class="self-crumb">BadGatewayException.new constructor</li>
+  </ol>
+  <div class="self-name">BadGatewayException.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;BadGatewayException-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">BadGatewayException</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">BadGatewayException</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, {</span></li>
+<li><span class="parameter" id="-param-details"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">details</span>, </span></li>
+<li><span class="parameter" id="-param-originalException"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Exception-class.html">Exception</a>?</span> <span class="parameter-name">originalException</span>, </span></li>
+<li><span class="parameter" id="-param-originalStackTrace"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">originalStackTrace</span>, </span></li>
+<li><span class="parameter" id="-param-statusCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">statusCode</span> = <span class="default-value">502</span>, </span></li>
+<li><span class="parameter" id="-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a>?</span> <span class="parameter-name">uri</span>, </span></li>
+</ol>})
+    </section>
+    
+<section class="desc markdown">
+  <p>A specialized <a href="../../jetleaf_web/HttpException-class.html">HttpException</a> representing an <strong>invalid or failed response</strong>
+from an upstream server, corresponding to the <strong>HTTP 502 Bad Gateway</strong> status.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a> indicates that a server acting as a gateway or proxy<br>
+received an <strong>invalid response</strong> or an <strong>error</strong> from an upstream service, API,<br>
+or backend it attempted to contact while fulfilling a request.</p>
+<p>This typically occurs when the gateway successfully connects to the upstream<br>
+but receives an unexpected, malformed, or non-compliant HTTP response, or when<br>
+the upstream terminates the connection prematurely.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">Future&lt;void&gt; forwardRequest(HttpRequestProvider request) async {
+  try {
+    final response = await httpClient.sendUpstream(request);
+    if (response.statusCode &gt;= 500) {
+      throw BadGatewayException(
+        'Upstream service responded with ${response.statusCode}',
+        uri: request.getUri(),
+      );
+    }
+  } on SocketException catch (e) {
+    throw BadGatewayException(
+      'Failed to connect to upstream service',
+      details: {'cause': e.message},
+      uri: request.getUri(),
+    );
+  }
+}
+</code></pre>
+<h3 id="common-scenarios">Common Scenarios</h3>
+<ul>
+<li>The upstream API returns an invalid or malformed HTTP response</li>
+<li>The backend unexpectedly closes the connection or sends a protocol error</li>
+<li>Reverse proxies like NGINX or JetLeaf's internal gateways encounter a misbehaving backend</li>
+<li>The upstream service crashes or produces incomplete responses</li>
+</ul>
+<h3 id="integration-example">Integration Example</h3>
+<pre class="language-dart"><code class="language-dart">try {
+  await dispatcher.dispatch(request, response);
+} on BadGatewayException catch (e) {
+  response.statusCode = 502;
+  response.getOutputStream().writeString('Bad Gateway: ${e.message}');
+}
+</code></pre>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Maps directly to <strong>HTTP 502 Bad Gateway</strong> as defined in <code>RFC 7231 §6.6.3</code>.</li>
+<li>Indicates a <strong>proxy or gateway-layer error</strong> rather than a client or business logic failure.</li>
+<li>Extends <a href="../../jetleaf_web/HttpException-class.html">HttpException</a> to propagate contextual metadata such as <a href="../../jetleaf_web/HttpException/uri.html">uri</a>, <a href="../../jetleaf_web/HttpException/details.html">details</a>,<br>
+and underlying <a href="../../jetleaf_web/HttpException/originalException.html">originalException</a> information.</li>
+<li>Useful for <strong>microservice orchestration</strong>, <strong>reverse proxies</strong>, and <strong>API composition layers</strong>.</li>
+</ul>
+<h3 id="related-exceptions">Related Exceptions</h3>
+<ul>
+<li><a href="../../jetleaf_web/GatewayTimeoutException-class.html">GatewayTimeoutException</a> – when an upstream fails to respond in time (504)</li>
+<li><a href="../../jetleaf_web/ServiceUnavailableException-class.html">ServiceUnavailableException</a> – for temporarily overloaded or unavailable services (503)</li>
+<li><a href="../../jetleaf_web/InternalServerErrorException-class.html">InternalServerErrorException</a> – for internal server logic failures (500)</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a> provides a consistent way for JetLeaf applications<br>
+to represent <strong>upstream service communication errors</strong>, supporting robust and<br>
+transparent error propagation in distributed or proxy-based architectures.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">BadGatewayException(
+  super.message, {
+  super.details,
+  super.originalException,
+  super.originalStackTrace,
+  super.statusCode = 502,
+  super.uri,
+});</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a></li>
+    <li class="self-crumb">BadGatewayException.new constructor</li>
+</ol>
+
+    <h5>BadGatewayException class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

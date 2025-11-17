@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Internal Server Error - JetLeaf</title>
+        <link rel="icon" href="{{favicon}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* same CSS as original */
+        </style>
+    </head>
+
+    <body>
+        <div class="error-container">
+            <div class="leaf-icon">{{icon}}</div>
+            <h1 class="error-code">500</h1>
+            <h2 class="error-title">Internal Server Error</h2>
+            <p class="error-message">
+                Something went wrong on our side while trying to fulfill your request.
+            </p>
+            <div class="error-details">
+                <strong>Error Details:</strong><br>
+                {{message}}<br>
+                <small>Timestamp: {{timestamp}}</small>
+            </div>
+            <div class="actions">
+                <a href="{{homePage}}" class="btn btn-primary">🏠 Return Home</a>
+                <a href="javascript:history.back()" class="btn btn-secondary">← Try Again</a>
+            </div>
+        </div>
+    </body>
+</html>

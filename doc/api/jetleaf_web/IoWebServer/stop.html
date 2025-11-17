@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the stop method from the IoWebServer class, for the Dart programming language.">
+  <title>stop method - IoWebServer class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a></li>
+    <li class="self-crumb">stop method</li>
+  </ol>
+  <div class="self-name">stop</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;IoWebServer-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">stop</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">stop</span>(<wbr>[<ol class="parameter-list single-line"> <li><span class="parameter" id="stop-param-runnable"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Runnable-class.html">Runnable</a>?</span> <span class="parameter-name">runnable</span></span></li>
+</ol>])
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Stop this component, typically in a synchronous fashion.</p>
+<p>Should not throw an exception if the component is not running.</p>
+<p>The callback is used to enable asynchronous shutdown. Implementations
+should call the callback once their shutdown process is complete.</p>
+<h2 id="parameters">Parameters</h2>
+<ul>
+<li><code>callback</code>: A callback to invoke once shutdown is complete (may be null)</li>
+</ul>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<ul>
+<li>If shutdown is synchronous, call the callback immediately</li>
+<li>If shutdown is asynchronous, call the callback when complete</li>
+<li>Always call the callback, even if it's null (null-safe call)</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;void&gt; stop([Runnable? runnable]) async {
+  final log = _context.log;
+
+  if (!_isRunning || _httpServer == null) {
+    if (log.getIsDebugEnabled()) {
+      log.debug(&#39;🟡 Stop called, but server is not running&#39;);
+    }
+    return;
+  }
+
+  if (log.getIsInfoEnabled()) {
+    log.info(&#39;🛠 Initiating graceful shutdown...&#39;);
+  }
+
+  await _publish(ServerStoppingEvent(this));
+
+  try {
+    await _httpServer!.close(force: true);
+    _httpServer = null;
+    _isRunning = false;
+  } catch (e, st) {
+    if (log.getIsErrorEnabled()) {
+      log.error(&#39;❌ Error during shutdown&#39;, error: e, stacktrace: st);
+    }
+    rethrow;
+  }
+
+  if (runnable != null) {
+    if (log.getIsDebugEnabled()) {
+      log.debug(&#39;Executing shutdown callback&#39;);
+    }
+
+    await runnable.run();
+  }
+
+  if (!_isRunning) {
+    if (log.getIsInfoEnabled()) {
+      log.info(&#39;✅ Server stopped successfully&#39;);
+    }
+
+    await _publish(ServerStoppedEvent(this));
+  }
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a></li>
+    <li class="self-crumb">stop method</li>
+</ol>
+
+    <h5>IoWebServer class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

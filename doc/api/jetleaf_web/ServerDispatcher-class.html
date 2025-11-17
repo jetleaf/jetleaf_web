@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ServerDispatcher class from the jetleaf_web library, for the Dart programming language.">
+  <title>ServerDispatcher class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">ServerDispatcher class</li>
+  </ol>
+  <div class="self-name">ServerDispatcher</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;ServerDispatcher-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">ServerDispatcher</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#interface" class="feature feature-interface" title="This class can only be implemented (not extended or mixed in).">interface</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A <strong>generic HTTP request dispatcher</strong> in the JetLeaf framework.</p>
+<p>The <a href="../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a> interface defines a unified contract for routing and
+handling HTTP requests in a framework-agnostic way. It abstracts away
+server-specific logic while providing strongly-typed access to the request
+(<a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>) and response (<a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>) objects.</p>
+<p>This interface is essential in JetLeaf for implementing <strong>modular, reusable,
+and type-safe request handling pipelines</strong>, including routers, middleware,
+and endpoint controllers.</p>
+<h3 id="overview">Overview</h3>
+<p>An <a href="../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a> is responsible for:</p>
+<ul>
+<li>Determining whether a request can be handled (<a href="../jetleaf_web/ServerDispatcher/canDispatch.html">canDispatch</a>).</li>
+<li>Executing business logic, controllers, or downstream handlers (<a href="../jetleaf_web/ServerDispatcher/dispatch.html">dispatch</a>).</li>
+<li>Writing responses via the provided <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> and its
+<a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/OutputStream-class.html">OutputStream</a>.</li>
+</ul>
+<p>Dispatchers may inspect HTTP method, path, headers, query parameters, or
+custom metadata to decide whether they are responsible for a request.</p>
+<h3 id="related-classes">Related Classes</h3>
+<ul>
+<li><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> – provides access to request metadata, parameters,
+headers, attributes, locale, and body content.</li>
+<li><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> – provides access to the response object and
+<a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/OutputStream-class.html">OutputStream</a> to write response data.</li>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/OutputStream-class.html">OutputStream</a> – used to write bytes, strings, or other payloads to the
+HTTP response.</li>
+<li><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a> – standard HTTP verbs such as GET, POST, PUT, DELETE, PATCH.</li>
+</ul>
+<h3 id="dispatch-workflow">Dispatch Workflow</h3>
+<ol>
+<li>
+<p><strong>Evaluation</strong> – The dispatcher evaluates the incoming request via
+<a href="../jetleaf_web/ServerDispatcher/canDispatch.html">canDispatch</a>. This may involve checking:</p>
+<ul>
+<li>HTTP method (GET, POST, etc.)</li>
+<li>HttpRequest path or route pattern</li>
+<li>Headers or query parameters</li>
+<li>Custom attributes or context metadata</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling</strong> – If the dispatcher can handle the request, it invokes
+<a href="../jetleaf_web/ServerDispatcher/dispatch.html">dispatch</a>, which:</p>
+<ul>
+<li>Executes the appropriate controller or business logic</li>
+<li>Writes the response payload using <a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>.getOutputStream()</li>
+<li>Ensures proper flushing and closure of streams</li>
+</ul>
+</li>
+<li>
+<p><strong>Completion</strong> – The dispatcher must ensure the response is complete and
+the request lifecycle is properly finalized.</p>
+</li>
+</ol>
+<h3 id="example-usage">Example Usage</h3>
+<pre class="language-dart"><code class="language-dart">class UserDispatcher implements ServerDispatcher {
+  @override
+  Future&lt;void&gt; dispatch(ServerHttpRequest request, ServerHttpResponse response) async {
+    final output = response.getOutputStream();
+    final userId = request.getParameter('id') ?? 'unknown';
+    await output.writeString('User ID: $userId');
+    await output.flush();
+    await output.close();
+  }
+}
+
+final dispatcher = UserDispatcher();
+if (dispatcher.canDispatch(request)) {
+  await dispatcher.dispatch(request, response);
+}
+</code></pre>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>The generic parameters <code>&lt;HttpRequest&gt;</code> and <code>&lt;HttpResponse&gt;</code> allow
+implementations to expose framework-specific request and response types
+while remaining type-safe.</li>
+<li><a href="../jetleaf_web/ServerDispatcher/canDispatch.html">canDispatch</a> should be <strong>idempotent</strong> and side-effect-free. It is called
+solely to evaluate request eligibility.</li>
+<li><a href="../jetleaf_web/ServerDispatcher/dispatch.html">dispatch</a> may perform asynchronous operations, including reading request
+streams, database calls, or network requests.</li>
+<li>HttpResponse writing should always use the provided <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/OutputStream-class.html">OutputStream</a> to ensure
+consistency and avoid bypassing the framework's lifecycle hooks.</li>
+<li>Dispatchers can be composed or chained to implement middleware pipelines,
+prioritizing handlers based on routes, headers, or other criteria.</li>
+</ul>
+<h3 id="common-scenarios">Common Scenarios</h3>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Method</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Route matching</td>
+<td><code>canDispatch</code></td>
+<td>Evaluates path and HTTP method to see if this dispatcher should handle the request</td>
+</tr>
+<tr>
+<td>Executing controller</td>
+<td><code>dispatch</code></td>
+<td>Runs business logic and writes response via <code>OutputStream</code></td>
+</tr>
+<tr>
+<td>Writing response</td>
+<td><code>dispatch</code></td>
+<td>Ensures proper encoding, flushing, and closing</td>
+</tr>
+<tr>
+<td>Logging / metrics</td>
+<td><code>dispatch</code></td>
+<td>Can attach request-specific metrics or logs via attributes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></li>
+<li><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></li>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/OutputStream-class.html">OutputStream</a></li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/ConfigurableServerDispatcher-class.html">ConfigurableServerDispatcher</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="canDispatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerDispatcher/canDispatch.html">canDispatch</a></span><span class="signature">(<wbr><span class="parameter" id="canDispatch-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Determines whether this dispatcher can handle the given <code>request</code>.
+  
+
+</dd>
+
+        <dt id="dispatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerDispatcher/dispatch.html">dispatch</a></span><span class="signature">(<wbr><span class="parameter" id="dispatch-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span><span class="parameter" id="dispatch-param-response"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Handles the given <code>request</code> and produces a response.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="THROW_IF_HANDLER_NOT_FOUND_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/ServerDispatcher/THROW_IF_HANDLER_NOT_FOUND_PROPERTY_NAME-constant.html">THROW_IF_HANDLER_NOT_FOUND_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The configuration property name that controls whether the web framework
+should throw an exception when no matching handler is found for an
+incoming request.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">ServerDispatcher class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

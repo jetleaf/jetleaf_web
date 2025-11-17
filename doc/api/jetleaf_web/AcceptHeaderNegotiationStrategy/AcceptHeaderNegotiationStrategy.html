@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AcceptHeaderNegotiationStrategy.new constructor from Class AcceptHeaderNegotiationStrategy from the jetleaf_web library, for the Dart programming language.">
+  <title>AcceptHeaderNegotiationStrategy.new constructor - AcceptHeaderNegotiationStrategy - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AcceptHeaderNegotiationStrategy-class.html">AcceptHeaderNegotiationStrategy</a></li>
+    <li class="self-crumb">AcceptHeaderNegotiationStrategy.new const constructor</li>
+  </ol>
+  <div class="self-name">AcceptHeaderNegotiationStrategy.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;AcceptHeaderNegotiationStrategy-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">AcceptHeaderNegotiationStrategy</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">AcceptHeaderNegotiationStrategy</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Default <a href="../../jetleaf_web/ContentNegotiationStrategy-class.html">ContentNegotiationStrategy</a> implementation that negotiates
+content type based on the client's <code>Accept</code> header.</p>
+<h3 id="overview">Overview</h3>
+<p>This strategy implements <strong>client-driven content negotiation</strong> by analyzing
+the <code>Accept</code> header from the incoming request and finding the best match
+among available converters.</p>
+<h3 id="negotiation-algorithm">Negotiation Algorithm</h3>
+<ol>
+<li>Retrieves the <code>Accept</code> header from the request</li>
+<li>If no Accept header is present, uses the first available converter's type</li>
+<li>If Accept header is present, parses accepted media types</li>
+<li>Iterates through available converters in order (respecting ordering)</li>
+<li>Returns the first converter's media type that matches an accepted type</li>
+<li>Falls back to first converter's type if no matches found</li>
+</ol>
+<h3 id="media-type-matching">Media Type Matching</h3>
+<p>Media types are matched using compatibility rules:</p>
+<ul>
+<li><code>*/*</code> matches any media type (lowest priority)</li>
+<li><code>type/*</code> matches any subtype of that type</li>
+<li><code>type/subtype</code> matches exact type/subtype</li>
+<li>Parameters (charset, etc.) are ignored for matching</li>
+</ul>
+<h3 id="example-scenarios">Example Scenarios</h3>
+<p><strong>Scenario 1: Accept JSON</strong></p>
+<pre class="language-dart"><code>Accept: application/json
+Available Converters: JsonConverter (application/json), XmlConverter (application/xml)
+Result: application/json
+</code></pre>
+<p><strong>Scenario 2: Accept Multiple Types</strong></p>
+<pre class="language-dart"><code>Accept: application/xml, application/json;q=0.9
+Available Converters: JsonConverter (application/json), XmlConverter (application/xml)
+Result: application/xml (higher quality factor)
+</code></pre>
+<p><strong>Scenario 3: No Accept Header</strong></p>
+<pre class="language-dart"><code>Accept: (none)
+Available Converters: JsonConverter (application/json)
+Result: application/json (first converter)
+</code></pre>
+<p><strong>Scenario 4: Wildcard Match</strong></p>
+<pre class="language-dart"><code>Accept: application/*
+Available Converters: JsonConverter (application/json), XmlConverter (application/xml)
+Result: application/json (first matching converter)
+</code></pre>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li>Returns null if no suitable media type is found and no fallback available</li>
+<li>Handles malformed Accept headers gracefully</li>
+<li>Considers only converters that can handle the specific return value type</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Thread-safe and stateless</li>
+<li>Follows HTTP/1.1 content negotiation specs (RFC 7231)</li>
+<li>Compatible with quality factors (q-values) in Accept header</li>
+<li>Respects converter ordering for priority</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const AcceptHeaderNegotiationStrategy();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AcceptHeaderNegotiationStrategy-class.html">AcceptHeaderNegotiationStrategy</a></li>
+    <li class="self-crumb">AcceptHeaderNegotiationStrategy.new const constructor</li>
+</ol>
+
+    <h5>AcceptHeaderNegotiationStrategy class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

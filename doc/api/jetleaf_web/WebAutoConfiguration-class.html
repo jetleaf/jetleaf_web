@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the WebAutoConfiguration class from the jetleaf_web library, for the Dart programming language.">
+  <title>WebAutoConfiguration class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">WebAutoConfiguration class</li>
+  </ol>
+  <div class="self-name">WebAutoConfiguration</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;WebAutoConfiguration-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">WebAutoConfiguration</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Auto-configuration class for Jetleaf web framework components.</p>
+<p>This class registers the default infrastructure pods for web request
+handling, including:</p>
+<ul>
+<li>Dispatcher, handler mappings, and handler adapters</li>
+<li>Method argument resolvers and return value handlers</li>
+<li>Exception resolvers (JSON, error pages, controller advice)</li>
+<li>HTTP message converters and REST I/O</li>
+<li>CORS configuration and filters</li>
+<li>Multipart request parsing and I/O encoding</li>
+<li>Template engine integration (JTL)</li>
+<li>Web server and server context</li>
+</ul>
+<p>All pods are registered with <code>@Role(DesignRole.INFRASTRUCTURE)</code> and
+conditional on missing pods to allow developers to override defaults.</p>
+<p>The pod name for this configuration is <code>WEB_AUTO_CONFIGURATION_POD_NAME</code>.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+
+
+        
+        
+  <dt>Annotations</dt>
+  <dd>
+    <ul class="annotation-list clazz-relationships">
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/AutoConfiguration-class.html">AutoConfiguration</a>()</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/ComponentScan-class.html">ComponentScan</a>(includeFilters: [ComponentScanFilter(FilterType.ANNOTATION, typeFilter: AnnotatedTypeFilter&lt;WebView&gt;()), ComponentScanFilter(FilterType.ANNOTATION, typeFilter: AnnotatedTypeFilter&lt;RestController&gt;()), ComponentScanFilter(FilterType.ANNOTATION, typeFilter: AnnotatedTypeFilter&lt;ControllerAdvice&gt;()), ComponentScanFilter(FilterType.ANNOTATION, typeFilter: AnnotatedTypeFilter&lt;RestControllerAdvice&gt;()), ComponentScanFilter(FilterType.ANNOTATION, typeFilter: AnnotatedTypeFilter&lt;Controller&gt;())])</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Role-class.html">Role</a>(DesignRole.INFRASTRUCTURE)</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Named-class.html">Named</a>(WebAutoConfiguration.WEB_AUTO_CONFIGURATION_POD_NAME)</li>
+    </ul>
+  </dd>
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="WebAutoConfiguration.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/WebAutoConfiguration.html">WebAutoConfiguration.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="exceptionResolverManager" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/exceptionResolverManager.html">exceptionResolverManager</a></span><span class="signature">(<wbr><span class="parameter" id="exceptionResolverManager-param-resolver"><span class="type-annotation"><a href="../jetleaf_web/ContentNegotiationResolver-class.html">ContentNegotiationResolver</a></span> <span class="parameter-name">resolver</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers the <a href="../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a> pod.
+  
+
+</dd>
+
+        <dt id="filterManager" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/filterManager.html">filterManager</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/FilterManager-class.html">FilterManager</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers the <a href="../jetleaf_web/FilterManager-class.html">FilterManager</a> pod.
+  
+
+</dd>
+
+        <dt id="handlerAdapterManager" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/handlerAdapterManager.html">handlerAdapterManager</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers the <a href="../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a> pod.
+  
+
+</dd>
+
+        <dt id="handlerInterceptorManager" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/handlerInterceptorManager.html">handlerInterceptorManager</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers the <a href="../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a> pod.
+  
+
+</dd>
+
+        <dt id="ioRestClient" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/ioRestClient.html">ioRestClient</a></span><span class="signature">(<wbr><span class="parameter" id="ioRestClient-param-decoder"><span class="type-annotation"><a href="../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a></span> <span class="parameter-name">decoder</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RestClient-class.html">RestClient</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides a REST builder for performing HTTP requests and responses.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="pathPatternParserManager" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/pathPatternParserManager.html">pathPatternParserManager</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; PathPatternParserManager</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers a <code>PathPatternParserManager</code> as a pod.
+  
+
+</dd>
+
+        <dt id="registryHandlerMapping" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/registryHandlerMapping.html">registryHandlerMapping</a></span><span class="signature">(<wbr><span class="parameter" id="registryHandlerMapping-param-parser"><span class="type-annotation">PathPatternParserManager</span> <span class="parameter-name">parser</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates and registers the <a href="../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a> pod.
+  
+
+</dd>
+
+        <dt id="resolverContext" class="callable">
+  <span class="name"><a href="../jetleaf_web/WebAutoConfiguration/resolverContext.html">resolverContext</a></span><span class="signature">(<wbr><span class="parameter" id="resolverContext-param-converter"><span class="type-annotation"><a href="../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a></span> <span class="parameter-name">converter</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ResolverContext-class.html">ResolverContext</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the default <code>ResolverContext</code> used for method argument resolution.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="EXCEPTION_RESOLVER_MANAGER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/EXCEPTION_RESOLVER_MANAGER_POD_NAME-constant.html">EXCEPTION_RESOLVER_MANAGER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <a href="../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a>.
+  
+
+</dd>
+
+        <dt id="FILTER_MANAGER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/FILTER_MANAGER_POD_NAME-constant.html">FILTER_MANAGER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <a href="../jetleaf_web/FilterManager-class.html">FilterManager</a>.
+  
+
+</dd>
+
+        <dt id="HANDLER_ADAPTER_MANAGER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/HANDLER_ADAPTER_MANAGER_POD_NAME-constant.html">HANDLER_ADAPTER_MANAGER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <a href="../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a>.
+  
+
+</dd>
+
+        <dt id="HANDLER_INTERCEPTOR_MANAGER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/HANDLER_INTERCEPTOR_MANAGER_POD_NAME-constant.html">HANDLER_INTERCEPTOR_MANAGER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <a href="../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a>.
+  
+
+</dd>
+
+        <dt id="PATH_PATTERN_PARSER_MANAGER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/PATH_PATTERN_PARSER_MANAGER_POD_NAME-constant.html">PATH_PATTERN_PARSER_MANAGER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <code>PathPatternParserManager</code> in the
+JetLeaf pod system.
+  
+
+</dd>
+
+        <dt id="RESOLVER_CONTEXT_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/RESOLVER_CONTEXT_POD_NAME-constant.html">RESOLVER_CONTEXT_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the resolver context.
+  
+
+</dd>
+
+        <dt id="REST_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/REST_POD_NAME-constant.html">REST_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the REST I/O component.
+  
+
+</dd>
+
+        <dt id="ROUTE_REGISTRY_HANDLER_MAPPING_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/ROUTE_REGISTRY_HANDLER_MAPPING_POD_NAME-constant.html">ROUTE_REGISTRY_HANDLER_MAPPING_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The pod name used to register the <a href="../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a>.
+  
+
+</dd>
+
+        <dt id="WEB_AUTO_CONFIGURATION_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/WebAutoConfiguration/WEB_AUTO_CONFIGURATION_POD_NAME-constant.html">WEB_AUTO_CONFIGURATION_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the web auto-configuration component.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">WebAutoConfiguration class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

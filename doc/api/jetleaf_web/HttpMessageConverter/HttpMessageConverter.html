@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the HttpMessageConverter.new constructor from Class HttpMessageConverter from the jetleaf_web library, for the Dart programming language.">
+  <title>HttpMessageConverter.new constructor - HttpMessageConverter - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">HttpMessageConverter.new const constructor</li>
+  </ol>
+  <div class="self-name">HttpMessageConverter.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;HttpMessageConverter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">HttpMessageConverter&lt;<wbr><span class="type-parameter">T</span>&gt;</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">HttpMessageConverter&lt;<wbr><span class="type-parameter">T</span>&gt;</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Strategy interface for converting between HTTP messages and Dart objects.</p>
+<p><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> implementations are responsible for the two-way
+conversion between HTTP request/response bodies and Dart objects. This
+abstraction enables content negotiation, serialization, and deserialization
+in a type-safe manner throughout the Jetleaf framework.</p>
+<h3 id="generic-type-parameter">Generic Type Parameter</h3>
+<ul>
+<li><code>T</code>: The Dart type that this converter can read and write</li>
+</ul>
+<h3 id="primary-responsibilities">Primary Responsibilities</h3>
+<ul>
+<li><strong>Deserialization</strong>: Convert HTTP request bodies to Dart objects (<a href="../../jetleaf_web/HttpMessageConverter/read.html">read</a>)</li>
+<li><strong>Serialization</strong>: Convert Dart objects to HTTP response bodies (<a href="../../jetleaf_web/HttpMessageConverter/write.html">write</a>)</li>
+<li><strong>Content Negotiation</strong>: Determine supported media types for specific types</li>
+<li><strong>Type Safety</strong>: Ensure proper type handling during conversion</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<p>Converters are used by:</p>
+<ul>
+<li><strong>Request Body Processing</strong>: Converting JSON/XML request bodies to method parameters</li>
+<li><strong>Response Body Processing</strong>: Converting return values to JSON/XML responses</li>
+<li><strong>Content Negotiation</strong>: Selecting appropriate converters based on Accept headers</li>
+<li><strong>Error Handling</strong>: Providing meaningful conversion error messages</li>
+</ul>
+<h3 id="built-in-implementations">Built-in Implementations</h3>
+<p>Jetleaf typically provides these standard converters:</p>
+<ul>
+<li><strong><code>JsonHttpMessageConverter</code></strong>: Handles JSON ↔ Dart object conversion</li>
+<li><strong><code>StringHttpMessageConverter</code></strong>: Handles text/plain content</li>
+<li><strong><code>FormHttpMessageConverter</code></strong>: Handles application/x-www-form-urlencoded</li>
+<li><strong><code>ByteArrayHttpMessageConverter</code></strong>: Handles binary data (application/octet-stream)</li>
+<li><strong><code>XmlHttpMessageConverter</code></strong>: Handles XML content (application/xml)</li>
+</ul>
+<h3 id="example-json-converter-implementation">Example: JSON Converter Implementation</h3>
+<pre class="language-dart"><code class="language-dart">@Generic(HttpMessageConverter)
+class JsonHttpMessageConverter implements HttpMessageConverter&lt;Object&gt; {
+  final JsonCodec _codec;
+  
+  JsonHttpMessageConverter(this._codec);
+
+  @override
+  bool canRead(Class&lt;Object&gt; type, [MediaType? mediaType]) {
+    return mediaType?.includes(MediaType.APPLICATION_JSON) ?? true;
+  }
+
+  @override
+  bool canWrite(Class&lt;Object&gt; type, [MediaType? mediaType]) {
+    return mediaType?.includes(MediaType.APPLICATION_JSON) ?? true;
+  }
+
+  @override
+  List&lt;MediaType&gt; getSupportedMediaTypes() {
+    return [MediaType.APPLICATION_JSON];
+  }
+
+  @override
+  Future&lt;Object&gt; read(Class&lt;Object&gt; type, HttpInputMessage inputMessage) async {
+    try {
+      final body = await inputMessage.getBody().readAsString();
+      return _codec.decode(body);
+    } catch (e) {
+      throw HttpMessageNotReadableException('Failed to read JSON: $e', e);
+    }
+  }
+
+  @override
+  Future&lt;void&gt; write(Object object, MediaType? contentType, HttpOutputMessage outputMessage) async {
+    try {
+      final json = _codec.encode(object);
+      outputMessage.getHeaders().setContentType(contentType ?? MediaType.APPLICATION_JSON);
+      await outputMessage.getBody().writeString(json);
+    } catch (e) {
+      throw HttpMessageNotWritableException('Failed to write JSON: $e', e);
+    }
+  }
+}
+</code></pre>
+<h3 id="content-negotiation-process">Content Negotiation Process</h3>
+<p>When processing requests/responses, the framework:</p>
+<ol>
+<li><strong>Collects Media Types</strong>: From Accept header or Content-Type header</li>
+<li><strong>Finds Compatible Converters</strong>: Using <a href="../../jetleaf_web/HttpMessageConverter/canRead.html">canRead</a>/<a href="../../jetleaf_web/HttpMessageConverter/canWrite.html">canWrite</a> methods</li>
+<li><strong>Selects Best Match</strong>: Based on media type specificity and quality factors</li>
+<li><strong>Executes Conversion</strong>: Using the selected converter</li>
+</ol>
+<h3 id="error-handling">Error Handling</h3>
+<p>Converters should throw framework-specific exceptions:</p>
+<ul>
+<li><a href="../../jetleaf_web/HttpMessageNotReadableException-class.html">HttpMessageNotReadableException</a>: When deserialization fails</li>
+<li><a href="../../jetleaf_web/HttpMessageNotWritableException-class.html">HttpMessageNotWritableException</a>: When serialization fails</li>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/IOException-class.html">IOException</a>: For I/O-related errors during stream processing</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Make <a href="../../jetleaf_web/HttpMessageConverter/canRead.html">canRead</a> and <a href="../../jetleaf_web/HttpMessageConverter/canWrite.html">canWrite</a> checks efficient and fast</li>
+<li>Support common media type variations (e.g., application/json vs application/vnd.api+json)</li>
+<li>Handle character encoding properly for text-based formats</li>
+<li>Consider performance implications for large payloads</li>
+<li>Provide clear error messages for debugging conversion issues</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const HttpMessageConverter();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">HttpMessageConverter.new const constructor</li>
+</ol>
+
+    <h5>HttpMessageConverter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoWebServerFactory.new constructor from Class IoWebServerFactory from the jetleaf_web library, for the Dart programming language.">
+  <title>IoWebServerFactory.new constructor - IoWebServerFactory - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoWebServerFactory-class.html">IoWebServerFactory</a></li>
+    <li class="self-crumb">IoWebServerFactory.new constructor</li>
+  </ol>
+  <div class="self-name">IoWebServerFactory.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;IoWebServerFactory-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">IoWebServerFactory</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">IoWebServerFactory</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-_dispatcher"><span class="type-annotation"><a href="../../jetleaf_web/ServerDispatcher-class.html">ServerDispatcher</a></span> <span class="parameter-name">_dispatcher</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>A concrete factory that produces <a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a> instances for JetLeaf applications.</p>
+<p>This factory implements <a href="../../jetleaf_web/WebServerFactory-class.html">WebServerFactory</a>, <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/EnvironmentAware-class.html">EnvironmentAware</a>, and
+<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/ApplicationEventBusAware-class.html">ApplicationEventBusAware</a>, allowing it to:</p>
+<ol>
+<li>Create fully configured <a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a> instances via <a href="../../jetleaf_web/IoWebServerFactory/createWebServer.html">createWebServer</a>.</li>
+<li>Configure server host and port from an <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> using
+<a href="../../jetleaf_web/IoWebServerFactory/setEnvironment.html">setEnvironment</a>.</li>
+<li>Inject an <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> using <a href="../../jetleaf_web/IoWebServerFactory/setApplicationEventBus.html">setApplicationEventBus</a> to
+enable publishing of server lifecycle events such as <a href="../../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a>,
+<a href="../../jetleaf_web/ServerStartedEvent-class.html">ServerStartedEvent</a>, <a href="../../jetleaf_web/ServerStoppingEvent-class.html">ServerStoppingEvent</a>, and <a href="../../jetleaf_web/ServerStoppedEvent-class.html">ServerStoppedEvent</a>.</li>
+</ol>
+<h3 id="features">Features:</h3>
+<ul>
+<li><strong>Environment-Aware</strong>: Reads <code>server.host</code> and <code>server.port</code> from
+the environment to configure the server.</li>
+<li><strong>Event-Aware</strong>: Requires an <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> to broadcast
+server lifecycle events.</li>
+<li><strong>Default Configuration</strong>: Uses <code>localhost</code> for host and <code>8080</code> for
+port if environment values are not provided.</li>
+</ul>
+<p>Example usage:</p>
+<pre class="language-dart"><code class="language-dart">final factory = IoWebServerFactory();
+factory.setApplicationEventBus(eventBus);
+factory.setEnvironment(environment);
+
+final server = await factory.createWebServer(context);
+await server.start();
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">IoWebServerFactory(this._dispatcher);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoWebServerFactory-class.html">IoWebServerFactory</a></li>
+    <li class="self-crumb">IoWebServerFactory.new constructor</li>
+</ol>
+
+    <h5>IoWebServerFactory class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

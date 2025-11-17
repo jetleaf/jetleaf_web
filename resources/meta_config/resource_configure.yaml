@@ -1,0 +1,12 @@
+jetleaf.enableautoconfiguration:
+  -  package:jetleaf_web/src/config/web_auto_configuration.dart.WebAutoConfiguration
+  -  package:jetleaf_web/src/config/web_server_auto_configuration.dart.WebServerAutoConfiguration
+  -  package:jetleaf_web/src/config/http_message_auto_configuration.dart.HttpMessageAutoConfiguration
+  -  package:jetleaf_web/src/config/method_argument_auto_configuration.dart.MethodArgumentAutoConfiguration
+  -  package:jetleaf_web/src/config/return_value_auto_configuration.dart.ReturnValueAutoConfiguration
+  -  package:jetleaf_web/src/config/exception_resolver_auto_configuration.dart.ExceptionResolverAutoConfiguration
+  -  package:jetleaf_web/src/config/handler_adapter_auto_configuration.dart.HandlerAdapterAutoConfiguration
+  -  package:jetleaf_web/src/config/jtl_auto_configuration.dart.JtlAutoConfiguration
+  -  package:jetleaf_web/src/config/csrf_auto_configuration.dart.CsrfAutoConfiguration
+  -  package:jetleaf_web/src/config/jetson_auto_configuration.dart.JetsonAutoConfiguration
+  -  package:jetleaf_web/src/config/content_negotiation_auto_configuration.dart.ContentNegotiationAutoConfiguration

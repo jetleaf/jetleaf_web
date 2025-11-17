@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the AbstractHttpMessageConverter class from the jetleaf_web library, for the Dart programming language.">
+  <title>AbstractHttpMessageConverter class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
+  </ol>
+  <div class="self-name">AbstractHttpMessageConverter</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;AbstractHttpMessageConverter-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">AbstractHttpMessageConverter&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Abstract base class implementing common <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> functionality.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> provides a robust foundation for creating
+concrete HTTP message converter implementations. It handles common concerns
+like media type support management, default encoding, header processing,
+and exception handling, allowing subclasses to focus on type-specific conversion logic.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>Media Type Management</strong>: Configurable list of supported media types</li>
+<li><strong>Encoding Support</strong>: Default character encoding configuration (UTF-8 by default)</li>
+<li><strong>Header Handling</strong>: Automatic Content-Type header management</li>
+<li><strong>Exception Wrapping</strong>: Consistent exception handling and transformation</li>
+<li><strong>Template Methods</strong>: Clean separation between common and type-specific logic</li>
+</ul>
+<h3 id="implementation-pattern">Implementation Pattern</h3>
+<p>Subclasses typically:</p>
+<ol>
+<li>Call super constructor and set supported media types</li>
+<li>Implement <a href="../jetleaf_web/AbstractHttpMessageConverter/readInternal.html">readInternal</a> for deserialization logic</li>
+<li>Implement <a href="../jetleaf_web/AbstractHttpMessageConverter/writeInternal.html">writeInternal</a> for serialization logic</li>
+<li>Optionally override <a href="../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a>/<a href="../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a> for custom media type logic</li>
+</ol>
+<h3 id="example-json-converter-implementation">Example: JSON Converter Implementation</h3>
+<pre class="language-dart"><code class="language-dart">class JsonHttpMessageConverter extends AbstractHttpMessageConverter&lt;Object&gt; {
+  final JsonCodec _codec;
+
+  JsonHttpMessageConverter(this._codec) {
+    setSupportedMediaTypes([MediaType.APPLICATION_JSON]);
+    setDefaultEncoding(Closeable.DEFAULT_ENCODING);
+  }
+
+  @override
+  Future&lt;Object&gt; readInternal(Class&lt;Object&gt; type, HttpInputMessage inputMessage) async {
+    final body = await inputMessage.getBody().readAsString(encoding: getDefaultEncoding());
+    return _codec.decode(body);
+  }
+
+  @override
+  Future&lt;void&gt; writeInternal(Object object, HttpOutputMessage outputMessage) async {
+    final jsonString = _codec.encode(object);
+    await outputMessage.getBody().writeString(jsonString, encoding: getDefaultEncoding());
+  }
+}
+</code></pre>
+<h3 id="media-type-compatibility">Media Type Compatibility</h3>
+<p>The default <a href="../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a> and <a href="../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a> implementations use media type compatibility
+checking, supporting scenarios like:</p>
+<ul>
+<li><code>application/json</code> ↔ <code>application/json; charset=utf-8</code></li>
+<li><code>text/plain</code> ↔ <code>text/plain; charset=iso-8859-1</code></li>
+<li>Exact media type matches and compatible parameter variations</li>
+</ul>
+<h3 id="exception-handling-strategy">Exception Handling Strategy</h3>
+<p>The converter automatically wraps implementation exceptions:</p>
+<ul>
+<li><strong>Read Errors</strong>: Wrapped in <a href="../jetleaf_web/HttpMessageNotReadableException-class.html">HttpMessageNotReadableException</a> with status 400</li>
+<li><strong>Write Errors</strong>: Wrapped in <a href="../jetleaf_web/HttpMessageNotWritableException-class.html">HttpMessageNotWritableException</a> with status 500</li>
+<li><strong>Original Context</strong>: Preserves original exception and stack trace for debugging</li>
+</ul>
+<h3 id="header-management">Header Management</h3>
+<p>The <a href="../jetleaf_web/AbstractHttpMessageConverter/addDefaultHeaders.html">addDefaultHeaders</a> method ensures proper Content-Type headers are set:</p>
+<ul>
+<li>Only sets headers if not already present</li>
+<li>Uses provided contentType or falls back to first supported media type</li>
+<li>Maintains consistency between declared and actual content types</li>
+</ul>
+<h3 id="best-practices-for-subclasses">Best Practices for Subclasses</h3>
+<ul>
+<li><strong>Set Supported Media Types</strong>: Call <a href="../jetleaf_web/AbstractHttpMessageConverter/setSupportedMediaTypes.html">setSupportedMediaTypes</a> in constructor</li>
+<li><strong>Handle Encoding</strong>: Respect <a href="../jetleaf_web/AbstractHttpMessageConverter/getDefaultEncoding.html">getDefaultEncoding()</a> in read/write operations</li>
+<li><strong>Validate Input</strong>: Perform type-specific validation in template methods</li>
+<li><strong>Resource Cleanup</strong>: Ensure streams are properly closed in error scenarios</li>
+<li><strong>Performance</strong>: Consider buffering strategies for large payloads</li>
+</ul>
+<h3 id="extension-points">Extension Points</h3>
+<p>Subclasses can override:</p>
+<ul>
+<li><a href="../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a>/<a href="../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a>: Custom media type matching logic</li>
+<li><a href="../jetleaf_web/AbstractHttpMessageConverter/addDefaultHeaders.html">addDefaultHeaders</a>: Custom header management</li>
+<li><a href="../jetleaf_web/AbstractHttpMessageConverter/getSupportedMediaTypes.html">getSupportedMediaTypes</a>: Dynamic media type support</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<p>Used as the base for all built-in Jetleaf converters:</p>
+<ul>
+<li><code>StringHttpMessageConverter</code>: Handles text/plain content</li>
+<li><code>ByteArrayHttpMessageConverter</code>: Handles application/octet-stream</li>
+<li><code>FormHttpMessageConverter</code>: Handles application/x-www-form-urlencoded</li>
+<li><code>JsonHttpMessageConverter</code>: Handles application/json</li>
+<li><code>XmlHttpMessageConverter</code>: Handles application/xml</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> dramatically reduces boilerplate code
+for converter implementations while ensuring consistent behavior, proper
+error handling, and framework integration across all HTTP message converters.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></li>
+      <li>AbstractHttpMessageConverter</li>
+    </ul>
+  </dd>
+
+        
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/ByteArrayHttpMessageConverter-class.html">ByteArrayHttpMessageConverter</a></li>
+              <li><a href="../jetleaf_web/FormHttpMessageConverter-class.html">FormHttpMessageConverter</a></li>
+              <li><a href="../jetleaf_web/Jetson2HttpMessageConverter-class.html">Jetson2HttpMessageConverter</a></li>
+              <li><a href="../jetleaf_web/Jetson2XmlHttpMessageConverter-class.html">Jetson2XmlHttpMessageConverter</a></li>
+              <li><a href="../jetleaf_web/Jetson2YamlHttpMessageConverter-class.html">Jetson2YamlHttpMessageConverter</a></li>
+              <li><a href="../jetleaf_web/StringHttpMessageConverter-class.html">StringHttpMessageConverter</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="AbstractHttpMessageConverter.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/AbstractHttpMessageConverter.html">AbstractHttpMessageConverter.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Abstract base class implementing common <a href="../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> functionality.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="addDefaultHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/addDefaultHeaders.html">addDefaultHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="addDefaultHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span>, </span><span class="parameter" id="addDefaultHeaders-param-contentType"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">contentType</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds default headers to the HTTP message if not already present.
+  
+
+</dd>
+
+        <dt id="addSupportedMediaType" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/addSupportedMediaType.html">addSupportedMediaType</a></span><span class="signature">(<wbr><span class="parameter" id="addSupportedMediaType-param-type"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds a media type to the list of supported types.
+  
+
+</dd>
+
+        <dt id="canRead" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/canRead.html">canRead</a></span><span class="signature">(<wbr><span class="parameter" id="canRead-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="canRead-param-mediaType"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">mediaType</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Determines whether this converter can deserialize the given type from the specified media type.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="canWrite" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/canWrite.html">canWrite</a></span><span class="signature">(<wbr><span class="parameter" id="canWrite-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="canWrite-param-mediaType"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">mediaType</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Determines whether this converter can serialize the given type to the specified media type.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="equalizedProperties" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getClassSupportedMediaTypes" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpMessageConverter/getClassSupportedMediaTypes.html">getClassSupportedMediaTypes</a></span><span class="signature">(<wbr><span class="parameter" id="getClassSupportedMediaTypes-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the media types specifically supported for a given class type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getDefaultEncoding" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/getDefaultEncoding.html">getDefaultEncoding</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the default character encoding used by this converter.
+  
+
+</dd>
+
+        <dt id="getSupportedMediaTypes" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/getSupportedMediaTypes.html">getSupportedMediaTypes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the list of media types this converter supports by default.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="matchesType" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/matchesType.html">matchesType</a></span><span class="signature">(<wbr><span class="parameter" id="matchesType-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns whether the given <code>type</code> matches this filter's criteria.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="read" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/read.html">read</a></span><span class="signature">(<wbr><span class="parameter" id="read-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span>, </span><span class="parameter" id="read-param-inputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a></span> <span class="parameter-name">inputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Deserializes an HTTP input message to a Dart object of type <code>T</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="readInternal" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/readInternal.html">readInternal</a></span><span class="signature">(<wbr><span class="parameter" id="readInternal-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span>, </span><span class="parameter" id="readInternal-param-inputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a></span> <span class="parameter-name">inputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Template method for reading and deserializing HTTP input.
+  
+
+</dd>
+
+        <dt id="removeSupportedMediaType" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/removeSupportedMediaType.html">removeSupportedMediaType</a></span><span class="signature">(<wbr><span class="parameter" id="removeSupportedMediaType-param-type"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes a media type from the list of supported types.
+  
+
+</dd>
+
+        <dt id="resolveRequestEncoding" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/resolveRequestEncoding.html">resolveRequestEncoding</a></span><span class="signature">(<wbr><span class="parameter" id="resolveRequestEncoding-param-inputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a></span> <span class="parameter-name">inputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Resolves the appropriate <strong>character encoding</strong> for reading the request body.
+  
+
+</dd>
+
+        <dt id="resolveResponseEncoding" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/resolveResponseEncoding.html">resolveResponseEncoding</a></span><span class="signature">(<wbr><span class="parameter" id="resolveResponseEncoding-param-outputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a></span> <span class="parameter-name">outputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Resolves the appropriate <strong>character encoding</strong> for writing the response body.
+  
+
+</dd>
+
+        <dt id="setDefaultEncoding" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/setDefaultEncoding.html">setDefaultEncoding</a></span><span class="signature">(<wbr><span class="parameter" id="setDefaultEncoding-param-encoding"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span> <span class="parameter-name">encoding</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the default character encoding for this converter.
+  
+
+</dd>
+
+        <dt id="setSupportedMediaTypes" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/setSupportedMediaTypes.html">setSupportedMediaTypes</a></span><span class="signature">(<wbr><span class="parameter" id="setSupportedMediaTypes-param-types"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span> <span class="parameter-name">types</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Replaces the current supported media types with the provided list.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="write" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-object"><span class="type-annotation">T</span> <span class="parameter-name">object</span>, </span><span class="parameter" id="write-param-contentType"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">contentType</span>, </span><span class="parameter" id="write-param-outputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a></span> <span class="parameter-name">outputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Serializes a Dart object to an HTTP output message.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="writeInternal" class="callable">
+  <span class="name"><a href="../jetleaf_web/AbstractHttpMessageConverter/writeInternal.html">writeInternal</a></span><span class="signature">(<wbr><span class="parameter" id="writeInternal-param-object"><span class="type-annotation">T</span> <span class="parameter-name">object</span>, </span><span class="parameter" id="writeInternal-param-outputMessage"><span class="type-annotation"><a href="../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a></span> <span class="parameter-name">outputMessage</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Template method for serializing an object to an HTTP output message.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span> class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

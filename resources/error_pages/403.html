@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>403 Forbidden - JetLeaf</title>
+        <link rel="icon" href="{{favicon}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                background: linear-gradient(135deg, #636e72, #2d3436);
+                font-family: 'Segoe UI', sans-serif;
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .card {
+                background: #fff;
+                padding: 2.5rem;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+                max-width: 600px;
+                width: 90%;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 6rem;
+                color: #d63031;
+                margin: 0;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+                margin: 1rem 0;
+                color: #2d3436;
+            }
+
+            p {
+                color: #636e72;
+                font-size: 1.1rem;
+            }
+
+            .details {
+                background: #f1f2f6;
+                border-left: 5px solid #d63031;
+                padding: 1rem;
+                margin: 1.5rem 0;
+                border-radius: 8px;
+                text-align: left;
+            }
+
+            .btn {
+                background: #d63031;
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border-radius: 8px;
+                text-decoration: none;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="card">
+            <h1>403</h1>
+            <h2>Access Denied</h2>
+            <p>{{message}}</p>
+            <div class="details">
+                <strong>Permission Error</strong><br>
+                You don't have the necessary permissions to view this page.<br>
+                <small>Timestamp: {{timestamp}}</small>
+            </div>
+            <a href="{{homePage}}" class="btn">Return Home</a>
+        </div>
+    </body>
+</html>

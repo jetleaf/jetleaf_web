@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the WebViewHandlerAdapter.new constructor from Class WebViewHandlerAdapter from the jetleaf_web library, for the Dart programming language.">
+  <title>WebViewHandlerAdapter.new constructor - WebViewHandlerAdapter - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/WebViewHandlerAdapter-class.html">WebViewHandlerAdapter</a></li>
+    <li class="self-crumb">WebViewHandlerAdapter.new constructor</li>
+  </ol>
+  <div class="self-name">WebViewHandlerAdapter.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;WebViewHandlerAdapter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">WebViewHandlerAdapter</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">WebViewHandlerAdapter</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-methodArgumentResolver"><span class="type-annotation"><a href="../../jetleaf_web/MethodArgumentResolverManager-class.html">MethodArgumentResolverManager</a></span> <span class="parameter-name">methodArgumentResolver</span>, </span></li>
+<li><span class="parameter" id="-param-methodReturnValueHandler"><span class="type-annotation"><a href="../../jetleaf_web/ReturnValueHandlerManager-class.html">ReturnValueHandlerManager</a></span> <span class="parameter-name">methodReturnValueHandler</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Adapter responsible for invoking <a href="../../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a> instances within
+the JetLeaf web request processing pipeline.</p>
+<p>The <a href="../../jetleaf_web/WebViewHandlerAdapter-class.html">WebViewHandlerAdapter</a> bridges the dispatcher and controller layer
+for components annotated with <code>@WebView</code>.<br>
+It determines whether it supports a given <a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a> and,
+if applicable, delegates execution to the appropriate handler
+invocation mechanisms provided by the superclass
+<a href="../../jetleaf_web/AbstractUrlHandlerAdapter-class.html">AbstractUrlHandlerAdapter</a>.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Identify handlers of type <a href="../../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a>.</li>
+<li>Bridge the request execution between the dispatcher and
+the annotated controller method.</li>
+<li>Utilize the configured <code>HandlerMethodArgumentResolver</code> and
+<code>HandlerMethodReturnValueHandler</code> for argument resolution and
+response rendering.</li>
+</ul>
+<h3 id="usage">Usage</h3>
+<p>The adapter is automatically registered by the framework during
+web auto-configuration (see <a href="../../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a>) and is not
+typically instantiated manually.</p>
+<p>Example internal usage:</p>
+<pre class="language-dart"><code class="language-dart">final adapter = WebViewHandlerAdapter(argumentResolver, returnValueHandler);
+if (adapter.supports(handlerMethod)) {
+  await adapter.handle(request, response, handlerMethod);
+}
+</code></pre>
+<h3 id="integration">Integration</h3>
+<ul>
+<li>Used by the <code>DispatcherServlet</code>-like mechanism in JetLeaf
+to invoke controller methods.</li>
+<li>Works together with:
+<ul>
+<li><a href="../../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a>: Represents <code>@WebView</code> controller method metadata.</li>
+<li><code>HandlerMethodArgumentResolver</code>: Binds incoming request data to parameters.</li>
+<li><code>HandlerMethodReturnValueHandler</code>: Writes the handler’s return value to the response.</li>
+</ul>
+</li>
+</ul>
+<h3 id="see-also">See also</h3>
+<ul>
+<li><a href="../../jetleaf_web/AbstractUrlHandlerAdapter-class.html">AbstractUrlHandlerAdapter</a></li>
+<li><a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a></li>
+<li><a href="../../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a></li>
+<li><a href="../../jetleaf_web/WebViewHandlerMethod-class.html">WebViewHandlerMethod</a></li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">WebViewHandlerAdapter(super.methodArgumentResolver, super.methodReturnValueHandler);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/WebViewHandlerAdapter-class.html">WebViewHandlerAdapter</a></li>
+    <li class="self-crumb">WebViewHandlerAdapter.new constructor</li>
+</ol>
+
+    <h5>WebViewHandlerAdapter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

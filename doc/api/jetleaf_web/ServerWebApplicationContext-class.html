@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ServerWebApplicationContext class from the jetleaf_web library, for the Dart programming language.">
+  <title>ServerWebApplicationContext class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">ServerWebApplicationContext class</li>
+  </ol>
+  <div class="self-name">ServerWebApplicationContext</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;ServerWebApplicationContext-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">ServerWebApplicationContext</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A specialized <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext-class.html">AnnotationConfigApplicationContext</a> implementation that
+provides full JetLeaf web runtime capabilities.</p>
+<p>The <a href="../jetleaf_web/ServerWebApplicationContext-class.html">ServerWebApplicationContext</a> is the <strong>central configuration and runtime
+container</strong> for JetLeaf-based web applications. It extends the standard
+application context model to include HTTP server management, environment-aware
+configuration, and contextual dependency injection for web components.</p>
+<h3 id="core-responsibilities">Core Responsibilities</h3>
+<ul>
+<li>Bootstraps and manages the lifecycle of the embedded <a href="../jetleaf_web/WebServer-class.html">WebServer</a>.</li>
+<li>Provides access to a configured <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a>, which contains
+server-level attributes, configuration properties, and dispatchers.</li>
+<li>Integrates JetLeaf’s dependency injection system with web-specific
+awareness via <a href="../jetleaf_web/WebAwareProcessor-class.html">WebAwareProcessor</a>, automatically wiring dependencies
+such as:
+<ul>
+<li><a href="../jetleaf_web/ServerContextAware-class.html">ServerContextAware</a></li>
+<li><a href="../jetleaf_web/ContextPathAware-class.html">ContextPathAware</a></li>
+<li><a href="../jetleaf_web/WebServerAware-class.html">WebServerAware</a></li>
+</ul>
+</li>
+<li>Propagates web environment properties (e.g., <code>server.context-path</code>)
+to the runtime <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a>.</li>
+</ul>
+<h3 id="initialization-sequence">Initialization Sequence</h3>
+<ol>
+<li>The pod factory is prepared and enhanced with a <a href="../jetleaf_web/WebAwareProcessor-class.html">WebAwareProcessor</a>.</li>
+<li>Web-related dependency interfaces are ignored for autowiring to avoid
+premature resolution.</li>
+<li>The context registers resolvable dependencies for <a href="../jetleaf_web/WebApplicationContext-class.html">WebApplicationContext</a>.</li>
+<li>The web server is created using a discovered <a href="../jetleaf_web/WebServerFactory-class.html">WebServerFactory</a> pod.</li>
+<li>The context path and other environment values are synchronized with
+the running <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a>.</li>
+</ol>
+<h3 id="typical-usage">Typical Usage</h3>
+<p>The <code>ServerWebApplicationContext</code> is automatically used in JetLeaf web
+environments but may be extended or customized for specialized runtime
+behavior, such as integrating additional dispatchers or alternative
+server implementations.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext-class.html">AbstractApplicationContext</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext-class.html">GenericApplicationContext</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext-class.html">AnnotationConfigApplicationContext</a></li>
+      <li>ServerWebApplicationContext</li>
+    </ul>
+  </dd>
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/ConfigurableWebApplicationContext-class.html">ConfigurableWebApplicationContext</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="ServerWebApplicationContext.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/ServerWebApplicationContext.html">ServerWebApplicationContext.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/ServerWebApplicationContext-class.html">ServerWebApplicationContext</a> instance.
+        </dd>
+        <dt id="ServerWebApplicationContext.all" class="callable">
+          <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/ServerWebApplicationContext.all.html">ServerWebApplicationContext.all</a></span><span class="signature">(<span class="parameter" id="all-param-parent"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>?</span> <span class="parameter-name">parent</span>, </span><span class="parameter" id="all-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/DefaultListablePodFactory-class.html">DefaultListablePodFactory</a>?</span> <span class="parameter-name">podFactory</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/ServerWebApplicationContext-class.html">ServerWebApplicationContext</a> with the specified parent
+context and <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodFactory-class.html">PodFactory</a>.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="logger" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/logger.html">logger</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/jetleaf_logging/1.0.1/logging/Log-class.html">Log</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The logger associated with this application context.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="podFactory" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/podFactory.html">podFactory</a></span>
+  <span class="signature">&#8596; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The pod factory associated with this application context.
+  <div class="features"><span class="feature">getter/setter pair</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="addApplicationListener" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/addApplicationListener.html">addApplicationListener</a></span><span class="signature">(<wbr><span class="parameter" id="addApplicationListener-param-listener"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEvent-class.html">ApplicationEvent</a></span>&gt;</span></span> <span class="parameter-name">listener</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds an <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a> to be notified of all <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEvent-class.html">ApplicationEvent</a>s.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="addPodFactoryPostProcessor" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/addPodFactoryPostProcessor.html">addPodFactoryPostProcessor</a></span><span class="signature">(<wbr><span class="parameter" id="addPodFactoryPostProcessor-param-processor"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodFactoryPostProcessor-class.html">PodFactoryPostProcessor</a></span> <span class="parameter-name">processor</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds a <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodFactoryPostProcessor-class.html">PodFactoryPostProcessor</a> to be applied to the pod factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="addPodProcessor" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/addPodProcessor.html">addPodProcessor</a></span><span class="signature">(<wbr><span class="parameter" id="addPodProcessor-param-processor"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodProcessor-class.html">PodProcessor</a></span> <span class="parameter-name">processor</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a new pod-aware processor.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="addSingletonCallback" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/addSingletonCallback.html">addSingletonCallback</a></span><span class="signature">(<wbr><span class="parameter" id="addSingletonCallback-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="addSingletonCallback-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, </span><span class="parameter" id="addSingletonCallback-param-callback"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Consumer.html">Consumer</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">callback</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Add a callback to be executed when the singleton associated with <code>name</code> is initialized.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="cancelSetup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/cancelSetup.html">cancelSetup</a></span><span class="signature">(<wbr><span class="parameter" id="cancelSetup-param-exception"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">exception</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Cancels the setup process due to the provided <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodException-class.html">PodException</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="clearMetadataCache" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/clearMetadataCache.html">clearMetadataCache</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears the internal metadata cache.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="clearSingletonCache" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/clearSingletonCache.html">clearSingletonCache</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Clears all cached singleton pods.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="close" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/close.html">close</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Closes this resource, relinquishing any underlying resources.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="completePodFactoryInitialization" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/completePodFactoryInitialization.html">completePodFactoryInitialization</a></span><span class="signature">(<wbr><span class="parameter" id="completePodFactoryInitialization-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Finalizes the initialization of the <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsDefinition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/containsDefinition.html">containsDefinition</a></span><span class="signature">(<wbr><span class="parameter" id="containsDefinition-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns <code>true</code> if this registry contains a pod with the given <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsLocalPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/containsLocalPod.html">containsLocalPod</a></span><span class="signature">(<wbr><span class="parameter" id="containsLocalPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if a pod with the given name is registered locally in this factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/containsPod.html">containsPod</a></span><span class="signature">(<wbr><span class="parameter" id="containsPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if a pod with the given name is registered in the factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsSingleton" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/containsSingleton.html">containsSingleton</a></span><span class="signature">(<wbr><span class="parameter" id="containsSingleton-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns <code>true</code> if this registry contains a pod with the given <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="containsType" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/containsType.html">containsType</a></span><span class="signature">(<wbr><span class="parameter" id="containsType-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="containsType-param-allowPodProviderInit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowPodProviderInit</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the factory contains a pod of the specified type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="copyConfigurationFrom" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/copyConfigurationFrom.html">copyConfigurationFrom</a></span><span class="signature">(<wbr><span class="parameter" id="copyConfigurationFrom-param-otherFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurablePodFactory-class.html">ConfigurablePodFactory</a></span> <span class="parameter-name">otherFactory</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Copies configuration from another factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="createWebServer" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/createWebServer.html">createWebServer</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/WebServer-class.html">WebServer</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  
+  
+
+</dd>
+
+        <dt id="destroyPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/destroyPod.html">destroyPod</a></span><span class="signature">(<wbr><span class="parameter" id="destroyPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, </span><span class="parameter" id="destroyPod-param-podInstance"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">podInstance</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Destroys a pod instance by name and instance.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="destroyPods" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/destroyPods.html">destroyPods</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Destroys all managed pods in the given
+<a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="destroyScopedPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/destroyScopedPod.html">destroyScopedPod</a></span><span class="signature">(<wbr><span class="parameter" id="destroyScopedPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Destroys all pods in the specified scope.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="destroySingletons" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/destroySingletons.html">destroySingletons</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Destroys all singleton pods in the factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="doClose" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/doClose.html">doClose</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Template method for actual cleanup logic when the context is closed.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="doGetFreshPodFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/doGetFreshPodFactory.html">doGetFreshPodFactory</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a fresh <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a> for this context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="doSetup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/doSetup.html">doSetup</a></span><span class="signature">(<wbr><span class="parameter" id="doSetup-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Performs any extra processing before the <code>podFactory</code> is finalized.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="doStart" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/doStart.html">doStart</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Template method invoked during <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/start.html">start</a> to perform startup logic.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="doStop" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/doStop.html">doStop</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Template method invoked during <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/stop.html">stop</a> to perform shutdown logic.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="findAllAnnotationsOnPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/findAllAnnotationsOnPod.html">findAllAnnotationsOnPod</a></span><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="findAllAnnotationsOnPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, </span><span class="parameter" id="findAllAnnotationsOnPod-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Finds all annotations of the specified type on a pod.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="findAllPodFactoryCustomizersAndApplicationModulesCustomize" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/findAllPodFactoryCustomizersAndApplicationModulesCustomize.html">findAllPodFactoryCustomizersAndApplicationModulesCustomize</a></span><span class="signature">(<wbr><span class="parameter" id="findAllPodFactoryCustomizersAndApplicationModulesCustomize-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Finds all registered <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodFactoryCustomizer-class.html">PodFactoryCustomizer</a> and <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationModule-class.html">ApplicationModule</a> implementations and
+invokes them to customize the provided <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodFactory-class.html">PodFactory</a> instance
+before the container is setup.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="findAnnotationOnPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/findAnnotationOnPod.html">findAnnotationOnPod</a></span><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="findAnnotationOnPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, </span><span class="parameter" id="findAnnotationOnPod-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">A?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Finds a specific annotation on a pod.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="findPodExpressionResolver" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/findPodExpressionResolver.html">findPodExpressionResolver</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Locates and registers a <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodExpressionResolver-class.html">PodExpressionResolver</a> within the current
+<a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodFactory-class.html">PodFactory</a> context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="finishSetup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/finishSetup.html">finishSetup</a></span><span class="signature">(<wbr><span class="parameter" id="finishSetup-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Template method invoked during <a href="../jetleaf_web/ServerWebApplicationContext/setup.html">setup</a> to complete the setup process.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="get" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/get.html">get</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="get-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="get-param-args"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ArgumentValue-class.html">ArgumentValue</a></span>&gt;</span>?</span> <span class="parameter-name">args</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a pod instance by its type with optional arguments.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAlias" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getAlias.html">getAlias</a></span><span class="signature">(<wbr><span class="parameter" id="getAlias-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the primary name associated with the given <code>alias</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAliases" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getAliases.html">getAliases</a></span><span class="signature">(<wbr><span class="parameter" id="getAliases-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves all alias names for the specified pod.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAllowCircularReferences" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getAllowCircularReferences.html">getAllowCircularReferences</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the current circular reference setting.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAllowDefinitionOverriding" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getAllowDefinitionOverriding.html">getAllowDefinitionOverriding</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the current definition overriding setting.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAllowRawInjection" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getAllowRawInjection.html">getAllowRawInjection</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the current raw injection despite wrapping setting.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getApplicationEventBus" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getApplicationEventBus.html">getApplicationEventBus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> currently associated with
+this application context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getApplicationEventListeners" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getApplicationEventListeners.html">getApplicationEventListeners</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEvent-class.html">ApplicationEvent</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The list of <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a>s to be notified of application events.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getApplicationName" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getApplicationName.html">getApplicationName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the name of this application.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getApplicationStartup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getApplicationStartup.html">getApplicationStartup</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ApplicationStartup-class.html">ApplicationStartup</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Defines a contract for components that are aware of and can interact with
+an <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ApplicationStartup-class.html">ApplicationStartup</a> strategy.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getContextPath" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getContextPath.html">getContextPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the context path for this web application.
+  
+
+</dd>
+
+        <dt id="getConversionService" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getConversionService.html">getConversionService</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_convert/1.0.1/convert/ConversionService-class.html">ConversionService</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the currently assigned <a href="https://pub.dev/documentation/jetleaf_convert/1.0.1/convert/ConversionService-class.html">ConversionService</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getDefinition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getDefinition.html">getDefinition</a></span><span class="signature">(<wbr><span class="parameter" id="getDefinition-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodDefinition-class.html">PodDefinition</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieve the pod registered under <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getDefinitionByClass" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getDefinitionByClass.html">getDefinitionByClass</a></span><span class="signature">(<wbr><span class="parameter" id="getDefinitionByClass-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodDefinition-class.html">PodDefinition</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the pod definition for the specified class type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getDefinitionNames" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getDefinitionNames.html">getDefinitionNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a list of all pod names currently registered.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getDisplayName" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getDisplayName.html">getDisplayName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the display name of this application context.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getEnvironment" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getEnvironment.html">getEnvironment</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  🫘 Returns the <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> associated with the current context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getId" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getId.html">getId</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns a unique identifier for this application context.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getIsSetupReady" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getIsSetupReady.html">getIsSetupReady</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns true if the application context has been setup.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getLifecycleProcessor" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getLifecycleProcessor.html">getLifecycleProcessor</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; LifecycleProcessor</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  🆕 Returns the <code>LifecycleProcessor</code> associated with the current context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMainApplicationClass" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getMainApplicationClass.html">getMainApplicationClass</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the main application class.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMergedPodDefinition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getMergedPodDefinition.html">getMergedPodDefinition</a></span><span class="signature">(<wbr><span class="parameter" id="getMergedPodDefinition-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/RootPodDefinition-class.html">RootPodDefinition</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the merged pod definition for the specified pod name.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMessage" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getMessage.html">getMessage</a></span><span class="signature">(<wbr><span class="parameter" id="getMessage-param-code"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">code</span>, {</span><span class="parameter" id="getMessage-param-args"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span>?</span> <span class="parameter-name">args</span>, </span><span class="parameter" id="getMessage-param-locale"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a>?</span> <span class="parameter-name">locale</span>, </span><span class="parameter" id="getMessage-param-defaultMessage"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">defaultMessage</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieve a message for the given code.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMessageSource" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getMessageSource.html">getMessageSource</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/message/MessageSource-class.html">MessageSource</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the configured <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/message/MessageSource-class.html">MessageSource</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getNamedObject" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getNamedObject.html">getNamedObject</a></span><span class="signature">(<wbr><span class="parameter" id="getNamedObject-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, [</span><span class="parameter" id="getNamedObject-param-args"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ArgumentValue-class.html">ArgumentValue</a></span>&gt;</span>?</span> <span class="parameter-name">args</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a pod as a generic Object by its name with optional arguments.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getNumberOfPodDefinitions" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getNumberOfPodDefinitions.html">getNumberOfPodDefinitions</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the total number of pods registered.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getObject" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getObject.html">getObject</a></span><span class="signature">(<wbr><span class="parameter" id="getObject-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="getObject-param-args"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ArgumentValue-class.html">ArgumentValue</a></span>&gt;</span>?</span> <span class="parameter-name">args</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a pod as a generic Object by its type with optional arguments.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPackageName" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPackageName.html">getPackageName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Represents an abstraction for identifying the package that an object,
+resource, or service belongs to.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getParent" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getParent.html">getParent</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the parent context, if any.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getParentFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getParentFactory.html">getParentFactory</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodFactory-class.html">PodFactory</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the parent factory in the hierarchy, if any.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPhase" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/getPhase.html">getPhase</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Interface for objects that may participate in a phased process
+such as lifecycle management.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPod.html">getPod</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="getPod-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, [</span><span class="parameter" id="getPod-param-args"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ArgumentValue-class.html">ArgumentValue</a></span>&gt;</span>?</span> <span class="parameter-name">args</span>, </span><span class="parameter" id="getPod-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span>?</span> <span class="parameter-name">type</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a pod instance by its name with optional arguments.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodClass" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodClass.html">getPodClass</a></span><span class="signature">(<wbr><span class="parameter" id="getPodClass-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the Class object for the specified pod name.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodExpressionResolver" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodExpressionResolver.html">getPodExpressionResolver</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodExpressionResolver-class.html">PodExpressionResolver</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves the current expression resolver.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/getPodFactory.html">getPodFactory</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  🫘 Returns the underlying <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodFactoryPostProcessors" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodFactoryPostProcessors.html">getPodFactoryPostProcessors</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodFactoryPostProcessor-class.html">PodFactoryPostProcessor</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The list of <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodFactoryPostProcessor-class.html">PodFactoryPostProcessor</a>s to be applied to the pod factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodNames" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodNames.html">getPodNames</a></span><span class="signature">(<wbr><span class="parameter" id="getPodNames-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, {</span><span class="parameter" id="getPodNames-param-includeNonSingletons"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">includeNonSingletons</span> = <span class="default-value">false</span>, </span><span class="parameter" id="getPodNames-param-allowEagerInit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowEagerInit</span> = <span class="default-value">false</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves all pod names for pods of the specified type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodNamesForAnnotation" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodNamesForAnnotation.html">getPodNamesForAnnotation</a></span><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="getPodNamesForAnnotation-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves pod names for pods annotated with the specified annotation type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodNamesIterator" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodNamesIterator.html">getPodNamesIterator</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Iterator-class.html">Iterator</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns an iterator over all pod names in the factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodProcessorCount" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodProcessorCount.html">getPodProcessorCount</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Gets the number of registered pod-aware processors.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodProcessors" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodProcessors.html">getPodProcessors</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodProcessor-class.html">PodProcessor</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves all registered pod-aware processors.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodsOf" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodsOf.html">getPodsOf</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="getPodsOf-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span>, {</span><span class="parameter" id="getPodsOf-param-includeNonSingletons"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">includeNonSingletons</span> = <span class="default-value">false</span>, </span><span class="parameter" id="getPodsOf-param-allowEagerInit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowEagerInit</span> = <span class="default-value">false</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves all pods of the specified type as a map of name to instance.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPodsWithAnnotation" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getPodsWithAnnotation.html">getPodsWithAnnotation</a></span><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="getPodsWithAnnotation-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">A</span>&gt;</span></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves pods with the specified annotation as a map of name to instance.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getProvider" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getProvider.html">getProvider</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="getProvider-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">type</span>, {</span><span class="parameter" id="getProvider-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">podName</span>, </span><span class="parameter" id="getProvider-param-allowEagerInit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowEagerInit</span> = <span class="default-value">false</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ObjectProvider-class.html">ObjectProvider</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a provider for a pod, allowing for lazy or eager initialization.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRegisteredScope" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getRegisteredScope.html">getRegisteredScope</a></span><span class="signature">(<wbr><span class="parameter" id="getRegisteredScope-param-scopeName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">scopeName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodScope-class.html">PodScope</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves a registered scope by name.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRegisteredScopeNames" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getRegisteredScopeNames.html">getRegisteredScopeNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieves all registered scope names.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getServerContext" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getServerContext.html">getServerContext</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the underlying <a href="../jetleaf_web/ServerContext-class.html">ServerContext</a> associated with this web
+application context.
+  
+
+</dd>
+
+        <dt id="getSingleton" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getSingleton.html">getSingleton</a></span><span class="signature">(<wbr><span class="parameter" id="getSingleton-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, {</span><span class="parameter" id="getSingleton-param-allowEarlyReference"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowEarlyReference</span> = <span class="default-value">true</span>, </span><span class="parameter" id="getSingleton-param-factory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ObjectFactory-class.html">ObjectFactory</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span>?</span> <span class="parameter-name">factory</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Retrieve the pod registered under <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getSingletonCount" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getSingletonCount.html">getSingletonCount</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the total number of pods registered.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getSingletonNames" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getSingletonNames.html">getSingletonNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a list of all pod names currently registered.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getStartTime" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/getStartTime.html">getStartTime</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns the startup time of this context as a <a href="https://api.dart.dev/stable/3.9.2/dart-core/DateTime-class.html">DateTime</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getSupportingEnvironment" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getSupportingEnvironment.html">getSupportingEnvironment</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/AbstractEnvironment-class.html">AbstractEnvironment</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> that supports this component or context.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getWebServer" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/getWebServer.html">getWebServer</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/WebServer-class.html">WebServer</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <a href="../jetleaf_web/WebServer-class.html">WebServer</a> instance managing this web application context.
+  
+
+</dd>
+
+        <dt id="initializeApplicationEventBus" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/initializeApplicationEventBus.html">initializeApplicationEventBus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Initializes the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> for this context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="initializeLifecycleProcessor" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/initializeLifecycleProcessor.html">initializeLifecycleProcessor</a></span><span class="signature">(<wbr><span class="parameter" id="initializeLifecycleProcessor-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Initializes the <code>LifecycleProcessor</code> for this context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="initializeMessageSource" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/initializeMessageSource.html">initializeMessageSource</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Initializes the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/message/MessageSource-class.html">MessageSource</a> for this context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="invokePodFactoryPostProcessors" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/invokePodFactoryPostProcessors.html">invokePodFactoryPostProcessors</a></span><span class="signature">(<wbr><span class="parameter" id="invokePodFactoryPostProcessors-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invokes all registered pod factory post-processors on the given
+<a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isActive" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isActive.html">isActive</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns whether this application context is currently active.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isActuallyInCreation" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isActuallyInCreation.html">isActuallyInCreation</a></span><span class="signature">(<wbr><span class="parameter" id="isActuallyInCreation-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if a pod with the given name is currently being created.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isAlias" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/isAlias.html">isAlias</a></span><span class="signature">(<wbr><span class="parameter" id="isAlias-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks whether the given <code>name</code> is registered as an alias.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isAutoStartup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isAutoStartup.html">isAutoStartup</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  An extension of the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/Lifecycle-class.html">Lifecycle</a> interface for those objects that require
+to be started upon ApplicationContext refresh and/or shutdown in a
+particular order.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isAutowireCandidate" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isAutowireCandidate.html">isAutowireCandidate</a></span><span class="signature">(<wbr><span class="parameter" id="isAutowireCandidate-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, </span><span class="parameter" id="isAutowireCandidate-param-descriptor"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/DependencyDescriptor-class.html">DependencyDescriptor</a></span> <span class="parameter-name">descriptor</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if a pod is a candidate for autowiring for the given dependency.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isCachePodMetadata" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isCachePodMetadata.html">isCachePodMetadata</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if pod metadata caching is enabled.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isClosed" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isClosed.html">isClosed</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns whether this application context has been closed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isNameInUse" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/isNameInUse.html">isNameInUse</a></span><span class="signature">(<wbr><span class="parameter" id="isNameInUse-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns <code>true</code> if <code>name</code> is currently in use in this registry.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isPodProvider" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isPodProvider.html">isPodProvider</a></span><span class="signature">(<wbr><span class="parameter" id="isPodProvider-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span>, [</span><span class="parameter" id="isPodProvider-param-rpd"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/RootPodDefinition-class.html">RootPodDefinition</a>?</span> <span class="parameter-name">rpd</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the specified pod name refers to a pod provider.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isPrototype" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isPrototype.html">isPrototype</a></span><span class="signature">(<wbr><span class="parameter" id="isPrototype-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the specified pod is configured as a prototype.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isRunning" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isRunning.html">isRunning</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Check whether this component is currently running.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isSingleton" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isSingleton.html">isSingleton</a></span><span class="signature">(<wbr><span class="parameter" id="isSingleton-param-podName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">podName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the specified pod is configured as a singleton.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="isTypeMatch" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/isTypeMatch.html">isTypeMatch</a></span><span class="signature">(<wbr><span class="parameter" id="isTypeMatch-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="isTypeMatch-param-typeToMatch"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">typeToMatch</span>, [</span><span class="parameter" id="isTypeMatch-param-allowPodProviderInit"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowPodProviderInit</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Checks if the pod with the specified name matches the given type.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="postProcessPodFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/postProcessPodFactory.html">postProcessPodFactory</a></span><span class="signature">(<wbr><span class="parameter" id="postProcessPodFactory-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Post-processes the <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a> for this context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="preInstantiateSingletons" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/preInstantiateSingletons.html">preInstantiateSingletons</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Pre-instantiates all singleton pods.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="preparePodFactory" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/preparePodFactory.html">preparePodFactory</a></span><span class="signature">(<wbr><span class="parameter" id="preparePodFactory-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Prepares the <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a> for this context.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="prepareSetup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/prepareSetup.html">prepareSetup</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Prepares the application context for a setup.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="publishEvent" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/publishEvent.html">publishEvent</a></span><span class="signature">(<wbr><span class="parameter" id="publishEvent-param-event"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEvent-class.html">ApplicationEvent</a></span> <span class="parameter-name">event</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Publishes the given <code>event</code> to all registered <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a>s.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="refreshPodFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/refreshPodFactory.html">refreshPodFactory</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="register" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/register.html">register</a></span><span class="signature">(<wbr><span class="parameter" id="register-param-registrar"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/PodRegistrar-class.html">PodRegistrar</a></span> <span class="parameter-name">registrar</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a <code>registrar</code> that declares pods into this registry.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerAlias" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/registerAlias.html">registerAlias</a></span><span class="signature">(<wbr><span class="parameter" id="registerAlias-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="registerAlias-param-alias"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">alias</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers an alias for an existing name in the registry.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerAnnotationConfigProcessors" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/registerAnnotationConfigProcessors.html">registerAnnotationConfigProcessors</a></span><span class="signature">(<wbr><span class="parameter" id="registerAnnotationConfigProcessors-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span>, [</span><span class="parameter" id="registerAnnotationConfigProcessors-param-source"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">source</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers the internal annotation configuration processors.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerClass" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/registerClass.html">registerClass</a></span><span class="signature">(<wbr>{<span class="parameter" id="registerClass-param-classes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span>&gt;</span>?</span> <span class="parameter-name">classes</span>, </span><span class="parameter" id="registerClass-param-mainClass"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span>?</span> <span class="parameter-name">mainClass</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Behavior
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerDefinition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/registerDefinition.html">registerDefinition</a></span><span class="signature">(<wbr><span class="parameter" id="registerDefinition-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="registerDefinition-param-pod"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodDefinition-class.html">PodDefinition</a></span> <span class="parameter-name">pod</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Register a new <code>pod</code> under the given <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerIgnoredDependency" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerIgnoredDependency.html">registerIgnoredDependency</a></span><span class="signature">(<wbr><span class="parameter" id="registerIgnoredDependency-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a dependency type that should be ignored during autowiring.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerListeners" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerListeners.html">registerListeners</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers all <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a> pods in the <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerPod" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/registerPod.html">registerPod</a></span><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span><span class="signature">(<wbr><span class="parameter" id="registerPod-param-podClass"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span> <span class="parameter-name">podClass</span>, {</span><span class="parameter" id="registerPod-param-customizer"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Consumer.html">Consumer</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/Spec-class.html">Spec</a><span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></span>&gt;</span>?</span> <span class="parameter-name">customizer</span>, </span><span class="parameter" id="registerPod-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">name</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a pod of type <code>T</code> in the registry.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerPodProcessors" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerPodProcessors.html">registerPodProcessors</a></span><span class="signature">(<wbr><span class="parameter" id="registerPodProcessors-param-podFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a></span> <span class="parameter-name">podFactory</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers all <em>PodAware</em> processors into the given
+<a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ConfigurableListablePodFactory-class.html">ConfigurableListablePodFactory</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerResolvableDependency" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerResolvableDependency.html">registerResolvableDependency</a></span><span class="signature">(<wbr><span class="parameter" id="registerResolvableDependency-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, [</span><span class="parameter" id="registerResolvableDependency-param-autowiredValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">autowiredValue</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a resolvable dependency for autowiring.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerScope" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerScope.html">registerScope</a></span><span class="signature">(<wbr><span class="parameter" id="registerScope-param-scopeName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">scopeName</span>, </span><span class="parameter" id="registerScope-param-scope"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodScope-class.html">PodScope</a></span> <span class="parameter-name">scope</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Registers a new scope with the given name.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="registerSingleton" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/registerSingleton.html">registerSingleton</a></span><span class="signature">(<wbr><span class="parameter" id="registerSingleton-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, </span><span class="parameter" id="registerSingleton-param-type"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a></span> <span class="parameter-name">type</span>, {</span><span class="parameter" id="registerSingleton-param-object"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ObjectHolder-class.html">ObjectHolder</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span>?</span> <span class="parameter-name">object</span>, </span><span class="parameter" id="registerSingleton-param-factory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ObjectFactory-class.html">ObjectFactory</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span>?</span> <span class="parameter-name">factory</span></span>})
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Register a new <code>pod</code> under the given <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeAlias" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/removeAlias.html">removeAlias</a></span><span class="signature">(<wbr><span class="parameter" id="removeAlias-param-alias"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">alias</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Removes an alias from the registry.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeDefinition" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/removeDefinition.html">removeDefinition</a></span><span class="signature">(<wbr><span class="parameter" id="removeDefinition-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Remove the pod associated with <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="removeSingleton" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/removeSingleton.html">removeSingleton</a></span><span class="signature">(<wbr><span class="parameter" id="removeSingleton-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Remove the pod associated with <code>name</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="resetCommonCaches" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/resetCommonCaches.html">resetCommonCaches</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Resets common internal caches maintained by the container.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="resolveDependency" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/resolveDependency.html">resolveDependency</a></span><span class="signature">(<wbr><span class="parameter" id="resolveDependency-param-descriptor"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/DependencyDescriptor-class.html">DependencyDescriptor</a></span> <span class="parameter-name">descriptor</span>, [</span><span class="parameter" id="resolveDependency-param-candidates"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span> <span class="parameter-name">candidates</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Resolves a dependency based on the provided descriptor.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="scan" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AnnotationConfigApplicationContext/scan.html">scan</a></span><span class="signature">(<wbr><span class="parameter" id="scan-param-basePackages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">basePackages</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  <strong>Scans the given base packages for annotated components</strong>
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setAllowCircularReferences" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/setAllowCircularReferences.html">setAllowCircularReferences</a></span><span class="signature">(<wbr><span class="parameter" id="setAllowCircularReferences-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Allows or disallows circular references between pods.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setAllowDefinitionOverriding" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/setAllowDefinitionOverriding.html">setAllowDefinitionOverriding</a></span><span class="signature">(<wbr><span class="parameter" id="setAllowDefinitionOverriding-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Allows or disallows overriding of pod definitions.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setAllowRawInjection" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/setAllowRawInjection.html">setAllowRawInjection</a></span><span class="signature">(<wbr><span class="parameter" id="setAllowRawInjection-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Allows or disallows raw injection despite wrapping.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setApplicationEventBus" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setApplicationEventBus.html">setApplicationEventBus</a></span><span class="signature">(<wbr><span class="parameter" id="setApplicationEventBus-param-applicationEventBus"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a></span> <span class="parameter-name">applicationEventBus</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> for this application context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setApplicationStartup" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/setApplicationStartup.html">setApplicationStartup</a></span><span class="signature">(<wbr><span class="parameter" id="setApplicationStartup-param-applicationStartup"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ApplicationStartup-class.html">ApplicationStartup</a></span> <span class="parameter-name">applicationStartup</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Defines a contract for components that are aware of and can interact with
+an <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/ApplicationStartup-class.html">ApplicationStartup</a> strategy.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setCachePodMetadata" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setCachePodMetadata.html">setCachePodMetadata</a></span><span class="signature">(<wbr><span class="parameter" id="setCachePodMetadata-param-cachePodMetadata"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">cachePodMetadata</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Enables or disables caching of pod metadata for performance optimization.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setConversionService" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setConversionService.html">setConversionService</a></span><span class="signature">(<wbr><span class="parameter" id="setConversionService-param-conversionService"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_convert/1.0.1/convert/ConversionService-class.html">ConversionService</a></span> <span class="parameter-name">conversionService</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets an assigned <a href="https://pub.dev/documentation/jetleaf_convert/1.0.1/convert/ConversionService-class.html">ConversionService</a>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setEnvironment" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setEnvironment.html">setEnvironment</a></span><span class="signature">(<wbr><span class="parameter" id="setEnvironment-param-environment"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a></span> <span class="parameter-name">environment</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the <a href="https://pub.dev/documentation/jetleaf_env/1.0.1/env/Environment-class.html">Environment</a> that this component runs in.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setMainApplicationClass" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setMainApplicationClass.html">setMainApplicationClass</a></span><span class="signature">(<wbr><span class="parameter" id="setMainApplicationClass-param-mainApplicationClass"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">mainApplicationClass</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the main application class.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setMessageSource" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setMessageSource.html">setMessageSource</a></span><span class="signature">(<wbr><span class="parameter" id="setMessageSource-param-messageSource"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/message/MessageSource-class.html">MessageSource</a></span> <span class="parameter-name">messageSource</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/message/MessageSource-class.html">MessageSource</a> used for resolving internationalized messages.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setParent" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/GenericApplicationContext/setParent.html">setParent</a></span><span class="signature">(<wbr><span class="parameter" id="setParent-param-parent"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a></span> <span class="parameter-name">parent</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the parent of this application context.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setParentFactory" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setParentFactory.html">setParentFactory</a></span><span class="signature">(<wbr><span class="parameter" id="setParentFactory-param-parentFactory"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodFactory-class.html">PodFactory</a>?</span> <span class="parameter-name">parentFactory</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the parent factory for this hierarchical factory.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setPodExpressionResolver" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/setPodExpressionResolver.html">setPodExpressionResolver</a></span><span class="signature">(<wbr><span class="parameter" id="setPodExpressionResolver-param-valueResolver"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/PodExpressionResolver-class.html">PodExpressionResolver</a>?</span> <span class="parameter-name">valueResolver</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the expression resolver for resolving expressions in pod definitions.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setup" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/setup.html">setup</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Refreshes this application context:
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="start" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/start.html">start</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A common interface defining methods for start/stop lifecycle control.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="stop" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/AbstractApplicationContext/stop.html">stop</a></span><span class="signature">(<wbr>[<span class="parameter" id="stop-param-callback"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Runnable-class.html">Runnable</a>?</span> <span class="parameter-name">callback</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-async/FutureOr-class.html">FutureOr</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Stop this component, typically in a synchronous fashion.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="supports" class="callable">
+  <span class="name"><a href="../jetleaf_web/ServerWebApplicationContext/supports.html">supports</a></span><span class="signature">(<wbr><span class="parameter" id="supports-param-applicationType"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationType.html">ApplicationType</a></span> <span class="parameter-name">applicationType</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns whether this context supports the given <code>applicationType</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">ServerWebApplicationContext class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

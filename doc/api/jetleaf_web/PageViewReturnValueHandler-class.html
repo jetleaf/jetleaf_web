@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the PageViewReturnValueHandler class from the jetleaf_web library, for the Dart programming language.">
+  <title>PageViewReturnValueHandler class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">PageViewReturnValueHandler class</li>
+  </ol>
+  <div class="self-name">PageViewReturnValueHandler</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;PageViewReturnValueHandler-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">PageViewReturnValueHandler</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Handles controller method return values of type <a href="../jetleaf_web/PageView-class.html">PageView</a> for rendering
+template-based web pages with advanced features like redirect fallbacks.</p>
+<p>This resolver specializes in processing <a href="../jetleaf_web/PageView-class.html">PageView</a> instances, which provide
+a rich representation of web pages including template paths, attributes,
+HTTP status codes, and optional redirect capabilities for error handling.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>PageView Processing</strong>: Handles <a href="../jetleaf_web/PageView-class.html">PageView</a> instances with template paths and attributes</li>
+<li><strong>Redirect Fallbacks</strong>: Supports automatic fallback to redirect templates when primary templates are missing</li>
+<li><strong>Status Code Management</strong>: Respects HTTP status codes specified in <a href="../jetleaf_web/PageView-class.html">PageView</a> instances</li>
+<li><strong>Template Validation</strong>: Verifies template existence before rendering attempts</li>
+<li><strong>Attribute Propagation</strong>: Passes page attributes to templates for dynamic content</li>
+</ul>
+<h3 id="resolution-scenarios">Resolution Scenarios</h3>
+<p>This handler activates when:</p>
+<ul>
+<li>Return value is a <a href="../jetleaf_web/PageView-class.html">PageView</a> instance</li>
+<li>The declaring class is annotated with <code>@Controller</code> (but NOT <code>@RestController</code>)</li>
+<li>OR the declaring class is annotated with <code>@WebView</code></li>
+<li>OR the request expects HTML content (Content-Type: text/html)</li>
+</ul>
+<h3 id="pageview-resolution-process">PageView Resolution Process</h3>
+<p>When a <a href="../jetleaf_web/PageView-class.html">PageView</a> return value is detected:</p>
+<ol>
+<li><strong>Primary Template Check</strong>: Attempts to resolve the main template path</li>
+<li><strong>Primary Rendering</strong>: If primary template exists, renders it with attributes</li>
+<li><strong>Redirect Fallback</strong>: If primary template missing and redirect is configured, attempts redirect template</li>
+<li><strong>Error Handling</strong>: Throws exception if no templates are available</li>
+<li><strong>Response Configuration</strong>: Sets appropriate status codes and content types</li>
+</ol>
+<h3 id="example-usage">Example Usage</h3>
+<pre class="language-dart"><code class="language-dart">@Controller()
+class WebsiteController {
+  @GetMapping("/home")
+  PageView getHomePage() {
+    return PageView("templates/home/main")
+      ..addAttribute("title", "Welcome to Our Site")
+      ..addAttribute("featuredProducts", getFeaturedProducts())
+      ..setStatus(HttpStatus.OK);
+  }
+  
+  @GetMapping("/legacy-page")
+  PageView getLegacyPage() {
+    return PageView("templates/legacy/old-page")
+      ..setRedirectPath("templates/errors/moved-permanently")
+      ..setRedirectStatus(HttpStatus.MOVED_PERMANENTLY);
+  }
+}
+</code></pre>
+<h3 id="redirect-fallback-mechanism">Redirect Fallback Mechanism</h3>
+<p>The handler supports sophisticated redirect behavior:</p>
+<ul>
+<li><strong>Primary Template Missing</strong>: When main template doesn't exist</li>
+<li><strong>Redirect Configuration</strong>: <a href="../jetleaf_web/PageView-class.html">PageView</a> specifies alternative template and status</li>
+<li><strong>Automatic Switching</strong>: Seamlessly falls back to redirect template</li>
+<li><strong>Status Code Propagation</strong>: Uses redirect-specific status codes</li>
+</ul>
+<h3 id="attribute-management">Attribute Management</h3>
+<p>The handler automatically provides templates with:</p>
+<ul>
+<li><strong>PageView Attributes</strong>: User-defined data from the <a href="../jetleaf_web/PageView-class.html">PageView</a> instance</li>
+<li><strong>Request Context</strong>: Framework-provided context like request path</li>
+<li><strong>Merged Data</strong>: Combined attributes for comprehensive template access</li>
+</ul>
+<h3 id="template-resolution">Template Resolution</h3>
+<p>Uses <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a> for robust template location:</p>
+<ul>
+<li><strong>Path Resolution</strong>: Converts logical paths to physical template files</li>
+<li><strong>Existence Verification</strong>: Validates template availability</li>
+<li><strong>Error Reporting</strong>: Clear error messages for debugging</li>
+<li><strong>Flexible Locations</strong>: Supports various template storage strategies</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<ul>
+<li>Specialized for traditional web MVC applications (not REST APIs)</li>
+<li>Works seamlessly with <code>@WebView</code> annotated components</li>
+<li>Integrates with JTL template engine for rendering</li>
+<li>Provides meaningful error handling for template issues</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/ReturnValueHandler-class.html">ReturnValueHandler</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="PageViewReturnValueHandler.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/PageViewReturnValueHandler/PageViewReturnValueHandler.html">PageViewReturnValueHandler.new</a></span><span class="signature">(<span class="parameter" id="-param-_assetBuilder"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a></span> <span class="parameter-name">_assetBuilder</span>, </span><span class="parameter" id="-param-_jtl"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/Jtl-class.html">Jtl</a></span> <span class="parameter-name">_jtl</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/PageViewReturnValueHandler-class.html">PageViewReturnValueHandler</a> with the specified dependencies.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="canHandle" class="callable">
+  <span class="name"><a href="../jetleaf_web/PageViewReturnValueHandler/canHandle.html">canHandle</a></span><span class="signature">(<wbr><span class="parameter" id="canHandle-param-method"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a>?</span> <span class="parameter-name">method</span>, </span><span class="parameter" id="canHandle-param-returnValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">returnValue</span>, </span><span class="parameter" id="canHandle-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Determines whether this handler can handle the given return value.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="equalizedProperties" class="callable">
+  <span class="name"><a href="../jetleaf_web/PageViewReturnValueHandler/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getSupportedMediaTypes" class="callable">
+  <span class="name"><a href="../jetleaf_web/PageViewReturnValueHandler/getSupportedMediaTypes.html">getSupportedMediaTypes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the list of media types this handler supports by default.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="handleReturnValue" class="callable">
+  <span class="name"><a href="../jetleaf_web/PageViewReturnValueHandler/handleReturnValue.html">handleReturnValue</a></span><span class="signature">(<wbr><span class="parameter" id="handleReturnValue-param-returnValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">returnValue</span>, </span><span class="parameter" id="handleReturnValue-param-method"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a>?</span> <span class="parameter-name">method</span>, </span><span class="parameter" id="handleReturnValue-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span><span class="parameter" id="handleReturnValue-param-response"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a></span> <span class="parameter-name">response</span>, </span><span class="parameter" id="handleReturnValue-param-handler"><span class="type-annotation"><a href="../jetleaf_web/HandlerMethod-class.html">HandlerMethod</a>?</span> <span class="parameter-name">handler</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Processes the return value and writes the appropriate response.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">PageViewReturnValueHandler class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

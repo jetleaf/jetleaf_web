@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ServerStartingEvent.new constructor from Class ServerStartingEvent from the jetleaf_web library, for the Dart programming language.">
+  <title>ServerStartingEvent.new constructor - ServerStartingEvent - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a></li>
+    <li class="self-crumb">ServerStartingEvent.new constructor</li>
+  </ol>
+  <div class="self-name">ServerStartingEvent.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;ServerStartingEvent-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ServerStartingEvent</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">ServerStartingEvent</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-source"><span class="type-annotation"><a href="../../jetleaf_web/WebServer-class.html">WebServer</a></span> <span class="parameter-name">source</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <h1 id="serverstartingevent">ServerStartingEvent</h1>
+<p>Represents the <strong>initial phase of the server startup lifecycle</strong> within the
+JetLeaf Web framework. This event is published right before the web server
+begins binding to its configured address and port, allowing components,
+interceptors, or registered application listeners to perform initialization
+logic prior to network activation.</p>
+<p>This event provides a synchronization point for dependency lifecycles and
+monitoring tools. For example, logging or configuration modules can listen
+to this event to prepare runtime contexts, preload caches, or announce
+startup activities.</p>
+<p>The <a href="../../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a> is always followed by a <a href="../../jetleaf_web/ServerStartedEvent-class.html">ServerStartedEvent</a> once
+the underlying I/O layer has completed binding and begins accepting
+connections.</p>
+<h2 id="typical-usage">Typical Usage</h2>
+<ul>
+<li>Emitted through the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> during the startup of
+<a href="../../jetleaf_web/WebServer-class.html">WebServer</a> implementations such as <a href="../../jetleaf_web/IoWebServer-class.html">IoWebServer</a>.</li>
+<li>Observed by lifecycle-aware components implementing
+<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventListener-class.html">ApplicationEventListener</a>.</li>
+<li>Commonly used to initialize metrics, start background workers, or perform
+preflight checks.</li>
+</ul>
+<h2 id="event-ordering">Event Ordering</h2>
+<ol>
+<li><a href="../../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a></li>
+<li><a href="../../jetleaf_web/ServerStartedEvent-class.html">ServerStartedEvent</a></li>
+</ol>
+<h2 id="source">Source</h2>
+<p>The <code>source</code> property references the <a href="../../jetleaf_web/WebServer-class.html">WebServer</a> instance that triggered
+this event, enabling listeners to access runtime information such as host,
+port, and configuration details.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">ServerStartingEvent(super.source);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ServerStartingEvent-class.html">ServerStartingEvent</a></li>
+    <li class="self-crumb">ServerStartingEvent.new constructor</li>
+</ol>
+
+    <h5>ServerStartingEvent class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

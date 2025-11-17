@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="jetleaf_web API docs, for the Dart programming language.">
+  <title>jetleaf_web - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://jetleaf.hapnium.com">jetleaf_web package</a></li>
+  </ol>
+  <div class="self-name">jetleaf_web</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <h1 id="-jetleaf-web--http-server--web-framework">🌐 JetLeaf Web — HTTP Server &amp; Web Framework</h1>
+<p><a href="https://pub.dev/packages/jetleaf_web"><img src="https://img.shields.io/badge/version-1.0.0-blue" alt="pub package"></a>
+<a href="#license"><img src="https://img.shields.io/badge/license-JetLeaf-green" alt="License"></a>
+<a href="https://dart.dev"><img src="https://img.shields.io/badge/sdk-%3E%3D3.9.0-blue" alt="Dart SDK"></a></p>
+<p>A comprehensive web framework for building HTTP servers, RESTful APIs, and dynamic web applications with JetLeaf.</p>
+<h2 id="-overview">📋 Overview</h2>
+<p><code>jetleaf_web</code> provides everything needed to build production-grade web applications:</p>
+<ul>
+<li><strong>HTTP Server</strong> — Multi-threaded server with keep-alive and compression</li>
+<li><strong>RESTful Routing</strong> — Declarative route definition with <code>@RestController</code> and HTTP method annotations</li>
+<li><strong>Request/Response Handling</strong> — Type-safe HTTP message processing</li>
+<li><strong>Content Negotiation</strong> — Automatic format selection (JSON, XML, YAML, Form data)</li>
+<li><strong>HTTP Message Converters</strong> — Built-in converters for common types</li>
+<li><strong>Multipart File Uploads</strong> — Stream-based file handling</li>
+<li><strong>Exception Handling</strong> — Centralized error resolution</li>
+<li><strong>Session Management</strong> — HTTP session support with pluggable storage</li>
+<li><strong>Template Rendering</strong> — Integration with JTL template engine</li>
+<li><strong>CORS &amp; Security</strong> — Cross-origin and CSRF protection</li>
+</ul>
+<h2 id="-quick-start">🚀 Quick Start</h2>
+<h3 id="installation">Installation</h3>
+<p>Add <code>jetleaf_web</code> to your <code>pubspec.yaml</code>:</p>
+<pre class="language-yaml"><code class="language-yaml">dependencies:
+  jetleaf_core:
+    path: ./jetleaf_core
+  jetleaf_web:
+    path: ./jetleaf_web
+</code></pre>
+<h3 id="basic-web-application">Basic Web Application</h3>
+<pre class="language-dart"><code class="language-dart">import 'package:jetleaf_core/core.dart';
+import 'package:jetleaf_web/jetleaf_web.dart';
+
+// Define a REST controller
+@RestController('/api/products')
+class ProductController {
+  final ProductService _service;
+
+  @Autowired
+  ProductController(this._service);
+
+  // GET /api/products
+  @GetMapping('/')
+  Future&lt;HttpResponse&gt; listProducts() async {
+    final products = await _service.getAllProducts();
+    return HttpResponse.ok(products);
+  }
+
+  // GET /api/products/:id
+  @GetMapping('/:id')
+  Future&lt;HttpResponse&gt; getProduct(
+    @PathVariable String id,
+    HttpRequest request,
+  ) async {
+    final product = await _service.getProductById(id);
+    if (product == null) {
+      return HttpResponse.notFound();
+    }
+    return HttpResponse.ok(product);
+  }
+
+  // POST /api/products
+  @PostMapping('/')
+  Future&lt;HttpResponse&gt; createProduct(
+    @RequestBody Product product,
+    HttpRequest request,
+  ) async {
+    final created = await _service.createProduct(product);
+    return HttpResponse.created(created);
+  }
+
+  // PUT /api/products/:id
+  @PutMapping('/:id')
+  Future&lt;HttpResponse&gt; updateProduct(
+    @PathVariable String id,
+    @RequestBody Product product,
+    HttpRequest request,
+  ) async {
+    final updated = await _service.updateProduct(id, product);
+    if (updated == null) {
+      return HttpResponse.notFound();
+    }
+    return HttpResponse.ok(updated);
+  }
+
+  // DELETE /api/products/:id
+  @DeleteMapping('/:id')
+  Future&lt;HttpResponse&gt; deleteProduct(
+    @PathVariable String id,
+    HttpRequest request,
+  ) async {
+    await _service.deleteProduct(id);
+    return HttpResponse.noContent();
+  }
+}
+
+// Start the application
+void main() async {
+  final context = AnnotationConfigApplicationContext(['package:myapp']);
+  final server = context.getPod&lt;WebServer&gt;();
+  
+  await server.start(port: 8080);
+  print('🚀 Server running on http://localhost:8080');
+}
+</code></pre>
+<h2 id="-architecture">🏗️ Architecture</h2>
+<h3 id="requestresponse-pipeline">Request/Response Pipeline</h3>
+<pre class="language-dart"><code>HTTP Request
+    ↓
+Content Negotiation (Accept header)
+    ↓
+Route Matching
+    ↓
+Method Argument Resolution
+    ↓
+Controller Method Execution
+    ↓
+Return Value Handling
+    ↓
+HTTP Message Conversion
+    ↓
+HTTP Response
+</code></pre>
+<h3 id="key-components">Key Components</h3>
+<pre class="language-dart"><code>WebServer
+├── RequestDispatcher
+├── HandlerAdapter (method invocation)
+├── ArgumentResolver (parameter injection)
+├── ReturnValueHandler (response creation)
+├── ContentNegotiationResolver
+├── HttpMessageConverterRegistry
+└── ExceptionResolver
+</code></pre>
+<h2 id="-key-features">📚 Key Features</h2>
+<h3 id="1-request-mapping">1. Request Mapping</h3>
+<p><strong>Path-based routing</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/api/users')
+class UserController {
+  // GET /api/users
+  @GetMapping('/')
+  Future&lt;HttpResponse&gt; list() { }
+
+  // GET /api/users/123
+  @GetMapping('/:id')
+  Future&lt;HttpResponse&gt; getById(@PathVariable String id) { }
+
+  // POST /api/users
+  @PostMapping('/')
+  Future&lt;HttpResponse&gt; create(@RequestBody User user) { }
+
+  // PUT /api/users/123
+  @PutMapping('/:id')
+  Future&lt;HttpResponse&gt; update(
+    @PathVariable String id,
+    @RequestBody User user,
+  ) { }
+
+  // DELETE /api/users/123
+  @DeleteMapping('/:id')
+  Future&lt;HttpResponse&gt; delete(@PathVariable String id) { }
+}
+</code></pre>
+<h3 id="2-parameter-resolution">2. Parameter Resolution</h3>
+<p><strong>Extract data from requests</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/api')
+class DataController {
+  // Path variables
+  @GetMapping('/users/:userId/posts/:postId')
+  Future&lt;HttpResponse&gt; getPost(
+    @PathVariable String userId,
+    @PathVariable String postId,
+  ) { }
+
+  // Query parameters
+  @GetMapping('/search')
+  Future&lt;HttpResponse&gt; search(
+    @RequestParam String? query,
+    @RequestParam int page = 1,
+    @RequestParam int size = 10,
+  ) { }
+
+  // Request body
+  @PostMapping('/create')
+  Future&lt;HttpResponse&gt; create(@RequestBody Map&lt;String, dynamic&gt; data) { }
+
+  // Request headers
+  @GetMapping('/info')
+  Future&lt;HttpResponse&gt; getInfo(
+    @RequestHeader String? authorization,
+    @RequestHeader('x-api-key') String? apiKey,
+  ) { }
+
+  // HTTP session
+  @GetMapping('/profile')
+  Future&lt;HttpResponse&gt; getProfile(HttpSession session) { }
+}
+</code></pre>
+<h3 id="3-content-negotiation">3. Content Negotiation</h3>
+<p><strong>Automatic format selection</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/api/data')
+class DataController {
+  @GetMapping('/items')
+  Future&lt;HttpResponse&gt; getItems(HttpRequest request) async {
+    final items = [
+      {'id': 1, 'name': 'Item 1'},
+      {'id': 2, 'name': 'Item 2'},
+    ];
+
+    // Returns JSON if Accept: application/json
+    // Returns XML if Accept: application/xml
+    // Returns YAML if Accept: application/yaml
+    return HttpResponse.ok(items);
+  }
+}
+</code></pre>
+<h3 id="4-http-message-converters">4. HTTP Message Converters</h3>
+<p><strong>Custom converters</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@Configuration()
+class ConverterConfiguration {
+  @Pod()
+  HttpMessageConverterRegistry createRegistry() {
+    final registry = HttpMessageConverterRegistry();
+    
+    // JSON converter
+    registry.register(JetsonHttpMessageConverter());
+    
+    // XML converter
+    registry.register(JetsonXmlHttpMessageConverter());
+    
+    // Form data converter
+    registry.register(FormHttpMessageConverter());
+    
+    return registry;
+  }
+}
+</code></pre>
+<h3 id="5-exception-handling">5. Exception Handling</h3>
+<p><strong>Centralized error handling</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestControllerAdvice()
+class GlobalExceptionHandler {
+  @ExceptionHandler(NotFoundException)
+  HttpResponse handleNotFound(NotFoundException ex) {
+    return HttpResponse.notFound(
+      {'error': ex.message},
+    );
+  }
+
+  @ExceptionHandler(ValidationException)
+  HttpResponse handleValidation(ValidationException ex) {
+    return HttpResponse.badRequest(
+      {'error': 'Validation failed', 'details': ex.details},
+    );
+  }
+
+  @ExceptionHandler(Exception)
+  HttpResponse handleGeneric(Exception ex) {
+    return HttpResponse.internalServerError(
+      {'error': 'Internal server error'},
+    );
+  }
+}
+</code></pre>
+<h3 id="6-multipart-file-uploads">6. Multipart File Uploads</h3>
+<p><strong>Handle file uploads</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/api/files')
+class FileController {
+  @PostMapping('/upload')
+  Future&lt;HttpResponse&gt; uploadFile(HttpRequest request) async {
+    // Parse multipart request
+    final parts = await request.getMultipartRequest().getParts();
+    
+    for (final part in parts) {
+      if (part.isFile) {
+        final filename = part.filename;
+        final contentType = part.contentType;
+        final bytes = await part.readBytes();
+        
+        // Process file
+        await saveFile(filename, bytes);
+      }
+    }
+
+    return HttpResponse.ok({'status': 'uploaded'});
+  }
+}
+</code></pre>
+<h3 id="7-http-sessions">7. HTTP Sessions</h3>
+<p><strong>Session management</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/api')
+class SessionController {
+  @PostMapping('/login')
+  Future&lt;HttpResponse&gt; login(
+    @RequestBody LoginRequest req,
+    HttpSession session,
+  ) async {
+    final user = await authenticateUser(req.email, req.password);
+    if (user == null) {
+      return HttpResponse.unauthorized();
+    }
+
+    session.setAttribute('user_id', user.id);
+    session.setAttribute('user_email', user.email);
+
+    return HttpResponse.ok(user);
+  }
+
+  @GetMapping('/profile')
+  Future&lt;HttpResponse&gt; getProfile(HttpSession session) async {
+    final userId = session.getAttribute('user_id');
+    if (userId == null) {
+      return HttpResponse.unauthorized();
+    }
+
+    final user = await getUserById(userId);
+    return HttpResponse.ok(user);
+  }
+
+  @PostMapping('/logout')
+  Future&lt;HttpResponse&gt; logout(HttpSession session) async {
+    session.invalidate();
+    return HttpResponse.ok({'status': 'logged out'});
+  }
+}
+</code></pre>
+<h3 id="8-template-rendering">8. Template Rendering</h3>
+<p><strong>Render HTML with JTL</strong>:</p>
+<pre class="language-dart"><code class="language-dart">@RestController('/pages')
+class PageController {
+  final TemplateEngine _template;
+
+  @Autowired
+  PageController(this._template);
+
+  @GetMapping('/home')
+  Future&lt;HttpResponse&gt; homePage() async {
+    final html = await _template.render(
+      'pages/home.jtl',
+      {'title': 'Welcome', 'user': 'John'},
+    );
+
+    return HttpResponse.ok(html)
+      .header('Content-Type', 'text/html; charset=utf-8');
+  }
+}
+</code></pre>
+<h2 id="-common-patterns">🎯 Common Patterns</h2>
+<h3 id="pattern-1-restful-api-endpoint">Pattern 1: RESTful API Endpoint</h3>
+<pre class="language-dart"><code class="language-dart">@RestController('/api/users')
+class UserController {
+  final UserService _service;
+
+  @Autowired
+  UserController(this._service);
+
+  @GetMapping('/')
+  Future&lt;HttpResponse&gt; listUsers() async {
+    final users = await _service.getAllUsers();
+    return HttpResponse.ok(users);
+  }
+
+  @PostMapping('/')
+  Future&lt;HttpResponse&gt; createUser(@RequestBody User user) async {
+    final created = await _service.createUser(user);
+    return HttpResponse.created(created);
+  }
+}
+</code></pre>
+<h3 id="pattern-2-error-handling-with-status-codes">Pattern 2: Error Handling with Status Codes</h3>
+<pre class="language-dart"><code class="language-dart">@GetMapping('/items/:id')
+Future&lt;HttpResponse&gt; getItem(@PathVariable String id) async {
+  final item = await _service.getItemById(id);
+  
+  if (item == null) {
+    return HttpResponse.notFound();
+  }
+
+  return HttpResponse.ok(item);
+}
+</code></pre>
+<h3 id="pattern-3-query-parameter-filtering">Pattern 3: Query Parameter Filtering</h3>
+<pre class="language-dart"><code class="language-dart">@GetMapping('/search')
+Future&lt;HttpResponse&gt; search(
+  @RequestParam String? q,
+  @RequestParam int limit = 50,
+) async {
+  if (q == null || q.isEmpty) {
+    return HttpResponse.badRequest(
+      {'error': 'Query parameter required'},
+    );
+  }
+
+  final results = await _service.search(q, limit: limit);
+  return HttpResponse.ok(results);
+}
+</code></pre>
+<h2 id="-http-status-codes">📖 HTTP Status Codes</h2>
+<p>Common HTTP response status codes:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Method</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td><code>ok()</code></td>
+<td>Successful GET/PUT</td>
+</tr>
+<tr>
+<td>201</td>
+<td><code>created()</code></td>
+<td>POST created resource</td>
+</tr>
+<tr>
+<td>204</td>
+<td><code>noContent()</code></td>
+<td>DELETE successful</td>
+</tr>
+<tr>
+<td>400</td>
+<td><code>badRequest()</code></td>
+<td>Invalid input</td>
+</tr>
+<tr>
+<td>401</td>
+<td><code>unauthorized()</code></td>
+<td>Missing authentication</td>
+</tr>
+<tr>
+<td>403</td>
+<td><code>forbidden()</code></td>
+<td>Insufficient permissions</td>
+</tr>
+<tr>
+<td>404</td>
+<td><code>notFound()</code></td>
+<td>Resource not found</td>
+</tr>
+<tr>
+<td>409</td>
+<td><code>conflict()</code></td>
+<td>Resource conflict</td>
+</tr>
+<tr>
+<td>500</td>
+<td><code>internalServerError()</code></td>
+<td>Server error</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-common-issues">⚠️ Common Issues</h2>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Cause</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Route not matched</td>
+<td>Wrong mapping path</td>
+<td>Verify <code>@RestController</code> base path and method annotation</td>
+</tr>
+<tr>
+<td>400 Bad Request</td>
+<td>Invalid request body</td>
+<td>Ensure request body matches pod type</td>
+</tr>
+<tr>
+<td>404 Not Found</td>
+<td>Route not registered</td>
+<td>Check controller is in package scan paths</td>
+</tr>
+<tr>
+<td>Content Negotiation fails</td>
+<td>Missing converter</td>
+<td>Register converter in pod factory</td>
+</tr>
+</tbody>
+</table>
+<h2 id="-best-practices">📋 Best Practices</h2>
+<h3 id="-do">✅ DO</h3>
+<ul>
+<li>Use RESTful URL patterns (<code>GET /users</code>, <code>POST /users</code>, <code>PUT /users/:id</code>)</li>
+<li>Return appropriate HTTP status codes</li>
+<li>Use <code>@PathVariable</code> for resource IDs</li>
+<li>Use <code>@RequestParam</code> for query/search parameters</li>
+<li>Use <code>@RequestBody</code> for form data</li>
+<li>Implement global exception handling</li>
+<li>Validate input before processing</li>
+<li>Document API endpoints with comments</li>
+</ul>
+<h3 id="-dont">❌ DON'T</h3>
+<ul>
+<li>Use <code>GET</code> for mutations (use <code>POST</code>, <code>PUT</code>, <code>DELETE</code>)</li>
+<li>Return <code>200 OK</code> for errors</li>
+<li>Ignore content negotiation</li>
+<li>Forget to close multipart streams</li>
+<li>Share mutable state between requests</li>
+<li>Block the event loop in handlers</li>
+<li>Trust user input without validation</li>
+</ul>
+<h2 id="-dependencies">📦 Dependencies</h2>
+<ul>
+<li><strong><code>jetleaf_core</code></strong> — Core framework</li>
+<li><strong><code>jetleaf_lang</code></strong> — Language utilities</li>
+<li><strong><code>jetson</code></strong> — JSON serialization</li>
+<li><strong><code>jtl</code></strong> — Template rendering</li>
+<li><strong><code>jetleaf_logging</code></strong> — Structured logging</li>
+<li><strong><code>jetleaf_env</code></strong> — Configuration</li>
+</ul>
+<h2 id="-license">📄 License</h2>
+<p>This package is part of the JetLeaf Framework. See LICENSE in the root directory.</p>
+<h2 id="-related-packages">🔗 Related Packages</h2>
+<ul>
+<li><strong><code>jetson</code></strong> — Object mapping and serialization</li>
+<li><strong><code>jtl</code></strong> — Template engine</li>
+<li><strong><code>jetleaf_validation</code></strong> — Data validation</li>
+<li><strong><code>jetleaf_security</code></strong> — Security utilities</li>
+</ul>
+<h2 id="-support">📞 Support</h2>
+<p>For issues, questions, or contributions, visit:</p>
+<ul>
+<li><a href="https://github.com/jetleaf/jetleaf_web/issues">GitHub Issues</a></li>
+<li><a href="https://jetleaf.hapnium.com/docs/web">Documentation</a></li>
+<li><a href="https://forum.jetleaf.hapnium.com">Community Forum</a></li>
+</ul>
+<hr>
+<p><strong>Created with ❤️ by <a href="https://hapnium.com">Hapnium</a></strong></p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="jetleaf_web">
+  <span class="name"><a href="jetleaf_web/">jetleaf_web</a></span> 
+
+</dt>
+<dd>Jetleaf Web Framework Library
+</dd>
+
+        </dl>
+      </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://jetleaf.hapnium.com">jetleaf_web package</a></li>
+</ol>
+
+    <h5 class="hidden-xs"><span class="package-name">jetleaf_web</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+      <li><a href="jetleaf_web/">jetleaf_web</a></li>
+</ol>
+
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

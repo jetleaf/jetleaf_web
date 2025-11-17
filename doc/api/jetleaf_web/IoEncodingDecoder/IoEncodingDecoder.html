@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoEncodingDecoder.new constructor from Class IoEncodingDecoder from the jetleaf_web library, for the Dart programming language.">
+  <title>IoEncodingDecoder.new constructor - IoEncodingDecoder - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a></li>
+    <li class="self-crumb">IoEncodingDecoder.new constructor</li>
+  </ol>
+  <div class="self-name">IoEncodingDecoder.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;IoEncodingDecoder-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">IoEncodingDecoder</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">IoEncodingDecoder</span>(<wbr>[<ol class="parameter-list single-line"> <li><span class="parameter" id="-param-fallbackDecoder"><span class="type-annotation"><a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a>?</span> <span class="parameter-name">fallbackDecoder</span></span></li>
+</ol>])
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new <a href="../../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a> instance with an optional
+<code>fallbackDecoder</code>.</p>
+<ul>
+<li><strong>Parameters:</strong>
+<ul>
+<li><code>fallbackDecoder</code>: The <a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> to delegate to when no custom
+<a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> is found. Defaults to <a href="../../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final decoder = IoEncodingDecoder();
+// or
+final decoder = IoEncodingDecoder(CustomDecoder());
+</code></pre>
+<p>A <strong>pluggable, multi-encoding decoder</strong> that supports dynamic registration
+of custom <a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> implementations while providing a fallback
+<a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> for unsupported encodings.</p>
+<p>The <a href="../../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a> acts as a central registry and coordinator
+for encoding/decoding operations across multiple character encodings.
+It delegates requests to user-defined <a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> instances, if
+available, or defers to the configured fallback decoder for all other
+cases.</p>
+<h3 id="overview">Overview</h3>
+<ul>
+<li>Enables <strong>runtime extensibility</strong> — new encodings can be added or replaced
+dynamically using <a href="../../jetleaf_web/IoEncodingDecoder/registerHandler.html">registerHandler</a>.</li>
+<li>Ensures <strong>compatibility and robustness</strong> by always delegating to a fallback
+decoder (defaults to <a href="../../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a>) when no handler is available.</li>
+<li>Provides unified APIs for text encoding, decoding, and supported encoding
+enumeration.</li>
+<li>Internally normalizes encoding names to lowercase for consistent lookup.</li>
+</ul>
+<h3 id="typical-use-cases">Typical Use Cases</h3>
+<ul>
+<li>Supporting <strong>custom or legacy encodings</strong> (e.g., Shift-JIS, GB2312).</li>
+<li>Extending base decoding behavior for <strong>application-specific formats</strong>.</li>
+<li>Centralizing all encoding logic in I/O, HTTP, and serialization layers.</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Thread-safe for concurrent encoding operations, assuming all handlers are.</li>
+<li>Encodings are matched case-insensitively (<code>utf-8</code>, <code>UTF-8</code>, <code>Utf8</code> → same).</li>
+<li>Unregistered encodings automatically fall back to the default decoder.</li>
+<li>Handlers can be dynamically added, removed, or replaced at runtime.</li>
+</ul>
+<h3 id="example-2">Example</h3>
+<pre class="language-dart"><code class="language-dart">final decoder = IoEncodingDecoder();
+decoder.registerHandler('shift-jis', ShiftJisEncodingHandler());
+
+final bytes = Uint8List.fromList([0x82, 0xA0]);
+print(decoder.decode(bytes, 'shift-jis')); // "あ"
+</code></pre>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> — Low-level encoding/decoding abstraction.</li>
+<li><a href="../../jetleaf_web/EncodingDecoder-class.html">EncodingDecoder</a> — Base interface for all multi-encoding decoders.</li>
+<li><a href="../../jetleaf_web/BasicEncodingDecoder-class.html">BasicEncodingDecoder</a> — Default implementation using Dart’s <code>dart:convert</code>.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">IoEncodingDecoder([EncodingDecoder? fallbackDecoder])
+    : _fallbackDecoder = fallbackDecoder ?? BasicEncodingDecoder();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/IoEncodingDecoder-class.html">IoEncodingDecoder</a></li>
+    <li class="self-crumb">IoEncodingDecoder.new constructor</li>
+</ol>
+
+    <h5>IoEncodingDecoder class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

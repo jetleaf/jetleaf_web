@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Page Not Found - JetLeaf</title>
+        <link rel="icon" href="{{FAVICON}}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            /* same CSS as original */
+        </style>
+    </head>
+
+    <body>
+        <div class="error-container">
+            <div class="leaf-icon">{{ICON}}</div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Oops! Page Not Found</h2>
+            <p class="error-message">
+                The page you're looking for seems to have wandered off into the digital wilderness.
+            </p>
+            <div class="error-details">
+                <strong>Error Details:</strong><br>
+                {{message}}<br>
+                <small>Timestamp: {{timestamp}}</small>
+            </div>
+            <div class="suggestions">
+                <h4>Here are some suggestions:</h4>
+                <ul>
+                    <li>Check the URL for any typos</li>
+                    <li>Go back to the previous page</li>
+                    <li>Visit our home page</li>
+                    <li>Use the navigation menu</li>
+                </ul>
+            </div>
+            <div class="actions">
+                <a href="{{homePage}}" class="btn btn-primary">🏠 Go Home</a>
+                <a href="javascript:history.back()" class="btn btn-secondary">← Go Back</a>
+            </div>
+        </div>
+    </body>
+</html>

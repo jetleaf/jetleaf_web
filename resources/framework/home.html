@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JetLeaf LeafServer - Home</title>
+        <link rel="icon" href="{{FAVICON}}">
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                margin: 0;
+                padding: 0;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem;
+            }
+            .header {
+                text-align: center;
+                color: white;
+                margin-bottom: 3rem;
+            }
+            .header h1 {
+                font-size: 3rem;
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            .header p {
+                font-size: 1.2rem;
+                margin: 1rem 0;
+                opacity: 0.9;
+            }
+            .features {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-bottom: 3rem;
+            }
+            .feature-card {
+                background: white;
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease;
+            }
+            .feature-card:hover {
+                transform: translateY(-5px);
+            }
+            .feature-card h3 {
+                color: #2c3e50;
+                margin-top: 0;
+            }
+            .feature-card p {
+                color: #7f8c8d;
+                line-height: 1.6;
+            }
+            .navigation {
+                background: white;
+                border-radius: 12px;
+                padding: 2rem;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            }
+            .navigation h3 {
+                color: #2c3e50;
+                margin-top: 0;
+            }
+            .nav-links {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            .nav-link {
+                display: block;
+                padding: 1rem;
+                background: #f8f9fa;
+                border-radius: 8px;
+                text-decoration: none;
+                color: #495057;
+                transition: all 0.3s ease;
+                text-align: center;
+            }
+            .nav-link:hover {
+                background: #e9ecef;
+                transform: translateY(-2px);
+            }
+            .emoji {
+                font-size: 1.5rem;
+                margin-right: 0.5rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>{{ICON}} JetLeaf LeafServer</h1>
+                <p>A Web framework for Dart using JetLeaf</p>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎯 JetLeaf Integration</h3>
+                    <p>Built on top of the powerful JetLeaf framework with full reflection support, dependency injection, and application context management.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎨 Template Engine</h3>
+                    <p>Built-in template engine with support for variables, conditionals, loops, and includes. Create dynamic HTML pages with ease.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ REST API Support</h3>
+                    <p>Build REST APIs with structured JSON responses using LeafResponse wrapper. Automatic serialization and error handling.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Exception Handling</h3>
+                    <p>Comprehensive exception handling integrated with JetLeaf's exception system. Custom error pages and API error responses.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔧 Reflection-Based Routing</h3>
+                    <p>Automatic route discovery using JetLeaf's powerful reflection system. Type-safe parameter binding and method invocation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📦 Zero Additional Dependencies</h3>
+                    <p>Built entirely on JetLeaf and Dart's standard library. Leverages your existing JetLeaf infrastructure.</p>
+                </div>
+            </div>
+
+            <div class="navigation">
+                <h3>🧭 Explore the Framework</h3>
+                <div class="nav-links">
+                    <a href="/home/about" class="nav-link"><span class="emoji">📖</span>About</a>
+                    <a href="/home/contact" class="nav-link"><span class="emoji">📧</span>Contact</a>
+                    <a href="/home/user/123" class="nav-link"><span class="emoji">👤</span>User Profile</a>
+                    <a href="/home/dashboard" class="nav-link"><span class="emoji">📊</span>Dashboard</a>
+                    <a href="/home/admin" class="nav-link"><span class="emoji">⚙️</span>Admin Panel</a>
+                    <a href="/home/error" class="nav-link"><span class="emoji">💥</span>Error Demo</a>
+                    <a href="/api/users" class="nav-link"><span class="emoji">🔗</span>API Users</a>
+                    <a href="/api/health" class="nav-link"><span class="emoji">💚</span>API Health</a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

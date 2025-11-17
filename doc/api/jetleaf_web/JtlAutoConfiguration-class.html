@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the JtlAutoConfiguration class from the jetleaf_web library, for the Dart programming language.">
+  <title>JtlAutoConfiguration class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">JtlAutoConfiguration class</li>
+  </ol>
+  <div class="self-name">JtlAutoConfiguration</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;JtlAutoConfiguration-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">JtlAutoConfiguration</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Auto-configuration class for JTL template infrastructure in Jetleaf.</p>
+<p>This configuration provides default pods for template rendering,
+including:</p>
+<ul>
+<li>Template cache</li>
+<li>Asset builder</li>
+<li>Template filter registry</li>
+<li>Expression evaluator</li>
+<li>Variable resolver</li>
+<li>Template renderer</li>
+<li>Core JTL engine instance</li>
+</ul>
+<p>All pods are marked with <code>@Role(DesignRole.INFRASTRUCTURE)</code> and support
+conditional registration via <code>@ConditionalOnMissingPod</code>, allowing
+developers to override defaults with custom implementations.</p>
+<p>pods registered here correspond to the following pod names:</p>
+<ul>
+<li><code>JTL_TEMPLATE_CACHE_POD_NAME</code></li>
+<li><code>JTL_ASSET_BUILDER_POD_NAME</code></li>
+<li><code>JTL_TEMPLATE_FILTER_REGISTRY_POD_NAME</code></li>
+<li><code>JTL_TEMPLATE_EXPRESSION_EVALUATOR_POD_NAME</code></li>
+<li><code>JTL_TEMPLATE_VARIABLE_RESOLVER_POD_NAME</code></li>
+<li><code>JTL_TEMPLATE_RENDERER_POD_NAME</code></li>
+<li><code>JTL_POD_NAME</code></li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+
+
+        
+        
+  <dt>Annotations</dt>
+  <dd>
+    <ul class="annotation-list clazz-relationships">
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Named-class.html">Named</a>(JtlAutoConfiguration.NAME)</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/AutoConfiguration-class.html">AutoConfiguration</a>()</li>
+        <li>@<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/annotation/Role-class.html">Role</a>(DesignRole.INFRASTRUCTURE)</li>
+    </ul>
+  </dd>
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="JtlAutoConfiguration.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/JtlAutoConfiguration.html">JtlAutoConfiguration.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="jtl" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtl.html">jtl</a></span><span class="signature">(<wbr><span class="parameter" id="jtl-param-templateCache"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateCache-class.html">TemplateCache</a></span> <span class="parameter-name">templateCache</span>, </span><span class="parameter" id="jtl-param-assetBuilder"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a></span> <span class="parameter-name">assetBuilder</span>, </span><span class="parameter" id="jtl-param-filterRegistry"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateFilterRegistry-class.html">TemplateFilterRegistry</a></span> <span class="parameter-name">filterRegistry</span>, </span><span class="parameter" id="jtl-param-expressionEvaluator"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateExpressionEvaluator-class.html">TemplateExpressionEvaluator</a></span> <span class="parameter-name">expressionEvaluator</span>, </span><span class="parameter" id="jtl-param-variableResolver"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateVariableResolver-class.html">TemplateVariableResolver</a></span> <span class="parameter-name">variableResolver</span>, </span><span class="parameter" id="jtl-param-templateRenderer"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateRenderer-class.html">TemplateRenderer</a></span> <span class="parameter-name">templateRenderer</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/Jtl-class.html">Jtl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the core JTL engine instance.
+  
+
+</dd>
+
+        <dt id="jtlAssetBuilder" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlAssetBuilder.html">jtlAssetBuilder</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the asset builder for resolving template assets.
+  
+
+</dd>
+
+        <dt id="jtlFilterRegistry" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlFilterRegistry.html">jtlFilterRegistry</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateFilterRegistry-class.html">TemplateFilterRegistry</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides a registry for template filters.
+  
+
+</dd>
+
+        <dt id="jtlTemplateCache" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlTemplateCache.html">jtlTemplateCache</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateCache-class.html">TemplateCache</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the template cache for storing compiled templates.
+  
+
+</dd>
+
+        <dt id="jtlTemplateExpressionEvaluator" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlTemplateExpressionEvaluator.html">jtlTemplateExpressionEvaluator</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateExpressionEvaluator-class.html">TemplateExpressionEvaluator</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the default template expression evaluator.
+  
+
+</dd>
+
+        <dt id="jtlTemplateRenderer" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlTemplateRenderer.html">jtlTemplateRenderer</a></span><span class="signature">(<wbr><span class="parameter" id="jtlTemplateRenderer-param-assetBuilder"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a></span> <span class="parameter-name">assetBuilder</span>, </span><span class="parameter" id="jtlTemplateRenderer-param-filterRegistry"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateFilterRegistry-class.html">TemplateFilterRegistry</a></span> <span class="parameter-name">filterRegistry</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateRenderer-class.html">TemplateRenderer</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the default template renderer.
+  
+
+</dd>
+
+        <dt id="jtlTemplateVariableResolver" class="callable">
+  <span class="name"><a href="../jetleaf_web/JtlAutoConfiguration/jtlTemplateVariableResolver.html">jtlTemplateVariableResolver</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/TemplateVariableResolver-class.html">TemplateVariableResolver</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Provides the default template variable resolver.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="JTL_ASSET_BUILDER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_ASSET_BUILDER_POD_NAME-constant.html">JTL_ASSET_BUILDER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL asset builder.
+  
+
+</dd>
+
+        <dt id="JTL_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_POD_NAME-constant.html">JTL_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template engine factory.
+  
+
+</dd>
+
+        <dt id="JTL_TEMPLATE_CACHE_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_TEMPLATE_CACHE_POD_NAME-constant.html">JTL_TEMPLATE_CACHE_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template cache.
+  
+
+</dd>
+
+        <dt id="JTL_TEMPLATE_EXPRESSION_EVALUATOR_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_TEMPLATE_EXPRESSION_EVALUATOR_POD_NAME-constant.html">JTL_TEMPLATE_EXPRESSION_EVALUATOR_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template expression evaluator.
+  
+
+</dd>
+
+        <dt id="JTL_TEMPLATE_FILTER_REGISTRY_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_TEMPLATE_FILTER_REGISTRY_POD_NAME-constant.html">JTL_TEMPLATE_FILTER_REGISTRY_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template filter registry.
+  
+
+</dd>
+
+        <dt id="JTL_TEMPLATE_RENDERER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_TEMPLATE_RENDERER_POD_NAME-constant.html">JTL_TEMPLATE_RENDERER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template renderer.
+  
+
+</dd>
+
+        <dt id="JTL_TEMPLATE_VARIABLE_RESOLVER_POD_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/JTL_TEMPLATE_VARIABLE_RESOLVER_POD_NAME-constant.html">JTL_TEMPLATE_VARIABLE_RESOLVER_POD_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Pod name for the JTL template variable resolver.
+  
+
+</dd>
+
+        <dt id="NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/JtlAutoConfiguration/NAME-constant.html">NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Class name pod for this configuration.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">JtlAutoConfiguration class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

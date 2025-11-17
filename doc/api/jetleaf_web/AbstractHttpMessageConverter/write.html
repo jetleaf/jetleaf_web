@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the write method from the AbstractHttpMessageConverter class, for the Dart programming language.">
+  <title>write method - AbstractHttpMessageConverter class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">write method</li>
+  </ol>
+  <div class="self-name">write</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;AbstractHttpMessageConverter-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">write</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://api.dart.dev/stable/3.9.2/dart-core/override-constant.html">override</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+<span class="name ">write</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="write-param-object"><span class="type-annotation">T</span> <span class="parameter-name">object</span>, </span></li>
+<li><span class="parameter" id="write-param-contentType"><span class="type-annotation"><a href="../../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">contentType</span>, </span></li>
+<li><span class="parameter" id="write-param-outputMessage"><span class="type-annotation"><a href="../../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a></span> <span class="parameter-name">outputMessage</span></span></li>
+</ol>)
+
+      <div class="features"><span class="feature">override</span></div>
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Serializes a Dart object to an HTTP output message.</p>
+<p>This method converts the Dart object to the appropriate format and writes
+it to the <a href="../../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a>, setting the appropriate Content-Type header.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>object</code>: The Dart object to serialize</li>
+<li><code>contentType</code>: The desired content type for the output (may be null)</li>
+<li><code>outputMessage</code>: The HTTP output message to write the content to</li>
+</ul>
+<h3 id="throws">Throws</h3>
+<ul>
+<li><a href="../../jetleaf_web/HttpMessageNotWritableException-class.html">HttpMessageNotWritableException</a>: If the object cannot be serialized</li>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/IOException-class.html">IOException</a>: If an I/O error occurs during writing</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">@override
+Future&lt;void&gt; write(User user, MediaType? contentType, HttpOutputMessage outputMessage) async {
+  try {
+    final jsonMap = user.toJson();
+    final jsonString = jsonEncode(jsonMap);
+    
+    // Set content type header
+    final actualContentType = contentType ?? MediaType.APPLICATION_JSON;
+    outputMessage.getHeaders().setContentType(actualContentType);
+    
+    // Write response body
+    await outputMessage.getBody().writeString(jsonString, Closeable.DEFAULT_ENCODING);
+  } on JsonUnsupportedObjectError catch (e) {
+    throw HttpMessageNotWritableException('Object not serializable to JSON: $e', e);
+  }
+}
+</code></pre>
+<h3 id="content-type-handling">Content Type Handling</h3>
+<p>If <code>contentType</code> is provided, it should be respected. If null, use
+a sensible default based on the converter's supported media types.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@override
+Future&lt;void&gt; write(T object, MediaType? contentType, HttpOutputMessage outputMessage) async {
+  try {
+    addDefaultHeaders(outputMessage.getHeaders(), contentType ?? _supportedMediaTypes.first);
+    await writeInternal(object, outputMessage);
+  } catch (e, st) {
+    throw HttpMessageNotWritableException(
+      &#39;Failed to write message $e&#39;,
+      originalException: e is Throwable ? e : e is Exception ? e : RuntimeException(e.toString()),
+      originalStackTrace: st
+    );
+  }
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter<span class="signature">&lt;<wbr><span class="type-parameter">T</span>&gt;</span></a></li>
+    <li class="self-crumb">write method</li>
+</ol>
+
+    <h5>AbstractHttpMessageConverter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

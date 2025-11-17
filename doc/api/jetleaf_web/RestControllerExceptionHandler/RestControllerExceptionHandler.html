@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the RestControllerExceptionHandler.new constructor from Class RestControllerExceptionHandler from the jetleaf_web library, for the Dart programming language.">
+  <title>RestControllerExceptionHandler.new constructor - RestControllerExceptionHandler - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a></li>
+    <li class="self-crumb">RestControllerExceptionHandler.new const constructor</li>
+  </ol>
+  <div class="self-name">RestControllerExceptionHandler.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;RestControllerExceptionHandler-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">RestControllerExceptionHandler</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">RestControllerExceptionHandler</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new instance of <a href="../../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a>.</p>
+<p>This constructor initializes a stateless exception handling component
+with no runtime dependencies. It is designed to be lightweight and
+immutable, meaning that a single shared instance can safely serve all
+REST controller requests within the JetLeaf runtime.</p>
+<p>A centralized exception handling component for RESTful controllers in
+the JetLeaf Web framework.</p>
+<p>The <a href="../../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a> serves as the <strong>default global
+exception translator</strong> for REST APIs. It intercepts exceptions thrown by
+controller pods and converts them into standardized JSON or structured
+response bodies using <a href="../../jetleaf_web/ResponseBody-class.html">ResponseBody</a>.</p>
+<h3 id="purpose">Purpose</h3>
+<p>JetLeaf’s REST controller layer is designed for explicit exception-based
+flow control. Rather than returning raw error codes, controllers may
+throw typed exceptions (such as <a href="../../jetleaf_web/BadRequestException-class.html">BadRequestException</a>,
+<a href="../../jetleaf_web/NotFoundException-class.html">NotFoundException</a>, or <a href="../../jetleaf_web/ServiceUnavailableException-class.html">ServiceUnavailableException</a>).<br>
+The <a href="../../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a> automatically maps these to valid
+HTTP responses, ensuring consistent structure and behavior across the
+application.</p>
+<p>Each handler method is annotated with <code>`@ExceptionHandler`</code>, linking a
+specific exception type to a corresponding HTTP response. The returned
+<a href="../../jetleaf_web/ResponseBody-class.html">ResponseBody</a> object encapsulates:</p>
+<ul>
+<li>the HTTP <a href="../../jetleaf_web/HttpStatus-class.html">HttpStatus</a> code,</li>
+<li>an error description or diagnostic message,</li>
+<li>optional details (metadata, validation errors, etc.),</li>
+<li>and a timestamp for traceability.</li>
+</ul>
+<h3 id="features">Features</h3>
+<ul>
+<li><strong>Consistent REST error format</strong> — all responses are standardized.</li>
+<li><strong>Automatic mapping</strong> of exceptions to HTTP status codes.</li>
+<li><strong>Extensible design</strong> — developers can subclass or replace this
+handler to customize error payloads or serialization rules.</li>
+<li><strong>Stateless &amp; reusable</strong> — safe to use across multiple web requests.</li>
+</ul>
+<h3 id="supported-exception-types">Supported Exception Types</h3>
+<p>The following exception classes are supported by default:</p>
+<table>
+<thead>
+<tr>
+<th>Exception Type</th>
+<th>HTTP Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../jetleaf_web/BadRequestException-class.html">BadRequestException</a></td>
+<td>400 BAD REQUEST</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/UnauthorizedException-class.html">UnauthorizedException</a></td>
+<td>401 UNAUTHORIZED</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/ForbiddenException-class.html">ForbiddenException</a></td>
+<td>403 FORBIDDEN</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/NotFoundException-class.html">NotFoundException</a></td>
+<td>404 NOT FOUND</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/MethodNotAllowedException-class.html">MethodNotAllowedException</a></td>
+<td>405 METHOD NOT ALLOWED</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/ConflictException-class.html">ConflictException</a></td>
+<td>409 CONFLICT</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/PayloadTooLargeException-class.html">PayloadTooLargeException</a></td>
+<td>413 PAYLOAD TOO LARGE</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/UnsupportedMediaTypeException-class.html">UnsupportedMediaTypeException</a></td>
+<td>415 UNSUPPORTED MEDIA TYPE</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/TooManyRequestsException-class.html">TooManyRequestsException</a></td>
+<td>429 TOO MANY REQUESTS</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/ServiceUnavailableException-class.html">ServiceUnavailableException</a></td>
+<td>503 SERVICE UNAVAILABLE</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/BadGatewayException-class.html">BadGatewayException</a></td>
+<td>502 BAD GATEWAY</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/GatewayTimeoutException-class.html">GatewayTimeoutException</a></td>
+<td>504 GATEWAY TIMEOUT</td>
+</tr>
+<tr>
+<td><a href="../../jetleaf_web/HttpException-class.html">HttpException</a></td>
+<td>Generic HTTP error fallback</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">@RestController()
+class AccountController {
+  @Get('/accounts/:id')
+  Future&lt;Account&gt; getAccount(@PathVariable('id') String id) async {
+    final account = await repository.findById(id);
+    if (account == null) throw NotFoundException('Account not found');
+    return account;
+  }
+}
+</code></pre>
+<p>If <a href="../../jetleaf_web/NotFoundException-class.html">NotFoundException</a> is thrown, this handler automatically returns:</p>
+<pre class="language-json"><code class="language-json">{
+  "error": "Not Found",
+  "message": "Account not found",
+  "timestamp": "2025-11-07T12:34:56.789Z"
+}
+</code></pre>
+<h3 id="integration">Integration</h3>
+<p>The handler is automatically registered in JetLeaf’s web dispatcher
+pipeline. It applies only to <strong>REST controllers</strong>, ensuring that web
+controllers rendering views use <a href="../../jetleaf_web/ControllerExceptionHandler-class.html">ControllerExceptionHandler</a> instead.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const RestControllerExceptionHandler();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/RestControllerExceptionHandler-class.html">RestControllerExceptionHandler</a></li>
+    <li class="self-crumb">RestControllerExceptionHandler.new const constructor</li>
+</ol>
+
+    <h5>RestControllerExceptionHandler class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

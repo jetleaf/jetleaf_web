@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the copyFrom method from the AbstractServerDispatcher class, for the Dart programming language.">
+  <title>copyFrom method - AbstractServerDispatcher class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a></li>
+    <li class="self-crumb">copyFrom method</li>
+  </ol>
+  <div class="self-name">copyFrom</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;AbstractServerDispatcher-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">copyFrom</span> method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+  <div>
+    <ol class="annotation-list">
+        <li>@<a href="https://pub.dev/documentation/meta/1.17.0/meta/protected-constant.html">protected</a></li>
+    </ol>
+  </div>
+<span class="returntype"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span>
+<span class="name ">copyFrom</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="copyFrom-param-from"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">from</span>, </span></li>
+<li><span class="parameter" id="copyFrom-param-to"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">to</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Copies all relevant properties from one <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> to another.</p>
+<p>This method performs a <strong>deep copy of request metadata</strong> from the <code>from</code>
+request into the <code>to</code> request, including:</p>
+<ol>
+<li><strong>Context path</strong> - the base path of the application or servlet context.</li>
+<li><strong>Attributes</strong> - all key-value pairs stored in the request's attribute map.</li>
+<li><strong>Cookies</strong> - all cookies attached to the request.</li>
+<li><strong>Headers</strong> - all HTTP headers associated with the request.</li>
+</ol>
+<p>This is useful when creating a <strong>derived or wrapper request</strong> that should
+preserve the original request's state, for example:</p>
+<ul>
+<li>Forwarding requests internally within the server.</li>
+<li>Cloning requests for testing purposes.</li>
+<li>Adapting between different request implementations.</li>
+</ul>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>from</code>: The source <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> to copy data from.</li>
+<li><code>to</code>: The target <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> to copy data into.</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p>The same <code>to</code> instance passed in, now populated with data from <code>from</code>.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final newRequest = IoRequest(underlyingRequest, "/app");
+copyFrom(originalRequest, newRequest);
+print(newRequest.getContextPath()); // Same as originalRequest
+print(newRequest.getHeaders().get("User-Agent"));
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">@protected
+ServerHttpRequest copyFrom(ServerHttpRequest from, ServerHttpRequest to) {
+  to.setContextPath(from.getContextPath());
+
+  final attributes = from.getAttributes();
+  for (final attribute in attributes.entries) {
+    to.setAttribute(attribute.key, attribute.value);
+  }
+
+  final cookies = from.getCookies();
+  for (final cookie in cookies.getAll()) {
+    to.getCookies().addCookie(cookie);
+  }
+
+  final headers = from.getHeaders();
+  final toHeaders = to.getHeaders();
+  toHeaders.addAllFromHeaders(headers);
+  to.setHeaders(toHeaders);
+
+  return to;
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a></li>
+    <li class="self-crumb">copyFrom method</li>
+</ol>
+
+    <h5>AbstractServerDispatcher class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

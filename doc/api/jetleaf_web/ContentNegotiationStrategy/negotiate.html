@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the negotiate method from the ContentNegotiationStrategy class, for the Dart programming language.">
+  <title>negotiate method - ContentNegotiationStrategy class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ContentNegotiationStrategy-class.html">ContentNegotiationStrategy</a></li>
+    <li class="self-crumb">negotiate abstract method</li>
+  </ol>
+  <div class="self-name">negotiate</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;ContentNegotiationStrategy-class-sidebar.html"
+    data-below-sidebar="">
+    <div>
+<h1><span class="kind-method">negotiate</span> abstract method 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+<span class="returntype"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/MediaType-class.html">MediaType</a>?</span>&gt;</span></span>
+<span class="name ">negotiate</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="negotiate-param-method"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a>?</span> <span class="parameter-name">method</span>, </span></li>
+<li><span class="parameter" id="negotiate-param-request"><span class="type-annotation"><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span>, </span></li>
+<li><span class="parameter" id="negotiate-param-supportedMediaTypes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span> <span class="parameter-name">supportedMediaTypes</span></span></li>
+</ol>)
+
+      
+
+    </section>
+    
+<section class="desc markdown">
+  <p>Negotiates the appropriate <a href="../../jetleaf_web/MediaType-class.html">MediaType</a> for the response.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>method</code>: The handler method that produced the return value (nullable)</li>
+<li><code>request</code>: The incoming HTTP request with headers and context</li>
+<li><code>supportedMediaTypes</code>: List of media types available for this return value</li>
+</ul>
+<h3 id="returns">Returns</h3>
+<p>The negotiated <a href="../../jetleaf_web/MediaType-class.html">MediaType</a> for the response, or null if no suitable
+media type could be determined.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Analyze request Accept headers</li>
+<li>Check handler method annotations if available</li>
+<li>Consider return value type and availability of media types</li>
+<li>Apply fallback strategies if necessary</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<p>May throw exceptions for:</p>
+<ul>
+<li>Invalid media types in Accept header</li>
+<li>Incompatible return value and accept types</li>
+<li>Configuration errors</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">Future&lt;MediaType?&gt; negotiate( Method? method, ServerHttpRequest request, List&lt;MediaType&gt; supportedMediaTypes);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ContentNegotiationStrategy-class.html">ContentNegotiationStrategy</a></li>
+    <li class="self-crumb">negotiate abstract method</li>
+</ol>
+
+    <h5>ContentNegotiationStrategy class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+</div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the CsrfFilter.new constructor from Class CsrfFilter from the jetleaf_web library, for the Dart programming language.">
+  <title>CsrfFilter.new constructor - CsrfFilter - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/CsrfFilter-class.html">CsrfFilter</a></li>
+    <li class="self-crumb">CsrfFilter.new constructor</li>
+  </ol>
+  <div class="self-name">CsrfFilter.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;CsrfFilter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">CsrfFilter</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">CsrfFilter</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-_manager"><span class="type-annotation"><a href="../../jetleaf_web/CsrfTokenRepositoryManager-class.html">CsrfTokenRepositoryManager</a></span> <span class="parameter-name">_manager</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Jetleaf's standard <strong>CSRF (Cross-Site Request Forgery) protection filter</strong>.</p>
+<p>This filter implements token-based CSRF protection by:</p>
+<ol>
+<li>Generating and injecting tokens for safe (GET, HEAD, OPTIONS, TRACE) requests</li>
+<li>Validating tokens for state-changing (POST, PUT, DELETE, PATCH) requests</li>
+<li>Rejecting requests with missing or invalid tokens with 403 Forbidden</li>
+</ol>
+<h3 id="how-csrf-protection-works">How CSRF Protection Works</h3>
+<p>CSRF attacks trick authenticated users into executing unwanted actions
+on a web application. This filter prevents such attacks by requiring
+a secret token that only the legitimate site can provide.</p>
+<p><strong>Safe Requests (GET, HEAD, OPTIONS, TRACE)</strong>:</p>
+<ul>
+<li>Generate a new CSRF token if one doesn't exist</li>
+<li>Save the token via <a href="../../jetleaf_web/CsrfTokenRepository-class.html">CsrfTokenRepository</a></li>
+<li>Make the token available as a request attribute</li>
+<li>Continue the filter chain normally</li>
+</ul>
+<p><strong>State-Changing Requests (POST, PUT, DELETE, PATCH)</strong>:</p>
+<ul>
+<li>Load the expected token from the repository</li>
+<li>Extract the actual token from the request (header or parameter)</li>
+<li>Compare the two tokens</li>
+<li>If valid, continue the chain</li>
+<li>If invalid or missing, respond with 403 Forbidden</li>
+</ul>
+<h3 id="token-injection">Token Injection</h3>
+<p>For safe requests, the filter automatically generates a token and
+stores it as a request attribute. This allows templates and APIs
+to access the token:</p>
+<pre class="language-dart"><code class="language-dart">// In a template or handler
+final csrfToken = request.getAttribute('_csrf') as CsrfToken?;
+if (csrfToken != null) {
+  print('&lt;input type="hidden" name="${csrfToken.getParameterName()}" value="${csrfToken.getToken()}"&gt;');
+}
+</code></pre>
+<h3 id="configuration">Configuration</h3>
+<p>The filter can be globally enabled/disabled via environment:</p>
+<pre class="language-dart"><code>jetleaf.web.csrf.enabled=true
+</code></pre>
+<h3 id="execution-order">Execution Order</h3>
+<p>This filter declares <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Ordered/HIGHEST_PRECEDENCE-constant.html">Ordered.HIGHEST_PRECEDENCE</a>, ensuring it runs
+early in the filter chain, immediately after CORS handling.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final filter = CsrfFilter(repositoryManager);
+await filter.doFilterInternal(req, res, chain);
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">CsrfFilter(this._manager);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/CsrfFilter-class.html">CsrfFilter</a></li>
+    <li class="self-crumb">CsrfFilter.new constructor</li>
+</ol>
+
+    <h5>CsrfFilter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

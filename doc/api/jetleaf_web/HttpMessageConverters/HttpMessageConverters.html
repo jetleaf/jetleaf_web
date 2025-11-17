@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the HttpMessageConverters.new constructor from Class HttpMessageConverters from the jetleaf_web library, for the Dart programming language.">
+  <title>HttpMessageConverters.new constructor - HttpMessageConverters - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a></li>
+    <li class="self-crumb">HttpMessageConverters.new constructor</li>
+  </ol>
+  <div class="self-name">HttpMessageConverters.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;HttpMessageConverters-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">HttpMessageConverters</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">HttpMessageConverters</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>A composite registry and container for managing <a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> pods.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a> serves as the central hub for HTTP message
+converter management in the Jetleaf framework. It implements multiple roles:</p>
+<ul>
+<li><strong>Registry Interface</strong>: Allows programmatic converter registration via <a href="../../jetleaf_web/HttpMessageConverters/add.html">add</a></li>
+<li><strong>Container</strong>: Maintains an ordered collection of all available converters</li>
+<li><strong>Discovery Engine</strong>: Automatically discovers converters and registrars from the application context</li>
+<li><strong>Ordering Service</strong>: Applies proper ordering to converters for content negotiation</li>
+</ul>
+<h3 id="key-responsibilities">Key Responsibilities</h3>
+<ul>
+<li><strong>Automatic Discovery</strong>: Finds all <a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> and <a href="../../jetleaf_web/HttpMessageConverterRegistrar-class.html">HttpMessageConverterRegistrar</a> pods</li>
+<li><strong>Deduplication</strong>: Ensures each converter is registered only once</li>
+<li><strong>Order Management</strong>: Applies <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a> for proper converter priority</li>
+<li><strong>Lifecycle Integration</strong>: Implements <a href="https://pub.dev/documentation/jetleaf_pod/1.0.1/pod/SmartInitializingSingleton-class.html">SmartInitializingSingleton</a> for startup initialization</li>
+<li><strong>Framework Integration</strong>: Implements <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/ApplicationContextAware-class.html">ApplicationContextAware</a> for dependency access</li>
+</ul>
+<h3 id="framework-integration-flow">Framework Integration Flow</h3>
+<p>During application startup:</p>
+<ol>
+<li><strong>Context Awareness</strong>: Framework injects <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> via <a href="../../jetleaf_web/HttpMessageConverters/setApplicationContext.html">setApplicationContext</a></li>
+<li><strong>Pod Initialization</strong>: Framework calls <a href="../../jetleaf_web/HttpMessageConverters/onReady.html">onReady</a> when context is ready</li>
+<li><strong>Registrar Discovery</strong>: Finds and invokes all <a href="../../jetleaf_web/HttpMessageConverterRegistrar-class.html">HttpMessageConverterRegistrar</a> pods</li>
+<li><strong>Converter Discovery</strong>: Finds and registers all <a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> pods</li>
+<li><strong>Ordering Application</strong>: Sorts converters using <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a></li>
+<li><strong>Ready State</strong>: Converter collection becomes available via <a href="../../jetleaf_web/HttpMessageConverters/getMessageConverters.html">getMessageConverters</a></li>
+</ol>
+<h3 id="example-manual-registration">Example: Manual Registration</h3>
+<pre class="language-dart"><code class="language-dart">@Pod
+class CustomConverterSetup {
+  final HttpMessageConverters _compositeConverter;
+
+  CustomConverterSetup(this._compositeConverter);
+
+  @PostConstruct
+  void setupConverters() {
+    // Manually register custom converters
+    _compositeConverter.add(CustomJsonConverter());
+    _compositeConverter.add(ProtobufConverter());
+  }
+}
+</code></pre>
+<h3 id="example-registrar-based-registration">Example: Registrar-Based Registration</h3>
+<pre class="language-dart"><code class="language-dart">@Pod
+class CustomConverterRegistrar implements HttpMessageConverterRegistrar {
+  @override
+  void register(HttpMessageConverterRegistry registry) {
+    registry.add(CustomJsonConverter());
+    registry.add(ProtobufConverter());
+  }
+}
+
+// The HttpMessageConverters will automatically discover
+// and invoke this registrar during onReady()
+</code></pre>
+<h3 id="converter-ordering-strategy">Converter Ordering Strategy</h3>
+<p>Converters are ordered using <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a> which considers:</p>
+<ul>
+<li><code>@Order</code> annotations on converter classes</li>
+<li><code>@Priority</code> annotations on converter classes</li>
+<li>Natural ordering based on converter capabilities</li>
+<li>Registration order as fallback</li>
+</ul>
+<h3 id="typical-converter-order">Typical Converter Order</h3>
+<p>The framework typically orders converters by specificity:</p>
+<ol>
+<li><strong>ByteArrayHttpMessageConverter</strong> - Most specific (binary data)</li>
+<li><strong>StringHttpMessageConverter</strong> - Text content</li>
+<li><strong>FormHttpMessageConverter</strong> - Form data</li>
+<li><strong>JsonHttpMessageConverter</strong> - JSON data</li>
+<li><strong>XmlHttpMessageConverter</strong> - XML data</li>
+<li><strong>Generic Converters</strong> - Least specific/catch-all</li>
+</ol>
+<h3 id="content-negotiation-process">Content Negotiation Process</h3>
+<p>When processing HTTP messages, the framework:</p>
+<ol>
+<li><strong>Retrieves Converters</strong>: Gets ordered list via <a href="../../jetleaf_web/HttpMessageConverters/getMessageConverters.html">getMessageConverters()</a></li>
+<li><strong>Iterates in Order</strong>: Processes converters from most to least specific</li>
+<li><strong>First Match Wins</strong>: Uses the first converter that can handle the media type</li>
+<li><strong>Fallback Handling</strong>: May use default converters if no specific match found</li>
+</ol>
+<h3 id="thread-safety">Thread Safety</h3>
+<p>The implementation uses synchronization for concurrent access:</p>
+<ul>
+<li>Converter registration is thread-safe via <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/synchronized.html">synchronized</a></li>
+<li>Converter retrieval provides an unmodifiable view</li>
+<li>Once initialized, the converter list is effectively immutable</li>
+</ul>
+<h3 id="error-handling">Error Handling</h3>
+<ul>
+<li><strong>Duplicate Converters</strong>: Silently deduplicated during registration</li>
+<li><strong>Self-Registration</strong>: <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a> ignores itself during discovery</li>
+<li><strong>Missing Context</strong>: Fails gracefully if application context not set</li>
+<li><strong>Empty Registry</strong>: Handles scenarios with no converters gracefully</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Use registrars for modular converter configuration</li>
+<li>Apply <code>@Order</code> annotations for explicit priority control</li>
+<li>Register specific converters before generic ones</li>
+<li>Consider performance implications of large converter collections</li>
+<li>Test content negotiation with your specific converter mix</li>
+</ul>
+<h3 id="integration-example">Integration Example</h3>
+<pre class="language-dart"><code class="language-dart">@Pod
+class HttpMessageProcessor {
+  final HttpMessageConverters _converter;
+
+  HttpMessageProcessor(this._converter);
+
+  Future&lt;void&gt; processRequest(HttpInputMessage request, HttpOutputMessage response) async {
+    final converters = _converter.getMessageConverters();
+    
+    // Use converters for content negotiation and processing
+    for (final converter in converters) {
+      if (converter.canRead(User.class, request.headers.contentType)) {
+        final user = await converter.read(User.class, request);
+        // Process user...
+        break;
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="related-components">Related Components</h3>
+<ul>
+<li><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a>: Strategy interface for message conversion</li>
+<li><a href="../../jetleaf_web/HttpMessageConverterRegistry-class.html">HttpMessageConverterRegistry</a>: Registration interface</li>
+<li><a href="../../jetleaf_web/HttpMessageConverterRegistrar-class.html">HttpMessageConverterRegistrar</a>: Modular registration pattern</li>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a>: Ordering utility for converters</li>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a>: Dependency injection and pod management</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a> provides a robust, auto-discovering,
+ordered container for HTTP message converters, serving as the cornerstone
+of Jetleaf's content negotiation and message processing capabilities.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">HttpMessageConverters();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/HttpMessageConverters-class.html">HttpMessageConverters</a></li>
+    <li class="self-crumb">HttpMessageConverters.new constructor</li>
+</ol>
+
+    <h5>HttpMessageConverters class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

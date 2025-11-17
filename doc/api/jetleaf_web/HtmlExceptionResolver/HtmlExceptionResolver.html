@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the HtmlExceptionResolver.new constructor from Class HtmlExceptionResolver from the jetleaf_web library, for the Dart programming language.">
+  <title>HtmlExceptionResolver.new constructor - HtmlExceptionResolver - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a></li>
+    <li class="self-crumb">HtmlExceptionResolver.new constructor</li>
+  </ol>
+  <div class="self-name">HtmlExceptionResolver.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;HtmlExceptionResolver-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">HtmlExceptionResolver</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">HtmlExceptionResolver</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-_argumentResolver"><span class="type-annotation"><a href="../../jetleaf_web/MethodArgumentResolverManager-class.html">MethodArgumentResolverManager</a></span> <span class="parameter-name">_argumentResolver</span>, </span></li>
+<li><span class="parameter" id="-param-_returnValueHandler"><span class="type-annotation"><a href="../../jetleaf_web/ReturnValueHandlerManager-class.html">ReturnValueHandlerManager</a></span> <span class="parameter-name">_returnValueHandler</span>, </span></li>
+<li><span class="parameter" id="-param-_errorPages"><span class="type-annotation"><a href="../../jetleaf_web/ErrorPages-class.html">ErrorPages</a></span> <span class="parameter-name">_errorPages</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new <a href="../../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a> with required dependencies.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>_argumentResolver</code>: The composite argument resolver for method parameter resolution</li>
+<li><code>_returnValueHandler</code>: The composite return value handler for result processing</li>
+</ul>
+<h3 id="dependency-injection">Dependency Injection</h3>
+<p>Typically injected by the framework with shared resolver instances:</p>
+<pre class="language-dart"><code class="language-dart">@Pod
+ControllerAdviceExceptionResolver createResolver(
+  MethodArgumentResolver argumentResolver,
+  ReturnValueHandlerManager returnValueHandler,
+) {
+  return ControllerAdviceExceptionResolver(argumentResolver, returnValueHandler);
+}
+</code></pre>
+<p>Resolves exceptions using <code>@ControllerAdvice</code>, annotated pods.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a> provides a sophisticated exception
+handling mechanism that leverages controller advice pods to handle exceptions
+in a centralized, declarative manner. It scans for advice pods, caches their
+exception handling methods, and orchestrates the resolution process.</p>
+<h3 id="key-responsibilities">Key Responsibilities</h3>
+<ul>
+<li><strong>Advice Discovery</strong>: Automatically finds all <code>@ControllerAdvice</code> pods</li>
+<li><strong>Method Resolution</strong>: Identifies appropriate exception handler methods using <a href="../../jetleaf_web/MethodExceptionAdviser-class.html">MethodExceptionAdviser</a></li>
+<li><strong>Argument Resolution</strong>: Uses <a href="../../jetleaf_web/MethodArgumentResolver-class.html">MethodArgumentResolver</a> to prepare method arguments</li>
+<li><strong>Return Value Handling</strong>: Uses <a href="../../jetleaf_web/ReturnValueHandlerManager-class.html">ReturnValueHandlerManager</a> to process results</li>
+<li><strong>Performance Optimization</strong>: Caches adviser-method mappings for efficient exception resolution</li>
+</ul>
+<h3 id="exception-resolution-flow">Exception Resolution Flow</h3>
+<p>When an exception occurs:</p>
+<ol>
+<li><strong>Cache Lookup</strong>: Checks cached adviser-method mappings for the exception type</li>
+<li><strong>Adviser Discovery</strong>: Finds appropriate controller advice pods if not cached</li>
+<li><strong>Method Selection</strong>: Identifies the best matching exception handler method</li>
+<li><strong>Argument Resolution</strong>: Prepares method arguments using the argument resolver</li>
+<li><strong>Method Invocation</strong>: Invokes the exception handler method with resolved arguments</li>
+<li><strong>Result Processing</strong>: Handles the return value using the return value handler</li>
+<li><strong>Context Update</strong>: Updates the handler context with resolved arguments</li>
+</ol>
+<h3 id="caching-strategy">Caching Strategy</h3>
+<p>The resolver maintains a cache mapping exception types to adviser-method pairs:</p>
+<ul>
+<li><strong>Key</strong>: The <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Class-class.html">Class</a> of the exception being handled</li>
+<li><strong>Value</strong>: A <a href="https://api.dart.dev/stable/3.9.2/dart-core/MapEntry-class.html">MapEntry</a> containing the <a href="../../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a> and <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Method-class.html">Method</a></li>
+<li><strong>Benefits</strong>: Avoids repeated reflection and scanning for common exceptions</li>
+<li><strong>Eviction</strong>: Cache persists for the lifetime of the resolver</li>
+</ul>
+<h3 id="ordering-strategy">Ordering Strategy</h3>
+<p>Controller advice pods are ordered using:</p>
+<ol>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/AnnotationAwareOrderComparator-class.html">AnnotationAwareOrderComparator</a>: Respects <code>@Order</code> and <code>@Priority</code> annotations</li>
+<li><a href="https://pub.dev/documentation/jetleaf_core/1.0.1/core/PackageOrderComparator-class.html">PackageOrderComparator</a>: Orders by package hierarchy and dependencies</li>
+</ol>
+<h3 id="integration-example">Integration Example</h3>
+<pre class="language-dart"><code class="language-dart">@ControllerAdvice(assignableTypes: [UserController])
+class UserExceptionHandler {
+  @ExceptionHandler([ValidationException])
+  String handleValidation(ValidationException ex) {
+    return 'Validation failed: ${ex.message}';
+  }
+}
+</code></pre>
+<h3 id="performance-considerations">Performance Considerations</h3>
+<ul>
+<li>Caching eliminates reflection overhead for repeated exceptions</li>
+<li>Advice pods are sorted once during initialization</li>
+<li>Method resolution uses efficient type matching algorithms</li>
+<li>Argument resolution leverages the shared argument resolver infrastructure</li>
+</ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
+<li>Cache operations are not synchronized (assumes initialization-time population)</li>
+<li>Advice pod list is immutable after initialization</li>
+<li>Method invocation is thread-safe for stateless advice pods</li>
+</ul>
+<h3 id="related-components">Related Components</h3>
+<ul>
+<li><a href="../../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a>: Wrapper for controller advice pod metadata</li>
+<li><a href="../../jetleaf_web/MethodExceptionAdviser-class.html">MethodExceptionAdviser</a>: Resolves exception handler methods</li>
+<li><a href="../../jetleaf_web/MethodArgumentResolver-class.html">MethodArgumentResolver</a>: Resolves method arguments</li>
+<li><a href="../../jetleaf_web/ReturnValueHandlerManager-class.html">ReturnValueHandlerManager</a>: Handles return values</li>
+<li><a href="../../jetleaf_web/ExceptionResolver-class.html">ExceptionResolver</a>: Base exception resolution interface</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a> provides a powerful, cache-optimized
+mechanism for centralized exception handling using controller advice pods,
+enabling clean separation of error handling logic from business logic.</p>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">HtmlExceptionResolver(this._argumentResolver, this._returnValueHandler, this._errorPages);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/HtmlExceptionResolver-class.html">HtmlExceptionResolver</a></li>
+    <li class="self-crumb">HtmlExceptionResolver.new constructor</li>
+</ol>
+
+    <h5>HtmlExceptionResolver class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

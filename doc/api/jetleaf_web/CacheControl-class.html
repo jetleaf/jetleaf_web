@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the CacheControl class from the jetleaf_web library, for the Dart programming language.">
+  <title>CacheControl class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">CacheControl class</li>
+  </ol>
+  <div class="self-name">CacheControl</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;CacheControl-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">CacheControl</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Represents the HTTP <code>Cache-Control</code> header and allows fluent
+construction of cache directives.</p>
+<p>This class provides a <strong>builder-style API</strong> for setting common
+cache control directives and generating a properly formatted
+<code>Cache-Control</code> header string.</p>
+<h3 id="features">Features</h3>
+<ul>
+<li>Supports standard HTTP cache directives such as <code>max-age</code>, <code>no-cache</code>,
+<code>no-store</code>, <code>must-revalidate</code>, <code>public</code>, <code>private</code>, <code>immutable</code>, etc.</li>
+<li>Allows shared cache overrides via <code>s-maxage</code>.</li>
+<li>Provides fluent API for composing multiple directives in a single instance.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final cc = CacheControl.maxAge(Duration(minutes: 10))
+    .cachePublic()
+    .mustRevalidate()
+    .staleWhileRevalidate(Duration(seconds: 30));
+
+print(cc.headerValue);
+// Output: "max-age=600, public, must-revalidate, stale-while-revalidate=30"
+</code></pre>
+</section>
+
+
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="CacheControl.empty" class="callable">
+          <span class="name"><a href="../jetleaf_web/CacheControl/CacheControl.empty.html">CacheControl.empty</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Represents the HTTP <code>Cache-Control</code> header and allows fluent
+construction of cache directives.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="CacheControl.maxAge" class="callable">
+          <span class="name"><a href="../jetleaf_web/CacheControl/CacheControl.maxAge.html">CacheControl.maxAge</a></span><span class="signature">(<span class="parameter" id="maxAge-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">maxAge</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a <code>CacheControl</code> with a <code>max-age</code> directive.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="CacheControl.noCache" class="callable">
+          <span class="name"><a href="../jetleaf_web/CacheControl/CacheControl.noCache.html">CacheControl.noCache</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates a <code>CacheControl</code> with the <code>no-cache</code> directive.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+        <dt id="CacheControl.noStore" class="callable">
+          <span class="name"><a href="../jetleaf_web/CacheControl/CacheControl.noStore.html">CacheControl.noStore</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          Creates a <code>CacheControl</code> with the <code>no-store</code> directive.
+            <div class="constructor-modifier features">factory</div>
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="cachePrivate" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/cachePrivate.html">cachePrivate</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>private</code> directive.
+  
+
+</dd>
+
+        <dt id="cachePublic" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/cachePublic.html">cachePublic</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>public</code> directive.
+  
+
+</dd>
+
+        <dt id="getHeaderValue" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/getHeaderValue.html">getHeaderValue</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the formatted <code>Cache-Control</code> header string, or <code>null</code> if no directives are set.
+  
+
+</dd>
+
+        <dt id="immutable" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/immutable.html">immutable</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>immutable</code> directive.
+  
+
+</dd>
+
+        <dt id="mustRevalidate" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/mustRevalidate.html">mustRevalidate</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>must-revalidate</code> directive.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noTransform" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/noTransform.html">noTransform</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>no-transform</code> directive.
+  
+
+</dd>
+
+        <dt id="proxyRevalidate" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/proxyRevalidate.html">proxyRevalidate</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>proxy-revalidate</code> directive.
+  
+
+</dd>
+
+        <dt id="sMaxAge" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/sMaxAge.html">sMaxAge</a></span><span class="signature">(<wbr><span class="parameter" id="sMaxAge-param-sMaxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">sMaxAge</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>s-maxage</code> directive for shared caches.
+  
+
+</dd>
+
+        <dt id="staleIfError" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/staleIfError.html">staleIfError</a></span><span class="signature">(<wbr><span class="parameter" id="staleIfError-param-duration"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">duration</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>stale-if-error</code> directive.
+  
+
+</dd>
+
+        <dt id="staleWhileRevalidate" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/staleWhileRevalidate.html">staleWhileRevalidate</a></span><span class="signature">(<wbr><span class="parameter" id="staleWhileRevalidate-param-duration"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Duration-class.html">Duration</a></span> <span class="parameter-name">duration</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/CacheControl-class.html">CacheControl</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds the <code>stale-while-revalidate</code> directive.
+  
+
+</dd>
+
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../jetleaf_web/CacheControl/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A string representation of this object.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">CacheControl class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

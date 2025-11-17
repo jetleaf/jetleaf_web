@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ControllerAdvice.new constructor from Class ControllerAdvice from the jetleaf_web library, for the Dart programming language.">
+  <title>ControllerAdvice.new constructor - ControllerAdvice - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ControllerAdvice-class.html">ControllerAdvice</a></li>
+    <li class="self-crumb">ControllerAdvice.new const constructor</li>
+  </ol>
+  <div class="self-name">ControllerAdvice.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;ControllerAdvice-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ControllerAdvice</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">ControllerAdvice</span>(<wbr>{<ol class="parameter-list"> <li><span class="parameter" id="-param-assignableTypes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">assignableTypes</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="-param-basePackages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">basePackages</span> = <span class="default-value">const []</span>, </span></li>
+<li><span class="parameter" id="-param-annotations"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>&gt;</span></span> <span class="parameter-name">annotations</span> = <span class="default-value">const []</span>, </span></li>
+</ol>})
+    </section>
+    
+<section class="desc markdown">
+  <p>Marks a class as a <strong>controller advice</strong> within the JetLeaf framework,
+enabling centralized handling of cross-cutting web concerns such as:</p>
+<ul>
+<li>Exception handling</li>
+<li>Response modification</li>
+<li>Pre/post-processing around controller method execution</li>
+</ul>
+<p>A <a href="../../jetleaf_web/ControllerAdvice-class.html">ControllerAdvice</a> can apply globally to all controllers or be scoped
+to specific controllers, packages, or annotations.</p>
+<h3 id="overview">Overview</h3>
+<p>JetLeaf scans all registered <code>@ControllerAdvice</code> declarations at runtime
+and associates them with eligible controllers based on their scoping
+attributes. Advice methods within these classes can intercept controller
+invocations to provide reusable, declarative behavior.</p>
+<h3 id="example-global-advice">Example: Global Advice</h3>
+<pre class="language-dart"><code class="language-dart">@ControllerAdvice()
+class GlobalExceptionHandler {
+  void handleException(ServerHttpRequest request, ServerHttpResponse response, Exception ex) {
+    // Handle exceptions for all controllers
+    response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+    response.getBody().write('A server error occurred');
+  }
+}
+</code></pre>
+<h3 id="example-targeted-advice">Example: Targeted Advice</h3>
+<pre class="language-dart"><code class="language-dart">@ControllerAdvice(assignableTypes: [UserController, ClassType&lt;CityController&gt;()])
+class UserCityExceptionHandler {
+  void handleException(ServerHttpRequest request, ServerHttpResponse response, Exception ex) {
+    // Handle only for UserController or CityController
+  }
+}
+</code></pre>
+<p>This advice applies only to <code>UserController</code> and <code>CityController</code>.</p>
+<h3 id="scoping-attributes">Scoping Attributes</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>assignableTypes</code></td>
+<td>Restricts advice to specific controller types or subtypes.</td>
+<td><code>[]</code> (global)</td>
+</tr>
+<tr>
+<td><code>basePackages</code></td>
+<td>Restricts advice to controllers within the given package names.</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>annotations</code></td>
+<td>Restricts advice to controllers annotated with one of the listed annotations.</td>
+<td><code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Inherits from <a href="../../jetleaf_web/Controller-class.html">Controller</a> for consistency with JetLeaf’s annotation model.</li>
+<li>Extends <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/ReflectableAnnotation-class.html">ReflectableAnnotation</a> to support runtime reflection.</li>
+<li>Implements <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode-mixin.html">EqualsAndHashCode</a> for structural comparison and deduplication.</li>
+<li>Internally resolved by <a href="../../jetleaf_web/ControllerAdviser-class.html">ControllerAdviser</a> during controller dispatch.</li>
+</ul>
+<h3 id="related-annotations">Related Annotations</h3>
+<ul>
+<li><a href="../../jetleaf_web/RestControllerAdvice-class.html">RestControllerAdvice</a> → REST-specific advice for API controllers.</li>
+<li><a href="../../jetleaf_web/Controller-class.html">Controller</a> → Marks classes eligible for web request mapping.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const ControllerAdvice({
+  this.assignableTypes = const [],
+  this.basePackages = const [],
+  this.annotations = const []
+});</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ControllerAdvice-class.html">ControllerAdvice</a></li>
+    <li class="self-crumb">ControllerAdvice.new const constructor</li>
+</ol>
+
+    <h5>ControllerAdvice class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

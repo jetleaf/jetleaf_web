@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the FrameworkMethodArgumentResolver.new constructor from Class FrameworkMethodArgumentResolver from the jetleaf_web library, for the Dart programming language.">
+  <title>FrameworkMethodArgumentResolver.new constructor - FrameworkMethodArgumentResolver - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a></li>
+    <li class="self-crumb">FrameworkMethodArgumentResolver.new const constructor</li>
+  </ol>
+  <div class="self-name">FrameworkMethodArgumentResolver.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;FrameworkMethodArgumentResolver-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">FrameworkMethodArgumentResolver</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">FrameworkMethodArgumentResolver</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Core JetLeaf argument resolver that provides built-in support for
+resolving <strong>framework-level types</strong> such as <a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a>,
+<a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a>, <code>RequestHttpBody</code>, and <a href="../../jetleaf_web/ViewContext-class.html">ViewContext</a>.</p>
+<p>A <a href="../../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a> automatically injects core
+framework objects into controller method parameters without requiring
+explicit annotations. This enables seamless access to request and
+response data, as well as rendering utilities, inside controller methods.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Resolves common JetLeaf web types (e.g., <code>RequestHttpBody</code>, <a href="../../jetleaf_web/PageView-class.html">PageView</a>).</li>
+<li>Provides automatic exception parameter binding for handler methods.</li>
+<li>Acts as the <strong>first-line resolver</strong> before annotation-based resolvers.</li>
+</ul>
+<h3 id="resolution-rules">Resolution Rules</h3>
+<p>Resolution occurs in the following order:</p>
+<ol>
+<li>
+<p><strong>Exception parameters:</strong><br>
+If the handler method declares a parameter assignable from the
+provided exception object (<code>ex</code>), the exception is injected.</p>
+</li>
+<li>
+<p><strong>Web framework abstractions:</strong></p>
+<ul>
+<li><code>RequestHttpBody</code> → wraps the request/response pair.</li>
+<li><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> → injects the raw request.</li>
+<li><a href="../../jetleaf_web/ServerHttpResponse-class.html">ServerHttpResponse</a> → injects the raw response.</li>
+<li><a href="../../jetleaf_web/HttpInputMessage-class.html">HttpInputMessage</a> / <a href="../../jetleaf_web/HttpOutputMessage-class.html">HttpOutputMessage</a> → alias for request/response.</li>
+</ul>
+</li>
+<li>
+<p><strong>View rendering components:</strong></p>
+<ul>
+<li><a href="../../jetleaf_web/ViewContext-class.html">ViewContext</a> → wraps the request in a <a href="../../jetleaf_web/WebViewContext-class.html">WebViewContext</a>.</li>
+<li><a href="../../jetleaf_web/PageView-class.html">PageView</a> → provides a default <code>WebPageView</code> instance.</li>
+</ul>
+</li>
+<li>
+<p>Returns <code>null</code> if no framework type matches.</p>
+</li>
+</ol>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">class UserController {
+  void handleUser(RequestHttpBody web, PageView page) {
+    // Access request/response and render a view
+  }
+
+  void handleError(UserNotFoundException ex, ServerHttpResponse res) {
+    res.setStatus(404);
+  }
+}
+
+final resolver = FrameworkMethodArgumentResolver();
+final param = HandlerMethod(UserController.handleUser).getParameter('web');
+final value = await resolver.resolveArgument(param, req, res, handler);
+</code></pre>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>This class is <strong>stateless</strong> and shared globally by the dispatcher.</li>
+<li>It serves as the default resolver before user-defined or
+annotation-based resolvers.</li>
+<li>Reflection-based type matching ensures flexibility without
+annotation clutter.</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const FrameworkMethodArgumentResolver();</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/FrameworkMethodArgumentResolver-class.html">FrameworkMethodArgumentResolver</a></li>
+    <li class="self-crumb">FrameworkMethodArgumentResolver.new const constructor</li>
+</ol>
+
+    <h5>FrameworkMethodArgumentResolver class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

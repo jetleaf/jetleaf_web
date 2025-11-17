@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the Part class from the jetleaf_web library, for the Dart programming language.">
+  <title>Part class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">Part class</li>
+  </ol>
+  <div class="self-name">Part</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;Part-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">Part</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#interface" class="feature feature-interface" title="This class can only be implemented (not extended or mixed in).">interface</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A <strong>single component</strong> of a multipart/form-data request, representing
+either a simple form field or a file upload.</p>
+<p>The <a href="../jetleaf_web/Part-class.html">Part</a> interface abstracts access to both metadata (headers, content
+type, and field name) and the actual content (bytes or stream) of an
+uploaded form part. It is a key component of multipart parsing and upload
+processing in JetLeaf’s HTTP framework.</p>
+<h3 id="overview">Overview</h3>
+<p>Multipart requests are commonly used for file uploads and form submissions
+where data is split into multiple logical parts, each with its own headers
+and content body. A <a href="../jetleaf_web/Part-class.html">Part</a> object provides uniform access to these parts,
+regardless of whether they originate from a text field, binary file,
+or streamed input.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Provides access to headers such as <code>Content-Disposition</code> and <code>Content-Type</code>.</li>
+<li>Exposes both metadata (name, filename, size) and raw content.</li>
+<li>Supports writing to files, retrieving binary data, and reading as strings.</li>
+<li>Offers cleanup operations for temporary or large uploads stored on disk.</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Implementations must be <strong>thread-safe</strong> and <strong>non-blocking</strong> wherever
+possible.</li>
+<li>Implementations may store large files in temporary disk locations to
+avoid excessive memory usage.</li>
+<li>The <code>getInputStream()</code> method (inherited from <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStreamSource-class.html">InputStreamSource</a>)
+provides streaming access to content for efficient large-file handling.</li>
+<li>Deleting a <a href="../jetleaf_web/Part-class.html">Part</a> should release any underlying file handles or temporary
+storage resources.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final part = request.getPart("avatar");
+
+print("Field name: ${part.getName()}");
+print("Submitted filename: ${part.getSubmittedFileName()}");
+print("Content type: ${part.getContentType()}");
+print("Size: ${part.getSize()} bytes");
+
+// Save the uploaded file
+await part.write("/uploads/${part.getSubmittedFileName()}");
+
+// Clean up temporary files
+await part.delete();
+</code></pre>
+<h3 id="typical-implementations">Typical Implementations</h3>
+<ul>
+<li><code>MemoryPart</code>: Stores small parts entirely in memory.</li>
+<li><code>FilePart</code>: Stores large uploads in a temporary file.</li>
+<li><code>StreamingPart</code>: Provides stream-based access for high-throughput uploads.</li>
+</ul>
+<h3 id="see-also">See Also</h3>
+<ul>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStreamSource-class.html">InputStreamSource</a> — base interface for streamed content access.</li>
+<li><a href="../jetleaf_web/MultipartParser-class.html">MultipartParser</a> — responsible for constructing <code>Part</code> instances
+from HTTP requests.</li>
+<li><a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpRequest-class.html">HttpRequest</a> — for accessing uploaded parts via request APIs.</li>
+</ul>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStreamSource-class.html">InputStreamSource</a></li>
+    </ul>
+  </dd>
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/FilePart-class.html">FilePart</a></li>
+              <li><a href="../jetleaf_web/IoPart-class.html">IoPart</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="delete" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/delete.html">delete</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Deletes any <strong>temporary storage</strong> associated with this multipart part.
+  
+
+</dd>
+
+        <dt id="getBytes" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/getBytes.html">getBytes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-typed_data/Uint8List-class.html">Uint8List</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>raw binary content</strong> of this part as a <a href="https://api.dart.dev/stable/3.9.2/dart-typed_data/Uint8List-class.html">Uint8List</a>.
+  
+
+</dd>
+
+        <dt id="getInputStream" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStreamSource/getInputStream.html">getInputStream</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Returns a new <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a> to read the underlying content.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getName" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/getName.html">getName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>name</strong> of this part, as specified in the
+<code>name</code> parameter of the <code>Content-Disposition</code> header.
+  
+
+</dd>
+
+        <dt id="getSize" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/getSize.html">getSize</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>total size</strong> of this part in bytes.
+  
+
+</dd>
+
+        <dt id="getString" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/getString.html">getString</a></span><span class="signature">(<wbr>[<span class="parameter" id="getString-param-encoding"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a>?</span> <span class="parameter-name">encoding</span></span>])
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>content</strong> of this part as a string.
+  
+
+</dd>
+
+        <dt id="getSubmittedFileName" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/getSubmittedFileName.html">getSubmittedFileName</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the <strong>original filename</strong> submitted by the client, if present.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="write" class="callable">
+  <span class="name"><a href="../jetleaf_web/Part/write.html">write</a></span><span class="signature">(<wbr><span class="parameter" id="write-param-fileName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">fileName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Writes the content of this part to the specified file path.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">Part class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the MultipartResolver class from the jetleaf_web library, for the Dart programming language.">
+  <title>MultipartResolver class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">MultipartResolver class</li>
+  </ol>
+  <div class="self-name">MultipartResolver</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;MultipartResolver-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">MultipartResolver</span> class 
+    <a href="https://dart.dev/language/class-modifiers#abstract" class="feature feature-abstract" title="This type can not be directly constructed.">abstract</a>
+    <a href="https://dart.dev/language/class-modifiers#interface" class="feature feature-interface" title="This class can only be implemented (not extended or mixed in).">interface</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Defines a strategy for handling <strong>multipart HTTP requests</strong>, commonly used
+for form submissions that include file uploads (<code>multipart/form-data</code>).</p>
+<p>A <code>MultipartResolver</code> implementation is responsible for:</p>
+<ol>
+<li>Detecting whether a request contains multipart content.</li>
+<li>Parsing the request into a <a href="../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a>, allowing access
+to individual uploaded files and form fields.</li>
+<li>Managing temporary storage for uploaded files (in-memory or on disk).</li>
+<li>Enforcing limits on individual file sizes, total request size, and
+memory thresholds for file handling.</li>
+</ol>
+<p>This abstraction allows JetLeaf to decouple file upload handling from
+the core request processing pipeline. Developers can provide custom
+implementations to handle special storage requirements, streaming uploads,
+or validation policies.</p>
+<h2 id="usage">Usage</h2>
+<p>Typically, a multipart resolver is registered in the web application context
+and used internally by the framework to:</p>
+<ul>
+<li>Identify multipart requests before dispatching to controllers.</li>
+<li>Automatically convert uploaded files into accessible objects.</li>
+<li>Ensure proper cleanup of temporary files after request processing.</li>
+</ul>
+<p>Example:</p>
+<pre class="language-dart"><code class="language-dart">if (resolver.isMultipart(request)) {
+  final multipartRequest = await resolver.resolveMultipart(request);
+  final avatar = multipartRequest.getFile('avatar');
+  // Process the uploaded file...
+  await resolver.cleanupMultipart(multipartRequest);
+}
+</code></pre>
+<h2 id="customization">Customization</h2>
+<p>Implementations may define:</p>
+<ul>
+<li>Memory thresholds for temporary file storage.</li>
+<li>Maximum allowed sizes per file and per request.</li>
+<li>Custom storage backends (e.g., cloud storage, database, temporary disk).</li>
+</ul>
+<p>By implementing this interface, you can fully control how JetLeaf processes
+multipart/form-data requests while maintaining compatibility with the
+framework's handler and controller abstractions.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/IoMultipartResolver-class.html">IoMultipartResolver</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="cleanupMultipart" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartResolver/cleanupMultipart.html">cleanupMultipart</a></span><span class="signature">(<wbr><span class="parameter" id="cleanupMultipart-param-request"><span class="type-annotation"><a href="../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter">void</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Cleans up any temporary files or in-memory buffers used to process
+the <code>request</code> during multipart resolution.
+  
+
+</dd>
+
+        <dt id="isMultipart" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartResolver/isMultipart.html">isMultipart</a></span><span class="signature">(<wbr><span class="parameter" id="isMultipart-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Determines if the given <code>request</code> contains multipart content.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="resolveMultipart" class="callable">
+  <span class="name"><a href="../jetleaf_web/MultipartResolver/resolveMultipart.html">resolveMultipart</a></span><span class="signature">(<wbr><span class="parameter" id="resolveMultipart-param-request"><span class="type-annotation"><a href="../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a></span> <span class="parameter-name">request</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Future-class.html">Future</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Parses the given <code>request</code> into a <a href="../jetleaf_web/MultipartServerHttpRequest-class.html">MultipartServerHttpRequest</a>,
+allowing access to uploaded files and form fields.
+  
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section class="summary offset-anchor" id="static-properties">
+    <h2>Static Properties</h2>
+    <dl class="properties">
+        <dt id="UPLOAD_DIRECTORY" class="property">
+  <span class="name"><a href="../jetleaf_web/MultipartResolver/UPLOAD_DIRECTORY.html">UPLOAD_DIRECTORY</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Default temporary directory path for storing uploaded files exceeding the threshold.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="BUFFER_SIZE_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/BUFFER_SIZE_PROPERTY_NAME-constant.html">BUFFER_SIZE_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for determining the buffer size to use while building the multipart files.
+  
+
+</dd>
+
+        <dt id="CHARSET_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/CHARSET_PROPERTY_NAME-constant.html">CHARSET_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for configuring the <strong>character set</strong> used for decoding text parts in multipart requests.
+  
+
+</dd>
+
+        <dt id="DEFAULT_CHARSET" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/DEFAULT_CHARSET-constant.html">DEFAULT_CHARSET</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Default character set used for decoding textual parts of a multipart request.
+  
+
+</dd>
+
+        <dt id="DEFAULT_FILE_SIZE_THRESHOLD" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/DEFAULT_FILE_SIZE_THRESHOLD-constant.html">DEFAULT_FILE_SIZE_THRESHOLD</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd>
+  Default file size threshold for storing files in memory vs. disk.
+  
+
+</dd>
+
+        <dt id="DEFAULT_MAX_UPLOAD_SIZE" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/DEFAULT_MAX_UPLOAD_SIZE-constant.html">DEFAULT_MAX_UPLOAD_SIZE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd>
+  Default maximum total size of a multipart request.
+  
+
+</dd>
+
+        <dt id="DEFAULT_MAX_UPLOAD_SIZE_PER_FILE" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/DEFAULT_MAX_UPLOAD_SIZE_PER_FILE-constant.html">DEFAULT_MAX_UPLOAD_SIZE_PER_FILE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd>
+  Default maximum size of an individual file in a multipart request.
+  
+
+</dd>
+
+        <dt id="FILE_SIZE_THRESHOLD_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/FILE_SIZE_THRESHOLD_PROPERTY_NAME-constant.html">FILE_SIZE_THRESHOLD_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for configuring the <strong>file size threshold</strong> for in-memory vs. disk storage.
+  
+
+</dd>
+
+        <dt id="MAX_UPLOAD_SIZE_PER_FILE_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/MAX_UPLOAD_SIZE_PER_FILE_PROPERTY_NAME-constant.html">MAX_UPLOAD_SIZE_PER_FILE_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for configuring the <strong>maximum upload size per individual file</strong>.
+  
+
+</dd>
+
+        <dt id="MAX_UPLOAD_SIZE_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/MAX_UPLOAD_SIZE_PROPERTY_NAME-constant.html">MAX_UPLOAD_SIZE_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for configuring the <strong>maximum total upload size</strong> for a multipart request.
+  
+
+</dd>
+
+        <dt id="PRESERVE_FILE_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/PRESERVE_FILE_NAME-constant.html">PRESERVE_FILE_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  
+
+</dt>
+<dd>
+  Default behavior for preserving the original file name of uploaded files.
+  
+
+</dd>
+
+        <dt id="PRESERVE_FILE_NAME_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/PRESERVE_FILE_NAME_PROPERTY_NAME-constant.html">PRESERVE_FILE_NAME_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name for determining whether the original <strong>file name</strong> should be preserved when saving uploaded files.
+  
+
+</dd>
+
+        <dt id="UPLOAD_DIRECTORY_PROPERTY_NAME" class="constant">
+    <span class="name "><a href="../jetleaf_web/MultipartResolver/UPLOAD_DIRECTORY_PROPERTY_NAME-constant.html">UPLOAD_DIRECTORY_PROPERTY_NAME</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Property name specifying the <strong>temporary directory</strong> used for storing uploaded files that exceed the in-memory threshold.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">MultipartResolver class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

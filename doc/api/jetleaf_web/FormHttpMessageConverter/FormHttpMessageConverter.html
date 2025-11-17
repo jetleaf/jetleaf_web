@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the FormHttpMessageConverter.new constructor from Class FormHttpMessageConverter from the jetleaf_web library, for the Dart programming language.">
+  <title>FormHttpMessageConverter.new constructor - FormHttpMessageConverter - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/FormHttpMessageConverter-class.html">FormHttpMessageConverter</a></li>
+    <li class="self-crumb">FormHttpMessageConverter.new constructor</li>
+  </ol>
+  <div class="self-name">FormHttpMessageConverter.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;FormHttpMessageConverter-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">FormHttpMessageConverter</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">FormHttpMessageConverter</span>(<wbr>)
+    </section>
+    
+<section class="desc markdown">
+  <p><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> implementation for handling HTML form data
+serialization and deserialization.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../../jetleaf_web/FormHttpMessageConverter-class.html">FormHttpMessageConverter</a> enables reading and writing of
+<code>application/x-www-form-urlencoded</code> request and response bodies.
+This is the standard format for HTML form submissions.</p>
+<h3 id="supported-media-types">Supported Media Types</h3>
+<ul>
+<li><code>application/x-www-form-urlencoded</code></li>
+</ul>
+<h3 id="reading-form-data">Reading Form Data</h3>
+<p>Deserializes form-encoded request bodies into <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map&lt;String, dynamic&gt;</a>
+or other compatible types, where keys are parameter names and values
+are the form field values.</p>
+<h3 id="writing-form-data">Writing Form Data</h3>
+<p>Serializes objects as form-encoded response bodies, converting
+the object's properties into URL-encoded key-value pairs.</p>
+<h3 id="example-reading-form-data">Example: Reading Form Data</h3>
+<pre class="language-dart"><code class="language-dart">@PostMapping('/form')
+Future&lt;String&gt; handleForm(@RequestBody Map&lt;String, dynamic&gt; formData) async {
+  final username = formData['username'];
+  final email = formData['email'];
+  return 'Received: $username, $email';
+}
+// Request body: "username=john&amp;email=john@example.com"
+</code></pre>
+<h3 id="example-writing-form-data">Example: Writing Form Data</h3>
+<pre class="language-dart"><code class="language-dart">@GetMapping('/form', produces: ['application/x-www-form-urlencoded'])
+Map&lt;String, String&gt; getFormData() =&gt; {
+  'name': 'John Doe',
+  'email': 'john@example.com',
+};
+// Response body: "name=John+Doe&amp;email=john%40example.com"
+</code></pre>
+<h3 id="form-data-encoding">Form Data Encoding</h3>
+<ul>
+<li>Parameter names and values are URL-encoded</li>
+<li>Spaces are encoded as <code>+</code> (or <code>%20</code>)</li>
+<li>Special characters are percent-encoded</li>
+<li>Multiple values for same key are supported as repeated parameters</li>
+</ul>
+<h3 id="type-support">Type Support</h3>
+<ul>
+<li><strong>Reading</strong>: Converts to <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map&lt;String, dynamic&gt;</a> with string values</li>
+<li><strong>Writing</strong>: Converts from <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map&lt;String, dynamic&gt;</a> to form-encoded string</li>
+</ul>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Stateless and thread-safe</li>
+<li>Uses UTF-8 encoding by default</li>
+<li>Compatible with standard HTML form submission</li>
+<li>Ordered after more specific converters in processing</li>
+</ul>
+<h3 id="related-types">Related Types</h3>
+<ul>
+<li><code>MultipartHttpMessageConverter</code> — for multipart/form-data</li>
+<li><a href="../../jetleaf_web/AbstractHttpMessageConverter-class.html">AbstractHttpMessageConverter</a> — base class for all converters</li>
+<li><a href="../../jetleaf_web/HttpMessageConverter-class.html">HttpMessageConverter</a> — converter interface</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">FormHttpMessageConverter() {
+  super.addSupportedMediaType(MediaType.APPLICATION_X_WWW_FORM_URLENCODED);
+}</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/FormHttpMessageConverter-class.html">FormHttpMessageConverter</a></li>
+    <li class="self-crumb">FormHttpMessageConverter.new constructor</li>
+</ol>
+
+    <h5>FormHttpMessageConverter class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

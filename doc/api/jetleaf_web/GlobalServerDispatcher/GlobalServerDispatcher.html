@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the GlobalServerDispatcher.new constructor from Class GlobalServerDispatcher from the jetleaf_web library, for the Dart programming language.">
+  <title>GlobalServerDispatcher.new constructor - GlobalServerDispatcher - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a></li>
+    <li class="self-crumb">GlobalServerDispatcher.new constructor</li>
+  </ol>
+  <div class="self-name">GlobalServerDispatcher.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;GlobalServerDispatcher-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">GlobalServerDispatcher</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      
+      <span class="name ">GlobalServerDispatcher</span>(<wbr><ol class="parameter-list"> <li><span class="parameter" id="-param-_resolver"><span class="type-annotation"><a href="../../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a></span> <span class="parameter-name">_resolver</span>, </span></li>
+<li><span class="parameter" id="-param-_context"><span class="type-annotation"><a href="../../jetleaf_web/ServerContext-class.html">ServerContext</a></span> <span class="parameter-name">_context</span>, </span></li>
+<li><span class="parameter" id="-param-parser"><span class="type-annotation">PathPatternParserManager</span> <span class="parameter-name">parser</span>, </span></li>
+<li><span class="parameter" id="-param-_filterManager"><span class="type-annotation"><a href="../../jetleaf_web/FilterManager-class.html">FilterManager</a></span> <span class="parameter-name">_filterManager</span>, </span></li>
+<li><span class="parameter" id="-param-_adapterManager"><span class="type-annotation"><a href="../../jetleaf_web/HandlerAdapterManager-class.html">HandlerAdapterManager</a></span> <span class="parameter-name">_adapterManager</span>, </span></li>
+<li><span class="parameter" id="-param-_handlerMapping"><span class="type-annotation"><a href="../../jetleaf_web/RouteRegistryHandlerMapping-class.html">RouteRegistryHandlerMapping</a></span> <span class="parameter-name">_handlerMapping</span>, </span></li>
+<li><span class="parameter" id="-param-_interceptorManager"><span class="type-annotation"><a href="../../jetleaf_web/HandlerInterceptorManager-class.html">HandlerInterceptorManager</a></span> <span class="parameter-name">_interceptorManager</span>, </span></li>
+<li><span class="parameter" id="-param-_exceptionManager"><span class="type-annotation"><a href="../../jetleaf_web/ExceptionResolverManager-class.html">ExceptionResolverManager</a></span> <span class="parameter-name">_exceptionManager</span>, </span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new <a href="../../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a> with the given <a href="../../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a>.</p>
+<p>The dispatcher will use the provided resolver to handle file uploads and
+form fields for multipart requests.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>resolver</code>: The <a href="../../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a> responsible for parsing multipart requests.</li>
+</ul>
+<p><strong>Example Usage:</strong></p>
+<pre class="language-dart"><code class="language-dart">final multipartResolver = IoMultipartResolver(EncodingDecoder());
+final dispatcher = GlobalServerDispatcher(multipartResolver);
+</code></pre>
+<p>A central dispatcher for handling HTTP requests within a web application.</p>
+<p><code>GlobalServerDispatcher</code> extends <a href="../../jetleaf_web/AbstractServerDispatcher-class.html">AbstractServerDispatcher</a> and is responsible
+for coordinating all aspects of request processing, including:</p>
+<ol>
+<li>Managing <a href="../../jetleaf_web/MultipartResolver-class.html">MultipartResolver</a> for handling <code>multipart/form-data</code> requests.</li>
+<li>Registering and coordinating <a href="../../jetleaf_web/HandlerMapping-class.html">HandlerMapping</a>, <a href="../../jetleaf_web/HandlerAdapter-class.html">HandlerAdapter</a>, and
+<a href="../../jetleaf_web/HandlerInterceptor-class.html">HandlerInterceptor</a> components to resolve and process requests.</li>
+<li>Managing <a href="../../jetleaf_web/Filter-class.html">Filter</a> chains for pre- and post-processing requests.</li>
+<li>Handling exception resolution via <a href="../../jetleaf_web/ExceptionResolver-class.html">ExceptionResolver</a> implementations.</li>
+<li>Integrating with the <a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationEventBus-class.html">ApplicationEventBus</a> to publish and listen for application events.</li>
+</ol>
+<p>This dispatcher supports dynamic discovery of pods from the
+<a href="https://pub.dev/documentation/jetleaf_core/1.0.1/context/ApplicationContext-class.html">ApplicationContext</a> and registers them during initialization.</p>
+<p><strong>Usage Example:</strong></p>
+<pre class="language-dart"><code class="language-dart">final dispatcher = GlobalServerDispatcher(multipartResolver);
+dispatcher.setApplicationContext(applicationContext);
+dispatcher.setApplicationEventBus(eventBus);
+await dispatcher.onReady();
+
+// Dispatcher is now ready to handle requests with registered filters, handlers, and interceptors.
+</code></pre>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">GlobalServerDispatcher(
+  this._resolver,
+  this._context,
+  super.parser,
+  this._filterManager,
+  super._adapterManager,
+  super._handlerMapping,
+  super._interceptorManager,
+  super._exceptionManager
+);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/GlobalServerDispatcher-class.html">GlobalServerDispatcher</a></li>
+    <li class="self-crumb">GlobalServerDispatcher.new constructor</li>
+</ol>
+
+    <h5>GlobalServerDispatcher class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

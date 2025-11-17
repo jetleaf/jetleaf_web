@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ResolvedBy.new constructor from Class ResolvedBy from the jetleaf_web library, for the Dart programming language.">
+  <title>ResolvedBy.new constructor - ResolvedBy - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a></li>
+    <li class="self-crumb">ResolvedBy.new const constructor</li>
+  </ol>
+  <div class="self-name">ResolvedBy.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;ResolvedBy-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ResolvedBy</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">ResolvedBy</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-resolver"><span class="type-annotation"><a href="../../jetleaf_web/Resolver-class.html">Resolver</a></span> <span class="parameter-name">resolver</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a <a href="../../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a> annotation with the specified resolver.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>resolver</code>: The <a href="../../jetleaf_web/Resolver-class.html">Resolver</a> implementation that will handle parameter
+resolution for the target annotation class.</li>
+</ul>
+<p>A metadata annotation that associates parameter resolver implementations
+with annotation classes for web request parameter resolution.</p>
+<p>This annotation provides a streamlined approach to linking custom annotations
+with their corresponding <a href="../../jetleaf_web/Resolver-class.html">Resolver</a> implementations. It serves as the foundation
+for the Jetleaf framework's parameter resolution system, enabling automatic
+population of controller method parameters based on request context and annotations.</p>
+<h3 id="design-philosophy">Design Philosophy</h3>
+<p><a href="../../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a> follows the principle of convention over configuration by
+explicitly connecting annotations to their resolution logic. This creates
+a clear, type-safe relationship between parameter annotations and the code
+that handles their resolution.</p>
+<h3 id="usage-pattern">Usage Pattern</h3>
+<pre class="language-dart"><code class="language-dart">// 1. Define a resolver implementation
+class MatrixVariableResolver implements Resolver {
+  const MatrixVariableResolver();
+
+  @override
+  bool supports(Parameter parameter) {
+    return parameter.hasAnnotation(MatrixVariable);
+  }
+
+  @override
+  Object? resolve(ServerHttpRequest request, Parameter parameter) {
+    final annotation = parameter.getAnnotation(MatrixVariable);
+    final varName = annotation.name ?? parameter.name;
+    return request.getMatrixVariables().get(varName);
+  }
+}
+
+// 2. Annotate the annotation with its resolver
+@ResolvedBy(MatrixVariableResolver())
+@Target({TargetKind.parameter})
+class MatrixVariable extends ReflectableAnnotation {
+  final String? name;
+  const MatrixVariable([this.name]);
+}
+
+// 3. Use in controller methods
+class ProductController {
+  @Get('/categories/{id}/products')
+  List&lt;Product&gt; getProducts(
+    @MatrixVariable('id') String categoryId,
+    @MatrixVariable('sort') String? sortBy
+  ) {
+    // Parameters are automatically resolved from matrix variables
+    return productService.findByCategory(categoryId, sortBy: sortBy);
+  }
+}
+</code></pre>
+<h3 id="framework-integration">Framework Integration</h3>
+<ul>
+<li>Jetleaf scans for <a href="../../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a> annotations during application startup</li>
+<li>The framework builds a registry mapping annotations to their resolvers</li>
+<li>During request processing, resolvers are invoked for matching parameters</li>
+<li>Resolution occurs before controller method invocation</li>
+</ul>
+<h3 id="common-built-in-resolvers">Common Built-in Resolvers</h3>
+<p>The Jetleaf framework typically provides these standard resolvers:</p>
+<ul>
+<li><strong>@PathVariable</strong>: Resolves URI template variables</li>
+<li><strong>@RequestParam</strong>: Resolves query string parameters</li>
+<li><strong>@RequestHeader</strong>: Resolves HTTP header values</li>
+<li><strong>@RequestBody</strong>: Resolves and deserializes request body</li>
+<li><strong>@MatrixVariable</strong>: Resolves matrix variables from path segments</li>
+<li><strong>@CookieValue</strong>: Resolves cookie values</li>
+<li><strong>@SessionAttribute</strong>: Resolves session attributes</li>
+</ul>
+<h3 id="target-restrictions">Target Restrictions</h3>
+<p>This annotation can only be applied to class types (annotations) using <code>@Target({TargetKind.classType})</code>.</p>
+<h3 id="related-components">Related Components</h3>
+<ul>
+<li><a href="../../jetleaf_web/Resolver-class.html">Resolver</a> - The core interface for parameter resolution logic</li>
+<li><a href="../../jetleaf_web/ServerHttpRequest-class.html">ServerHttpRequest</a> - The request context available during resolution</li>
+<li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Parameter-class.html">Parameter</a> - Reflection information about method parameters</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const ResolvedBy(this.resolver);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ResolvedBy-class.html">ResolvedBy</a></li>
+    <li class="self-crumb">ResolvedBy.new const constructor</li>
+</ol>
+
+    <h5>ResolvedBy class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

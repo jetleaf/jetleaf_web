@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the IoRestHttpResponse class from the jetleaf_web library, for the Dart programming language.">
+  <title>IoRestHttpResponse class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">IoRestHttpResponse class</li>
+  </ol>
+  <div class="self-name">IoRestHttpResponse</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;IoRestHttpResponse-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">IoRestHttpResponse</span> class 
+    <a href="https://dart.dev/language/class-modifiers#final" class="feature feature-final" title="This class can neither be extended, implemented, nor mixed in.">final</a>
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A low-level HTTP response wrapper used by <a href="../jetleaf_web/IoRestHttpRequest-class.html">IoRestHttpRequest</a>
+to expose JetLeaf's standardized <a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a> interface
+over Dart's native <a href="https://api.dart.dev/stable/dart-io/HttpClientResponse-class.html"><code>HttpClientResponse</code></a>.</p>
+<p>The <a href="../jetleaf_web/IoRestHttpResponse-class.html">IoRestHttpResponse</a> class provides a unified abstraction for
+reading response status codes, headers, and streamed body content
+in a consistent, framework-oriented manner.</p>
+<h3 id="responsibilities">Responsibilities</h3>
+<ul>
+<li>Wraps a <a href="https://api.dart.dev/stable/dart-io/HttpClientResponse-class.html"><code>HttpClientResponse</code></a>
+returned from the Dart I/O layer.</li>
+<li>Provides access to the HTTP <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a>, <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a>, and <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a>.</li>
+<li>Bridges JetLeaf's stream-based abstraction with the low-level network response.</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final response = await request.execute();
+
+// Read status code
+print('Status: ${response.getStatus()}');
+
+// Read response body
+final stream = response.getBody();
+final data = await stream.readAsString();
+print('Body: $data');
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+  <dt>Implemented types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a></li>
+    </ul>
+  </dd>
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="IoRestHttpResponse.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/IoRestHttpResponse/IoRestHttpResponse.html">IoRestHttpResponse.new</a></span><span class="signature">(<span class="parameter" id="-param-_response"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpClientResponse-class.html">HttpClientResponse</a></span> <span class="parameter-name">_response</span></span>)</span>
+        </dt>
+        <dd>
+          A low-level HTTP response wrapper used by <a href="../jetleaf_web/IoRestHttpRequest-class.html">IoRestHttpRequest</a>
+to expose JetLeaf's standardized <a href="../jetleaf_web/RestHttpResponse-class.html">RestHttpResponse</a> interface
+over Dart's native <a href="https://api.dart.dev/stable/dart-io/HttpClientResponse-class.html"><code>HttpClientResponse</code></a>.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="getBody" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRestHttpResponse/getBody.html">getBody</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the message body as an <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/InputStream-class.html">InputStream</a>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRestHttpResponse/getHeaders.html">getHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the HTTP headers associated with this message.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="getStatus" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRestHttpResponse/getStatus.html">getStatus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Represents the <strong>HTTP response</strong> returned from executing a <a href="../jetleaf_web/RestHttpRequest-class.html">RestHttpRequest</a>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/IoRestHttpResponse/setHeaders.html">setHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Replaces the entire set of HTTP headers for this message.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">IoRestHttpResponse class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

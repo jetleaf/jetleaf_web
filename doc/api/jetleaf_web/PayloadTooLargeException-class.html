@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the PayloadTooLargeException class from the jetleaf_web library, for the Dart programming language.">
+  <title>PayloadTooLargeException class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">PayloadTooLargeException class</li>
+  </ol>
+  <div class="self-name">PayloadTooLargeException</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;PayloadTooLargeException-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">PayloadTooLargeException</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating that the client's request payload
+exceeds the server's allowed size, corresponding to the HTTP<br>
+<strong>413 Payload Too Large</strong> status.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../jetleaf_web/PayloadTooLargeException-class.html">PayloadTooLargeException</a> is thrown when the <strong>body of a request</strong>
+(such as a file upload or JSON payload) exceeds the maximum size limit
+configured by the server or application.</p>
+<p>It informs clients that the request was rejected <strong>before processing</strong>
+due to its size, allowing them to reduce the payload or use chunked uploads.</p>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">Future&lt;void&gt; handleUpload(HttpRequestProvider request) async {
+  final contentLength = request.getContentLength() ?? 0;
+  if (contentLength &gt; 10 * 1024 * 1024) { // 10 MB limit
+    throw PayloadTooLargeException(
+      'Uploaded file exceeds 10 MB limit',
+      details: {'maxAllowedBytes': 10 * 1024 * 1024},
+    );
+  }
+
+  // Continue with file processing...
+}
+</code></pre>
+<h3 id="common-scenarios">Common Scenarios</h3>
+<ul>
+<li>Multipart file uploads exceeding configured size limits</li>
+<li>JSON or XML payloads too large for parsing</li>
+<li>Streaming requests that surpass internal buffer or quota thresholds</li>
+</ul>
+<h3 id="integration-example">Integration Example</h3>
+<pre class="language-dart"><code class="language-dart">try {
+  await fileUploadHandler.handle(request);
+} on PayloadTooLargeException catch (e) {
+  response.statusCode = 413;
+  response.getOutputStream().writeString('Request too large: ${e.message}');
+}
+</code></pre>
+<h3 id="design-notes">Design Notes</h3>
+<ul>
+<li>Maps directly to <strong>HTTP 413 Payload Too Large</strong> as defined in <code>RFC 7231 §6.5.11</code>.</li>
+<li>Useful for enforcing upload size constraints and preventing resource exhaustion.</li>
+<li>Extends <a href="../jetleaf_web/HttpException-class.html">HttpException</a> to include diagnostic context such as URI and size limits.</li>
+<li>Works seamlessly with JetLeaf's <a href="../jetleaf_web/ExceptionResolver-class.html">ExceptionResolver</a> and validation pipeline.</li>
+</ul>
+<h3 id="related-exceptions">Related Exceptions</h3>
+<ul>
+<li><a href="../jetleaf_web/BadRequestException-class.html">BadRequestException</a> – for syntactically invalid input (400)</li>
+<li><a href="../jetleaf_web/UnsupportedMediaTypeException-class.html">UnsupportedMediaTypeException</a> – for invalid <code>Content-Type</code> (415)</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../jetleaf_web/PayloadTooLargeException-class.html">PayloadTooLargeException</a> provides a consistent mechanism within
+JetLeaf for enforcing payload size limits and communicating those
+constraints back to clients in a standardized, recoverable manner.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Error-class.html">Error</a></li>
+        <li><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException-class.html">RuntimeException</a></li>
+        <li><a href="../jetleaf_web/HttpException-class.html">HttpException</a></li>
+      <li>PayloadTooLargeException</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+        
+  <dt>Available extensions</dt>
+  <dd><ul class="comma-separated clazz-relationships">
+      <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ErrorExtensions.html">ErrorExtensions</a></li>
+      <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ExceptionExtensions.html">ExceptionExtensions</a></li>
+      <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/RuntimeExceptionExtensions.html">RuntimeExceptionExtensions</a></li>
+      <li><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ThrowableExtensions.html">ThrowableExtensions</a></li>
+  </ul></dd>
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="PayloadTooLargeException.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/PayloadTooLargeException/PayloadTooLargeException.html">PayloadTooLargeException.new</a></span><span class="signature">(<span class="parameter" id="-param-message"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">message</span>, {</span><span class="parameter" id="-param-details"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span> <span class="parameter-name">details</span>, </span><span class="parameter" id="-param-originalException"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Exception-class.html">Exception</a>?</span> <span class="parameter-name">originalException</span>, </span><span class="parameter" id="-param-originalStackTrace"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">originalStackTrace</span>, </span><span class="parameter" id="-param-statusCode"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">statusCode</span> = <span class="default-value">413</span>, </span><span class="parameter" id="-param-uri"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a>?</span> <span class="parameter-name">uri</span></span>})</span>
+        </dt>
+        <dd>
+          A specialized <a href="../jetleaf_web/HttpException-class.html">HttpException</a> indicating that the client's request payload
+exceeds the server's allowed size, corresponding to the HTTP<br>
+<strong>413 Payload Too Large</strong> status.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="cause" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/cause.html">cause</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>
+  
+
+</dt>
+<dd class="inherited">
+  The underlying cause of this exception, if any.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="details" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/details.html">details</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span>?</span>
+  
+
+</dt>
+<dd class="inherited">
+  Additional contextual information about the error.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="message" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/message.html">message</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The message describing the error.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="originalException" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/originalException.html">originalException</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Exception-class.html">Exception</a>?</span>
+  
+
+</dt>
+<dd class="inherited">
+  The underlying exception that caused this FluxException.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="originalStackTrace" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/originalStackTrace.html">originalStackTrace</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a>?</span>
+  
+
+</dt>
+<dd class="inherited">
+  The stack trace from the original exception.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="stackTrace" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/stackTrace.html">stackTrace</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The associated stack trace.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="statusCode" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/statusCode.html">statusCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The HTTP status code returned by the server, when applicable.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="uri" class="property inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/uri.html">uri</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a>?</span>
+  
+
+</dt>
+<dd class="inherited">
+  The URI of the HTTP request that triggered this exception.
+  <div class="features"><span class="feature">final</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="getCause" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/getCause.html">getCause</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The cause of this exception, if any.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getMessage" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/getMessage.html">getMessage</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The message associated with this exception.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getStackTrace" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException/getStackTrace.html">getStackTrace</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The stack trace associated with this exception.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getStatus" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/getStatus.html">getStatus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Resolves the corresponding <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a> for this object, if available.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="printStackTrace" class="callable">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ErrorExtensions/printStackTrace.html">printStackTrace</a></span><span class="signature">(<wbr>[<span class="parameter" id="printStackTrace-param-useErrorPrint"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">useErrorPrint</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+      <p class="from-extension">
+        <span>Available on <a href="https://api.dart.dev/stable/3.9.2/dart-core/Error-class.html">Error</a>,
+        provided by the <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ErrorExtensions.html">ErrorExtensions</a> extension</span>
+      </p>
+  Prints the error along with its stack trace.
+  
+
+</dd>
+
+        <dt id="printStackTrace" class="callable">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ExceptionExtensions/printStackTrace.html">printStackTrace</a></span><span class="signature">(<wbr>[<span class="parameter" id="printStackTrace-param-stacktrace"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a>?</span> <span class="parameter-name">stacktrace</span>, </span><span class="parameter" id="printStackTrace-param-useErrorPrint"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">useErrorPrint</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+      <p class="from-extension">
+        <span>Available on <a href="https://api.dart.dev/stable/3.9.2/dart-core/Exception-class.html">Exception</a>,
+        provided by the <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ExceptionExtensions.html">ExceptionExtensions</a> extension</span>
+      </p>
+  Prints the exception and optional <a href="https://api.dart.dev/stable/3.9.2/dart-core/StackTrace-class.html">StackTrace</a> if available.
+  
+
+</dd>
+
+        <dt id="printStackTrace" class="callable">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/RuntimeExceptionExtensions/printStackTrace.html">printStackTrace</a></span><span class="signature">(<wbr>[<span class="parameter" id="printStackTrace-param-useErrorPrint"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">useErrorPrint</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+      <p class="from-extension">
+        <span>Available on <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException-class.html">RuntimeException</a>,
+        provided by the <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/RuntimeExceptionExtensions.html">RuntimeExceptionExtensions</a> extension</span>
+      </p>
+  Extension on <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/RuntimeException-class.html">RuntimeException</a> to support pretty stack trace printing.
+  
+
+</dd>
+
+        <dt id="printStackTrace" class="callable">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ThrowableExtensions/printStackTrace.html">printStackTrace</a></span><span class="signature">(<wbr>[<span class="parameter" id="printStackTrace-param-useErrorPrint"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">useErrorPrint</span> = <span class="default-value">false</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+      <p class="from-extension">
+        <span>Available on <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/Throwable-class.html">Throwable</a>,
+        provided by the <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ThrowableExtensions.html">ThrowableExtensions</a> extension</span>
+      </p>
+  Extension on <a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/Throwable-class.html">Throwable</a> to support printing stack traces in a unified way.
+  
+
+</dd>
+
+        <dt id="toMap" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/toMap.html">toMap</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter">dynamic</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Converts this exception into a serializable map representation.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/HttpException/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+    
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">PayloadTooLargeException class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

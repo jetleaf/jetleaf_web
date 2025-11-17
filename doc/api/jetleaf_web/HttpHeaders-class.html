@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the HttpHeaders class from the jetleaf_web library, for the Dart programming language.">
+  <title>HttpHeaders class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">HttpHeaders class</li>
+  </ol>
+  <div class="self-name">HttpHeaders</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;HttpHeaders-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">HttpHeaders</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>A comprehensive data structure representing HTTP request or response headers,
+mapping String header names to a list of String values with case-insensitive lookups.</p>
+<p>This class provides strongly-typed accessors for common HTTP headers and application-level
+data types, making it easier to work with HTTP headers in a type-safe manner.</p>
+<h3 id="features">Features</h3>
+<ul>
+<li><strong>Case-insensitive header names</strong>: Header names are case-insensitive for lookups</li>
+<li><strong>Multi-value support</strong>: Headers can have multiple values stored as comma-separated strings</li>
+<li><strong>Type-safe accessors</strong>: Convenience methods for common headers (Content-Type, Authorization, etc.)</li>
+<li><strong>Immutable variants</strong>: Read-only header support through <a href="../jetleaf_web/ReadOnlyHttpHeaders-class.html">ReadOnlyHttpHeaders</a></li>
+<li><strong>RFC-compliant parsing</strong>: Proper handling of HTTP date formats and header values</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final headers = HttpHeaders()
+  ..setContentType(MediaType.APPLICATION_JSON)
+  ..setContentLength(1024)
+  ..setBearerAuth('mytoken')
+  ..set('X-Custom-Header', 'custom-value');
+
+print(headers.getContentType()); // MediaType('application', 'json')
+print(headers.getFirst('Authorization')); // 'Bearer mytoken'
+</code></pre>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+
+        
+        
+  <dt>Mixed-in types</dt>
+  <dd>
+    <ul class="comma-separated clazz-relationships">
+        <li><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode-mixin.html">EqualsAndHashCode</a></li>
+    </ul>
+  </dd>
+
+          <dt>Implementers</dt>
+          <dd><ul class="comma-separated clazz-relationships">
+              <li><a href="../jetleaf_web/ReadOnlyHttpHeaders-class.html">ReadOnlyHttpHeaders</a></li>
+          </ul></dd>
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="HttpHeaders.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/HttpHeaders/HttpHeaders.html">HttpHeaders.new</a></span><span class="signature">()</span>
+        </dt>
+        <dd>
+          A comprehensive data structure representing HTTP request or response headers,
+mapping String header names to a list of String values with case-insensitive lookups.
+        </dd>
+        <dt id="HttpHeaders.fromHttpHeaders" class="callable">
+          <span class="name"><a href="../jetleaf_web/HttpHeaders/HttpHeaders.fromHttpHeaders.html">HttpHeaders.fromHttpHeaders</a></span><span class="signature">(<span class="parameter" id="fromHttpHeaders-param-httpHeaders"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">httpHeaders</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance by unwrapping any read-only wrapper from another instance.
+        </dd>
+        <dt id="HttpHeaders.fromMap" class="callable">
+          <span class="name"><a href="../jetleaf_web/HttpHeaders/HttpHeaders.fromMap.html">HttpHeaders.fromMap</a></span><span class="signature">(<span class="parameter" id="fromMap-param-headers"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headers</span></span>)</span>
+        </dt>
+        <dd>
+          Creates a new <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance backed by an existing map of headers.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="add" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/add.html">add</a></span><span class="signature">(<wbr><span class="parameter" id="add-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="add-param-headerValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">headerValue</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds a value to a header, appending to existing values if the header already exists.
+  
+
+</dd>
+
+        <dt id="addAll" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/addAll.html">addAll</a></span><span class="signature">(<wbr><span class="parameter" id="addAll-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="addAll-param-headerValues"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headerValues</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds multiple values to a header, appending to existing values if the header already exists.
+  
+
+</dd>
+
+        <dt id="addAllFromHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/addAllFromHeaders.html">addAllFromHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="addAllFromHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Adds all headers from another <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance to this one.
+  
+
+</dd>
+
+        <dt id="clear" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/clear.html">clear</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes all headers.
+  
+
+</dd>
+
+        <dt id="clearContentHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/clearContentHeaders.html">clearContentHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes all content-related headers.
+  
+
+</dd>
+
+        <dt id="containsHeader" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/containsHeader.html">containsHeader</a></span><span class="signature">(<wbr><span class="parameter" id="containsHeader-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if a header with the given name exists.
+  
+
+</dd>
+
+        <dt id="containsHeaderValue" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/containsHeaderValue.html">containsHeaderValue</a></span><span class="signature">(<wbr><span class="parameter" id="containsHeaderValue-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="containsHeaderValue-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if a header contains a specific value.
+  
+
+</dd>
+
+        <dt id="equalizedProperties" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+        <dt id="forEach" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/forEach.html">forEach</a></span><span class="signature">(<wbr><span class="parameter" id="forEach-param-action"><span class="type-annotation">void</span> <span class="parameter-name">action</span>(<span class="parameter" id="param-"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, </span><span class="parameter" id="param-"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span></span>)</span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Performs the given action for each header.
+  
+
+</dd>
+
+        <dt id="get" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/get.html">get</a></span><span class="signature">(<wbr><span class="parameter" id="get-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets all values of a header as a list.
+  
+
+</dd>
+
+        <dt id="getAccept" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccept.html">getAccept</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Parses the <code>Accept</code> HTTP header into a list of <a href="../jetleaf_web/MediaType-class.html">MediaType</a> objects.
+  
+
+</dd>
+
+        <dt id="getAcceptCharset" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAcceptCharset.html">getAcceptCharset</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Returns the list of accepted character sets from the <code>Accept-Charset</code> header.
+  
+
+</dd>
+
+        <dt id="getAcceptLanguage" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAcceptLanguage.html">getAcceptLanguage</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/LanguageRange-class.html">LanguageRange</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Parses the <code>Accept-Language</code> HTTP header into a list of <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/LanguageRange-class.html">LanguageRange</a> objects.
+  
+
+</dd>
+
+        <dt id="getAcceptLanguageAsLocales" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAcceptLanguageAsLocales.html">getAcceptLanguageAsLocales</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Parses the <code>Accept-Language</code> HTTP header into a list of <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a> objects.
+  
+
+</dd>
+
+        <dt id="getAcceptPatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAcceptPatch.html">getAcceptPatch</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Accept-Patch</code> HTTP header as a list of media types.
+  
+
+</dd>
+
+        <dt id="getAccessControlAllowCredentials" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlAllowCredentials.html">getAccessControlAllowCredentials</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the value of the <code>Access-Control-Allow-Credentials</code> CORS header.
+  
+
+</dd>
+
+        <dt id="getAccessControlAllowHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlAllowHeaders.html">getAccessControlAllowHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the value of the <code>Access-Control-Allow-Headers</code> CORS header as a list.
+  
+
+</dd>
+
+        <dt id="getAccessControlAllowMethods" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlAllowMethods.html">getAccessControlAllowMethods</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the value of the <code>Access-Control-Allow-Methods</code> CORS header as a list of HTTP methods.
+  
+
+</dd>
+
+        <dt id="getAccessControlAllowOrigin" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlAllowOrigin.html">getAccessControlAllowOrigin</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the value of the <code>Access-Control-Allow-Origin</code> CORS header.
+  
+
+</dd>
+
+        <dt id="getAccessControlExposeHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlExposeHeaders.html">getAccessControlExposeHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Access-Control-Expose-Headers</code> CORS header as a list.
+  
+
+</dd>
+
+        <dt id="getAccessControlMaxAge" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlMaxAge.html">getAccessControlMaxAge</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Access-Control-Max-Age</code> CORS header as seconds.
+  
+
+</dd>
+
+        <dt id="getAccessControlRequestHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlRequestHeaders.html">getAccessControlRequestHeaders</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Access-Control-Request-Headers</code> CORS header as a list.
+  
+
+</dd>
+
+        <dt id="getAccessControlRequestMethod" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAccessControlRequestMethod.html">getAccessControlRequestMethod</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Access-Control-Request-Method</code> CORS header as an HTTP method.
+  
+
+</dd>
+
+        <dt id="getAllow" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getAllow.html">getAllow</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Allow</code> HTTP header as a set of HTTP methods.
+  
+
+</dd>
+
+        <dt id="getCacheControl" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getCacheControl.html">getCacheControl</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Cache-Control</code> HTTP header value.
+  
+
+</dd>
+
+        <dt id="getConnection" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getConnection.html">getConnection</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Connection</code> HTTP header values as a list.
+  
+
+</dd>
+
+        <dt id="getContentDisposition" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getContentDisposition.html">getContentDisposition</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Content-Disposition</code> HTTP header as a <a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a> object.
+  
+
+</dd>
+
+        <dt id="getContentLanguage" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getContentLanguage.html">getContentLanguage</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Content-Language</code> HTTP header as a locale.
+  
+
+</dd>
+
+        <dt id="getContentLength" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getContentLength.html">getContentLength</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Content-Length</code> HTTP header as an integer.
+  
+
+</dd>
+
+        <dt id="getContentType" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getContentType.html">getContentType</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Content-Type</code> HTTP header as a <a href="../jetleaf_web/MediaType-class.html">MediaType</a> object.
+  
+
+</dd>
+
+        <dt id="getDate" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getDate.html">getDate</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Date</code> HTTP header as milliseconds since epoch.
+  
+
+</dd>
+
+        <dt id="getETag" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getETag.html">getETag</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>ETag</code> HTTP header value.
+  
+
+</dd>
+
+        <dt id="getETagValuesAsList" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getETagValuesAsList.html">getETagValuesAsList</a></span><span class="signature">(<wbr><span class="parameter" id="getETagValuesAsList-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets ETag values as a list, parsing them from the header.
+  
+
+</dd>
+
+        <dt id="getExpires" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getExpires.html">getExpires</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Expires</code> HTTP header as milliseconds since epoch.
+  
+
+</dd>
+
+        <dt id="getFirst" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getFirst.html">getFirst</a></span><span class="signature">(<wbr><span class="parameter" id="getFirst-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the first value of a header, or <code>null</code> if the header is not present.
+  
+
+</dd>
+
+        <dt id="getHeaderNames" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getHeaderNames.html">getHeaderNames</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the names of all headers present.
+  
+
+</dd>
+
+        <dt id="getHeaderSet" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getHeaderSet.html">getHeaderSet</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/MapEntry-class.html">MapEntry</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets all headers as a set of map entries.
+  
+
+</dd>
+
+        <dt id="getHost" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getHost.html">getHost</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-io/InternetAddress-class.html">InternetAddress</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Host</code> HTTP header as an Internet address.
+  
+
+</dd>
+
+        <dt id="getIfMatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getIfMatch.html">getIfMatch</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>If-Match</code> HTTP header values as a list of ETags.
+  
+
+</dd>
+
+        <dt id="getIfModifiedSince" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getIfModifiedSince.html">getIfModifiedSince</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>If-Modified-Since</code> HTTP header as milliseconds since epoch.
+  
+
+</dd>
+
+        <dt id="getIfNoneMatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getIfNoneMatch.html">getIfNoneMatch</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>If-None-Match</code> HTTP header values as a list of ETags.
+  
+
+</dd>
+
+        <dt id="getIfUnModifiedSince" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getIfUnModifiedSince.html">getIfUnModifiedSince</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>If-Unmodified-Since</code> HTTP header as milliseconds since epoch.
+  
+
+</dd>
+
+        <dt id="getIsEmpty" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getIsEmpty.html">getIsEmpty</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if there are no headers present.
+  
+
+</dd>
+
+        <dt id="getLastModified" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getLastModified.html">getLastModified</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Last-Modified</code> HTTP header as milliseconds since epoch.
+  
+
+</dd>
+
+        <dt id="getLocation" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getLocation.html">getLocation</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Location</code> HTTP header as a URI.
+  
+
+</dd>
+
+        <dt id="getOrDefault" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getOrDefault.html">getOrDefault</a></span><span class="signature">(<wbr><span class="parameter" id="getOrDefault-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="getOrDefault-param-defaultValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">defaultValue</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the values of a header as a list, returning a default value if the header is not present.
+  
+
+</dd>
+
+        <dt id="getOrEmpty" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getOrEmpty.html">getOrEmpty</a></span><span class="signature">(<wbr><span class="parameter" id="getOrEmpty-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the values of a header as a list, returning an empty list if the header is not present.
+  
+
+</dd>
+
+        <dt id="getOrigin" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getOrigin.html">getOrigin</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Origin</code> HTTP header value.
+  
+
+</dd>
+
+        <dt id="getPragma" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getPragma.html">getPragma</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Pragma</code> HTTP header value.
+  
+
+</dd>
+
+        <dt id="getRange" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getRange.html">getRange</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpRange-class.html">HttpRange</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Range</code> HTTP header as a list of HTTP ranges.
+  
+
+</dd>
+
+        <dt id="getSize" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getSize.html">getSize</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the number of headers present.
+  
+
+</dd>
+
+        <dt id="getUpgrade" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getUpgrade.html">getUpgrade</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Upgrade</code> HTTP header value.
+  
+
+</dd>
+
+        <dt id="getValuesAsList" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getValuesAsList.html">getValuesAsList</a></span><span class="signature">(<wbr><span class="parameter" id="getValuesAsList-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the values of a header as a flattened list, handling quoted strings and escaping.
+  
+
+</dd>
+
+        <dt id="getVary" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/getVary.html">getVary</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Gets the <code>Vary</code> HTTP header values as a list.
+  
+
+</dd>
+
+        <dt id="hasHeaderValues" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/hasHeaderValues.html">hasHeaderValues</a></span><span class="signature">(<wbr><span class="parameter" id="hasHeaderValues-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="hasHeaderValues-param-values"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Checks if a header has exactly the specified values.
+  
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="put" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/put.html">put</a></span><span class="signature">(<wbr><span class="parameter" id="put-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="put-param-headerValues"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headerValues</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the values for a header, replacing any existing values, and returns the previous values.
+  
+
+</dd>
+
+        <dt id="putAllFromHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/putAllFromHeaders.html">putAllFromHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="putAllFromHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Copies all headers from another <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance, replacing any existing values.
+  
+
+</dd>
+
+        <dt id="putAllFromMap" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/putAllFromMap.html">putAllFromMap</a></span><span class="signature">(<wbr><span class="parameter" id="putAllFromMap-param-headers"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span>&gt;</span></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Copies all headers from a map of header names to value lists.
+  
+
+</dd>
+
+        <dt id="putIfAbsent" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/putIfAbsent.html">putIfAbsent</a></span><span class="signature">(<wbr><span class="parameter" id="putIfAbsent-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="putIfAbsent-param-headerValues"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headerValues</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the values for a header only if it is not already present.
+  
+
+</dd>
+
+        <dt id="remove" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/remove.html">remove</a></span><span class="signature">(<wbr><span class="parameter" id="remove-param-key"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span>?</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Removes a header and returns its previous values.
+  
+
+</dd>
+
+        <dt id="set" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/set.html">set</a></span><span class="signature">(<wbr><span class="parameter" id="set-param-headerName"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">headerName</span>, </span><span class="parameter" id="set-param-headerValue"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">headerValue</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets a header value, replacing any existing values for that header.
+  
+
+</dd>
+
+        <dt id="setAccept" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccept.html">setAccept</a></span><span class="signature">(<wbr><span class="parameter" id="setAccept-param-acceptableMediaTypes"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span> <span class="parameter-name">acceptableMediaTypes</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Accept</code> HTTP header from a list of <a href="../jetleaf_web/MediaType-class.html">MediaType</a> objects.
+  
+
+</dd>
+
+        <dt id="setAcceptCharset" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAcceptCharset.html">setAcceptCharset</a></span><span class="signature">(<wbr><span class="parameter" id="setAcceptCharset-param-encodings"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a></span>&gt;</span></span> <span class="parameter-name">encodings</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Accept-Charset</code> HTTP header from a list of character encodings.
+  
+
+</dd>
+
+        <dt id="setAcceptLanguage" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAcceptLanguage.html">setAcceptLanguage</a></span><span class="signature">(<wbr><span class="parameter" id="setAcceptLanguage-param-languages"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/LanguageRange-class.html">LanguageRange</a></span>&gt;</span></span> <span class="parameter-name">languages</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Accept-Language</code> HTTP header from a list of <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/LanguageRange-class.html">LanguageRange</a> objects.
+  
+
+</dd>
+
+        <dt id="setAcceptLanguageAsLocales" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAcceptLanguageAsLocales.html">setAcceptLanguageAsLocales</a></span><span class="signature">(<wbr><span class="parameter" id="setAcceptLanguageAsLocales-param-locales"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a></span>&gt;</span></span> <span class="parameter-name">locales</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Accept-Language</code> HTTP header from a list of <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a> objects.
+  
+
+</dd>
+
+        <dt id="setAcceptPatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAcceptPatch.html">setAcceptPatch</a></span><span class="signature">(<wbr><span class="parameter" id="setAcceptPatch-param-types"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/MediaType-class.html">MediaType</a></span>&gt;</span></span> <span class="parameter-name">types</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Accept-Patch</code> HTTP header from a list of media types.
+  
+
+</dd>
+
+        <dt id="setAccessControlAllowCredentials" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlAllowCredentials.html">setAccessControlAllowCredentials</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlAllowCredentials-param-allowCredentials"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span> <span class="parameter-name">allowCredentials</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Allow-Credentials</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlAllowHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlAllowHeaders.html">setAccessControlAllowHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlAllowHeaders-param-allowedHeaders"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">allowedHeaders</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Allow-Headers</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlAllowMethods" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlAllowMethods.html">setAccessControlAllowMethods</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlAllowMethods-param-allowedMethods"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>&gt;</span></span> <span class="parameter-name">allowedMethods</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Allow-Methods</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlAllowOrigin" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlAllowOrigin.html">setAccessControlAllowOrigin</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlAllowOrigin-param-allowedOrigin"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">allowedOrigin</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Allow-Origin</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlExposeHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlExposeHeaders.html">setAccessControlExposeHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlExposeHeaders-param-exposedHeaders"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">exposedHeaders</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Expose-Headers</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlMaxAge" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlMaxAge.html">setAccessControlMaxAge</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlMaxAge-param-maxAge"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">maxAge</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Max-Age</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlRequestHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlRequestHeaders.html">setAccessControlRequestHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlRequestHeaders-param-requestHeaders"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">requestHeaders</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Request-Headers</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAccessControlRequestMethod" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAccessControlRequestMethod.html">setAccessControlRequestMethod</a></span><span class="signature">(<wbr><span class="parameter" id="setAccessControlRequestMethod-param-requestMethod"><span class="type-annotation"><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a>?</span> <span class="parameter-name">requestMethod</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Access-Control-Request-Method</code> CORS header.
+  
+
+</dd>
+
+        <dt id="setAll" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAll.html">setAll</a></span><span class="signature">(<wbr><span class="parameter" id="setAll-param-values"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">values</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets multiple headers from a map, replacing any existing values.
+  
+
+</dd>
+
+        <dt id="setAllow" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setAllow.html">setAllow</a></span><span class="signature">(<wbr><span class="parameter" id="setAllow-param-methods"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Set-class.html">Set</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpMethod-class.html">HttpMethod</a></span>&gt;</span></span> <span class="parameter-name">methods</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Allow</code> HTTP header from a set of HTTP methods.
+  
+
+</dd>
+
+        <dt id="setBasicAuth" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setBasicAuth.html">setBasicAuth</a></span><span class="signature">(<wbr><span class="parameter" id="setBasicAuth-param-username"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">username</span>, </span><span class="parameter" id="setBasicAuth-param-password"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Authorization</code> HTTP header for Basic authentication.
+  
+
+</dd>
+
+        <dt id="setBasicAuthEncoded" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setBasicAuthEncoded.html">setBasicAuthEncoded</a></span><span class="signature">(<wbr><span class="parameter" id="setBasicAuthEncoded-param-encodedCredentials"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">encodedCredentials</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Authorization</code> HTTP header with pre-encoded Basic authentication credentials.
+  
+
+</dd>
+
+        <dt id="setBasicAuthWithCharset" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setBasicAuthWithCharset.html">setBasicAuthWithCharset</a></span><span class="signature">(<wbr><span class="parameter" id="setBasicAuthWithCharset-param-username"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">username</span>, </span><span class="parameter" id="setBasicAuthWithCharset-param-password"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span>, </span><span class="parameter" id="setBasicAuthWithCharset-param-charset"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a>?</span> <span class="parameter-name">charset</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Authorization</code> HTTP header for Basic authentication with specific character encoding.
+  
+
+</dd>
+
+        <dt id="setBearerAuth" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setBearerAuth.html">setBearerAuth</a></span><span class="signature">(<wbr><span class="parameter" id="setBearerAuth-param-token"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">token</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Authorization</code> HTTP header for Bearer token authentication.
+  
+
+</dd>
+
+        <dt id="setCacheControl" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setCacheControl.html">setCacheControl</a></span><span class="signature">(<wbr><span class="parameter" id="setCacheControl-param-cacheControl"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">cacheControl</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Cache-Control</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setConnection" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setConnection.html">setConnection</a></span><span class="signature">(<wbr><span class="parameter" id="setConnection-param-connection"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">connection</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Connection</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setContentDisposition" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setContentDisposition.html">setContentDisposition</a></span><span class="signature">(<wbr><span class="parameter" id="setContentDisposition-param-contentDisposition"><span class="type-annotation"><a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a></span> <span class="parameter-name">contentDisposition</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Content-Disposition</code> HTTP header from a <a href="../jetleaf_web/ContentDisposition-class.html">ContentDisposition</a> object.
+  
+
+</dd>
+
+        <dt id="setContentDispositionFormData" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setContentDispositionFormData.html">setContentDispositionFormData</a></span><span class="signature">(<wbr><span class="parameter" id="setContentDispositionFormData-param-name"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">name</span>, [</span><span class="parameter" id="setContentDispositionFormData-param-filename"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">filename</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Content-Disposition</code> header for form data with a name and optional filename.
+  
+
+</dd>
+
+        <dt id="setContentLanguage" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setContentLanguage.html">setContentLanguage</a></span><span class="signature">(<wbr><span class="parameter" id="setContentLanguage-param-locale"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/Locale-class.html">Locale</a>?</span> <span class="parameter-name">locale</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Content-Language</code> HTTP header from a locale.
+  
+
+</dd>
+
+        <dt id="setContentLength" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setContentLength.html">setContentLength</a></span><span class="signature">(<wbr><span class="parameter" id="setContentLength-param-contentLength"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">contentLength</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Content-Length</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setContentType" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setContentType.html">setContentType</a></span><span class="signature">(<wbr><span class="parameter" id="setContentType-param-mediaType"><span class="type-annotation"><a href="../jetleaf_web/MediaType-class.html">MediaType</a>?</span> <span class="parameter-name">mediaType</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Content-Type</code> HTTP header from a <a href="../jetleaf_web/MediaType-class.html">MediaType</a> object.
+  
+
+</dd>
+
+        <dt id="setDate" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setDate.html">setDate</a></span><span class="signature">(<wbr><span class="parameter" id="setDate-param-modified"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">modified</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Date</code> HTTP header from various date representations.
+  
+
+</dd>
+
+        <dt id="setETag" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setETag.html">setETag</a></span><span class="signature">(<wbr><span class="parameter" id="setETag-param-tag"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">tag</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>ETag</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setExpires" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setExpires.html">setExpires</a></span><span class="signature">(<wbr><span class="parameter" id="setExpires-param-expires"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">expires</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Expires</code> HTTP header from various date representations.
+  
+
+</dd>
+
+        <dt id="setHost" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setHost.html">setHost</a></span><span class="signature">(<wbr><span class="parameter" id="setHost-param-host"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/InternetAddress-class.html">InternetAddress</a>?</span> <span class="parameter-name">host</span>, [</span><span class="parameter" id="setHost-param-port"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">port</span> = <span class="default-value">0</span></span>])
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Host</code> HTTP header using an Internet address and optional port.
+  
+
+</dd>
+
+        <dt id="setIfMatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setIfMatch.html">setIfMatch</a></span><span class="signature">(<wbr><span class="parameter" id="setIfMatch-param-ifMatch"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">ifMatch</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>If-Match</code> HTTP header for conditional requests.
+  
+
+</dd>
+
+        <dt id="setIfModifiedSince" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setIfModifiedSince.html">setIfModifiedSince</a></span><span class="signature">(<wbr><span class="parameter" id="setIfModifiedSince-param-modified"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">modified</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>If-Modified-Since</code> HTTP header for conditional requests.
+  
+
+</dd>
+
+        <dt id="setIfNoneMatch" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setIfNoneMatch.html">setIfNoneMatch</a></span><span class="signature">(<wbr><span class="parameter" id="setIfNoneMatch-param-ifNoneMatch"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">ifNoneMatch</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>If-None-Match</code> HTTP header for conditional requests.
+  
+
+</dd>
+
+        <dt id="setIfUnModifiedSince" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setIfUnModifiedSince.html">setIfUnModifiedSince</a></span><span class="signature">(<wbr><span class="parameter" id="setIfUnModifiedSince-param-modified"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">modified</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>If-Unmodified-Since</code> HTTP header for conditional requests.
+  
+
+</dd>
+
+        <dt id="setLastModified" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setLastModified.html">setLastModified</a></span><span class="signature">(<wbr><span class="parameter" id="setLastModified-param-modified"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">modified</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Last-Modified</code> HTTP header from various date representations.
+  
+
+</dd>
+
+        <dt id="setLocation" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setLocation.html">setLocation</a></span><span class="signature">(<wbr><span class="parameter" id="setLocation-param-location"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Uri-class.html">Uri</a>?</span> <span class="parameter-name">location</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Location</code> HTTP header from a URI.
+  
+
+</dd>
+
+        <dt id="setOrigin" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setOrigin.html">setOrigin</a></span><span class="signature">(<wbr><span class="parameter" id="setOrigin-param-origin"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">origin</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Origin</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setPragma" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setPragma.html">setPragma</a></span><span class="signature">(<wbr><span class="parameter" id="setPragma-param-pragma"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">pragma</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Pragma</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setRange" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setRange.html">setRange</a></span><span class="signature">(<wbr><span class="parameter" id="setRange-param-ranges"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="../jetleaf_web/HttpRange-class.html">HttpRange</a></span>&gt;</span></span> <span class="parameter-name">ranges</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Range</code> HTTP header for partial content requests.
+  
+
+</dd>
+
+        <dt id="setUpgrade" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setUpgrade.html">setUpgrade</a></span><span class="signature">(<wbr><span class="parameter" id="setUpgrade-param-upgrade"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span> <span class="parameter-name">upgrade</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Upgrade</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="setVary" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/setVary.html">setVary</a></span><span class="signature">(<wbr><span class="parameter" id="setVary-param-requestHeaders"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">requestHeaders</span></span>)
+    <span class="returntype parameter">&#8594; void</span>
+  </span>
+  
+
+</dt>
+<dd>
+  Sets the <code>Vary</code> HTTP header.
+  
+
+</dd>
+
+        <dt id="toString" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  A string representation of this object.
+  <div class="features"><span class="feature">override</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://pub.dev/documentation/jetleaf_build/1.0.0/jetleaf_build/EqualsAndHashCode/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section class="summary offset-anchor" id="static-properties">
+    <h2>Static Properties</h2>
+    <dl class="properties">
+        <dt id="DATE_FORMATTER" class="property">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/DATE_FORMATTER.html">DATE_FORMATTER</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/DateTimeFormatter-class.html">DateTimeFormatter</a></span>
+  
+
+</dt>
+<dd>
+  Date formatter for HTTP dates as specified in RFC 1123.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="DATE_PARSERS" class="property">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/DATE_PARSERS.html">DATE_PARSERS</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/DateTimeFormatter-class.html">DateTimeFormatter</a></span>&gt;</span></span>
+  
+
+</dt>
+<dd>
+  List of date parsers for handling various HTTP date formats.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="EMPTY" class="property">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/EMPTY.html">EMPTY</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  
+
+</dt>
+<dd>
+  An empty <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance that is immutable and cannot be modified.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="GMT" class="property">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/GMT.html">GMT</a></span>
+  <span class="signature">&#8594; <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/ZoneId-class.html">ZoneId</a></span>
+  
+
+</dt>
+<dd>
+  GMT timezone identifier used for HTTP date formatting and parsing.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section class="summary offset-anchor" id="static-methods">
+    <h2>Static Methods</h2>
+    <dl class="callables">
+        <dt id="copyFrom" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/copyFrom.html">copyFrom</a></span><span class="signature">(<wbr><span class="parameter" id="copyFrom-param-httpHeaders"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">httpHeaders</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a new mutable <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance by copying all header values from another instance.
+  
+
+</dd>
+
+        <dt id="copyWith" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/copyWith.html">copyWith</a></span><span class="signature">(<wbr><span class="parameter" id="copyWith-param-headers"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a new mutable <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance by copying all header values from a map.
+  
+
+</dd>
+
+        <dt id="encodeBasicAuth" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/encodeBasicAuth.html">encodeBasicAuth</a></span><span class="signature">(<wbr><span class="parameter" id="encodeBasicAuth-param-username"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">username</span>, </span><span class="parameter" id="encodeBasicAuth-param-password"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">password</span>, </span><span class="parameter" id="encodeBasicAuth-param-charset"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-convert/Encoding-class.html">Encoding</a>?</span> <span class="parameter-name">charset</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Encodes credentials for Basic authentication.
+  
+
+</dd>
+
+        <dt id="formatDate" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/formatDate.html">formatDate</a></span><span class="signature">(<wbr><span class="parameter" id="formatDate-param-date"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">date</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Formats a date as an HTTP date string.
+  
+
+</dd>
+
+        <dt id="fromDartHttpHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/fromDartHttpHeaders.html">fromDartHttpHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="fromDartHttpHeaders-param-headers"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a new <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance from a <a href="https://api.dart.dev/stable/3.9.2/dart-io/HttpHeaders-class.html">dart:io.HttpHeaders</a> object.
+  
+
+</dd>
+
+        <dt id="readOnlyFromHttpHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/readOnlyFromHttpHeaders.html">readOnlyFromHttpHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="readOnlyFromHttpHeaders-param-headers"><span class="type-annotation"><a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a read-only wrapper around an existing <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a> instance.
+  
+
+</dd>
+
+        <dt id="readOnlyHttpHeaders" class="callable">
+  <span class="name"><a href="../jetleaf_web/HttpHeaders/readOnlyHttpHeaders.html">readOnlyHttpHeaders</a></span><span class="signature">(<wbr><span class="parameter" id="readOnlyHttpHeaders-param-headers"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-collection/MapView-class.html">MapView</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>&gt;</span></span> <span class="parameter-name">headers</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpHeaders-class.html">HttpHeaders</a></span>
+  </span>
+  
+
+</dt>
+<dd>
+  Creates a read-only wrapper around a map of headers.
+  
+
+</dd>
+
+    </dl>
+  </section>
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="ACCEPT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT-constant.html">ACCEPT</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept</code> header — indicates which <strong>media types</strong> are acceptable
+for the response content.
+  
+
+</dd>
+
+        <dt id="ACCEPT_CHARSET" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT_CHARSET-constant.html">ACCEPT_CHARSET</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept-Charset</code> header — specifies which <strong>character encodings</strong>
+(charsets) are acceptable for the response.
+  
+
+</dd>
+
+        <dt id="ACCEPT_ENCODING" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT_ENCODING-constant.html">ACCEPT_ENCODING</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept-Encoding</code> header — indicates which <strong>content encodings</strong>
+(e.g. compression algorithms) the client can handle.
+  
+
+</dd>
+
+        <dt id="ACCEPT_LANGUAGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT_LANGUAGE-constant.html">ACCEPT_LANGUAGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept-Language</code> header — lists the <strong>natural languages</strong> that
+are preferred by the client for the response content.
+  
+
+</dd>
+
+        <dt id="ACCEPT_PATCH" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT_PATCH-constant.html">ACCEPT_PATCH</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept-Patch</code> header — specifies which <strong>patch document formats</strong>
+the server supports for applying partial modifications to resources.
+  
+
+</dd>
+
+        <dt id="ACCEPT_RANGES" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCEPT_RANGES-constant.html">ACCEPT_RANGES</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Accept-Ranges</code> header — indicates the <strong>range units</strong> that the
+server supports (e.g. <code>bytes</code>) for partial content retrieval.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_ALLOW_CREDENTIALS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_ALLOW_CREDENTIALS-constant.html">ACCESS_CONTROL_ALLOW_CREDENTIALS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Allow-Credentials</code> header — indicates whether the
+response to the request can be exposed when the credentials flag is true.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_ALLOW_HEADERS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_ALLOW_HEADERS-constant.html">ACCESS_CONTROL_ALLOW_HEADERS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Allow-Headers</code> header — specifies which HTTP headers
+can be used during the actual request.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_ALLOW_METHODS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_ALLOW_METHODS-constant.html">ACCESS_CONTROL_ALLOW_METHODS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Allow-Methods</code> header — specifies which HTTP methods
+are allowed when accessing the resource in a cross-origin request.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_ALLOW_ORIGIN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_ALLOW_ORIGIN-constant.html">ACCESS_CONTROL_ALLOW_ORIGIN</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Allow-Origin</code> header — indicates which origins
+are permitted to access the resource.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_EXPOSE_HEADERS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_EXPOSE_HEADERS-constant.html">ACCESS_CONTROL_EXPOSE_HEADERS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Expose-Headers</code> header — indicates which response headers
+are accessible to the client-side JavaScript in a cross-origin request.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_MAX_AGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_MAX_AGE-constant.html">ACCESS_CONTROL_MAX_AGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Max-Age</code> header — indicates how long the results
+of a pre-flight (<code>OPTIONS</code>) request can be cached.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_REQUEST_HEADERS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_REQUEST_HEADERS-constant.html">ACCESS_CONTROL_REQUEST_HEADERS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Request-Headers</code> header — sent by the browser in a
+pre-flight request to indicate which headers will be used in the actual request.
+  
+
+</dd>
+
+        <dt id="ACCESS_CONTROL_REQUEST_METHOD" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ACCESS_CONTROL_REQUEST_METHOD-constant.html">ACCESS_CONTROL_REQUEST_METHOD</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  CORS <code>Access-Control-Request-Method</code> header — sent by the browser in a
+pre-flight request to indicate which HTTP method will be used in the actual request.
+  
+
+</dd>
+
+        <dt id="AGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/AGE-constant.html">AGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Age</code> header — indicates the time in seconds since the response was
+generated or successfully validated by the origin server.
+  
+
+</dd>
+
+        <dt id="ALLOW" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ALLOW-constant.html">ALLOW</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Allow</code> header — lists the set of methods supported by the target resource.
+  
+
+</dd>
+
+        <dt id="AUTHORIZATION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/AUTHORIZATION-constant.html">AUTHORIZATION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Authorization</code> header — contains credentials used to authenticate
+a user agent with a server.
+  
+
+</dd>
+
+        <dt id="CACHE_CONTROL" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CACHE_CONTROL-constant.html">CACHE_CONTROL</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Cache-Control</code> header — specifies directives for caching mechanisms
+in both requests and responses.
+  
+
+</dd>
+
+        <dt id="CONNECTION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONNECTION-constant.html">CONNECTION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Connection</code> header — controls whether the network connection
+stays open after the current transaction finishes.
+  
+
+</dd>
+
+        <dt id="CONTENT_DISPOSITION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_DISPOSITION-constant.html">CONTENT_DISPOSITION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Disposition</code> header — indicates if content should be displayed
+inline in the browser or treated as an attachment.
+  
+
+</dd>
+
+        <dt id="CONTENT_ENCODING" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_ENCODING-constant.html">CONTENT_ENCODING</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Encoding</code> header — specifies any encoding transformations
+applied to the message body.
+  
+
+</dd>
+
+        <dt id="CONTENT_LANGUAGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_LANGUAGE-constant.html">CONTENT_LANGUAGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Language</code> header — describes the natural language(s)
+of the intended audience for the content.
+  
+
+</dd>
+
+        <dt id="CONTENT_LENGTH" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_LENGTH-constant.html">CONTENT_LENGTH</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Length</code> header — indicates the exact byte length
+of the message body.
+  
+
+</dd>
+
+        <dt id="CONTENT_LOCATION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_LOCATION-constant.html">CONTENT_LOCATION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Location</code> header — provides an alternate location
+for the returned content.
+  
+
+</dd>
+
+        <dt id="CONTENT_RANGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_RANGE-constant.html">CONTENT_RANGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Range</code> header — indicates where a partial body
+message belongs within a complete resource.
+  
+
+</dd>
+
+        <dt id="CONTENT_TYPE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/CONTENT_TYPE-constant.html">CONTENT_TYPE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Content-Type</code> header — indicates the media type
+of the request or response body.
+  
+
+</dd>
+
+        <dt id="COOKIE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/COOKIE-constant.html">COOKIE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Cookie</code> header — contains stored cookies previously
+sent by the server in <code>Set-Cookie</code> headers.
+  
+
+</dd>
+
+        <dt id="DATE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/DATE-constant.html">DATE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Date</code> header — represents the date and time
+at which the message was originated by the sender.
+  
+
+</dd>
+
+        <dt id="ETAG" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ETAG-constant.html">ETAG</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>ETag</code> header — provides a unique identifier
+for a specific version of a resource.
+  
+
+</dd>
+
+        <dt id="EXPECT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/EXPECT-constant.html">EXPECT</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Expect</code> header — indicates expectations
+that need to be met by the server before proceeding.
+  
+
+</dd>
+
+        <dt id="EXPIRES" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/EXPIRES-constant.html">EXPIRES</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Expires</code> header — defines the date/time
+after which the response is considered stale.
+  
+
+</dd>
+
+        <dt id="FROM" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/FROM-constant.html">FROM</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>From</code> header — contains the email address
+of the user making the request.
+  
+
+</dd>
+
+        <dt id="HOST" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/HOST-constant.html">HOST</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Host</code> header — specifies the domain name
+and optional port number of the server.
+  
+
+</dd>
+
+        <dt id="IF_MATCH" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/IF_MATCH-constant.html">IF_MATCH</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>If-Match</code> header — makes the request conditional
+on the current resource matching one of the provided ETags.
+  
+
+</dd>
+
+        <dt id="IF_MODIFIED_SINCE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/IF_MODIFIED_SINCE-constant.html">IF_MODIFIED_SINCE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>If-Modified-Since</code> header — makes the request conditional
+on the resource having been modified after the specified date.
+  
+
+</dd>
+
+        <dt id="IF_NONE_MATCH" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/IF_NONE_MATCH-constant.html">IF_NONE_MATCH</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>If-None-Match</code> header — makes the request conditional
+on the resource <strong>not</strong> matching any of the provided ETags.
+  
+
+</dd>
+
+        <dt id="IF_RANGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/IF_RANGE-constant.html">IF_RANGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>If-Range</code> header — makes a range request conditional
+on a specific ETag or last modification date.
+  
+
+</dd>
+
+        <dt id="IF_UNMODIFIED_SINCE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/IF_UNMODIFIED_SINCE-constant.html">IF_UNMODIFIED_SINCE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>If-Unmodified-Since</code> header — makes the request conditional
+on the resource <strong>not</strong> being modified since the specified date.
+  
+
+</dd>
+
+        <dt id="LAST_MODIFIED" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/LAST_MODIFIED-constant.html">LAST_MODIFIED</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Last-Modified</code> header — indicates the date and time
+at which the resource was last modified.
+  
+
+</dd>
+
+        <dt id="LINK" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/LINK-constant.html">LINK</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Link</code> header — provides a means of including one or more
+links in an HTTP response header.
+  
+
+</dd>
+
+        <dt id="LOCATION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/LOCATION-constant.html">LOCATION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Location</code> header — indicates the URL to redirect to,
+or the URL of a newly created resource.
+  
+
+</dd>
+
+        <dt id="MAX_FORWARDS" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/MAX_FORWARDS-constant.html">MAX_FORWARDS</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Max-Forwards</code> header — limits the number of times
+a request can be forwarded by proxies or gateways.
+  
+
+</dd>
+
+        <dt id="ORIGIN" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/ORIGIN-constant.html">ORIGIN</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Origin</code> header — indicates the origin (scheme, host, and port)
+that caused the request, primarily used in CORS.
+  
+
+</dd>
+
+        <dt id="POWERED_BY_JETLEAF" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/POWERED_BY_JETLEAF-constant.html">POWERED_BY_JETLEAF</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The non-standard HTTP header that identifies the <strong>software framework</strong>
+or platform used to generate the response.
+  
+
+</dd>
+
+        <dt id="PRAGMA" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/PRAGMA-constant.html">PRAGMA</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Pragma</code> header — a general-purpose header
+for implementation-specific directives.
+  
+
+</dd>
+
+        <dt id="PROXY_AUTHENTICATE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/PROXY_AUTHENTICATE-constant.html">PROXY_AUTHENTICATE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Proxy-Authenticate</code> header — defines the authentication method
+that should be used to access a resource through a proxy server.
+  
+
+</dd>
+
+        <dt id="PROXY_AUTHORIZATION" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/PROXY_AUTHORIZATION-constant.html">PROXY_AUTHORIZATION</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Proxy-Authorization</code> header — contains credentials
+for authenticating the client with an intermediate proxy server.
+  
+
+</dd>
+
+        <dt id="RANGE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/RANGE-constant.html">RANGE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Range</code> header — requests a specific part (byte range)
+of a resource instead of the entire representation.
+  
+
+</dd>
+
+        <dt id="REFERER" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/REFERER-constant.html">REFERER</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Referer</code> header — identifies the address (URL)
+of the previous web page from which a request was initiated.
+  
+
+</dd>
+
+        <dt id="RETRY_AFTER" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/RETRY_AFTER-constant.html">RETRY_AFTER</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Retry-After</code> header — indicates how long the client should wait
+before making a follow-up request.
+  
+
+</dd>
+
+        <dt id="SERVER" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/SERVER-constant.html">SERVER</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Server</code> header — provides information about
+the software and version used by the origin server.
+  
+
+</dd>
+
+        <dt id="SET_COOKIE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/SET_COOKIE-constant.html">SET_COOKIE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Set-Cookie</code> header — used by servers to send
+cookies to the user agent for stateful session management.
+  
+
+</dd>
+
+        <dt id="SET_COOKIE2" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/SET_COOKIE2-constant.html">SET_COOKIE2</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Set-Cookie2</code> header — an obsolete header that was
+part of an early cookie specification superseded by <code>Set-Cookie</code>.
+  
+
+</dd>
+
+        <dt id="TE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/TE-constant.html">TE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>TE</code> header — indicates which transfer encodings
+the client is willing to accept in the response.
+  
+
+</dd>
+
+        <dt id="TIMEZONE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/TIMEZONE-constant.html">TIMEZONE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  The non-standard JetLeaf-specific HTTP header used to convey the
+<strong>client's local timezone information</strong> with each request.
+  
+
+</dd>
+
+        <dt id="TRAILER" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/TRAILER-constant.html">TRAILER</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Trailer</code> header — indicates that the given header fields
+are present in the message trailer of a chunked transfer-encoded message.
+  
+
+</dd>
+
+        <dt id="TRANSFER_ENCODING" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/TRANSFER_ENCODING-constant.html">TRANSFER_ENCODING</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Transfer-Encoding</code> header — specifies the form of encoding
+used to safely transfer the payload body between client and server.
+  
+
+</dd>
+
+        <dt id="UPGRADE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/UPGRADE-constant.html">UPGRADE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Upgrade</code> header — sent by a client to request an upgrade
+to a different communication protocol over the same connection.
+  
+
+</dd>
+
+        <dt id="USER_AGENT" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/USER_AGENT-constant.html">USER_AGENT</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>User-Agent</code> header — contains information about the
+user agent (client software) originating the request.
+  
+
+</dd>
+
+        <dt id="VARY" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/VARY-constant.html">VARY</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Vary</code> header — determines which request headers are
+used by caches to decide if a stored response is valid for
+future requests.
+  
+
+</dd>
+
+        <dt id="VIA" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/VIA-constant.html">VIA</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Via</code> header — added by intermediate proxies to
+track the chain of proxies and gateways that a request
+or response has passed through.
+  
+
+</dd>
+
+        <dt id="WARNING" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/WARNING-constant.html">WARNING</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>Warning</code> header — carries additional information about
+the status or transformation of a response, typically for
+caching or proxy diagnostics.
+  
+
+</dd>
+
+        <dt id="WWW_AUTHENTICATE" class="constant">
+    <span class="name "><a href="../jetleaf_web/HttpHeaders/WWW_AUTHENTICATE-constant.html">WWW_AUTHENTICATE</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  HTTP <code>WWW-Authenticate</code> header — defines the authentication
+method(s) that a client must use to access a protected resource.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">HttpHeaders class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

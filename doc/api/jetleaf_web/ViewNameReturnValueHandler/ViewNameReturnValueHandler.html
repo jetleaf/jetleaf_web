@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ViewNameReturnValueHandler.new constructor from Class ViewNameReturnValueHandler from the jetleaf_web library, for the Dart programming language.">
+  <title>ViewNameReturnValueHandler.new constructor - ViewNameReturnValueHandler - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../../static-assets/styles.css?v1">
+  <link rel="icon" href="../../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li><a href="../../jetleaf_web/ViewNameReturnValueHandler-class.html">ViewNameReturnValueHandler</a></li>
+    <li class="self-crumb">ViewNameReturnValueHandler.new const constructor</li>
+  </ol>
+  <div class="self-name">ViewNameReturnValueHandler.new</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+  <div
+      id="dartdoc-main-content"
+      class="main-content"
+      data-above-sidebar="jetleaf_web&#47;ViewNameReturnValueHandler-class-sidebar.html"
+      data-below-sidebar="">
+      <div>
+<h1><span class="kind-constructor">ViewNameReturnValueHandler</span> constructor 
+</h1></div>
+
+    <section class="multi-line-signature">
+      const
+      <span class="name ">ViewNameReturnValueHandler</span>(<wbr><ol class="parameter-list single-line"> <li><span class="parameter" id="-param-_jtl"><span class="type-annotation"><a href="https://pub.dev/documentation/jtl/1.0.0/jtl/Jtl-class.html">Jtl</a></span> <span class="parameter-name">_jtl</span>, </span></li>
+<li><span class="parameter" id="-param-_assetBuilder"><span class="type-annotation"><a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a></span> <span class="parameter-name">_assetBuilder</span></span></li>
+</ol>)
+    </section>
+    
+<section class="desc markdown">
+  <p>Creates a new <a href="../../jetleaf_web/ViewNameReturnValueHandler-class.html">ViewNameReturnValueHandler</a> with the specified dependencies.</p>
+<h3 id="parameters">Parameters</h3>
+<ul>
+<li><code>_jtl</code>: The <a href="https://pub.dev/documentation/jtl/1.0.0/jtl/Jtl-class.html">Jtl</a> template engine instance to use for view rendering</li>
+<li><code>_assetBuilder</code>: The <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a> instance to use for template resolution</li>
+</ul>
+<h3 id="example">Example</h3>
+<pre class="language-dart"><code class="language-dart">final jtl = JtlFactory();
+final assetBuilder = DefaultAssetBuilder(location);
+final handler = ViewNameReturnValueHandler(jtl, assetBuilder);
+</code></pre>
+<p>Resolves controller method return values that are strings representing view names
+and renders them using the JTL template engine with asset-based template resolution.</p>
+<p>This handler handles the common MVC pattern where controller methods return
+string values representing view names that should be resolved to template files,
+rendered with context data, and returned as HTML responses.</p>
+<h3 id="enhanced-features">Enhanced Features</h3>
+<ul>
+<li><strong>Asset-Based Resolution</strong>: Uses <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a> to locate template files</li>
+<li><strong>Template Validation</strong>: Verifies template existence before rendering</li>
+<li><strong>Automatic Content Type</strong>: Sets appropriate HTML content type headers</li>
+<li><strong>Context Path Injection</strong>: Automatically provides request context to templates</li>
+<li><strong>Error Handling</strong>: Throws meaningful exceptions for missing templates</li>
+</ul>
+<h3 id="resolution-scenarios">Resolution Scenarios</h3>
+<p>This handler activates when:</p>
+<ol>
+<li><strong>Controller Methods</strong>: Any string return value from methods in classes
+annotated with <code>@Controller</code> (including <code>@RestController</code>)</li>
+<li><strong>HTML Content Type</strong>: Any string return value when the request expects
+HTML content (based on Accept header or Content-Type)</li>
+</ol>
+<h3 id="view-resolution-process">View Resolution Process</h3>
+<p>When a string return value is detected:</p>
+<ol>
+<li><strong>Template Validation</strong>: Checks if the template asset exists</li>
+<li><strong>Attribute Collection</strong>: Gathers view attributes from multiple sources</li>
+<li><strong>Context Enhancement</strong>: Adds request context data for templates</li>
+<li><strong>Template Rendering</strong>: Processes the template with JTL engine</li>
+<li><strong>Response Configuration</strong>: Sets status codes and content types</li>
+<li><strong>Content Writing</strong>: Streams rendered content to the response</li>
+</ol>
+<h3 id="example-usage">Example Usage</h3>
+<pre class="language-dart"><code class="language-dart">@Controller()
+class UserController {
+  @GetMapping("/users/{id}/profile")
+  String getUserProfile(@PathVariable String id) {
+    // Returns a view name that will be resolved to 'templates/users/profile.html'
+    return "users/profile";
+  }
+  
+  @GetMapping("/dashboard")
+  String getDashboard() {
+    // Returns a template path that will be processed by JTL
+    return "templates/dashboard/main";
+  }
+}
+</code></pre>
+<h3 id="attribute-resolution-priority">Attribute Resolution Priority</h3>
+<p>The handler collects view attributes from multiple sources with clear precedence:</p>
+<ol>
+<li><strong>ViewContext</strong>: Primary source for user-defined view attributes</li>
+<li><strong>PageView</strong>: Secondary source for page-specific attributes and status codes</li>
+<li><strong>Framework Data</strong>: Automatic injection of request context information</li>
+</ol>
+<h3 id="asset-based-template-resolution">Asset-Based Template Resolution</h3>
+<p>The handler uses <a href="https://pub.dev/documentation/jetleaf_lang/1.0.1/lang/AssetBuilder-class.html">AssetBuilder</a> to locate template files, providing:</p>
+<ul>
+<li><strong>Flexible Path Resolution</strong>: Support for various template locations</li>
+<li><strong>File Existence Checks</strong>: Validation that templates actually exist</li>
+<li><strong>Caching Support</strong>: Potential for performance optimization</li>
+<li><strong>Error Reporting</strong>: Clear error messages for missing templates</li>
+</ul>
+<h3 id="framework-integration">Framework Integration</h3>
+<ul>
+<li>Registered automatically in the web module configuration</li>
+<li>Executes after other specialized handlers (like <a href="../../jetleaf_web/ResponseBody-class.html">ResponseBody</a> handlers)</li>
+<li>Works with the framework's view resolution infrastructure</li>
+<li>Integrates with error handling for template rendering failures</li>
+</ul>
+</section>
+
+
+    
+<section class="summary source-code" id="source">
+  <h2><span>Implementation</span></h2>
+  <pre class="language-dart"><code class="language-dart">const ViewNameReturnValueHandler(this._jtl, this._assetBuilder);</code></pre>
+</section>
+
+
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../../index.html">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/">jetleaf_web</a></li>
+    <li><a href="../../jetleaf_web/ViewNameReturnValueHandler-class.html">ViewNameReturnValueHandler</a></li>
+    <li class="self-crumb">ViewNameReturnValueHandler.new const constructor</li>
+</ol>
+
+    <h5>ViewNameReturnValueHandler class</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div><!--/.sidebar-offcanvas-left-->
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../../static-assets/highlight.pack.js?v1"></script>
+<script src="../../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+

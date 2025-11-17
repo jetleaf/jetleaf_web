@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="description" content="API docs for the ErrorPage class from the jetleaf_web library, for the Dart programming language.">
+  <title>ErrorPage class - jetleaf_web library - Dart API</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../static-assets/github.css?v1">
+  <link rel="stylesheet" href="../static-assets/styles.css?v1">
+  <link rel="icon" href="../static-assets/favicon.png?v1">
+  
+</head>
+
+<body data-base-href="../" data-using-base-href="false" class="light-theme">
+<div id="overlay-under-drawer"></div>
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web.dart</a></li>
+    <li class="self-crumb">ErrorPage class</li>
+  </ol>
+  <div class="self-name">ErrorPage</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <button class="toggle" id="theme-button" title="Toggle between light and dark mode" aria-label="Light and dark mode toggle">
+    <span id="dark-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      dark_mode
+    </span>
+    <span id="light-theme-button" class="material-symbols-outlined" aria-hidden="true">
+      light_mode
+    </span>
+  </button>
+</header>
+<main>
+<div
+    id="dartdoc-main-content"
+    class="main-content"
+    data-above-sidebar="jetleaf_web&#47;jetleaf_web-library-sidebar.html"
+    data-below-sidebar="jetleaf_web&#47;ErrorPage-class-sidebar.html">
+    <div>
+<h1><span class="kind-class">ErrorPage</span> class 
+ 
+</h1></div>
+
+    
+<section class="desc markdown">
+  <p>Represents an error page configuration for handling HTTP error responses.</p>
+<h3 id="overview">Overview</h3>
+<p>The <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a> class extends <a href="../jetleaf_web/PageView-class.html">PageView</a> to provide specialized functionality
+for error page management in the Jetleaf framework. It supports both
+application-defined custom error pages and framework-provided default
+error pages with comprehensive redirect and fallback capabilities.</p>
+<h3 id="key-features">Key Features</h3>
+<ul>
+<li><strong>HTTP Status Association</strong>: Each error page is associated with a specific HTTP status code</li>
+<li><strong>Framework Identification</strong>: Special identifier for framework-provided pages</li>
+<li><strong>Redirect Support</strong>: Configurable redirects to other error pages as fallbacks</li>
+<li><strong>Predefined Pages</strong>: Built-in support for common HTTP error statuses</li>
+<li><strong>Hierarchical Fallbacks</strong>: Intelligent fallback chains for error resolution</li>
+</ul>
+<h3 id="framework-vs-application-pages">Framework vs Application Pages</h3>
+<ul>
+<li><strong>Framework Pages</strong>: Identified by the <code>FRAMEWORK_ERROR_PAGE_IDENTIFIER</code> path prefix,
+provide standardized error handling across Jetleaf applications</li>
+<li><strong>Application Pages</strong>: Custom pages defined by developers, can override framework defaults</li>
+</ul>
+<h3 id="redirect-chain-strategy">Redirect Chain Strategy</h3>
+<p>Many framework error pages are configured with redirects to create a sensible
+fallback hierarchy. For example:</p>
+<ul>
+<li>400, 401, 403, 500, 502, 503 → 404 → Ultimate fallback</li>
+<li>This ensures users always see a meaningful error page even when specific
+error pages are unavailable</li>
+</ul>
+<h3 id="usage-examples">Usage Examples</h3>
+<pre class="language-dart"><code class="language-dart">// Framework error page (using predefined constant)
+final notFoundPage = ErrorPage.ERROR_NOT_FOUND_PAGE;
+
+// Custom application error page
+final customErrorPage = ErrorPage('/errors/custom-error.html', HttpStatus.IM_A_TEAPOT);
+
+// Error page with redirect configuration
+final redirectErrorPage = ErrorPage('/errors/maintenance.html', HttpStatus.SERVICE_UNAVAILABLE)
+  ..setRedirectPath('/errors/general.html')
+  ..setRedirectStatus(HttpStatus.OK);
+</code></pre>
+<h3 id="integration-with-errorpages-registry">Integration with ErrorPages Registry</h3>
+<p>Error pages are typically managed by the <a href="../jetleaf_web/ErrorPages-class.html">ErrorPages</a> registry which:</p>
+<ul>
+<li>Discovers all error page pods in the application context</li>
+<li>Handles conflicts between application and framework pages</li>
+<li>Provides resolved page lists for error handling components</li>
+</ul>
+<h3 id="template-resolution">Template Resolution</h3>
+<p>Error pages support various template resolution strategies:</p>
+<ul>
+<li><strong>Static HTML</strong>: Direct file paths to HTML resources</li>
+<li><strong>Dynamic Templates</strong>: Template engine integration (Thymeleaf, Mustache, etc.)</li>
+<li><strong>Redirects</strong>: HTTP redirects to other error pages or application endpoints</li>
+</ul>
+<h3 id="best-practices">Best Practices</h3>
+<ul>
+<li>Use framework-provided pages as base templates for customization</li>
+<li>Create application-specific pages for unique error scenarios</li>
+<li>Configure sensible redirect chains for comprehensive error coverage</li>
+<li>Test error page rendering for all supported HTTP status codes</li>
+<li>Consider accessibility and user experience in error page design</li>
+</ul>
+<h3 id="related-components">Related Components</h3>
+<ul>
+<li><a href="../jetleaf_web/ErrorPages-class.html">ErrorPages</a>: Central registry for error page management</li>
+<li><a href="../jetleaf_web/PageView-class.html">PageView</a>: Base class for page view configurations</li>
+<li><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a>: HTTP status code definitions and utilities</li>
+</ul>
+<h3 id="summary">Summary</h3>
+<p>The <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a> class provides a robust foundation for error page management
+in Jetleaf applications, supporting both framework defaults and custom
+application error handling with flexible redirect and fallback capabilities.</p>
+</section>
+
+
+    <section>
+      <dl class="dl-horizontal">
+        
+  <dt>Inheritance</dt>
+  <dd>
+    <ul class="gt-separated dark clazz-relationships">
+      <li><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></li>
+        <li><a href="../jetleaf_web/PageView-class.html">PageView</a></li>
+      <li>ErrorPage</li>
+    </ul>
+  </dd>
+
+        
+        
+
+
+        
+        
+
+
+      </dl>
+    </section>
+
+    
+  <section class="summary offset-anchor" id="constructors">
+    <h2>Constructors</h2>
+    <dl class="constructor-summary-list">
+        <dt id="ErrorPage.new" class="callable">
+          <span class="name"><a href="../jetleaf_web/ErrorPage/ErrorPage.html">ErrorPage.new</a></span><span class="signature">(<span class="parameter" id="-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span>, [</span><span class="parameter" id="-param-status"><span class="type-annotation"><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a>?</span> <span class="parameter-name">status</span></span>])</span>
+        </dt>
+        <dd>
+          Represents an error page configuration for handling HTTP error responses.
+        </dd>
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-properties">
+    <h2>Properties</h2>
+    <dl class="properties">
+        <dt id="hashCode" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/hashCode.html">hashCode</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  The hash code for this object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="runtimeType" class="property inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/runtimeType.html">runtimeType</a></span>
+  <span class="signature">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Type-class.html">Type</a></span>
+  
+
+</dt>
+<dd class="inherited">
+  A representation of the runtime type of the object.
+  <div class="features"><span class="feature">no setter</span><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="instance-methods">
+    <h2>Methods</h2>
+    <dl class="callables">
+        <dt id="addAllAttributes" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/addAllAttributes.html">addAllAttributes</a></span><span class="signature">(<wbr><span class="parameter" id="addAllAttributes-param-map"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span> <span class="parameter-name">map</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds all entries from a map to the model attributes.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="addAttribute" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/addAttribute.html">addAttribute</a></span><span class="signature">(<wbr><span class="parameter" id="addAttribute-param-key"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">key</span>, </span><span class="parameter" id="addAttribute-param-value"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span> <span class="parameter-name">value</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Adds a single key-value pair to the model attributes.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="equalizedProperties" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/equalizedProperties.html">equalizedProperties</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/List-class.html">List</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Mixin-style contract for value-based equality, <code>hashCode</code>, and <code>toString</code>.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getAttributes" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/getAttributes.html">getAttributes</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/Map-class.html">Map</a><span class="signature">&lt;<wbr><span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>, <span class="type-parameter"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a>?</span>&gt;</span></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The model attributes (data) bound to this view for rendering.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/getPath.html">getPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The path to the view template resource.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRedirectPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/getRedirectPath.html">getRedirectPath</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a>?</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Optional redirect path used when the primary view cannot be resolved.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getRedirectStatus" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/getRedirectStatus.html">getRedirectStatus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The HTTP status code to be used when performing a redirect.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="getStatus" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/getStatus.html">getStatus</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The HTTP status code to be set when rendering this view.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="noSuchMethod" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/noSuchMethod.html">noSuchMethod</a></span><span class="signature">(<wbr><span class="parameter" id="noSuchMethod-param-invocation"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Invocation-class.html">Invocation</a></span> <span class="parameter-name">invocation</span></span>)
+    <span class="returntype parameter">&#8594; dynamic</span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Invoked when a nonexistent method or property is accessed.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/setPath.html">setPath</a></span><span class="signature">(<wbr><span class="parameter" id="setPath-param-path"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">path</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the primary template path for this view.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setRedirectPath" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/setRedirectPath.html">setRedirectPath</a></span><span class="signature">(<wbr><span class="parameter" id="setRedirectPath-param-redirectPath"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span> <span class="parameter-name">redirectPath</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the redirect path for fallback rendering.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setRedirectStatus" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/setRedirectStatus.html">setRedirectStatus</a></span><span class="signature">(<wbr><span class="parameter" id="setRedirectStatus-param-status"><span class="type-annotation"><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span> <span class="parameter-name">status</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the HTTP status code for redirect scenarios.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setStatus" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/setStatus.html">setStatus</a></span><span class="signature">(<wbr><span class="parameter" id="setStatus-param-status"><span class="type-annotation"><a href="../jetleaf_web/HttpStatus-class.html">HttpStatus</a></span> <span class="parameter-name">status</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the HTTP status code for successful rendering.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="setStatusCode" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/setStatusCode.html">setStatusCode</a></span><span class="signature">(<wbr><span class="parameter" id="setStatusCode-param-code"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/int-class.html">int</a></span> <span class="parameter-name">code</span></span>)
+    <span class="returntype parameter">&#8594; <a href="../jetleaf_web/PageView-class.html">PageView</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  Sets the HTTP status code using a numeric code.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+        <dt id="toString" class="callable inherited">
+  <span class="name"><a href="../jetleaf_web/PageView/toString.html">toString</a></span><span class="signature">(<wbr>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  A string representation of this object.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section
+      class="summary offset-anchor inherited"
+      id="operators">
+    <h2>Operators</h2>
+    <dl class="callables">
+        <dt id="operator ==" class="callable inherited">
+  <span class="name"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object/operator_equals.html">operator ==</a></span><span class="signature">(<wbr><span class="parameter" id="==-param-other"><span class="type-annotation"><a href="https://api.dart.dev/stable/3.9.2/dart-core/Object-class.html">Object</a></span> <span class="parameter-name">other</span></span>)
+    <span class="returntype parameter">&#8594; <a href="https://api.dart.dev/stable/3.9.2/dart-core/bool-class.html">bool</a></span>
+  </span>
+  
+
+</dt>
+<dd class="inherited">
+  The equality operator.
+  <div class="features"><span class="feature">inherited</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+  <section class="summary offset-anchor" id="static-properties">
+    <h2>Static Properties</h2>
+    <dl class="properties">
+        <dt id="ERROR_BAD_GATEWAY_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_BAD_GATEWAY_PAGE.html">ERROR_BAD_GATEWAY_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 502 Bad Gateway page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_BAD_REQUEST_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_BAD_REQUEST_PAGE.html">ERROR_BAD_REQUEST_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 400 Bad Request error page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_FORBIDDEN_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_FORBIDDEN_PAGE.html">ERROR_FORBIDDEN_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 403 Forbidden error page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_INTERNAL_SERVER_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_INTERNAL_SERVER_PAGE.html">ERROR_INTERNAL_SERVER_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 500 Internal Server Error page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_NOT_FOUND_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_NOT_FOUND_PAGE.html">ERROR_NOT_FOUND_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 404 Not Found error page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_SERVICE_UNAVAILABLE_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_SERVICE_UNAVAILABLE_PAGE.html">ERROR_SERVICE_UNAVAILABLE_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 503 Service Unavailable page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+        <dt id="ERROR_UNAUTHORIZED_PAGE" class="property">
+  <span class="name"><a href="../jetleaf_web/ErrorPage/ERROR_UNAUTHORIZED_PAGE.html">ERROR_UNAUTHORIZED_PAGE</a></span>
+  <span class="signature">&#8594; <a href="../jetleaf_web/ErrorPage-class.html">ErrorPage</a></span>
+  
+
+</dt>
+<dd>
+  Predefined 401 Unauthorized error page.
+  <div class="features"><span class="feature">final</span></div>
+
+</dd>
+
+    </dl>
+  </section>
+    
+    
+
+  <section class="summary offset-anchor" id="constants">
+    <h2>Constants</h2>
+    <dl class="properties">
+        <dt id="FRAMEWORK_ERROR_PAGE_IDENTIFIER" class="constant">
+    <span class="name "><a href="../jetleaf_web/ErrorPage/FRAMEWORK_ERROR_PAGE_IDENTIFIER-constant.html">FRAMEWORK_ERROR_PAGE_IDENTIFIER</a></span>
+  <span class="signature">&#8594; const <a href="https://api.dart.dev/stable/3.9.2/dart-core/String-class.html">String</a></span>
+  
+
+</dt>
+<dd>
+  Path prefix identifier for framework-provided error pages.
+  
+
+</dd>
+
+    </dl>
+  </section>
+  </div> <!-- /.main-content -->
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="../index.html">jetleaf_web</a></li>
+    <li><a href="../jetleaf_web/">jetleaf_web</a></li>
+    <li class="self-crumb">ErrorPage class</li>
+</ol>
+
+    <h5>jetleaf_web library</h5>
+    <div id="dartdoc-sidebar-left-content"></div>
+  </div>
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div><!--/.sidebar-offcanvas-->
+</main>
+<footer>
+  <span class="no-break">
+    jetleaf_web
+      1.0.0
+  </span>
+  
+</footer>
+
+
+<script src="../static-assets/highlight.pack.js?v1"></script>
+<script src="../static-assets/docs.dart.js"></script>
+
+</body>
+</html>
+
