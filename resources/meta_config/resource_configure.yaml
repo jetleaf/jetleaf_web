@@ -10,3 +10,4 @@ jetleaf.enableautoconfiguration:
   -  package:jetleaf_web/src/config/csrf_auto_configuration.dart.CsrfAutoConfiguration
   -  package:jetleaf_web/src/config/jetson_auto_configuration.dart.JetsonAutoConfiguration
   -  package:jetleaf_web/src/config/content_negotiation_auto_configuration.dart.ContentNegotiationAutoConfiguration
+  -  package:jetleaf_web/src/config/cors_auto_configuration.dart.CorsAutoConfiguration

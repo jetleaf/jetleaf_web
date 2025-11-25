@@ -1111,10 +1111,6 @@ class HttpHeaders with EqualsAndHashCode {
   /// ### Related Headers
   /// - `Server` — indicates the web server software (e.g., nginx, Apache)
   /// - `Via` — shows intermediate proxies or gateways
-  ///
-  /// ### Specification
-  /// Not defined by any RFC; commonly used across frameworks such as
-  /// Express, Spring Boot, and ASP.NET.
   static const String POWERED_BY_JETLEAF = "X-Powered-By";
 
   // ========== Static Constants ==========

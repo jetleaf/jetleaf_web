@@ -112,7 +112,7 @@ final class CorsFilter implements Filter, EnvironmentAware, Ordered {
 
   @override
   Future<void> doFilter(ServerHttpRequest request, ServerHttpResponse response, FilterChain chain) async {
-    final enabled = _environment.getProperty(CorsConfigurationManager.ENABLED_PROPERTY_NAME)?.equalsIgnoreCase("true") ?? false;
+    final enabled = _environment.getPropertyAs(CorsConfigurationManager.ENABLED_PROPERTY_NAME, Class<bool>()) ?? false;
 
     if (!enabled) {
       // CORS globally disabled — continue as normal.

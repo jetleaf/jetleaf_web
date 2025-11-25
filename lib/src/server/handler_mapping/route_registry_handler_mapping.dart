@@ -186,7 +186,7 @@ final class RouteRegistryHandlerMapping extends AbstractRouteDslHandlerMapping i
   @override
   String getContextPath() {
     final environment = applicationContext.getEnvironment();
-    return environment.getProperty(ServerContext.SERVER_CONTEXT_PATH) ?? "";
+    return environment.getProperty(ServerContext.SERVER_CONTEXT_PATH_PROPERTY_NAME) ?? ServerContext.SERVER_CONTEXT_PATH;
   }
 
   @override

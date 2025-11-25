@@ -20,6 +20,7 @@ import '../../exception/exceptions.dart';
 import '../../http/http_body.dart';
 import '../../http/http_status.dart';
 import '../../http/media_type.dart';
+import '../../utils/web_utils.dart';
 import '../server_http_request.dart';
 import '../server_http_response.dart';
 import '../handler_method.dart';
@@ -122,11 +123,9 @@ final class ResponseBodyReturnValueHandler implements ReturnValueHandler {
       return;
     }
 
+    final contentType = WebUtils.resolveMediaTypeAsJson(response);
     final body = returnValue as ResponseBody;
-    final contentType = request.getHeaders().getAccept();
-    final selectedContentType = contentType.firstOrNull ?? MediaType.APPLICATION_JSON;
     response.setStatus(body.status);
-
     final valueToWrite = body.getBody();
 
     if (valueToWrite == null) {
@@ -134,13 +133,12 @@ final class ResponseBodyReturnValueHandler implements ReturnValueHandler {
     }
     
     final valueClass = Class.forObject(valueToWrite);
-
-    final writer = _converters.findWritable(valueClass, selectedContentType);
+    final writer = _converters.findWritable(valueClass, contentType);
 
     if (writer == null) {
       throw HttpMediaTypeNotSupportedException('No suitable HttpMessageConverter found for type ${valueClass.getName()} and content type $contentType');
     }
 
-    return writer.write(valueToWrite, selectedContentType, response);
+    return writer.write(valueToWrite, contentType, response);
   }
 }

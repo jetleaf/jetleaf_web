@@ -81,7 +81,23 @@ class GlobalServerDispatcher extends AbstractServerDispatcher implements Applica
   /// [ServerDispatcher] for handling incoming HTTP requests.
   final ServerContext _context;
 
-  final FilterManager _filterManager; 
+  /// Reference to the active [FilterManager] responsible for managing
+  /// registered HTTP filters within the request processing pipeline.
+  ///
+  /// The [_filterManager]:
+  /// - Maintains ordering and lifecycle of all configured filters
+  /// - Determines execution flow before and after handler invocation
+  /// - Allows dynamic addition or discovery of filters at runtime (depending
+  ///   on implementation)
+  ///
+  /// This field is initialized once and remains immutable, ensuring
+  /// deterministic filter behavior throughout the application lifecycle.
+  ///
+  /// ### Related Components
+  /// - [Filter] — Individual request/response interceptors
+  /// - [FilterChain] — Executes filters in resolved order
+  /// - [ApplicationContext] — May contribute filter definitions
+  final FilterManager _filterManager;
 
   /// {@template global_server_dispatcher_constructor}
   /// Creates a new [GlobalServerDispatcher] with the given [MultipartResolver].

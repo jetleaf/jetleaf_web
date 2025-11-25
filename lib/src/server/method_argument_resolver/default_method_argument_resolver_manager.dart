@@ -146,13 +146,13 @@ final class DefaultMethodArgumentResolverManager implements MethodArgumentResolv
   }
 
   @override
-  Future<ArgumentValueHolder> resolveArgs(Method method, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]) async {
+  Future<ArgumentValueHolder> resolveArgs(Method method, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]) async {
     final params = method.getParameters();
     final Map<String, Object?> named = {};
     final List<Object?> positional = [];
 
     for (final p in params) {
-      final value = await resolveArgument(p, req, res, handler, ex);
+      final value = await resolveArgument(p, req, res, handler, ex, st);
       
       if (p.isNamed()) {
         named[p.getName()] = value;
@@ -165,10 +165,10 @@ final class DefaultMethodArgumentResolverManager implements MethodArgumentResolv
   }
 
   @protected
-  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]) async {
+  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]) async {
     for (final resolver in _resolvers) {
       if (resolver.canResolve(param)) {
-        return await resolver.resolveArgument(param, req, res, handler, ex);
+        return await resolver.resolveArgument(param, req, res, handler, ex, st);
       }
     }
 

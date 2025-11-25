@@ -15,7 +15,6 @@
 import 'package:jetleaf_lang/lang.dart';
 
 import '../../http/media_type.dart';
-import '../../utils/web_utils.dart';
 import '../server_http_request.dart';
 import 'content_negotiation_strategy.dart';
 
@@ -91,58 +90,27 @@ final class AcceptHeaderNegotiationStrategy implements ContentNegotiationStrateg
 
   @override
   Future<MediaType?> negotiate(Method? method, ServerHttpRequest request, List<MediaType> supportedMediaTypes) async {
-    final producing = WebUtils.producing(method);
-    final supported = producing.isNotEmpty ? producing : supportedMediaTypes;
-    
-    if (supported.isEmpty) {
+    // Get Accept header from request
+    final acceptHeaders = request.getHeaders().getAccept();
+    if (acceptHeaders.isEmpty && supportedMediaTypes.isEmpty) {
       return null;
     }
 
-    // Get Accept header from request
-    final acceptHeader = request.getHeaders().getAccept();
-
-    // If no Accept header, return first supported media type
-    if (acceptHeader.isEmpty) {
-      return supported.first;
+    if (acceptHeaders.isEmpty) {
+      return supportedMediaTypes.first;
     }
 
     // Try to find a matching media type
-    for (final supportedType in supported) {
-      for (final acceptedType in acceptHeader) {
-        if (_isMediaTypeCompatible(supportedType, acceptedType) || supportedType.isCompatibleWith(acceptedType)) {
-          return supportedType;
+    if (supportedMediaTypes.isNotEmpty) {
+      for (final accepted in acceptHeaders) {
+        final supported = supportedMediaTypes.find((type) => type.isCompatibleWith(accepted));
+        if (supported != null) {
+          return supported;
         }
       }
     }
 
     // Fallback: return first supported media type
-    return supported.first;
-  }
-
-  /// Checks if a supported media type is compatible with an accepted media type.
-  ///
-  /// Handles wildcard matching:
-  /// - `*/*` matches any type
-  /// - `type/*` matches any subtype of that type
-  /// - `type/subtype` matches exact type/subtype
-  bool _isMediaTypeCompatible(MediaType supported, MediaType accepted) {
-    final acceptedType = accepted.getType();
-    final acceptedSubtype = accepted.getSubtype();
-    final supportedType = supported.getType();
-    final supportedSubtype = supported.getSubtype();
-
-    // Check for wildcard matches
-    if (acceptedType == '*') {
-      return true; // */* matches anything
-    }
-
-    if (acceptedType == supportedType) {
-      if (acceptedSubtype == '*') {
-        return true; // type/* matches type/anything
-      }
-      return acceptedSubtype == supportedSubtype; // Exact match
-    }
-
-    return false;
+    return acceptHeaders.first;
   }
 }

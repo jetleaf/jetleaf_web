@@ -61,7 +61,7 @@ abstract interface class MethodArgumentResolver {
   /// - [ex]: (optional) The exception object, when invoked in exception contexts.
   ///
   /// Returns the resolved argument value or `null` if not applicable.
-  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]);
+  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]);
 }
 
 /// {@template handler_method_argument_resolver_manager}
@@ -167,5 +167,6 @@ abstract interface class MethodArgumentResolverManager {
     ServerHttpResponse res,
     HandlerMethod handler, [
     Object? ex,
+    StackTrace? st
   ]);
 }

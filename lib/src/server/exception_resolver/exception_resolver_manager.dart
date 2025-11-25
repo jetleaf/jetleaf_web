@@ -99,7 +99,7 @@ final class ExceptionResolverManager implements ApplicationContextAware, Initial
   ///   resolver.getSupportedMediaTypes()
   /// );
   /// ```
-  final ContentNegotiationResolver negotiationResolver;
+  final ContentNegotiationResolver _negotiationResolver;
   
   /// The [ApplicationContext] is used to discover and instantiate all Pods
   /// relevant to request processing, filters, and exception resolvers.
@@ -113,7 +113,7 @@ final class ExceptionResolverManager implements ApplicationContextAware, Initial
   List<ExceptionResolver> _exceptionResolvers = [];
 
   /// {@macro exception_resolver_manager}
-  ExceptionResolverManager(this.negotiationResolver);
+  ExceptionResolverManager(this._negotiationResolver);
   
   @override
   String getPackageName() => PackageNames.WEB;
@@ -234,9 +234,11 @@ final class ExceptionResolverManager implements ApplicationContextAware, Initial
   ///
   /// This method is typically used in a server framework to centralize exception
   /// handling and integrate with content negotiation mechanisms.
-  Future<bool> resolve(ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? method, Object ex) async {
+  Future<bool> resolve(ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? method, Object ex, StackTrace st) async {
+    await _negotiationResolver.resolve(method?.getMethod(), request, response, []);
+    
     for (final resolver in _exceptionResolvers) {
-      if (await resolver.resolve(request, response, method, ex)) {
+      if (await resolver.resolve(request, response, method, ex, st)) {
         return true;
       }
     }

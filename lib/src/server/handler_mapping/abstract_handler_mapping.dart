@@ -76,7 +76,7 @@ abstract class AbstractHandlerMapping implements HandlerMapping {
 
   /// Returns the global context path from the active [Environment].
   ///
-  /// Uses the property key [ServerContext.SERVER_CONTEXT_PATH].
+  /// Uses the property key [ServerContext.SERVER_CONTEXT_PATH_PROPERTY_NAME].
   /// If the context path is undefined, returns an empty string.
   String getContextPath();
 

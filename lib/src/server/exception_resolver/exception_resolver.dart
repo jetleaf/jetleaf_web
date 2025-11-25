@@ -214,5 +214,5 @@ abstract interface class ExceptionResolver {
   /// - Consider caching for expensive resolution logic
   /// - Avoid blocking operations during resolution
   /// {@endtemplate}
-  Future<bool> resolve(ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? handler, Object ex);
+  Future<bool> resolve(ServerHttpRequest request, ServerHttpResponse response, HandlerMethod? handler, Object ex, StackTrace st);
 }

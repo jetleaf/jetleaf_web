@@ -75,7 +75,7 @@ final class AnnotatedMethodArgumentResolver implements MethodArgumentResolver {
   const AnnotatedMethodArgumentResolver(this._context);
 
   @override
-  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]) async {
+  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]) async {
     final resolver = getResolver(param);
     if (resolver != null) {
       return await resolver.resolve(req, param, _context);

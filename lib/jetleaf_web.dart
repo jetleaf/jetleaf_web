@@ -12,17 +12,129 @@
 // 
 // 🔧 Powered by Hapnium — the Dart backend engine 🍃
 
-/// Jetleaf Web Framework Library
+/// 🌐 **JetLeaf Web Framework**
 ///
-/// This library exports all core modules, annotations, context utilities,
-/// HTTP message converters, server infrastructure, routing, handlers,
-/// exception resolvers, multipart support, path matching, REST clients,
-/// template rendering, and utility classes required to build web applications
-/// using Jetleaf.
+/// This library provides a comprehensive web application framework for
+/// JetLeaf, offering features such as:
+/// - Annotation-driven request handling
+/// - HTTP request/response management
+/// - REST and multipart support
+/// - Content negotiation
+/// - CSRF and CORS protection
+/// - Exception handling and advisories
+/// - Handler adapters, interceptors, and mappings
+/// - Return value handling
+/// - Routing and filters
+/// - Template and view rendering
+/// - Integration with Jetson (object mapping) and JTL (template engine)
 ///
-/// It serves as the main entry point for importing the Jetleaf web framework
-/// into your application, providing access to all features and default
-/// implementations, while allowing overrides via custom pods.
+///
+/// ## 🔑 Core Concepts
+///
+/// ### 🏷 Annotations
+/// - `core.dart`, `request_mapping.dart`, `request_parameter.dart`
+/// - `resolvers.dart` — declarative method-level configuration for requests  
+/// - `default_resolver_context.dart` — default context for annotation resolution
+///
+///
+/// ### ⚙ Configuration & Auto-Configuration
+/// Provides auto-configuration for web application components:
+/// - `WebAutoConfiguration`, `CsrfAutoConfiguration`
+/// - `ExceptionResolverAutoConfiguration`
+/// - `HandlerAdapterAutoConfiguration`
+/// - `HttpMessageAutoConfiguration`
+/// - `JetsonAutoConfiguration`, `JtlAutoConfiguration`
+/// - `MethodArgumentAutoConfiguration`
+/// - `ReturnValueAutoConfiguration`
+/// - `WebServerAutoConfiguration`
+/// - `ContentNegotiationAutoConfiguration`
+///
+///
+/// ### 🌐 Server Contexts
+/// - `ServerContext`, `WebApplicationContext` — runtime web application contexts  
+/// - `ServerWebApplicationContext` — full-featured server web context  
+/// - `Aware`, `WebAwareProcessor`, `DefaultServerContext` — helpers for context awareness
+///
+///
+/// ### 📨 HTTP & I/O
+/// - Core HTTP: `HttpMessage`, `HttpHeaders`, `HttpMethod`, `HttpStatus`, `HttpBody`, `HttpSession`, `HttpCookie`, `MediaType`, `Etag`, `CacheControl`  
+/// - I/O: `IoRequest`, `IoResponse`, `IoMultipartRequest`, `IoMultipartResolver`, `IoPart`, `IoWebServer`, `MultipartParser`  
+/// - Rest Client: `io_rest/client.dart`, `io_rest/executor.dart`, `io_rest/request.dart`, `io_rest/response.dart`
+///
+///
+/// ### 🛠 Converters & Content Negotiation
+/// - `AbstractHttpMessageConverter` and concrete converters for JSON, XML, YAML, and form data  
+/// - `HttpMessageConverterRegistry`, `HttpMessageConverters`  
+/// - `Jetson2HttpMessageConverter`, `Jetson2XmlHttpMessageConverter`, `Jetson2YamlHttpMessageConverter`  
+/// - Content negotiation strategies and resolvers for handling client preferences
+///
+///
+/// ### ⚡ Exception Handling
+/// - Core exceptions: `exceptions.dart`, `server_exceptions.dart`, `path_exception.dart`  
+/// - Exception resolvers: `HtmlExceptionResolver`, `RestExceptionResolver`, `ExceptionResolverManager`  
+/// - Advisers & Handlers: `ExceptionAdviser`, `MethodExceptionAdviser`, `ControllerExceptionHandler`, `RestControllerExceptionHandler`
+///
+///
+/// ### 🔄 Handler Adapters & Interceptors
+/// - `HandlerAdapter` abstractions, including framework, annotated, route DSL, and web view adapters  
+/// - `HandlerInterceptor` and `HandlerInterceptorManager` for request pre/post-processing
+///
+///
+/// ### 🗺 Routing & Path Matching
+/// - `Route`, `RouteEntry`, `Router`, `RouterRegistrar`, `RouterSpec`  
+/// - Path utilities: `PathMatch`, `PathPattern`, `PathPatternParser`, `PathSegment`
+/// - DSL-based and registry-based routing strategies
+///
+///
+/// ### 🎯 Method Argument & Return Value Handling
+/// - `MethodArgumentResolver` abstractions for annotated and framework-driven argument resolution  
+/// - `ReturnValueHandler` implementations: JSON, XML, YAML, view-based, redirect, string, void, page view
+///
+///
+/// ### 🔒 Security
+/// - CORS: `CorsConfiguration`, `CorsFilter`, `DefaultCorsConfigurationManager`  
+/// - CSRF: `CsrfFilter`, `CsrfToken`, `CsrfTokenRepository`, `CsrfTokenRepositoryManager`, `DefaultCsrfTokenRepositoryManager`
+///
+///
+/// ### 📦 Multipart Support
+/// - `MultipartFile`, `MultipartResolver`, `MultipartServerHttpRequest`, `Part`
+///
+///
+/// ### 🖼 Web Rendering
+/// - Templates and views: `Renderable`, `View`, `ViewContext`  
+/// - Web request utilities and helpers: `WebRequest`, `Web`, `WebConfigurer`  
+/// - Error pages: `ErrorPage`, `ErrorPages`  
+///
+///
+/// ### 📌 Utilities
+/// - `Encoding`, `MatrixVariableUtils`, `WebUtils`  
+/// - URI building: `UriBuilder`  
+/// - Event handling: `Events`
+///
+///
+/// ### 📦 Integrated Packages
+/// - `package:jtl/jtl.dart` — JetLeaf Template Engine  
+/// - `package:jetson/jetson.dart` — JetLeaf Object Mapping & Serialization
+///
+///
+/// ## 🎯 Intended Usage
+///
+/// Import this library to build fully-featured web applications in JetLeaf:
+/// ```dart
+/// import 'package:jetleaf_web/jetleaf_web.dart';
+///
+/// @Controller
+/// class MyController {
+///   @GetMapping('/hello')
+///   String hello() => 'Hello, JetLeaf!';
+/// }
+/// ```
+///
+/// Supports annotation-driven configuration, REST and web endpoints, multipart requests,
+/// content negotiation, exception handling, routing, filters, and templating.
+///
+///
+/// © 2025 Hapnium & JetLeaf Contributors
 library;
 
 export 'src/annotation/core.dart';
@@ -133,14 +245,14 @@ export 'src/server/exception_resolver/rest_exception_resolver.dart';
 export 'src/server/exception_resolver/exception_resolver.dart';
 export 'src/server/exception_resolver/exception_resolver_manager.dart';
 
-export 'src/server/exception_adviser/controller_adviser.dart';
+export 'src/server/exception_adviser/exception_adviser.dart';
 export 'src/server/exception_adviser/method_exception_adviser.dart';
 
 export 'src/server/exception_handler/rest_controller_exception_handler.dart';
 export 'src/server/exception_handler/controller_exception_handler.dart';
 
 export 'src/server/handler_adapter/handler_adapter.dart';
-export 'src/server/handler_adapter/abstract_handler_adapter.dart';
+export 'src/server/handler_adapter/abstract_url_handler_adapter.dart';
 export 'src/server/handler_adapter/handler_adapter_manager.dart';
 export 'src/server/handler_adapter/route_dsl_handler_adapter.dart';
 export 'src/server/handler_adapter/annotated_handler_adapter.dart';
@@ -212,3 +324,7 @@ export 'src/web/web.dart';
 export 'src/events.dart';
 export 'src/uri_builder.dart';
 export 'src/web_configurer.dart';
+
+// PACKAGES
+export 'package:jtl/jtl.dart';
+export 'package:jetson/jetson.dart';

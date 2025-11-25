@@ -14,7 +14,6 @@
 
 import 'package:jetleaf_core/annotation.dart';
 import 'package:jetleaf_lang/lang.dart';
-import 'package:jetleaf_pod/pod.dart';
 import 'package:jetson/jetson.dart';
 
 import '../http/http_message.dart';
@@ -22,52 +21,86 @@ import '../http/media_type.dart';
 import 'abstract_http_message_converter.dart';
 
 /// {@template jetson2_yaml_http_message_converter}
-/// JetLeaf's YAML-based [AbstractHttpMessageConverter] backed by
-/// the [ObjectMapper] from the Jetson serialization framework.
+/// A high-priority HTTP message converter that uses Jetson’s YAML-capable
+/// [ObjectMapper] to read and write YAML request and response bodies.
 ///
-/// This converter provides full-featured **YAML serialization and
-/// deserialization** for request and response bodies using Jetson's
-/// reflective object mapping capabilities with YAML format support.
+/// This converter:
 ///
-/// ### Overview
-/// The [Jetson2YamlHttpMessageConverter] integrates Jetson's [ObjectMapper]
-/// with JetLeaf's web I/O model ([HttpInputMessage], [HttpOutputMessage]),
-/// enabling seamless YAML handling for annotated controllers.
+/// * Is registered with `Ordered.HIGHEST_PRECEDENCE - 2`, running after the XML
+///   converter and before other lower-precedence converters.
+/// * Supports the standard and extended YAML media types:
+///   - `application/yaml`  
+///   - `application/x-yaml`  
+///   - `text/yaml`  
+///   - `text/x-yaml`
+/// * Only participates in reading/writing when the configured `_objectMapper`
+///   is a [YamlObjectMapper].
+/// * Delegates all YAML → object and object → YAML transformations to Jetson.
+/// * Honors declared request/response character encodings.
+/// * Automatically assigns the `Content-Type` header (with charset) when not
+///   already present.
 ///
-/// ### Responsibilities
-/// - Deserialize incoming YAML request bodies into Dart objects
-/// - Serialize controller return values into YAML responses
-/// - Support YAML-specific serialization options and features
+/// ### Reading
 ///
-/// ### Supported Media Types
-/// - `application/yaml`
-/// - `text/yaml`
-/// - `text/x-yaml`
+/// The full request body is decoded using the resolved character encoding,
+/// then passed into the YAML-aware Jetson mapper:
 ///
-/// ### Example
 /// ```dart
-/// @RestController()
-/// class ConfigController {
-///   @GetMapping('/config', produces: ['application/yaml'])
-///   Config getConfig() => Config(...);
-/// }
+/// mapper.readYamlValue(yamlString, type);
 /// ```
 ///
-/// ### Design Notes
-/// - Extends [AbstractHttpMessageConverter] with `Object` as the base type
-/// - Uses Jetson's pluggable architecture for YAML support
-/// - Ensures all YAML payloads are encoded properly (UTF-8 by default)
-/// - Works seamlessly with content negotiation strategies
+/// If the provided object mapper is *not* a [YamlObjectMapper], the converter
+/// gracefully falls back to generic Jetson deserialization:
 ///
-/// ### Related Types
-/// - [ObjectMapper] — core Jetson component for serialization
-/// - [AbstractHttpMessageConverter] — JetLeaf's HTTP I/O abstraction
-/// - [Jetson2HttpMessageConverter] — JSON equivalent
-/// - [Jetson2XmlHttpMessageConverter] — XML equivalent
+/// ```dart
+/// mapper.readValue(yamlString, type);
+/// ```
+///
+/// Any parsing or mapping errors propagate naturally to the caller, where they
+/// can be handled by the surrounding JetLeaf HTTP framework.
+///
+/// ### Writing
+///
+/// Objects are serialized using:
+///
+/// ```dart
+/// mapper.writeValueAsYaml(object);
+/// ```
+///
+/// with a fallback of:
+///
+/// ```dart
+/// mapper.writeValueAsString(object);
+/// ```
+///
+/// After serialization:
+///
+/// 1. The `Content-Type` header is set to `application/yaml` (with charset) if
+///    not already specified.  
+/// 2. The YAML string is written to the output stream using the resolved
+///    encoding.
+///
+/// ### Application Context
+///
+/// This converter does not customize its mapper via dependency injection.
+/// Instead, YAML support is enabled simply by providing a [YamlObjectMapper]
+/// to the converter at construction time, or by exposing one in the
+/// application context that Jetson is configured to use.
+///
+/// ### Example
+///
+/// ```dart
+/// final converter = Jetson2YamlHttpMessageConverter(yamlMapper);
+/// final dto = await converter.readInternal(Class<MyDto>(), inputMessage);
+/// ```
+///
+/// Most JetLeaf applications automatically register this converter when a YAML
+/// mapper is present in the environment.
+///
 /// {@endtemplate}
 @Order(Ordered.HIGHEST_PRECEDENCE - 2)
-class Jetson2YamlHttpMessageConverter extends AbstractHttpMessageConverter<Object> implements InitializingPod {
-  /// The Jetson [ObjectMapper] responsible for YAML serialization/deserialization.
+class Jetson2YamlHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
+  /// The Jetson [ObjectMapper] responsible for serialization and deserialization.
   final ObjectMapper _objectMapper;
 
   /// {@macro jetson2_yaml_http_message_converter}
@@ -77,23 +110,24 @@ class Jetson2YamlHttpMessageConverter extends AbstractHttpMessageConverter<Objec
     super.addSupportedMediaType(MediaType('text', 'yaml'));
     super.addSupportedMediaType(MediaType('text', 'x-yaml'));
   }
-  
+
   @override
-  List<Object?> equalizedProperties() => [Jetson2YamlHttpMessageConverter];
-  
-  @override
-  String getPackageName() => PackageNames.WEB;
-  
-  @override
-  Future<void> onReady() async {
-    // YAML support discovered through Jetson's ObjectMapper configuration
+  bool canRead(Class type, [MediaType? mediaType]) {
+    if (mediaType != null && getSupportedMediaTypes().any((media) => media.isCompatibleWith(mediaType)) && _objectMapper is YamlObjectMapper) {
+      return true;
+    }
+
+    return false;
   }
 
   @override
-  bool canRead(Class type, [MediaType? mediaType]) => _objectMapper is YamlObjectMapper;
+  bool canWrite(Class type, [MediaType? mediaType]) {
+    if (mediaType != null && getSupportedMediaTypes().any((media) => media.isCompatibleWith(mediaType)) && _objectMapper is YamlObjectMapper) {
+      return true;
+    }
 
-  @override
-  bool canWrite(Class type, [MediaType? mediaType]) => _objectMapper is YamlObjectMapper;
+    return false;
+  }
   
   @override
   Future<Object> readInternal(Class<Object> type, HttpInputMessage inputMessage) async {
@@ -129,4 +163,7 @@ class Jetson2YamlHttpMessageConverter extends AbstractHttpMessageConverter<Objec
 
     return tryWith(outputMessage.getBody(), (output) async => await output.writeString(yamlString, encoding));
   }
+
+  @override
+  List<Object?> equalizedProperties() => [runtimeType];
 }

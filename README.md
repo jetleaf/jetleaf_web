@@ -29,10 +29,8 @@ Add `jetleaf_web` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  jetleaf_core:
-    path: ./jetleaf_core
-  jetleaf_web:
-    path: ./jetleaf_web
+  jetleaf_core: ^1.0.0
+  jetleaf_web: ^1.0.0
 ```
 
 ### Basic Web Application

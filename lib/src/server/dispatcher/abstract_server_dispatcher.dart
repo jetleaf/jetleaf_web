@@ -753,8 +753,8 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
       await adapter.handle(request, response, handler);
 
       await chain.applyPostHandle(request, response);
-    } catch (ex) {
-      if (await _exceptionManager.resolve(request, response, handlerMethod, ex)) {
+    } catch (ex, st) {
+      if (await _exceptionManager.resolve(request, response, handlerMethod, ex, st)) {
         return;
       }
 

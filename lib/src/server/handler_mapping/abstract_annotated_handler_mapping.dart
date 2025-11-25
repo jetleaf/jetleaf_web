@@ -116,12 +116,12 @@ abstract class AbstractAnnotatedHandlerMapping extends AbstractWebViewAnnotatedH
         final path = baseMapping.path;
 
         basePath = basePath != null && path != null
-            ? WebUtils.normalizePath("$basePath$path")
-            : path != null
-                ? WebUtils.normalizePath(path)
-                : basePath != null
-                    ? WebUtils.normalizePath(basePath)
-                    : null;
+          ? WebUtils.normalizePath("$basePath$path")
+          : path != null
+            ? WebUtils.normalizePath(path)
+            : basePath != null
+              ? WebUtils.normalizePath(basePath)
+              : null;
 
         baseHttpMethod = baseMapping.method;
         baseProduces = baseMapping.produces;
@@ -148,17 +148,13 @@ abstract class AbstractAnnotatedHandlerMapping extends AbstractWebViewAnnotatedH
 
         // Inherit default properties from the class-level mapping.
         final path = mapping.path;
-        final produces = mapping.produces.isNotEmpty
-            ? mapping.produces
-            : baseProduces;
-        final consumes = mapping.consumes.isNotEmpty
-            ? mapping.consumes
-            : baseConsumes;
+        final produces = mapping.produces.isNotEmpty ? mapping.produces : baseProduces;
+        final consumes = mapping.consumes.isNotEmpty ? mapping.consumes : baseConsumes;
 
         // Construct the resolved path, including context prefix if applicable.
         final resolvedPath = ignoreContextPath
-            ? WebUtils.normalizePath("${basePath ?? ""}${path ?? ""}")
-            : WebUtils.normalizePath("${getContextPath()}${basePath ?? ""}${path ?? ""}");
+          ? WebUtils.normalizePath("${basePath ?? ""}${path ?? ""}")
+          : WebUtils.normalizePath("${getContextPath()}${basePath ?? ""}${path ?? ""}");
 
         final pattern = parser.getParser().parsePattern(resolvedPath);
 

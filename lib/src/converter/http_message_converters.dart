@@ -421,7 +421,9 @@ final class HttpMessageConverters implements HttpMessageConverterRegistry, Initi
   /// - Uses [canRead] for compatibility determination
   /// {@endtemplate}
   HttpMessageConverter? findReadable(Class type, MediaType? mediaType) {
-    for (final converter in getMessageConverters()) {
+    final converters = getMessageConverters();
+
+    for (final converter in converters) {
       if (converter.canRead(type, mediaType)) return converter;
     }
 
@@ -452,7 +454,9 @@ final class HttpMessageConverters implements HttpMessageConverterRegistry, Initi
   /// - Uses [canWrite] for capability checking
   /// {@endtemplate}
   HttpMessageConverter? findWritable(Class type, MediaType mediaType) {
-    for (final converter in getMessageConverters()) {
+    final converters = getMessageConverters();
+    
+    for (final converter in converters) {
       if (converter.canWrite(type, mediaType)) return converter;
     }
 

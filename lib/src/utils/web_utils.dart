@@ -323,4 +323,57 @@ final class WebUtils {
 
     return [];
   }
+
+  /// Determines whether the response should be rendered as JSON based on
+  /// its `Content-Type` header.
+  ///
+  /// - Checks the `Content-Type` header of [response].
+  /// - Returns `true` if the content type is compatible with `application/json`.
+  /// - Returns `false` if the content type is absent or not compatible.
+  static bool renderAsJson(ServerHttpResponse response) {
+    MediaType? resolvedContentType = response.getHeaders().getContentType();
+    if (resolvedContentType == null) {
+      return false;
+    }
+
+    return resolvedContentType.isCompatibleWith(MediaType.APPLICATION_JSON);
+  }
+
+  /// Resolves the media type of the response as JSON, ensuring it is compatible
+  /// with `application/json`.
+  ///
+  /// - If the response already has a compatible `Content-Type`, it is returned.
+  /// - If no `Content-Type` is set, or it is incompatible, the content type
+  ///   is set to `application/json` and returned.
+  /// - This ensures consistent JSON response rendering for clients.
+  static MediaType resolveMediaTypeAsJson(ServerHttpResponse response) {
+    final defaultType = MediaType.APPLICATION_JSON;
+
+    MediaType selectedContentType = response.getHeaders().getContentType() ?? defaultType;
+    if (!selectedContentType.isCompatibleWith(defaultType)) {
+      response.getHeaders().setContentType(defaultType);
+      return defaultType;
+    }
+
+    return selectedContentType;
+  }
+
+  /// Resolves the media type of the response as HTML, ensuring it is compatible
+  /// with `text/html`.
+  ///
+  /// - If the response already has a compatible `Content-Type`, it is returned.
+  /// - If no `Content-Type` is set, or it is incompatible, the content type
+  ///   is set to `text/html` and returned.
+  /// - This ensures consistent HTML response rendering for clients.
+  static MediaType resolveMediaTypeAsHtml(ServerHttpResponse response) {
+    final defaultType = MediaType.TEXT_HTML;
+
+    MediaType selectedContentType = response.getHeaders().getContentType() ?? defaultType;
+    if (!selectedContentType.isCompatibleWith(defaultType)) {
+      response.getHeaders().setContentType(defaultType);
+      return defaultType;
+    }
+
+    return selectedContentType;
+  }
 }

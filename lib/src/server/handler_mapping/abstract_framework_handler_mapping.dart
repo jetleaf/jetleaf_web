@@ -101,7 +101,8 @@ abstract class AbstractFrameworkHandlerMapping extends AbstractAnnotatedHandlerM
         res.getHeaders().setContentType(MediaType.parse('image/svg+xml; charset=utf-8'));
         res.setStatus(HttpStatus.OK);
         return tryWith(res.getBody(), (output) async => await output.writeString(svg, Closeable.DEFAULT_ENCODING));
-      });
+      })
+      ..ignoreContextPath = true;
 
     final spec = routerBuilder.build(contextPath: getContextPath());
     final definitions = spec.routes;

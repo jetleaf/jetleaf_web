@@ -17,61 +17,119 @@ import 'package:jetleaf_lang/lang.dart';
 import '../../annotation/core.dart';
 
 /// {@template jetleaf_method_exception_adviser}
-/// Internal resolver that maps exception types to their corresponding handler methods
-/// within a `@ControllerAdvice`, `@RestControllerAdvice`, or annotated controller.
+/// A reflection-based adviser that discovers and resolves exception-handling
+/// methods declared inside a JetLeaf `@ControllerAdvice` class.
 ///
-/// A [MethodExceptionAdviser] is responsible for analyzing a reflective class
-/// (usually annotated with [ControllerAdvice] or [RestControllerAdvice]) and
-/// determining which methods are designated as **exception handlers** via:
+/// `MethodExceptionAdviser` scans the annotated controller-advice class for all
+/// methods marked with:
 ///
-/// - `@ExceptionHandler(ExceptionType)` — standard JetLeaf annotation  
-/// - `@Catch(ExceptionType)` — alternative alias for handler declaration
+/// * `@ExceptionHandler` — explicit exception mapping
+/// * `@Catch` — lightweight exception-catch shorthand
 ///
-/// It builds a **mapping** of `ExceptionType → Method` and can efficiently resolve
-/// the appropriate handler for a given exception type at runtime.
+/// and builds an internal lookup table of:
 ///
-/// ### Example
-/// ```dart
-/// @ControllerAdvice()
-/// class GlobalErrorAdvice {
-///   @ExceptionHandler(UserNotFoundException)
-///   ResponseBody<String> handleUserNotFound(UserNotFoundException e) =>
-///       ResponseBody.of('User not found', HttpStatus.NOT_FOUND);
-///
-///   @Catch(DatabaseException)
-///   ResponseBody<String> handleDatabaseError(DatabaseException e) =>
-///       ResponseBody.of('Database error', HttpStatus.INTERNAL_SERVER_ERROR);
-/// }
-///
-/// // During runtime:
-/// final adviser = MethodExceptionAdviser(ClassUtils.loadClass(GlobalErrorAdvice));
-/// final handler = adviser.advises(ClassUtils.loadClass(UserNotFoundException));
-/// print(handler?.getName()); // -> "handleUserNotFound"
+/// ```
+/// ExceptionType → Method
 /// ```
 ///
-/// ### Matching Rules
-/// When resolving a handler for a thrown exception:
-/// 1. **Exact match** — if an exception type is explicitly registered, it takes precedence.
-/// 2. **Assignable match** — if not found, searches for the *most specific* superclass
-///    or interface handler capable of handling that exception.
-/// 3. **Parameter fallback** — if no annotation value is declared, parameter types
-///    of handler methods are inspected for exception subclasses.
+/// This adviser is used by JetLeaf’s exception resolution pipeline to find the
+/// most appropriate handler for any thrown error.
 ///
-/// ### Design Notes
-/// - This class is used internally by JetLeaf’s exception resolution system.
-/// - Supports both `@ExceptionHandler` and `@Catch` for flexibility.
-/// - Uses reflection to resolve the closest applicable handler for polymorphic exceptions.
+///
+/// ### 🔍 How Handlers Are Discovered
+///
+/// During construction, the adviser inspects **all methods in the class
+/// hierarchy** of the provided `@ControllerAdvice` class:
+///
+/// 1. If a method has `@ExceptionHandler(value: [...])`:
+///    * Each declared type is resolved via `ClassUtils.loadClass(...)`.
+///    * Each resolved exception type is mapped directly to the method.
+///
+/// 2. If a method has `@Catch(value: [...])`, the same logic applies.
+///
+/// 3. If the annotation’s `value` is *null*:
+///    * All method parameters that represent errors (i.e.,
+///      `ClassUtils.isAssignableToError`) are treated as inferred exception
+///      types.
+///
+/// This allows handlers to be declared in multiple styles:
+///
+/// ```dart
+/// @ExceptionHandler([NotFoundException])
+/// Response handleNotFound(...) { ... }
+///
+/// @ExceptionHandler
+/// Response handleAll(RuntimeException e) { ... }
+///
+/// @Catch(MyCustomError)
+/// Response catchCustom(...) { ... }
+/// ```
+///
+/// ### 🎯 Handler Selection Algorithm
+///
+/// When resolving an error, the adviser uses a two-phase matching strategy:
+///
+/// 1. **Exact match** — If the thrown exception’s class is directly mapped,
+///    return that handler immediately.
+///
+/// 2. **Assignable match** — Otherwise, find the *most specific* declared type
+///    that is assignable from the actual exception:
+///
+///    * If multiple handlers match via inheritance,
+///      the one with the closest (most specific) type is selected.
+///    * If none apply, the adviser returns `null`.
+/// 
+/// ### 🧱 Example
+///
+/// ```dart
+/// final adviser = MethodExceptionAdviser(Class.fromType(MyControllerAdvice));
+///
+/// final method = adviser.getAdviceMethod(Class.fromType(MyCustomException));
+/// if (method != null) {
+///   // Invoke the method during exception handling
+/// }
+/// ```
+///
+/// ### 📦 Integration
+///
+/// `MethodExceptionAdviser` is part of JetLeaf’s exception-resolution
+/// subsystem and is used by:
+///
+/// * `ExceptionResolver`
+/// * `RestErrorHandler`
+/// * JetLeaf Web MVC pipeline
+///
+/// It allows `@ControllerAdvice` classes to serve as global, type-aware
+/// exception mappers.
+/// 
 /// {@endtemplate}
-final class MethodExceptionAdviser {
+final class MethodExceptionAdviser with EqualsAndHashCode {
   /// Cached mapping of `ExceptionType → handler Method`.
   final Map<Class, Method> _handledMethods = {};
+
+  /// The reflected `@ControllerAdvice` class that this adviser analyzes.
+  ///
+  /// This field stores the *root class* whose methods will be inspected for
+  /// `@ExceptionHandler` and `@Catch` annotations. All handler discovery,
+  /// mapping, and resolution originates from this class.
+  ///
+  /// ### Why it's important
+  /// - Determines where exception-handling methods are sourced.
+  /// - Allows the adviser to walk the **full class hierarchy**, enabling
+  ///   inherited handler methods.
+  /// - Acts as the identity value for equality and hashing so that two
+  ///   advisers wrapping the same controller-advice class compare equal.
+  ///
+  /// The class is resolved via JetLeaf's reflection system (`Class<T>`),
+  /// ensuring consistent metadata access regardless of platform or runtime.
+  final Class _controllerAdviceClass;
 
   /// {@macro jetleaf_method_exception_adviser}
   ///
   /// Creates a new adviser by scanning all methods of the given
-  /// [controllerAdviceClass] for `@ExceptionHandler` or `@Catch` annotations.
-  MethodExceptionAdviser(Class controllerAdviceClass) {
-    final methods = controllerAdviceClass.getAllMethodsInHierarchy();
+  /// [_controllerAdviceClass] for `@ExceptionHandler` or `@Catch` annotations.
+  MethodExceptionAdviser(this._controllerAdviceClass) {
+    final methods = _controllerAdviceClass.getAllMethodsInHierarchy();
 
     for (final method in methods) {
       final exceptionHandler = method.getDirectAnnotation<ExceptionHandler>();
@@ -88,8 +146,37 @@ final class MethodExceptionAdviser {
     }
   }
 
-  /// Registers exception handler methods based on the annotation value
-  /// or inferred from parameter types when no explicit value is provided.
+  /// Registers all exception-handler mappings defined on a specific method.
+  ///
+  /// This method processes either:
+  ///
+  /// - Explicit annotation values (`@ExceptionHandler(value: [...])`,
+  ///   `@Catch(value: [...])`)
+  /// - Or *inferred* exception types based on the method’s parameters
+  ///   when `value` is `null`
+  ///
+  /// ### Behavior
+  ///
+  /// **1. Explicit value provided**
+  /// - If the annotation contains a single class or symbol, it is resolved
+  ///   through `ClassUtils.loadClass`.
+  /// - If the annotation contains an iterable of values, *each* is resolved.
+  /// - All successfully resolved classes are mapped to the given [method].
+  ///
+  /// **2. No explicit value**
+  /// - All parameter types of the method are scanned.
+  /// - Each parameter that represents an error/exception type (according to
+  ///   `ClassUtils.isAssignableToError`) is treated as a catchable type.
+  ///
+  /// This dual-mode discovery supports both concise handler signatures and
+  /// explicit mappings for multiple exception types.
+  ///
+  /// ### Parameters
+  /// - [method] — The reflective method being registered as a handler.
+  /// - [annotationValue] — The `value` field of the annotation, which may be:
+  ///   - a class symbol,
+  ///   - an iterable of class symbols,
+  ///   - or `null` to indicate inference.
   void _getExceptionHandlerMethods(Method method, Object? annotationValue) {
     if (annotationValue != null) {
       if (annotationValue is! Iterable) {
@@ -112,14 +199,34 @@ final class MethodExceptionAdviser {
     }
   }
 
-  /// Returns the most appropriate handler method for the given [exceptionClass].
+  /// Attempts to locate the most appropriate exception-handling method for the
+  /// given [exceptionClass].
   ///
-  /// The lookup strategy is:
-  /// - First, return an **exact match** if available.
-  /// - Otherwise, return the **most specific** assignable handler for the type.
+  /// ### Resolution Strategy
   ///
-  /// If no matching handler is found, returns `null`.
-  Method? advises(Class exceptionClass) {
+  /// 1. **Exact Match**
+  ///    If the exception class is registered directly in `_handledMethods`,
+  ///    the associated method is returned immediately.
+  ///
+  /// 2. **Assignable (Inheritance) Match**
+  ///    If no direct match exists, the adviser scans all declared
+  ///    handler types and selects the *most specific* handler whose
+  ///    declared type is assignable from the actual exception type.
+  ///
+  ///    Example:
+  ///    - `IOException` is preferred over `Exception`
+  ///      if both are declared handlers.
+  ///
+  /// 3. **No Match**
+  ///    If no appropriate handler exists, returns `null`.
+  ///
+  /// ### Use Cases
+  /// This is the core method used by JetLeaf’s exception pipeline to determine
+  /// which `@ExceptionHandler` method should be invoked for a thrown exception.
+  ///
+  /// ### Returns
+  /// - The matched [Method], or `null` if no handler applies.
+  Method? getAdviceMethod(Class exceptionClass) {
     // exact match
     if (_handledMethods.containsKey(exceptionClass)) {
       return _handledMethods[exceptionClass];
@@ -148,6 +255,6 @@ final class MethodExceptionAdviser {
     return candidate;
   }
 
-  /// Returns an immutable view of all registered exception-handler mappings.
-  Map<Class, Method> getHandledMethods() => Map.unmodifiable(_handledMethods);
+  @override
+  List<Object?> equalizedProperties() => [_controllerAdviceClass];
 }

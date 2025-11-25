@@ -118,7 +118,7 @@ final class YamlReturnValueHandler implements ReturnValueHandler {
     }
 
     // Content-Type header already set globally by DefaultReturnValueHandlerManager
-    final mediaType = response.getHeaders().getContentType() ?? MediaType('application', 'yaml');
+    final mediaType = response.getHeaders().getContentType() ?? MediaType.APPLICATION_YAML;
     final converter = _converters.findWritable(valueClass, mediaType);
     if (converter == null) {
       throw HttpMediaTypeNotSupportedException('No suitable converter for $mediaType');

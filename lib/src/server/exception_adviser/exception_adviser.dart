@@ -15,10 +15,10 @@
 import 'package:jetleaf_lang/lang.dart';
 import '../../annotation/core.dart';
 
-/// {@template jetleaf_controller_adviser}
+/// {@template jetleaf_exception_adviser}
 /// Internal representation of a `@ControllerAdvice` or `@RestControllerAdvice` declaration in JetLeaf.
 ///
-/// A [ControllerAdviser] encapsulates:
+/// A [ExceptionAdviser] encapsulates:
 /// - The **annotated target instance** (the object containing the advice methods)
 /// - The **advice annotation metadata** ([ControllerAdvice], [WebView] or [RestControllerAdvice])
 /// - The **declaring class type** for reflective access
@@ -69,7 +69,7 @@ import '../../annotation/core.dart';
 /// - [ControllerAdvice]
 /// - [RestControllerAdvice]
 /// - [ExceptionHandler]
-final class ControllerAdviser {
+final class ExceptionAdviser {
   /// The runtime instance containing the advice methods.
   final Object target;
 
@@ -79,8 +79,8 @@ final class ControllerAdviser {
   /// The reflective [Class] object representing the advice type.
   final Class type;
 
-  /// {@macro jetleaf_controller_adviser}
-  ControllerAdviser(this.controllerAdvice, this.target, this.type);
+  /// {@macro jetleaf_exception_adviser}
+  ExceptionAdviser(this.controllerAdvice, this.target, this.type);
 
   /// Determines whether this advice applies to the given [controllerClass].
   ///

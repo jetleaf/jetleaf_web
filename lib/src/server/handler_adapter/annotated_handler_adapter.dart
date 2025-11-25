@@ -13,14 +13,13 @@
 // 🔧 Powered by Hapnium — the Dart backend engine 🍃
 
 import 'package:jetleaf_lang/lang.dart';
-import 'package:jetleaf_pod/pod.dart';
 
 import '../../http/http_headers.dart';
 import '../handler_mapping/abstract_annotated_handler_mapping.dart';
 import '../handler_method.dart';
 import '../server_http_request.dart';
 import '../server_http_response.dart';
-import 'abstract_handler_adapter.dart';
+import 'abstract_url_handler_adapter.dart';
 
 /// {@template annotated_handler_adapter}
 /// Adapter that supports annotation-based controller handlers.
@@ -72,25 +71,7 @@ class AnnotatedHandlerAdapter extends AbstractUrlHandlerAdapter {
         request.getHeaders().addAll(HttpHeaders.ACCEPT, handler.produces.map((i) => i.toString()).toList());
       }
 
-      final method = handler.method;
-      final resolvedArgs = await methodArgumentResolver.resolveArgs(method, request, response, handler);
-      final named = resolvedArgs.namedArgs;
-      final positional = resolvedArgs.positionalArgs;
-
-      // Setup and reset the context of this handler for this request scope
-      handler.getContext().setArgs(resolvedArgs);
-
-      final result = method.invoke(handler.definition.target, named, positional);
-
-      // Refresh context in case invocation mutated arguments
-      handler.getContext().setArgs(ArgumentValueHolder(namedArgs: named, positionalArgs: positional));
-
-      if (result is Future) {
-        final update = await result;
-        return methodReturnValueHandler.handleReturnValue(update, method, request, response, handler);
-      }
-
-      return methodReturnValueHandler.handleReturnValue(result, method, request, response, handler);
+      return await doHandle(handler, handler.definition.target, request, response, handler.method);
     }
   }
 }

@@ -360,10 +360,10 @@ final class IoWebServer implements ConfigurableWebServer {
         stopwatch.stop();
         request.setCompletedAt(DateTime.fromMillisecondsSinceEpoch(stopwatch.elapsed.inMilliseconds));
 
-        if (log.getIsDebugEnabled()) {
+        if (log.getIsTraceEnabled()) {
           final method = req.method;
           final path = req.uri.path;
-          log.debug('[REQ] $method $path (${stopwatch.elapsedMilliseconds} ms)');
+          log.trace('[REQ] $method $path (${stopwatch.elapsedMilliseconds} ms)');
         }
       }
     });

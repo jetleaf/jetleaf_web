@@ -18,7 +18,7 @@ import '../handler_mapping/abstract_framework_handler_mapping.dart';
 import '../handler_method.dart';
 import '../server_http_request.dart';
 import '../server_http_response.dart';
-import 'abstract_handler_adapter.dart';
+import 'abstract_url_handler_adapter.dart';
 
 /// {@template framework_handler_adapter}
 /// Adapter responsible for handling Jetleaf's internal framework routes.

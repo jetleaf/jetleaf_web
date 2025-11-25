@@ -116,7 +116,7 @@ final class XmlReturnValueHandler implements ReturnValueHandler {
     }
 
     // Content-Type header already set globally by DefaultReturnValueHandlerManager
-    final mediaType = response.getHeaders().getContentType() ?? MediaType('application', 'xml');
+    final mediaType = response.getHeaders().getContentType() ?? MediaType.APPLICATION_XML;
     final converter = _converters.findWritable(valueClass, mediaType);
     if (converter == null) {
       throw HttpMediaTypeNotSupportedException('No suitable converter for $mediaType');

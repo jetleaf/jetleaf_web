@@ -60,7 +60,6 @@ class StandardWebEnvironment extends GlobalEnvironment implements ConfigurableWe
   @override
   void customizePropertySources(MutablePropertySources propertySources) {
     super.customizePropertySources(propertySources);
-
     propertySources.addLast(WebEnvironmentPropertySource(WEB_ENVIRONMENT_PROPERTY_SOURCE_NAME));
   }
 }

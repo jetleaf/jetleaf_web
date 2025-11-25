@@ -19,7 +19,6 @@ import 'package:jetleaf_pod/pod.dart';
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-import '../../exception/exceptions.dart';
 import '../../http/media_type.dart';
 import '../../utils/web_utils.dart';
 import '../server_http_request.dart';
@@ -130,27 +129,21 @@ final class DefaultContentNegotiationResolver implements ContentNegotiationResol
 
   @override
   Future<void> resolve(Method? method, ServerHttpRequest request, ServerHttpResponse response, List<MediaType> supportedMediaTypes) async {
-    // MediaType? contentType = request.getHeaders().getContentType();
-    // if (contentType != null) {
-    //   response.getHeaders().setContentType(contentType);
-    //   return;
-    // }
     MediaType? contentType;
-    
-    // Try strategies in order until one produces a result
     MediaType? negotiatedMediaType;
+
     final strategies = _cachedStrategies ??= AnnotationAwareOrderComparator.getOrderedItems(_strategies);
+    final producing = WebUtils.producing(method);
+    final supportedTypes = producing.isNotEmpty ? producing : supportedMediaTypes;
 
     for (final strategy in strategies) {
-      negotiatedMediaType = await strategy.negotiate(method, request, supportedMediaTypes);
+      negotiatedMediaType = await strategy.negotiate(method, request, supportedTypes);
       if (negotiatedMediaType != null) {
         break;
       }
     }
 
-    if (negotiatedMediaType == null) {
-      throw HttpMediaTypeNotSupportedException('No suitable media type could be negotiated for response');
-    }
+    negotiatedMediaType ??= MediaType.APPLICATION_JSON;
 
     // Resolve encoding and apply content type
     final encoding = _resolveResponseEncoding(request, negotiatedMediaType);

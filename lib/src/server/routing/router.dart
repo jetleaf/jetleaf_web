@@ -12,6 +12,7 @@
 // 
 // 🔧 Powered by Hapnium — the Dart backend engine 🍃
 
+import '../../utils/web_utils.dart';
 import 'route.dart';
 import 'route_entry.dart';
 import 'router_interface.dart';
@@ -283,9 +284,9 @@ class RouterBuilder extends Router {
     final allRoutes = <RouteDefinition>[];
 
     for (final routeEntry in _routes) {
-      final context = contextPath ?? '';
+      final context = ignoreContextPath ? "" : contextPath ?? '';
       final prefix = _pathPrefix ?? '';
-      final path = '$context$prefix${routeEntry.route.path}';
+      final path = WebUtils.normalizePath('$context$prefix${routeEntry.route.path}');
 
       if (routeEntry is RequestRouteEntry) {
         allRoutes.add(RouteDefinition(
@@ -303,7 +304,7 @@ class RouterBuilder extends Router {
     }
 
     for (final child in _children) {
-      final spec = child.build();
+      final spec = child.build(contextPath: contextPath);
       allRoutes.addAll(spec.routes);
     }
 

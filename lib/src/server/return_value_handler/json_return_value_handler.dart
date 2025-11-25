@@ -121,13 +121,12 @@ final class JsonReturnValueHandler implements ReturnValueHandler {
       return;
     }
 
+    final contentType = WebUtils.resolveMediaTypeAsJson(response);
     final valueClass = Class.forObject(returnValue);
-    final acceptTypes = request.getHeaders().getContentType();
-    final mediaType = acceptTypes ?? MediaType.APPLICATION_JSON;
 
-    final converter = _converters.findWritable(valueClass, mediaType);
+    final converter = _converters.findWritable(valueClass, contentType);
     if (converter == null) {
-      throw HttpMediaTypeNotSupportedException('No suitable HttpMessageConverter found for ${valueClass.getName()} and type $mediaType');
+      throw HttpMediaTypeNotSupportedException('No suitable HttpMessageConverter found for ${valueClass.getName()} and type $contentType');
     }
 
     final status = WebUtils.getResponseStatus(returnValue, method) ?? HttpStatus.OK;
@@ -137,6 +136,6 @@ final class JsonReturnValueHandler implements ReturnValueHandler {
       response.setStatus(status);
     }
 
-    await converter.write(returnValue, mediaType, response);
+    await converter.write(returnValue, contentType, response);
   }
 }

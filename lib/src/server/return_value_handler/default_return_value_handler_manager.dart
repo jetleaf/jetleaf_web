@@ -17,6 +17,7 @@ import 'dart:collection';
 import 'package:jetleaf_core/context.dart';
 import 'package:jetleaf_core/core.dart';
 import 'package:jetleaf_lang/lang.dart';
+import 'package:jetleaf_logging/logging.dart';
 import 'package:jetleaf_pod/pod.dart';
 import 'package:jetleaf_web/src/http/media_type.dart';
 import 'package:meta/meta.dart';
@@ -133,6 +134,9 @@ final class DefaultReturnValueHandlerManager implements ReturnValueHandlerManage
   /// {@endtemplate}
   late ApplicationContext _applicationContext;
 
+  /// The logger to use
+  final Log _logger = LogFactory.getLog(DefaultReturnValueHandlerManager);
+
   /// {@template return_value_handler_manager._negotiation_resolver}
   /// The [ContentNegotiationResolver] used to determine the most suitable
   /// response format for a given request.
@@ -214,9 +218,17 @@ final class DefaultReturnValueHandlerManager implements ReturnValueHandlerManage
       response.setStatus(HttpStatus.NO_CONTENT);
       return;
     }
+
+    if (_logger.getIsTraceEnabled()) {
+      _logger.trace("Searching for the handler that handles the request ${request.getRequestURI()}");
+    }
     
     final handler = findHandler(method, returnValue, request);
     if (handler != null) {
+      if (_logger.getIsTraceEnabled()) {
+        _logger.trace("Found ${handler.runtimeType} as the handler incharge of handling ${request.getUri()}");
+      }
+      
       await _negotiationResolver.resolve(method, request, response, handler.getSupportedMediaTypes());
       return await handler.handleReturnValue(returnValue, method, request, response, hm);
     }

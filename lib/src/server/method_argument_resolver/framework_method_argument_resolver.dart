@@ -86,11 +86,15 @@ final class FrameworkMethodArgumentResolver implements MethodArgumentResolver {
   const FrameworkMethodArgumentResolver();
 
   @override
-  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex]) async {
+  Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]) async {
     final paramClass = param.getClass();
 
     if (ex != null && paramClass.isAssignableFrom(ex.getClass())) {
       return ex;
+    }
+
+    if (st != null && paramClass.isAssignableFrom(st.getClass())) {
+      return st;
     }
 
     if (WebRequest.CLASS.isAssignableFrom(paramClass)) {
