@@ -1,6 +1,6 @@
 name: jetleaf_web
 description: Web context for JetLeaf — provides HTTP, routing, and client-server helpers.
-version: 1.0.1
+version: 1.0.2
 
 homepage: https://jetleaf.hapnium.com
 repository: https://github.com/jetleaf/jetleaf_web
@@ -26,14 +26,14 @@ environment:
 
 dependencies:
   meta: ^1.17.0
-  jetleaf_lang: ^1.0.2
-  jtl: ^1.0.1
-  jetson: ^1.0.1
-  jetleaf_logging: ^1.0.2
-  jetleaf_pod: ^1.0.2
-  jetleaf_core: ^1.0.2
-  jetleaf_env: ^1.0.2
-  jetleaf_utils: ^1.0.2
+  jetleaf_lang: ^1.0.3
+  jtl: ^1.0.2
+  jetson: ^1.0.2
+  jetleaf_logging: ^1.0.3
+  jetleaf_pod: ^1.0.3
+  jetleaf_core: ^1.0.3
+  jetleaf_env: ^1.0.3
+  jetleaf_utils: ^1.0.3
 
 dev_dependencies:
   test: ^1.25.0
