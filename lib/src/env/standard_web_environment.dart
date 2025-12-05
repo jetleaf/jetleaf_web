@@ -12,6 +12,7 @@
 // 
 // 🔧 Powered by Hapnium — the Dart backend engine 🍃
 
+import 'package:jetleaf_core/context.dart';
 import 'package:jetleaf_env/env.dart';
 import 'package:jetleaf_env/property.dart';
 
@@ -21,7 +22,7 @@ import 'environment.dart';
 
 /// {@template standard_web_environment}
 /// A standard implementation of [ConfigurableWebEnvironment] that uses
-/// [GlobalEnvironment] as its base.
+/// [ApplicationEnvironment] as its base.
 ///
 /// [StandardWebEnvironment] provides a ready-to-use, mutable web environment
 /// for typical JetLeaf web applications. It allows reading and modifying
@@ -30,7 +31,7 @@ import 'environment.dart';
 /// and runtime.
 ///
 /// This class is suitable for most standard web applications that do not
-/// require custom environment handling. By extending [GlobalEnvironment],
+/// require custom environment handling. By extending [ApplicationEnvironment],
 /// it inherits all global property resolution, system property access,
 /// and default property sources.
 ///
@@ -42,10 +43,10 @@ import 'environment.dart';
 /// print('Server will start on port $port');
 /// ```
 /// {@endtemplate}
-class StandardWebEnvironment extends GlobalEnvironment implements ConfigurableWebEnvironment {
+class StandardWebEnvironment extends ApplicationEnvironment implements ConfigurableWebEnvironment {
   /// Creates a new instance of [StandardWebEnvironment].
   ///
-  /// By default, it initializes the environment using [GlobalEnvironment]
+  /// By default, it initializes the environment using [ApplicationEnvironment]
   /// constructor, which sets up default property sources and resolution order.
   /// 
   /// {@macro standard_web_environment}

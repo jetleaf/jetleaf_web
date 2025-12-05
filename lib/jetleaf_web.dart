@@ -239,6 +239,7 @@ export 'src/csrf/default_csrf_token_repository_manager.dart';
 export 'src/server/dispatcher/abstract_server_dispatcher.dart';
 export 'src/server/dispatcher/global_server_dispatcher.dart';
 export 'src/server/dispatcher/server_dispatcher.dart';
+export 'src/server/dispatcher/server_dispatcher_error_listener.dart';
 
 export 'src/server/exception_resolver/html_exception_resolver.dart';
 export 'src/server/exception_resolver/rest_exception_resolver.dart';
