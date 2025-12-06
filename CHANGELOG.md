@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7]
+
+- Updated dependencies - all
+
 ## [1.0.6]
 
 - Updated dependencies - `jetleaf_env`, `jetson` and `jetleaf_core`
