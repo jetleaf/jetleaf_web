@@ -2,23 +2,32 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.4] - 2025-12-1
+## [1.0.6]
+
+- Updated dependencies - `jetleaf_env`, `jetson` and `jetleaf_core`
+
+## [1.0.5]
+
+- Updated dependencies
+- Added `ServerDispatcherErrorListenerr` for error listening.
+
+## [1.0.4]
 
 - Updated dependencies
 
-## [1.0.3] - 2025-11-28
+## [1.0.3]
 
 - Updated dependencies
 
-## [1.0.2] - 2025-11-26
+## [1.0.2]
 
 - Updated dependencies
 
-## [1.0.1] - 2025-11-25
+## [1.0.1]
 
 - Updated dependencies
 
-## [1.0.0+1] - 2025-11-19
+## [1.0.0+1]
 
 Patch release: dependency alignment and small improvements.
 
@@ -26,7 +35,7 @@ Patch release: dependency alignment and small improvements.
 
 - Updated package dependencies and alignment with other JetLeaf modules.
 
-## [1.0.0] - 2025-11-17
+## [1.0.0]
 
 Initial release.
 

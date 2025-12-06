@@ -336,7 +336,7 @@ final class IoWebServer implements ConfigurableWebServer {
     }
 
     final startTime = DateTime.now().millisecondsSinceEpoch;
-    await _publish(ServerStartingEvent(this));
+    await _publish(ServerStartingEvent(this, DateTime.now()));
 
     _httpServer = await HttpServer.bind(_host, _port);
     _isRunning = true;
@@ -356,6 +356,8 @@ final class IoWebServer implements ConfigurableWebServer {
         if (log.getIsErrorEnabled()) {
           log.error('❌ Unhandled exception during request dispatch', error: e, stacktrace: st);
         }
+
+        rethrow;
       } finally {
         stopwatch.stop();
         request.setCompletedAt(DateTime.fromMillisecondsSinceEpoch(stopwatch.elapsed.inMilliseconds));
@@ -369,7 +371,7 @@ final class IoWebServer implements ConfigurableWebServer {
     });
 
     if (_isRunning) {
-      await _publish(ServerStartedEvent(this));
+      await _publish(ServerStartedEvent(this, DateTime.now()));
     }
 
     final elapsed = DateTime.now().millisecondsSinceEpoch - startTime;
@@ -398,7 +400,7 @@ final class IoWebServer implements ConfigurableWebServer {
       log.info('🛠 Initiating graceful shutdown...');
     }
 
-    await _publish(ServerStoppingEvent(this));
+    await _publish(ServerStoppingEvent(this, DateTime.now()));
 
     try {
       await _httpServer!.close(force: true);
@@ -424,7 +426,7 @@ final class IoWebServer implements ConfigurableWebServer {
         log.info('✅ Server stopped successfully');
       }
 
-      await _publish(ServerStoppedEvent(this));
+      await _publish(ServerStoppedEvent(this, DateTime.now()));
     }
   }
 

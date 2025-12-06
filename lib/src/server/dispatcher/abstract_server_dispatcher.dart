@@ -36,6 +36,7 @@ import '../multipart/multipart_server_http_request.dart';
 import 'server_dispatcher.dart';
 import '../server_http_request.dart';
 import '../server_http_response.dart';
+import 'server_dispatcher_error_listener.dart';
 
 /// {@template jetleaf_abstract_server_dispatcher}
 /// A **base implementation** of [ServerDispatcher] providing the full orchestration
@@ -648,7 +649,7 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
       }
 
       final bus = getEventBus();
-      bus.onEvent(HttpUpgradedEvent(request, response));
+      bus.onEvent(HttpUpgradedEvent(request, response, DateTime.now()));
 
       return;
     }
@@ -754,6 +755,10 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
 
       await chain.applyPostHandle(request, response);
     } catch (ex, st) {
+      if (getErrorListener() case final listener?) {
+        await listener.listen(ex, ex.getClass(), st);
+      }
+
       if (await _exceptionManager.resolve(request, response, handlerMethod, ex, st)) {
         return;
       }
@@ -771,6 +776,30 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
       }
     }
   }
+
+  /// Returns the configured [ServerDispatcherErrorListener], if any.
+  ///
+  /// A `ServerDispatcherErrorListener` allows the server dispatcher to
+  /// intercept, observe, or transform errors that occur during request
+  /// dispatching. This may include:
+  /// - Uncaught exceptions in handlers  
+  /// - Routing failures  
+  /// - Middleware/Filter errors  
+  ///
+  /// ### Behavior
+  /// - If no listener is configured, this method returns `null`.
+  /// - Implementations may provide a default listener or allow applications
+  ///   to supply one via configuration.
+  ///
+  /// ### Typical Use Case
+  /// ```dart
+  /// final listener = dispatcher.getErrorListener();
+  /// listener?.onError(context, exception);
+  /// ```
+  ///
+  /// ### Returns
+  /// The current error listener, or `null` if error delegation is not enabled.
+  ServerDispatcherErrorListener? getErrorListener();
 
   /// Returns the [Log] instance used by the **server dispatcher** and related components
   /// to record operational and diagnostic information.

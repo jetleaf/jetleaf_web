@@ -16,6 +16,7 @@ import 'package:jetleaf_core/context.dart';
 import 'package:jetleaf_core/core.dart';
 import 'package:jetleaf_lang/lang.dart';
 import 'package:jetleaf_logging/logging.dart';
+import 'package:jetleaf_pod/pod.dart';
 import 'package:meta/meta.dart';
 
 import '../../context/server_context.dart';
@@ -29,6 +30,7 @@ import '../server_http_request.dart';
 import '../server_http_response.dart';
 import 'abstract_server_dispatcher.dart';
 import 'server_dispatcher.dart';
+import 'server_dispatcher_error_listener.dart';
 
 /// {@template global_server_dispatcher}
 /// A central dispatcher for handling HTTP requests within a web application.
@@ -56,7 +58,7 @@ import 'server_dispatcher.dart';
 /// // Dispatcher is now ready to handle requests with registered filters, handlers, and interceptors.
 /// ```
 /// {@endtemplate}
-class GlobalServerDispatcher extends AbstractServerDispatcher implements ApplicationContextAware, ApplicationEventBusAware {
+class GlobalServerDispatcher extends AbstractServerDispatcher implements ApplicationContextAware, ApplicationEventBusAware, InitializingPod {
   /// {@template global_server_dispatcher_event_bus}
   /// The event bus used by this dispatcher to publish and subscribe to
   /// application-level events.
@@ -98,6 +100,28 @@ class GlobalServerDispatcher extends AbstractServerDispatcher implements Applica
   /// - [FilterChain] — Executes filters in resolved order
   /// - [ApplicationContext] — May contribute filter definitions
   final FilterManager _filterManager;
+
+  /// Optional error listener used by the server dispatcher to observe or
+  /// handle errors occurring during request routing and execution.
+  ///
+  /// When set, this listener receives callbacks whenever an exception is
+  /// thrown inside the dispatcher pipeline, allowing the application to:
+  /// - Log or transform unhandled exceptions  
+  /// - Customize error responses  
+  /// - Integrate with monitoring or alerting systems  
+  /// - Apply uniform error-handling policies across all routes
+  ///
+  /// ### Notes
+  /// - If `null`, the dispatcher falls back to its default error-handling
+  ///   logic.
+  /// - This field is typically configured during server initialization
+  ///   or via extension modules.
+  ///
+  /// ### Type
+  /// A nullable [ServerDispatcherErrorListener] instance.
+  ServerDispatcherErrorListener? _dispatcherErrorListener;
+
+  ApplicationContext? _applicationContext;
 
   /// {@template global_server_dispatcher_constructor}
   /// Creates a new [GlobalServerDispatcher] with the given [MultipartResolver].
@@ -144,6 +168,22 @@ class GlobalServerDispatcher extends AbstractServerDispatcher implements Applica
       setThrowIfHandlerIsNotFound(notFound);
     } 
   }
+
+  @override
+  Future<void> onReady() async {
+    if (_applicationContext case final context?) {
+      final type = Class<ServerDispatcherErrorListener>();
+      if (await context.containsType(type)) {
+        _dispatcherErrorListener = await context.get(type);
+      }
+    }
+  }
+
+  @override
+  String getPackageName() => PackageNames.WEB;
+
+  @override
+  ServerDispatcherErrorListener? getErrorListener() => _dispatcherErrorListener;
 
   @override
   void setApplicationEventBus(ApplicationEventBus applicationEventBus) {

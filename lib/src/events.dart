@@ -46,7 +46,7 @@ abstract class ServerEvent extends ApplicationEvent {
   /// Creates a [ServerEvent] bound to the given [WebServer] source.
   /// 
   /// {@macro server_event}
-  ServerEvent(WebServer super.source);
+  const ServerEvent(WebServer super.source, super.timestamp);
 
   /// Creates a [ServerEvent] with a manually specified clock,
   /// allowing precise control over the event timestamp.
@@ -98,7 +98,7 @@ abstract class ServerEvent extends ApplicationEvent {
 /// {@endtemplate}
 final class ServerStartingEvent extends ServerEvent {
   /// {@macro server_starting_event}
-  ServerStartingEvent(super.source);
+  const ServerStartingEvent(super.source, super.timestamp);
 }
 
 /// {@template server_started_event}
@@ -131,7 +131,7 @@ final class ServerStartingEvent extends ServerEvent {
 /// {@endtemplate}
 final class ServerStartedEvent extends ServerEvent {
   /// {@macro server_started_event}
-  ServerStartedEvent(super.source);
+  const ServerStartedEvent(super.source, super.timestamp);
 }
 
 /// {@template server_stopping_event}
@@ -177,7 +177,7 @@ final class ServerStartedEvent extends ServerEvent {
 /// {@endtemplate}
 final class ServerStoppingEvent extends ServerEvent {
   /// {@macro server_stopping_event}
-  ServerStoppingEvent(super.source);
+  const ServerStoppingEvent(super.source, super.timestamp);
 }
 
 /// {@template server_stopped_event}
@@ -225,7 +225,7 @@ final class ServerStoppingEvent extends ServerEvent {
 /// {@endtemplate}
 final class ServerStoppedEvent extends ServerEvent {
   /// {@macro server_stopped_event}
-  ServerStoppedEvent(super.source);
+  const ServerStoppedEvent(super.source, super.timestamp);
 }
 
 /// {@template http_event}
@@ -268,7 +268,7 @@ abstract class HttpEvent extends ApplicationEvent {
   /// The event timestamp is recorded using the system clock.
   /// 
   /// {@macro http_event}
-  HttpEvent(HttpMessage super.source);
+  const HttpEvent(HttpMessage super.source, super.timestamp);
 
   /// Creates a new [HttpEvent] using a custom [Clock].
   ///
@@ -316,5 +316,5 @@ class HttpUpgradedEvent extends HttpEvent {
   /// and [ServerHttpResponse].
   /// 
   /// {@macro http_upgraded_event}
-  HttpUpgradedEvent(ServerHttpRequest super.source, this.response);
+  const HttpUpgradedEvent(ServerHttpRequest super.source, this.response, super.timestamp);
 }
