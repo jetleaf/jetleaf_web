@@ -297,18 +297,20 @@ final class IoWebServer implements ConfigurableWebServer {
     }
 
     final address = server.address;
+    final serverPort = server.port;
+    final serverHost = address.address;
 
     if (address.isLoopback) {
-      return Uri(scheme: 'http', host: 'localhost', port: server.port);
+      return Uri(scheme: 'http', host: 'localhost', port: serverPort);
     }
 
     // IPv6 addresses in URLs need to be enclosed in square brackets to avoid
     // URL ambiguity with the ":" in the address.
     if (address.type == InternetAddressType.IPv6) {
-      return Uri(scheme: 'http', host: '[${address.address}]', port: server.port);
+      return Uri(scheme: 'http', host: '[$serverHost]', port: serverPort);
     }
 
-    return Uri(scheme: 'http', host: address.address, port: server.port);
+    return Uri(scheme: 'http', host: serverHost, port: serverPort);
   }
 
   @override
@@ -378,7 +380,7 @@ final class IoWebServer implements ConfigurableWebServer {
 
     if (_isRunning && log.getIsInfoEnabled()) {
       log.info('✅ Server started in $elapsed ms');
-      log.info('🌐 Running at http://${getAddress()?.host}:$_port');
+      log.info('🌐 Running at ${getUri()}');
     }
   }
 
