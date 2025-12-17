@@ -61,7 +61,6 @@ import '../http/media_type.dart';
 /// - [HttpMessageConverters] — the registry that actually holds converters.
 /// - [HttpMessageConverter] — converter interface for reading/writing messages.
 /// {@endtemplate}
-@Author("Evaristus Adimonyemma")
 final class DefaultResolverContext implements ResolverContext {
   /// The composite registry of all available [HttpMessageConverter]s.
   ///

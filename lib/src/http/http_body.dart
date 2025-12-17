@@ -50,6 +50,7 @@ import 'http_status.dart';
 /// - [_body] may be `null` if not provided.
 /// - Designed to be immutable after construction.
 /// {@endtemplate}
+@Generic(HttpBody)
 class HttpBody<T> with EqualsAndHashCode {
   /// Internal storage for HTTP headers.
   /// 
@@ -162,6 +163,7 @@ class HttpBody<T> with EqualsAndHashCode {
 /// - **Testing**: Mock HTTP responses in unit tests
 /// - **Middleware**: Transform responses in HTTP middleware chains
 /// {@endtemplate}
+@Generic(ResponseBody)
 class ResponseBody<T> extends HttpBody<T> {
   /// The HTTP status of this response.
   /// 

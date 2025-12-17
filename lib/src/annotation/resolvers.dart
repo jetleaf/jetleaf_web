@@ -511,7 +511,7 @@ final class RequestPartResolver implements Resolver {
     final maxSize = annotation.maxSize; // max size from annotation
     final required = annotation.required;
     final allowedMaxSizePerFile = request.getMaxUploadSizePerFile();
-    final paramClass = parameter.getClass();
+    final paramClass = parameter.getReturnClass();
 
     // Utility: validate per-file size
     void validatePerFileSize(int size, String fileName) {
@@ -649,7 +649,7 @@ final class RequestBodyResolver implements Resolver {
     }
 
     final contentType = request.getHeaders().getContentType();
-    final paramClass = parameter.getClass();
+    final paramClass = parameter.getReturnClass();
 
     // Find a converter that can read the request body into the parameter type
     final converter = context.findReadable(paramClass, contentType);
