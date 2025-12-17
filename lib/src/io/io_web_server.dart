@@ -26,6 +26,7 @@ import '../exception/server_exceptions.dart';
 import '../web/web.dart';
 import 'io_request.dart';
 import 'io_response.dart';
+import 'io_web_server_security_context_factory.dart';
 
 /// {@template io_web_server_factory}
 /// A concrete factory that produces [IoWebServer] instances for JetLeaf applications.
@@ -89,8 +90,32 @@ final class IoWebServerFactory implements WebServerFactory, EnvironmentAware, Ap
   /// Returns the configured [ServerDispatcher] for this server context.
   final ServerDispatcher _dispatcher;
 
+  /// An optional factory responsible for creating and configuring the
+  /// [IoWebServerSecurityContext] used by this server application.
+  ///
+  /// When provided, the [IoWebServerSecurityContextFactory] enables the
+  /// construction of a security context that participates in request
+  /// authentication, authorization, and other security-related processing.
+  ///
+  /// ### Responsibilities
+  /// A configured security context factory may:
+  ///  - Produce the security context instance at server startup.
+  ///  - Integrate authentication mechanisms (session, token, headers, etc.).
+  ///  - Populate request-scoped security metadata.
+  ///  - Register or configure security filters or interceptors.
+  ///
+  /// ### Optional Behavior
+  /// This field is nullable.  
+  /// When no factory is provided:
+  ///  - The server runs without an application-defined security context.
+  ///  - No security infrastructure is initialized automatically.
+  ///
+  /// This allows lightweight servers or internal systems to run without
+  /// requiring any security configuration.
+  final IoWebServerSecurityContextFactory? _securityContextFactory;
+
   /// {@macro io_web_server_factory}
-  IoWebServerFactory(this._dispatcher);
+  IoWebServerFactory(this._dispatcher, this._securityContextFactory);
 
   @override
   void setApplicationEventBus(ApplicationEventBus applicationEventBus) {
@@ -113,7 +138,7 @@ final class IoWebServerFactory implements WebServerFactory, EnvironmentAware, Ap
   @override
   Future<WebServer> createWebServer(ServerContext context) async {
     final dispatcher = _dispatcher;
-    return IoWebServer(context, _host, _port, _eventBus, dispatcher);
+    return IoWebServer(context, _host, _port, _eventBus, dispatcher, _securityContextFactory);
   }
 }
 
@@ -255,8 +280,32 @@ final class IoWebServer implements ConfigurableWebServer {
   /// Returns the configured [ServerDispatcher] for this server context.
   final ServerDispatcher _dispatcher;
 
+  /// An optional factory responsible for creating and configuring the
+  /// [IoWebServerSecurityContext] used by this server application.
+  ///
+  /// When provided, the [IoWebServerSecurityContextFactory] enables the
+  /// construction of a security context that participates in request
+  /// authentication, authorization, and other security-related processing.
+  ///
+  /// ### Responsibilities
+  /// A configured security context factory may:
+  ///  - Produce the security context instance at server startup.
+  ///  - Integrate authentication mechanisms (session, token, headers, etc.).
+  ///  - Populate request-scoped security metadata.
+  ///  - Register or configure security filters or interceptors.
+  ///
+  /// ### Optional Behavior
+  /// This field is nullable.  
+  /// When no factory is provided:
+  ///  - The server runs without an application-defined security context.
+  ///  - No security infrastructure is initialized automatically.
+  ///
+  /// This allows lightweight servers or internal systems to run without
+  /// requiring any security configuration.
+  final IoWebServerSecurityContextFactory? _securityContextFactory;
+
   /// {@macro io_web_server}
-  IoWebServer(this._context, this._host, this._port, this._eventBus, this._dispatcher);
+  IoWebServer(this._context, this._host, this._port, this._eventBus, this._dispatcher, this._securityContextFactory);
 
   /// Publishes a [ServerEvent] to the internal [ApplicationEventBus].
   ///
@@ -297,18 +346,21 @@ final class IoWebServer implements ConfigurableWebServer {
     }
 
     final address = server.address;
+    final serverPort = server.port;
+    final serverHost = address.address;
+    final serverScheme = _securityContextFactory != null ? "https" : "http";
 
     if (address.isLoopback) {
-      return Uri(scheme: 'http', host: 'localhost', port: server.port);
+      return Uri(scheme: serverScheme, host: 'localhost', port: serverPort);
     }
 
     // IPv6 addresses in URLs need to be enclosed in square brackets to avoid
     // URL ambiguity with the ":" in the address.
     if (address.type == InternetAddressType.IPv6) {
-      return Uri(scheme: 'http', host: '[${address.address}]', port: server.port);
+      return Uri(scheme: serverScheme, host: '[$serverHost]', port: serverPort);
     }
 
-    return Uri(scheme: 'http', host: address.address, port: server.port);
+    return Uri(scheme: serverScheme, host: serverHost, port: serverPort);
   }
 
   @override
@@ -338,7 +390,12 @@ final class IoWebServer implements ConfigurableWebServer {
     final startTime = DateTime.now().millisecondsSinceEpoch;
     await _publish(ServerStartingEvent(this, DateTime.now()));
 
-    _httpServer = await HttpServer.bind(_host, _port);
+    if (_securityContextFactory case final context?) {
+      _httpServer = await HttpServer.bindSecure(_host, _port, context.createContext(), requestClientCertificate: context.shouldRequestClientCertificate());
+    } else {
+      _httpServer = await HttpServer.bind(_host, _port);
+    }
+
     _isRunning = true;
 
     _httpServer!.listen((req) async {
@@ -378,7 +435,7 @@ final class IoWebServer implements ConfigurableWebServer {
 
     if (_isRunning && log.getIsInfoEnabled()) {
       log.info('✅ Server started in $elapsed ms');
-      log.info('🌐 Running at http://${getAddress()?.host}:$_port');
+      log.info('🌐 Running at ${getUri()}');
     }
   }
 

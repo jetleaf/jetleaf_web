@@ -99,12 +99,12 @@ final class AnnotatedMethodArgumentResolver implements MethodArgumentResolver {
     final parent = Class<RequestParameter>(null, PackageNames.WEB);
 
     for (final ann in source.getAllDirectAnnotations()) {
-      final annClass = ann.getClass();
+      final annClass = ann.getDeclaringClass();
 
       if (parent.isAssignableFrom(annClass) || ann.matches<RequestParameter>()) {
         for (final meta in annClass.getAllAnnotations()) {
           try {
-            final metaClass = meta.getClass();
+            final metaClass = meta.getDeclaringClass();
 
             // If the annotation on the annotation class is a ResolvedBy, extract it
             if (Class<ResolvedBy>(null, PackageNames.WEB).isAssignableFrom(metaClass)) {

@@ -3050,6 +3050,7 @@ class ReadOnlyHttpHeaders extends HttpHeaders {
 ///   .headers;
 /// ```
 /// {@endtemplate}
+@Generic(HttpHeaderBuilder)
 abstract class HttpHeaderBuilder<B extends HttpHeaderBuilder<B>> {
   /// {@macro jetleaf_http_header_builder}
   const HttpHeaderBuilder();

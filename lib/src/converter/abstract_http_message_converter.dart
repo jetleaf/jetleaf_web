@@ -126,6 +126,7 @@ import '../http/media_type.dart';
 /// for converter implementations while ensuring consistent behavior, proper
 /// error handling, and framework integration across all HTTP message converters.
 /// {@endtemplate}
+@Generic(AbstractHttpMessageConverter)
 abstract class AbstractHttpMessageConverter<T> extends HttpMessageConverter<T> {
   /// The list of **supported media types** that this converter, renderer,
   /// or HTTP component can handle.

@@ -142,7 +142,7 @@ final class ExceptionAdviser {
     if (annotations.isNotEmpty) {
       for (final ann in annotations) {
         final annClass = ClassUtils.loadClass(ann);
-        if (annClass != null && controllerClass.getAllDirectAnnotations().any((ann) => ann.getClass() == annClass)) {
+        if (annClass != null && controllerClass.getAllDirectAnnotations().any((ann) => ann.getDeclaringClass() == annClass)) {
           return true;
         }
       }

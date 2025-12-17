@@ -20,6 +20,7 @@ import '../context/server_context.dart';
 import '../io/io_encoding_decoder.dart';
 import '../io/io_multipart_resolver.dart';
 import '../io/io_web_server.dart';
+import '../io/io_web_server_security_context_factory.dart';
 import '../path/path_pattern_parser_manager.dart';
 import '../server/dispatcher/global_server_dispatcher.dart';
 import '../server/dispatcher/server_dispatcher.dart';
@@ -158,7 +159,8 @@ final class WebServerAutoConfiguration {
   @Role(DesignRole.INFRASTRUCTURE)
   @Pod(value: WEB_SERVER_FACTORY_POD_NAME)
   @ConditionalOnMissingPod(values: [WebServerFactory])
-  WebServerFactory ioWebServerFactory(ServerDispatcher dispatcher) => IoWebServerFactory(dispatcher);
+  WebServerFactory ioWebServerFactory(ServerDispatcher dispatcher, IoWebServerSecurityContextFactory? securityContext)
+  => IoWebServerFactory(dispatcher, securityContext);
 
   /// {@template io_server_context_pod}
   /// Provides the default server context holding shared framework resources.

@@ -87,7 +87,7 @@ final class FrameworkMethodArgumentResolver implements MethodArgumentResolver {
 
   @override
   Future<Object?> resolveArgument(Parameter param, ServerHttpRequest req, ServerHttpResponse res, HandlerMethod handler, [Object? ex, StackTrace? st]) async {
-    final paramClass = param.getClass();
+    final paramClass = param.getReturnClass();
 
     if (ex != null && paramClass.isAssignableFrom(ex.getClass())) {
       return ex;
@@ -130,7 +130,7 @@ final class FrameworkMethodArgumentResolver implements MethodArgumentResolver {
 
   @override
   bool canResolve(Parameter param) {
-    final paramClass = param.getClass();
+    final paramClass = param.getReturnClass();
 
     if (ClassUtils.isAssignableToError(paramClass)) {
       return true;

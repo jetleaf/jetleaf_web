@@ -205,6 +205,7 @@ export 'src/io/io_part.dart';
 export 'src/io/io_request.dart' hide IoRequestInputStream;
 export 'src/io/io_response.dart' hide IoResponseOutputStream;
 export 'src/io/io_web_server.dart';
+export 'src/io/io_web_server_security_context_factory.dart';
 export 'src/io/multipart_parser.dart';
 
 export 'src/io_rest/client.dart';
