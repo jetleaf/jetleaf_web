@@ -6,7 +6,7 @@ This project follows a simple, human-readable changelog format inspired by
 
 ---
 
-## [1.0.9]
+## [1.0.8]
 
 ### Changed
 - Updated dependencies: all.
@@ -14,10 +14,6 @@ This project follows a simple, human-readable changelog format inspired by
 ### Added
 - `IoWebServerrSecurityContextFactory` for pseudo security context integration with `HttpServer`.  
   _Note: This API may be removed in future versions; use with caution._
-
----
-
-## [1.0.8]
 
 ### Fixed
 - Fixed issues with `getUri` method in server.
