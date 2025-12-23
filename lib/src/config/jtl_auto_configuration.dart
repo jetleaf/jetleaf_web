@@ -125,7 +125,7 @@ final class JtlAutoConfiguration {
   @Role(DesignRole.INFRASTRUCTURE)
   @Pod(value: JTL_ASSET_BUILDER_POD_NAME)
   @ConditionalOnMissingPod(values: [AssetBuilder])
-  AssetBuilder jtlAssetBuilder() => DefaultAssetBuilder();
+  AssetBuilder jtlAssetBuilder() => AssetBuilder();
 
   /// {@template jtl_filter_registry_pod}
   /// Provides a registry for template filters.

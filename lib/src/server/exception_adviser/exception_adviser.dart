@@ -130,8 +130,8 @@ final class ExceptionAdviser {
     // Step 3: base packages
     final basePkgs = controllerAdvice.basePackages;
     if (basePkgs.isNotEmpty) {
-      final controllerPkg = controllerClass.getPackage()?.getName();
-      if (controllerPkg != null && basePkgs.any((pkg) => pkg.equals(controllerPkg))) {
+      final controllerPkg = controllerClass.getPackage().getName();
+      if (basePkgs.any((pkg) => pkg.equals(controllerPkg))) {
         return true;
       }
       return false;
