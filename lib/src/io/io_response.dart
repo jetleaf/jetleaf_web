@@ -52,7 +52,7 @@ import '../exception/exceptions.dart';
 /// ```
 ///
 /// {@endtemplate}
-class IoResponse implements ServerHttpResponse {
+base class IoResponse implements ServerHttpResponse {
   /// The underlying `dart:io` HttpResponse associated with this request.
   ///
   /// Used for low-level operations such as writing body data, setting headers,

@@ -14,9 +14,6 @@
 
 // ignore_for_file: unused_field
 
-import '../server/handler_method.dart';
-import '../path/path_pattern.dart';
-import '../path/path_pattern_parser.dart';
 import 'dart:io' as io;
 import 'dart:async';
 import 'dart:convert';
@@ -30,6 +27,9 @@ import '../http/http_headers.dart';
 import '../http/http_method.dart';
 import '../http/http_session.dart';
 import '../server/server_http_request.dart';
+import '../server/handler_method.dart';
+import '../path/path_pattern.dart';
+import '../path/path_pattern_parser.dart';
 
 /// {@template io_request}
 /// Represents a concrete implementation of [ServerHttpRequest] that wraps
@@ -62,7 +62,7 @@ import '../server/server_http_request.dart';
 /// ioRequest.setAttribute('userId', 123);
 /// ```
 /// {@endtemplate}
-class IoRequest implements ServerHttpRequest {
+base class IoRequest implements ServerHttpRequest {
   /// The resolved handler method associated with this request.
   ///
   /// This is set by the dispatcher after the request path has been matched
@@ -260,6 +260,17 @@ class IoRequest implements ServerHttpRequest {
     }
 
     return false;
+  }
+
+  @override
+  String getOrigin() {
+    // First, check if there's an Origin header (for CORS requests)
+    final originHeader = getHeaders().getOrigin();
+    if (originHeader != null && originHeader.isNotEmpty) {
+      return originHeader;
+    }
+
+    return _request.requestedUri.origin;
   }
 
   /// Returns the client certificate associated with this request, if present.

@@ -15,11 +15,11 @@
 import 'package:jetleaf_core/core.dart';
 import 'package:jetleaf_env/env.dart';
 import 'package:jetleaf_lang/lang.dart';
-import 'package:jetleaf_utils/utils.dart';
 
 import '../http/http_headers.dart';
 import '../http/http_method.dart';
 import '../http/http_status.dart';
+import '../path/path_segment.dart';
 import '../server/filter/filter.dart';
 import '../server/server_http_request.dart';
 import '../server/server_http_response.dart';
@@ -128,7 +128,7 @@ final class CorsFilter implements Filter, EnvironmentAware, Ordered {
     }
 
     // 2️⃣ Inject standard CORS headers into the response.
-    _applyCorsHeaders(response, cors);
+    _applyCorsHeaders(response, request, cors);
 
     // 3️⃣ Handle pre-flight OPTIONS requests directly.
     if (_isPreFlightRequest(request)) {
@@ -182,10 +182,34 @@ final class CorsFilter implements Filter, EnvironmentAware, Ordered {
   /// @see [CorsConfiguration]
   /// @see [ServerHttpResponse.setHeaders]
   /// {@endtemplate}
-  void _applyCorsHeaders(ServerHttpResponse response, CorsConfiguration cors) {
+  void _applyCorsHeaders(ServerHttpResponse response, ServerHttpRequest request, CorsConfiguration cors) {
     final headers = response.getHeaders();
+    final requestOrigin = request.getOrigin();
+    final wildCard = WildcardSegment();
 
-    headers.setAccessControlAllowOrigin(StringUtils.collectionToCommaDelimitedString(cors.allowedOrigins));
+    // Handle Access-Control-Allow-Origin
+    if (cors.allowedOrigins.isNotEmpty) {
+      String? allowedOrigin;
+      
+      // Check for wildcard '*'
+      if (cors.allowedOrigins.contains(wildCard.getSegmentString())) {
+        // If wildcard is present, use the request origin
+        allowedOrigin = requestOrigin;
+      } else {
+        // Check if request origin matches any allowed origin
+        final matchedOrigin = cors.allowedOrigins.firstWhere((origin) => origin.equals(requestOrigin), orElse: () => '');
+        
+        if (matchedOrigin.isNotEmpty) {
+          allowedOrigin = matchedOrigin;
+        }
+      }
+      
+      // Only set the header if we have an allowed origin
+      if (allowedOrigin != null) {
+        headers.setAccessControlAllowOrigin(allowedOrigin);
+      }
+    }
+
     headers.setAccessControlAllowMethods(cors.allowedMethods.map(HttpMethod.valueOf).toList());
     headers.setAccessControlAllowHeaders(cors.allowedHeaders);
     headers.setAccessControlAllowCredentials(cors.allowCredentials);
