@@ -49,7 +49,12 @@ class InvalidPathPatternException extends RuntimeException {
   /// - [position]: The optional index in the pattern where the issue was detected.
   /// 
   /// {@macro invalid_path_pattern_exception}
-  InvalidPathPatternException(super.message, this.pattern, [this.position]);
+  InvalidPathPatternException(String message, this.pattern, [this.position]) : super(
+    position != null 
+      ? 'InvalidPathPatternException: $message\nPattern: $pattern\nPosition: $position'
+      : 'InvalidPathPatternException: $message\nPattern: $pattern',
+    cause: StackTrace.current
+  );
 
   @override
   String toString() {

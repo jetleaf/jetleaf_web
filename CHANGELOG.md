@@ -6,6 +6,14 @@ This project follows a simple, human-readable changelog format inspired by
 
 ---
 
+## [1.1.2]
+
+### Changed
+
+- Updated dependencies: `jetleaf_core`, `jetleaf_pod`, `jetson`.
+
+---
+
 ## [1.1.1]
 
 ### Changed
