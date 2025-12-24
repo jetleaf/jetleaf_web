@@ -52,7 +52,7 @@ import 'io_request.dart';
 /// ```
 /// 
 /// {@endtemplate}
-class IoMultipartRequest extends IoRequest implements MultipartServerHttpRequest {
+base class IoMultipartRequest extends IoRequest implements MultipartServerHttpRequest {
   /// The maximum allowed size of the entire multipart request in bytes.
   ///
   /// Used to prevent clients from uploading excessively large requests

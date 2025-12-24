@@ -735,4 +735,44 @@ abstract interface class ServerHttpRequest implements HttpInputMessage {
   /// Once set, this context can be used by interceptors, filters, or
   /// other components to access route-specific information.
   void setHandlerContext(HandlerMethod handler, PathPattern pattern);
+
+  /// Returns the **origin** of the incoming HTTP request.
+  ///
+  /// The origin is defined by the HTTP and CORS specifications as the
+  /// combination of the request’s **scheme**, **host**, and optional **port**:
+  ///
+  /// ```
+  /// <scheme>://<host>[:<port>]
+  /// ```
+  ///
+  /// This value is typically derived from the `Origin` request header when
+  /// present, and represents the security context from which the request
+  /// originated.
+  ///
+  /// ### Examples
+  ///
+  /// | Request URL                              | Returned Origin              |
+  /// |------------------------------------------|------------------------------|
+  /// | `http://localhost:3000/api/login`        | `http://localhost:3000`      |
+  /// | `https://jetleaf.hapnium.com/dashboard`  | `https://jetleaf.hapnium.com`|
+  /// | `https://api.example.com:8443/users`     | `https://api.example.com:8443`|
+  ///
+  /// ### Notes
+  /// - The origin **never includes** the request path, query string, or fragment.
+  /// - If the request does not include an `Origin` header, implementations
+  ///   may derive the origin from the request URI (`scheme`, `host`, `port`)
+  ///   or return an empty string, depending on framework behavior.
+  /// - This method is commonly used for **CORS validation**, security checks,
+  ///   and request origin inspection.
+  ///
+  /// ### CORS Considerations
+  /// - For cross-origin requests, the returned value should exactly match the
+  ///   `Origin` header sent by the client.
+  /// - When used to populate the `Access-Control-Allow-Origin` response header,
+  ///   **only a single origin value** must be used per response.
+  ///
+  /// ### Returns
+  /// A [String] representing the request origin in the form
+  /// `<scheme>://<host>[:<port>]`.
+  String getOrigin();
 }
