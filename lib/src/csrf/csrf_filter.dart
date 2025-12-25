@@ -311,4 +311,7 @@ final class CsrfFilter extends OncePerRequestFilter implements EnvironmentAware,
   void setEnvironment(Environment environment) {
     _environment = environment;
   }
+
+  @override
+  List<Object?> equalizedProperties() => [CsrfFilter];
 }
