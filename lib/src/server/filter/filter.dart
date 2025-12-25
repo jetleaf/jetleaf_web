@@ -12,6 +12,8 @@
 // 
 // 🔧 Powered by Hapnium — the Dart backend engine 🍃
 
+import 'package:jetleaf_lang/lang.dart';
+
 import '../server_http_request.dart';
 import '../server_http_response.dart';
 
@@ -44,7 +46,7 @@ import '../server_http_response.dart';
 /// ```
 ///
 /// {@endtemplate}
-abstract interface class Filter {
+abstract interface class Filter with EqualsAndHashCode {
   /// Called for each HTTP request and response.
   ///
   /// Implementations must decide whether to continue the chain or terminate the request.

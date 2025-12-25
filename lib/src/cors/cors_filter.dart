@@ -215,7 +215,6 @@ final class CorsFilter implements Filter, EnvironmentAware, Ordered {
     headers.setAccessControlAllowCredentials(cors.allowCredentials);
     headers.setAccessControlExposeHeaders(cors.exposedHeaders);
     headers.setAccessControlMaxAge(cors.maxAgeSeconds);
-
     response.setHeaders(headers);
   }
 
@@ -268,4 +267,7 @@ final class CorsFilter implements Filter, EnvironmentAware, Ordered {
   void setEnvironment(Environment environment) {
     _environment = environment;
   }
+
+  @override
+  List<Object?> equalizedProperties() => [CorsFilter];
 }

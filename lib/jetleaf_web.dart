@@ -154,6 +154,7 @@ export 'src/config/method_argument_auto_configuration.dart';
 export 'src/config/return_value_auto_configuration.dart';
 export 'src/config/web_server_auto_configuration.dart';
 export 'src/config/content_negotiation_auto_configuration.dart';
+export 'src/config/cors_auto_configuration.dart';
 
 export 'src/context/aware.dart';
 export 'src/context/default_server_context.dart';
