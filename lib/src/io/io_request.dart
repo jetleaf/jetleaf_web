@@ -194,6 +194,7 @@ base class IoRequest implements ServerHttpRequest {
     if (_pathPattern == null) return {};
     final parser = PathPatternParser();
     final match = parser.match(_request.uri.path, _pathPattern!);
+    
     return match.variables;
   }
   
@@ -254,13 +255,7 @@ base class IoRequest implements ServerHttpRequest {
   }
   
   @override
-  bool shouldUpgrade() {
-    if (io.WebSocketTransformer.isUpgradeRequest(_request)) {
-      return true;
-    }
-
-    return false;
-  }
+  bool shouldUpgrade() => io.WebSocketTransformer.isUpgradeRequest(_request);
 
   @override
   String getOrigin() {

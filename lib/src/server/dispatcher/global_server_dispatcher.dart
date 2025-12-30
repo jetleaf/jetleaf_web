@@ -121,6 +121,7 @@ class GlobalServerDispatcher extends AbstractServerDispatcher implements Applica
   /// A nullable [ServerDispatcherErrorListener] instance.
   ServerDispatcherErrorListener? _dispatcherErrorListener;
 
+  /// The application context
   ApplicationContext? _applicationContext;
 
   /// {@template global_server_dispatcher_constructor}

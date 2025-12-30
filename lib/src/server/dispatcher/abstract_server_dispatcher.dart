@@ -649,9 +649,7 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
       }
 
       final bus = getEventBus();
-      bus.onEvent(HttpUpgradedEvent(request, response, DateTime.now()));
-
-      return;
+      return await bus.onEvent(HttpUpgradedEvent(request, response, DateTime.now()));
     }
 
     final resolver = getResolver();
@@ -718,10 +716,32 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
     HandlerMethod? handlerMethod;
 
     try {
-      final handler = await getHandler(request);
-      handlerMethod = handler;
+      if (await getHandler(request) case final handler?) {
+        handlerMethod = handler;
+        
+        // Debug: entering dispatch
+        if (log.getIsTraceEnabled()) {
+          log.trace(
+            '➡️  Dispatching request: ${request.getMethod()} ${request.getRequestURI()} '
+            '→ handler [${handler.getInvokingClass().getSimpleName()}.${handler.getMethod()?.getName()}()]'
+          );
+        }
 
-      if (handler == null) {
+        if (_adapterManager.findSupportingAdapter(handler) case final adapter?) {
+          chain = _HandlerExecutionChain(handler, _interceptorManager.getInterceptors());
+
+          if (!await chain.applyPreHandle(request, response)) return;
+
+          // Handle any cors before handling request
+          WebUtils.handleCors(handler.getMethod(), handler.getInvokingClass(), request, response);
+
+          await adapter.handle(request, response, handler);
+
+          await chain.applyPostHandle(request, response);
+        } else {
+          throw NotFoundException('No suitable adapter was found for this request - ${request.getMethod()} ${request.getRequestURI()}');
+        }
+      } else {
         if (log.getIsWarnEnabled()) {
           log.warn('⚠️  No handler found for ${request.getMethod()} ${request.getUri().path}');
         }
@@ -730,30 +750,6 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
         // to throw the exception, so, we do nothing.
         return;
       }
-
-      // Debug: entering dispatch
-      if (log.getIsTraceEnabled()) {
-        log.trace(
-          '➡️  Dispatching request: ${request.getMethod()} ${request.getRequestURI()} '
-          '→ handler [${handler.getInvokingClass().getSimpleName()}.${handler.getMethod()?.getName()}()]'
-        );
-      }
-
-      HandlerAdapter? adapter = _adapterManager.findSupportingAdapter(handler);
-      if (adapter == null) {
-        throw NotFoundException('No suitable adapter was found for this request - ${request.getMethod()} ${request.getRequestURI()}');
-      }
-
-      chain = _HandlerExecutionChain(handler, _interceptorManager.getInterceptors());
-
-      if (!await chain.applyPreHandle(request, response)) return;
-
-      // Handle any cors before handling request
-      WebUtils.handleCors(handler.getMethod(), handler.getInvokingClass(), request, response);
-
-      await adapter.handle(request, response, handler);
-
-      await chain.applyPostHandle(request, response);
     } catch (ex, st) {
       if (getErrorListener() case final listener?) {
         await listener.listen(ex, ex.getClass(), st);
