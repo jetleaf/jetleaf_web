@@ -34,8 +34,6 @@ import '../http/media_type.dart';
 ///
 /// - [method] → The HTTP method this mapping responds to. (Required)
 /// - [path] → The URL path pattern for this mapping, e.g., `'/users/{id}'`.
-/// - [params] → Required request parameters that must be present.
-/// - [headers] → Required HTTP headers that must be present.
 /// - [consumes] → Supported content types for request body (e.g., `application/json`).
 /// - [produces] → Produced content types for the response (e.g., `application/json`).
 ///

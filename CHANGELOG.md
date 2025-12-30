@@ -6,6 +6,21 @@ This project follows a simple, human-readable changelog format inspired by
 
 ---
 
+## [1.11.1]
+
+### Changed
+
+- The `jetleaf_web` package is now organized into sub-libraries:
+  - `package:jetleaf_web/web.dart`
+  - `package:jetleaf_web/http.dart`
+  - And others
+  - `package:jetleaf_web/jetleaf_web.dart` (imports all sub-libraries)
+
+This reorganization allows users to import only the classes they need,
+reducing unnecessary dependencies and improving clarity.
+
+---
+
 ## [1.11.0]
 
 ### Changed
