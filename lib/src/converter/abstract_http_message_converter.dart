@@ -15,6 +15,7 @@
 import 'dart:convert';
 
 import 'package:jetleaf_lang/lang.dart';
+import 'package:jetson/jetson.dart';
 import 'package:meta/meta.dart';
 
 import '../exception/exceptions.dart';
@@ -531,10 +532,22 @@ abstract class AbstractHttpMessageConverter<T> extends HttpMessageConverter<T> {
     try {
       return await readInternal(type, inputMessage);
     } catch (e, st) {
+      Object exception = e;
+      StackTrace trace = st;
+
+      if (e is FailedDeserializationException) {
+        exception = e.cause ?? e;
+        trace = e.stackTrace;
+      }
+
       throw HttpMessageNotReadableException(
-        'Failed to read message. $e',
-        originalException: e is Throwable ? e : e is Exception ? e : RuntimeException(e.toString()),
-        originalStackTrace: st
+        'Failed to read message. $exception',
+        originalException: exception is Throwable 
+          ? exception
+          : exception is Exception
+            ? exception
+            : RuntimeException(exception.toString()),
+        originalStackTrace: trace
       );
     }
   }

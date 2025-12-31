@@ -192,10 +192,41 @@ class ServerWebApplicationContext extends AnnotationConfigApplicationContext imp
 
     try {
       final server = await createWebServer();
-      await server.start();
-    } catch (e, st) {
-      final ex = e is Throwable ? e : RuntimeException(e.toString());
-      throw ServiceUnavailableException("Unable to start web server", originalException: ex, originalStackTrace: st);
+      return await server.start();
+    } catch (ex, st) {
+      Throwable? lastException;
+      StackTrace? lastStackTrace;
+
+      if (ex is HttpException) {
+        if (ex.originalException case final exception?) {
+          lastException = exception is Throwable ? exception :  RuntimeException(exception.toString());
+        }
+
+        if (ex.originalStackTrace case final stackTrace?) {
+          lastStackTrace = stackTrace;
+        }
+      }
+
+      if (ex is Throwable) {
+        if (ex.getCause() case final cause?) {
+          if (cause case Throwable cause) {
+            lastException ??= cause;
+          } else if (cause case Error cause) {
+            lastException ??= RuntimeException(cause.toString());
+          } else if (cause case Exception cause) {
+            lastException ??= RuntimeException(cause.toString());
+          }
+        }
+
+        lastStackTrace ??= ex.getStackTrace();
+      } else {
+        lastException = RuntimeException(ex.toString());
+      }
+
+      lastStackTrace ??= st;
+      lastException ??= RuntimeException(ex.toString());
+
+      throw ServiceUnavailableException(originalException: lastException, originalStackTrace: lastStackTrace);
     }
   }
 
@@ -215,12 +246,12 @@ class ServerWebApplicationContext extends AnnotationConfigApplicationContext imp
   @override
   FutureOr<void> start() async {
     await getWebServer().start();
-    return super.start();
+    return await super.start();
   }
 
   @override
   Future<void> doClose() async {
     await getWebServer().stop();
-    await super.doClose();
+    return await super.doClose();
   }
 }

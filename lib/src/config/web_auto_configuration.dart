@@ -150,7 +150,7 @@ final class WebAutoConfiguration {
   @ConditionalOnMissingPod(values: [ResolverContext])
   ResolverContext resolverContext(HttpMessageConverters converter) => DefaultResolverContext(converter);
 
-    /// The pod name used to register the [HandlerInterceptorManager].
+  /// The pod name used to register the [HandlerInterceptorManager].
   ///
   /// Provides consistent access to the interceptor manager throughout
   /// the JetLeaf web subsystem.

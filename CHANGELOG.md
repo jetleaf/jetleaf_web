@@ -6,6 +6,14 @@ This project follows a simple, human-readable changelog format inspired by
 
 ---
 
+## [1.11.2]
+
+### Changed
+
+- Updated dependency - `jetson`
+
+---
+
 ## [1.11.1]
 
 ### Changed

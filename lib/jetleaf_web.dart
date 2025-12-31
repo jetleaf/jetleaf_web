@@ -152,7 +152,5 @@ export 'rest.dart';
 export 'server.dart';
 export 'utils.dart';
 export 'web.dart';
-
-// PACKAGES
-export 'package:jtl/jtl.dart';
-export 'package:jetson/jetson.dart';
+export 'jtl.dart';
+export 'jetson.dart';

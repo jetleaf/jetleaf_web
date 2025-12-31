@@ -94,6 +94,26 @@ class HttpException extends RuntimeException {
     return buffer.toString();
   }
 
+  Map<String, Object> toJson() {
+    final json = <String, Object>{};
+
+    if (uri case final uri?) {
+      json.add("uri", uri.toString());
+    }
+
+    json.add("status_code", statusCode);
+    
+    if (details case final details?) {
+      json.add("details", details);
+    }
+
+    if (originalException case final exception?) {
+      json.add("original_exception", exception is Throwable ? exception.getMessage() : exception.toString());
+    }
+
+    return json;
+  }
+
   /// Resolves the corresponding [HttpStatus] for this object, if available.
   ///
   /// This method converts the internal numeric [statusCode] (if set)
@@ -784,14 +804,99 @@ class InternalServerErrorException extends HttpException {
 /// {@endtemplate}
 class ServiceUnavailableException extends HttpException {
   /// {@macro jetleaf_service_unavailable_exception}
-  ServiceUnavailableException(
-    super.message, {
+  ServiceUnavailableException({
     super.details,
     super.originalException,
     super.originalStackTrace,
     super.statusCode = 503,
     super.uri,
-  });
+  }) : super(_buildErrorMessage(originalException, details));
+
+  static String _buildErrorMessage(Exception? lastException, Map<String, dynamic>? details) {
+    final baseMessage = 'Unable to start web server';
+    
+    // Early return if no additional context
+    if (lastException == null && (details == null || details.isEmpty)) {
+      return baseMessage;
+    }
+    
+    final buffer = StringBuffer(baseMessage);
+    
+    // Include lastException message (highest priority)
+    if (lastException != null) {
+      final lastExceptionMessage = lastException is Throwable ? lastException.getMessage() : lastException.toString();
+      
+      // Clean up the exception message if it's too verbose
+      final cleanedMessage = _cleanExceptionMessage(lastExceptionMessage);
+      buffer.write(' due to: $cleanedMessage');
+    }
+    
+    // Append key details from the map
+    if (details != null && details.isNotEmpty) {
+      // Extract the most important details to include in the main message
+      final keyDetail = _extractKeyDetail(details);
+      
+      if (keyDetail.isNotEmpty) {
+        if (lastException != null) {
+          buffer.write(' ($keyDetail)');
+        } else {
+          buffer.write(': $keyDetail');
+        }
+      }
+    }
+    
+    return buffer.toString();
+  }
+  
+  /// Extracts the most relevant detail from the map for the main message
+  static String _extractKeyDetail(Map<String, dynamic> details) {
+    // Priority order for details to include in the main message
+    const priorityKeys = ['reason', 'cause', 'error', 'issue', 'problem', 'description'];
+    
+    for (final key in priorityKeys) {
+      if (details.containsKey(key) && details[key] != null) {
+        final value = details[key];
+        if (value is String && value.isNotEmpty) {
+          return value;
+        }
+      }
+    }
+    
+    // If no priority keys found, use the first non-empty string value
+    for (final entry in details.entries) {
+      if (entry.value is String && (entry.value as String).isNotEmpty) {
+        return '${entry.key}: ${entry.value}';
+      }
+    }
+    
+    // If all else fails, just show a summary
+    return '${details.length} error detail(s)';
+  }
+  
+  /// Cleans up exception messages that might be too verbose
+  static String _cleanExceptionMessage(String message) {
+    // Remove common verbose prefixes
+    const prefixes = [
+      'Exception: ',
+      'Error: ',
+      'System.',
+    ];
+    
+    var cleaned = message;
+    for (final prefix in prefixes) {
+      if (cleaned.startsWith(prefix)) {
+        cleaned = cleaned.substring(prefix.length);
+      }
+    }
+    
+    // Truncate if too long
+    const maxLength = 100;
+    if (cleaned.length > maxLength) {
+      cleaned = '${cleaned.substring(0, maxLength)}...';
+    }
+    
+    return cleaned;
+  }
 }
 
 /// {@template jetleaf_payload_too_large_exception}
