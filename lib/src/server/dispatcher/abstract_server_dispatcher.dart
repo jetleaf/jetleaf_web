@@ -751,15 +751,41 @@ abstract class AbstractServerDispatcher implements ConfigurableServerDispatcher 
         return;
       }
     } catch (ex, st) {
-      if (getErrorListener() case final listener?) {
-        await listener.listen(ex, ex.getClass(), st);
+      Object? lastException;
+      StackTrace? lastStackTrace;
+
+      if (ex is HttpException) {
+        if (ex.originalException case final exception?) {
+          lastException = exception;
+        }
+
+        if (ex.originalStackTrace case final stackTrace?) {
+          lastStackTrace = stackTrace;
+        }
+
+        if (ex.cause case final cause?) {
+          if (cause case Throwable cause) {
+            lastException ??= cause;
+          } else if (cause case Error cause) {
+            lastException ??= cause;
+          } else if (cause case Exception cause) {
+            lastException ??= cause;
+          }
+        }
       }
 
-      if (await _exceptionManager.resolve(request, response, handlerMethod, ex, st)) {
+      lastException ??= ex;
+      lastStackTrace ??= st;
+
+      if (getErrorListener() case final listener?) {
+        await listener.listen(lastException, lastException.getClass(), lastStackTrace);
+      }
+
+      if (await _exceptionManager.resolve(request, response, handlerMethod, lastException, lastStackTrace)) {
         return;
       }
 
-      rethrow;
+      throw lastException;
     } finally {
       if (request is MultipartServerHttpRequest) {
         await getResolver().cleanupMultipart(request);
